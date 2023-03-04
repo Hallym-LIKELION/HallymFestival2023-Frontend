@@ -1,85 +1,89 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import hamburgerBtnImage from '@/assets/hamburger.png'
+const showMenu = ref(false)
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <button @click="showMenu = !showMenu">
+      <img :src="hamburgerBtnImage" width="32" />
+    </button>
+    <p>2023 한림대학교 비봉축전</p>
   </header>
+  <div class="wrapper">
+    <nav :class="{ hidden: !showMenu }">
+      <RouterLink to="/">HOME</RouterLink>
+      <RouterLink to="/announcement">공지사항</RouterLink>
+      <RouterLink to="/boothmap">부스배치도</RouterLink>
+      <RouterLink to="/timetable">타임 테이블</RouterLink>
+      <RouterLink to="/program">프로그램</RouterLink>
+    </nav>
 
-  <RouterView />
+    <RouterView class="router-view" />
+  </div>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  width: 100%;
+  height: 72px;
+  background-color: #999999;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+header > button {
+  margin-left: 24px;
+  /* 이미지를 하얗게 */
+  filter: brightness(0) invert(1);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 7px;
+  cursor: pointer;
+}
+
+header > p {
+  margin-right: 24px;
+  font-size: 16pt;
+  font-weight: 600;
+  color: white;
+}
+
+.wrapper {
+  padding-top: 72px;
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 100%;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  background-color: #777777;
+  padding: 8px;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+nav.hidden {
+  display: none;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+nav > * {
+  width: 300px;
+  font-size: 24pt;
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding: 8px 16px;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.router-view {
+  max-width: 768px;
+  margin: auto;
 }
 </style>
