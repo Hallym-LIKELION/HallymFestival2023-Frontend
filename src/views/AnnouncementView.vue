@@ -8,19 +8,15 @@ import AnnouncementItem from '../components/AnnouncementItem.vue'
     <h1>공지사항</h1>
     <div class="search-bar"><SearchBar /></div>
     <div class="announcement-list">
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
-      <AnnouncementItem />
+      <AnnouncementItem
+        title="축제 진행에 대한 공지"
+        content="안녕하세요. 2023 한림대학교 비봉축전 준비 위원회 공지사항입니다. 감사합니다."
+      />
+      <AnnouncementItem
+        title="Lorem Ipsum"
+        content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      />
+      <AnnouncementItem title="멋쟁이사자처럼" content="123123123123" />
     </div>
   </main>
 </template>
@@ -34,6 +30,7 @@ h1 {
 }
 
 .search-bar {
+  margin: 0 10px;
   margin-bottom: 24px;
   display: flex;
   justify-content: center;
@@ -43,9 +40,11 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 10px;
 }
 
 .announcement-list > * {
+  max-width: 400px;
   margin: 10px 0;
 }
 </style>

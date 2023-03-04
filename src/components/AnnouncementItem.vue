@@ -1,19 +1,23 @@
-<script setup></script>
+<script setup>
+const props = defineProps(['title', 'content'])
+</script>
 
 <template>
   <div>
-    <h3>가나다라ㅏ밤당개베저ㅏ대ㅑ</h3>
+    <h3>{{ title }}</h3>
     <p>
-      가나다다ㅏ배자댖바대ㅔㅂ자ㅔㄷㅍㅂㅈㄷㅍㅂㅈㄷㅂㅈㅐ더ㅑㅂ저댜ㅐㅍㅂㅈㅂㅈ답쟈ㅐ더ㅑㅂ저ㅑㅐㅍ
+      {{ content }}
     </p>
   </div>
 </template>
 
 <style scoped>
 div {
-  width: 400px;
+  width: 100%;
   border-radius: 12px;
   background-color: lightgray;
+  height: 70px;
+  overflow: hidden;
 }
 
 h3 {
@@ -24,5 +28,8 @@ h3 {
 p {
   margin: 0 8px;
   margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
