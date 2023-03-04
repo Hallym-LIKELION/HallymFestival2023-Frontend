@@ -19,6 +19,7 @@ const showMenu = ref(false)
       <RouterLink to="/boothmap">부스배치도</RouterLink>
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
+      <RouterLink to="/credit">Our Teams</RouterLink>
     </nav>
 
     <RouterView class="router-view" />
@@ -40,11 +41,9 @@ header {
 header > button {
   margin-left: 24px;
   /* 이미지를 하얗게 */
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(0.2);
   background: none;
   border: none;
-  border-radius: 8px;
-  padding: 4px 7px;
   cursor: pointer;
 }
 

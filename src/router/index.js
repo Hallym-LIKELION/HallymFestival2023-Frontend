@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/program',
       name: 'program',
       component: () => import('../views/ProgramListView.vue')
+    },
+    {
+      path: '/credit',
+      name: 'credit',
+      component: () => import('../views/CreditView.vue')
     }
   ]
 })
