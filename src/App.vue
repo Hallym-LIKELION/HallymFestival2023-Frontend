@@ -16,10 +16,11 @@ const showMenu = ref(false)
     <nav :class="{ hidden: !showMenu }">
       <RouterLink to="/">HOME</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
-      <RouterLink to="/boothmap">부스배치도</RouterLink>
+      <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
-      <RouterLink to="/credit">Our Teams</RouterLink>
+      <RouterLink to="/aboutus">About Us</RouterLink>
+      <RouterLink to="/login">로그인</RouterLink>
     </nav>
 
     <RouterView class="router-view" />
@@ -37,7 +38,6 @@ header {
   justify-content: space-between;
   z-index: 999;
 }
-
 header > button {
   margin-left: 24px;
   /* 이미지를 하얗게 */
@@ -46,18 +46,15 @@ header > button {
   border: none;
   cursor: pointer;
 }
-
 header > p {
   margin-right: 24px;
   font-size: 16pt;
   font-weight: 600;
   color: white;
 }
-
 .wrapper {
   padding-top: 72px;
 }
-
 nav {
   height: 100%;
   display: flex;
@@ -66,11 +63,9 @@ nav {
   background-color: #777777;
   padding: 8px;
 }
-
 nav.hidden {
   display: none;
 }
-
 nav > * {
   width: 300px;
   font-size: 24pt;
@@ -80,7 +75,6 @@ nav > * {
   font-weight: 600;
   padding: 8px 16px;
 }
-
 .router-view {
   max-width: 768px;
   margin: auto;
