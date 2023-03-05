@@ -1,8 +1,8 @@
 <script setup>
 import SearchBar from '../components/SearchBar.vue'
-import AnnouncementItem from '../components/AnnouncementItem.vue'
+import ListItem from '../components/ListItem.vue'
 
-function itemClick(id) {
+function ShowAnnouncement(id) {
   // TODO: 공지사항 내용을 띄우는 코드 작성하기
   console.log(`announcement item ${id} clicked`)
 }
@@ -13,17 +13,23 @@ function itemClick(id) {
     <h1>공지사항</h1>
     <div class="search-bar"><SearchBar /></div>
     <div class="announcement-list">
-      <AnnouncementItem
-        @click="() => itemClick(1)"
+      <ListItem
+        @click="() => ShowAnnouncement(1)"
         title="축제 진행에 대한 공지"
         content="안녕하세요. 2023 한림대학교 비봉축전 준비 위원회 공지사항입니다. 감사합니다."
+        image="https://via.placeholder.com/60x60/4d4d4d/b8b8b8"
       />
-      <AnnouncementItem
-        @click="() => itemClick(2)"
+      <ListItem
+        @click="() => ShowAnnouncement(2)"
         title="Lorem Ipsum"
         content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
       />
-      <AnnouncementItem @click="() => itemClick(3)" title="멋쟁이사자처럼" content="123123123123" />
+      <ListItem
+        @click="() => ShowAnnouncement(3)"
+        title="멋쟁이사자처럼"
+        content="123123123123"
+        image="https://avatars.githubusercontent.com/u/122857055?s=400&u=386f18f709e3269a0f8fa4078f62f53320576dfd&v=4"
+      />
     </div>
   </main>
 </template>
