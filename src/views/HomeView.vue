@@ -13,7 +13,7 @@ import festivalImage from '@/assets/poster.jpg'
 
     <div class="menu">
       <RouterLink to="/announcement">공지사항</RouterLink>
-      <RouterLink to="/boothmap">부스배치도</RouterLink>
+      <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/timetable">타임 테이블</RouterLink>
     </div>
   </main>
@@ -49,8 +49,8 @@ h1 {
 .menu > * {
   margin: 16px;
   padding: 4px 12px;
+  border-radius: 24px;
   text-decoration: none;
-  border-radius: 16px;
   color: black;
   background-color: lightgray;
 }
