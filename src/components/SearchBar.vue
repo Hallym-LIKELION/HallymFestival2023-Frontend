@@ -1,18 +1,28 @@
-<script setup>
-// defineProps({
-//   msg: {
-//     type: String,
-//     required: true
-//   }
-// })
-
+<script>
 import searchImage from '@/assets/search.png'
+
+export default {
+  data() {
+    return {
+      searchImage
+    }
+  },
+  props: ['modelValue'],
+  emits: ['update:modelValue']
+}
 </script>
 
 <template>
   <div>
     <img :src="searchImage" alt="" />
-    <input type="text" name="" id="" placeholder="TODO 여기 기능 구현" />
+    <input
+      type="text"
+      name=""
+      id=""
+      placeholder="Search..."
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 

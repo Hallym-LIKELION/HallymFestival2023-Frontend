@@ -20,6 +20,7 @@ const showMenu = ref(false)
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/aboutus">About Us</RouterLink>
+      <RouterLink to="/feature-test">API 데모 테스트</RouterLink>
       <RouterLink to="/login">로그인</RouterLink>
     </nav>
 
