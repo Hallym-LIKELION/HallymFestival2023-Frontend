@@ -19,12 +19,6 @@ export async function GetDemoPostList() {
  * @returns {{userId: Number, id: Number, title: String, body: String}} id를 userID로 갖는 API 데이터입니다.
  */
 export async function GetDemoPost(id) {
-  // {
-  //     userId: Number,
-  //     id: Number,
-  //     title: String,
-  //     body: String
-  // }
   const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
   if (res.status >= 400) {
     throw new Error(`API 요청에 실패했습니다. HTTP Status: ${res.status}`);
