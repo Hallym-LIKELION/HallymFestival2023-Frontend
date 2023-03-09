@@ -80,7 +80,9 @@ export default {
 
         // 2. 검색에 따른 필터링
         const isContainSearchString =
-          this.search === '' || item.title.includes(search) || item.content.includes(search);
+          this.search === '' ||
+          item.title.includes(this.search) ||
+          item.content.includes(this.search);
 
         return isChoosedDay && isContainSearchString;
       });
