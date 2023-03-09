@@ -1,35 +1,3 @@
-<script>
-import SearchBar from '../components/SearchBar.vue'
-import ListItem from '../components/ListItem.vue'
-import { GetDemoPostList } from '../api/api-client'
-
-export default {
-  components: { SearchBar, ListItem },
-  data() {
-    return {
-      items: []
-    }
-  },
-  methods: {
-    showArticle(id) {
-      // TODO: 공지사항 내용을 띄우는 코드 작성하기
-      alert(`post item ${id} clicked`)
-    }
-  },
-  async mounted() {
-    // 데이터 가져오기
-
-    const data = await GetDemoPostList()
-
-    // 더미 API에서는 데이터를 100개 보내지만, 테스트에서는 5개만 사용
-    data.splice(5, 95)
-
-    console.log(data)
-    this.items = data
-  }
-}
-</script>
-
 <template>
   <main>
     <h1>API Demo Page</h1>
@@ -46,6 +14,45 @@ export default {
     </div>
   </main>
 </template>
+
+<script>
+import SearchBar from '../components/SearchBar.vue';
+import ListItem from '../components/ListItem.vue';
+import { GetDemoPostList } from '../api/api-client';
+
+/**
+ * Axios Demo 페이지입니다.
+ */
+export default {
+  components: { SearchBar, ListItem },
+  data() {
+    return {
+      items: []
+    };
+  },
+  methods: {
+    showArticle(id) {
+      // TODO: 공지사항 내용을 띄우는 코드 작성하기
+      alert(`post item ${id} clicked`);
+    }
+  },
+  created() {
+    // 데이터 가져오기
+    GetDemoPostList()
+      .then((data) => {
+        // 더미 API에서는 데이터를 100개 보내지만, 테스트에서는 5개만 사용
+        data.splice(5, 95);
+
+        console.log(data);
+        this.items = data;
+      })
+      .catch((err) => {
+        alert('Unexpected error has occured. Please try again later.');
+        console.log(err);
+      });
+  }
+};
+</script>
 
 <style scoped>
 h1 {

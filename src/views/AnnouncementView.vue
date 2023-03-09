@@ -1,8 +1,26 @@
+<template>
+  <main>
+    <h1>공지사항</h1>
+    <div class="search-bar"><SearchBar v-model="search" /></div>
+    <div class="announcement-list">
+      <template v-for="(item, index) in filltered_list">
+        <ListItem
+          @click="() => showAnnouncement(item.id)"
+          :title="item.title"
+          :content="item.content"
+          :image="item.image"
+        />
+      </template>
+    </div>
+  </main>
+</template>
+
 <script>
-import SearchBar from '../components/SearchBar.vue'
-import ListItem from '../components/ListItem.vue'
+import SearchBar from '../components/SearchBar.vue';
+import ListItem from '../components/ListItem.vue';
 
 export default {
+  name: 'AnnouncementView',
   components: {
     SearchBar,
     ListItem
@@ -31,41 +49,24 @@ export default {
         }
       ],
       search: ''
-    }
+    };
   },
   computed: {
     filltered_list() {
-      const search = this.search
+      const search = this.search;
       return this.list.filter(
         (item) => search === '' || item.title.includes(search) || item.content.includes(search)
-      )
+      );
     }
   },
   methods: {
     showAnnouncement(id) {
       // TODO: 공지사항 내용을 띄우는 코드 작성하기
-      alert(`announcement item ${id} clicked`)
+      alert(`announcement item ${id} clicked`);
     }
   }
-}
+};
 </script>
-
-<template>
-  <main>
-    <h1>공지사항</h1>
-    <div class="search-bar"><SearchBar v-model="search" /></div>
-    <div class="announcement-list">
-      <template v-for="(item, index) in filltered_list">
-        <ListItem
-          @click="() => showAnnouncement(item.id)"
-          :title="item.title"
-          :content="item.content"
-          :image="item.image"
-        />
-      </template>
-    </div>
-  </main>
-</template>
 
 <style scoped>
 h1 {

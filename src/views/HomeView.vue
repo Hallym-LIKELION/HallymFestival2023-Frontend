@@ -1,8 +1,3 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-import festivalImage from '@/assets/poster.jpg'
-</script>
-
 <template>
   <main>
     <h1>2023 한림대학교 비봉축전</h1>
@@ -18,6 +13,19 @@ import festivalImage from '@/assets/poster.jpg'
     </div>
   </main>
 </template>
+
+<script>
+import { RouterLink } from 'vue-router';
+import festivalImage from '@/assets/poster.jpg';
+
+export default {
+  data() {
+    return {
+      festivalImage
+    };
+  }
+};
+</script>
 
 <style scoped>
 h1 {

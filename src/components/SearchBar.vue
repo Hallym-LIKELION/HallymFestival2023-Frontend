@@ -1,17 +1,3 @@
-<script>
-import searchImage from '@/assets/search.png'
-
-export default {
-  data() {
-    return {
-      searchImage
-    }
-  },
-  props: ['modelValue'],
-  emits: ['update:modelValue']
-}
-</script>
-
 <template>
   <div>
     <img :src="searchImage" alt="" />
@@ -25,6 +11,20 @@ export default {
     />
   </div>
 </template>
+
+<script>
+import searchImage from '@/assets/search.png';
+
+export default {
+  data() {
+    return {
+      searchImage
+    };
+  },
+  props: ['modelValue'],
+  emits: ['update:modelValue']
+};
+</script>
 
 <style scoped>
 div {
@@ -45,5 +45,6 @@ input {
   width: 100%;
   border: none;
   outline: none;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 </style>

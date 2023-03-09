@@ -1,32 +1,52 @@
-<script setup>
-import { ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import hamburgerBtnImage from '@/assets/hamburger.png'
-const showMenu = ref(false)
-</script>
-
 <template>
   <header>
     <button @click="showMenu = !showMenu">
-      <img :src="hamburgerBtnImage" width="32" />
+      <img :src="menuButtonImage" width="32" />
     </button>
     <p>2023 한림대학교 비봉축전</p>
   </header>
   <div class="wrapper">
     <nav :class="{ hidden: !showMenu }">
-      <RouterLink to="/">HOME</RouterLink>
-      <RouterLink to="/announcement">공지사항</RouterLink>
-      <RouterLink to="/boothmap">부스 배치도</RouterLink>
-      <RouterLink to="/timetable">타임 테이블</RouterLink>
-      <RouterLink to="/program">프로그램</RouterLink>
-      <RouterLink to="/aboutus">About Us</RouterLink>
-      <RouterLink to="/feature-test">API 데모 테스트</RouterLink>
-      <RouterLink to="/login">로그인</RouterLink>
+      <template v-for="{ url, name } in navList">
+        <RouterLink :to="'/' + url" v-text="name" />
+      </template>
     </nav>
 
-    <RouterView class="router-view" />
+    <RouterView v-slot="{ Component }" class="router-view">
+      <Transition name="slide-right" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
 </template>
+
+<script>
+import { RouterLink, RouterView } from 'vue-router';
+import menuButtonImage from '@/assets/hamburger.png';
+
+export default {
+  components: {
+    RouterLink,
+    RouterView
+  },
+  data() {
+    return {
+      showMenu: false,
+      menuButtonImage,
+      navList: [
+        { name: 'HOME', url: '' },
+        { name: '공지사항', url: 'announcement' },
+        { name: '부스 배치도', url: 'boothmap' },
+        { name: '타임 테이블', url: 'timetable' },
+        { name: '프로그램', url: 'program' },
+        { name: 'About Us', url: 'aboutus' },
+        { name: 'API 데모 테스트', url: 'feature-test' },
+        { name: '로그인', url: 'login' }
+      ]
+    };
+  }
+};
+</script>
 
 <style scoped>
 header {
@@ -42,7 +62,7 @@ header {
 header > button {
   margin-left: 24px;
   /* 이미지를 하얗게 */
-  filter: brightness(0) invert(0.2);
+  filter: brightness(0) invert(1);
   background: none;
   border: none;
   cursor: pointer;
@@ -63,6 +83,8 @@ nav {
   flex-direction: column;
   background-color: #777777;
   padding: 8px;
+  overflow: auto;
+  z-index: 99;
 }
 nav.hidden {
   display: none;
@@ -78,6 +100,28 @@ nav > * {
 }
 .router-view {
   max-width: 768px;
+  min-height: calc(100vh - 72px);
   margin: auto;
+}
+
+/* 트랜지션 기능 테스트 */
+.slide-right-enter-active {
+  transition: opacity 0.25s ease;
+}
+.slide-right-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.slide-right-enter-from {
+  opacity: 0;
+}
+.slide-right-enter-to {
+  opacity: 1;
+}
+.slide-right-leave-from {
+  opacity: 1;
+}
+.slide-right-leave-to {
+  opacity: 0;
 }
 </style>

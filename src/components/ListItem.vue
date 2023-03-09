@@ -1,22 +1,49 @@
-<script setup>
-const props = defineProps({
-  title: 'string',
-  content: 'string',
-  image: 'string',
-  imageAlt: 'string'
-})
-</script>
-
 <template>
   <div class="component-wrapper">
-    <img :class="['image-content', { hidden: image === undefined }]" :src="image" :alt="imageAlt" />
+    <img class="image-content" :src="image" :alt="imageAlt" />
     <div class="text-content">
       <h3 v-text="title" />
-      <p v-text="content" />
+      <p v-text="`${type} - ${content}`" />
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default() {
+        return 'Untitled Announcement';
+      }
+    },
+    content: {
+      type: String,
+      default() {
+        return '내용입니다.';
+      }
+    },
+    image: {
+      type: String,
+      default() {
+        return 'https://via.placeholder.com/60x60/4d4d4d/b8b8b8';
+      }
+    },
+    imageAlt: {
+      type: String,
+      default() {
+        return '공지사항에 대한 이미지';
+      }
+    },
+    type: {
+      type: String,
+      default() {
+        return 'default';
+      }
+    }
+  }
+};
+</script>
 <style scoped>
 .component-wrapper {
   width: 100%;
