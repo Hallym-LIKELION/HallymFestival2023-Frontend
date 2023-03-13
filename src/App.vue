@@ -5,15 +5,21 @@
     </button>
     <p>2023 한림대학교 비봉축전</p>
   </header>
+  <div class="dimmer" :class="{ hidden: !showMenu }" @click="() => (showMenu = false)"></div>
   <div class="wrapper">
     <nav :class="{ hidden: !showMenu }">
-      <template v-for="{ url, name } in navList">
-        <RouterLink :to="'/' + url" v-text="name" />
+      <template v-for="{ url, name, bottom = false } in navList">
+        <RouterLink
+          :to="'/' + url"
+          v-text="name"
+          :class="{ bottom }"
+          @click="() => (showMenu = false)"
+        />
       </template>
     </nav>
 
     <RouterView v-slot="{ Component }" class="router-view">
-      <Transition name="slide-right" mode="out-in">
+      <Transition name="fade" mode="out-in">
         <component :is="Component" />
       </Transition>
     </RouterView>
@@ -41,7 +47,7 @@ export default {
         { name: '프로그램', url: 'program' },
         { name: 'About Us', url: 'aboutus' },
         { name: 'API 데모 테스트', url: 'feature-test' },
-        { name: '로그인', url: 'login' }
+        { name: '로그인', url: 'login', bottom: true }
       ]
     };
   }
@@ -52,76 +58,117 @@ export default {
 header {
   width: 100%;
   height: 72px;
-  background-color: #999999;
   display: flex;
   position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 8px #00000066;
   align-items: center;
-  justify-content: space-between;
+  justify-content: stretch;
   z-index: 999;
 }
 header > button {
   margin-left: 24px;
+  position: absolute;
   /* 이미지를 하얗게 */
-  filter: brightness(0) invert(1);
   background: none;
   border: none;
   cursor: pointer;
 }
 header > p {
-  margin-right: 24px;
-  font-size: 16pt;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 18pt;
   font-weight: 600;
-  color: white;
 }
 .wrapper {
   padding-top: 72px;
 }
+
+/* 사이드 메뉴 열었을때 배경 흐리게 */
+.dimmer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: #00000077;
+  opacity: 1;
+  transition: opacity 0.25s;
+}
+
+.dimmer.hidden {
+  opacity: 0;
+}
+
 nav {
   height: 100%;
+  background-color: #ffffff;
   display: flex;
   position: fixed;
   flex-direction: column;
-  background-color: #777777;
   padding: 8px;
   overflow: auto;
   z-index: 99;
 }
-nav.hidden {
+
+.hidden {
   display: none;
 }
-nav > * {
-  width: 300px;
-  font-size: 24pt;
-  margin: 10px;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  padding: 8px 16px;
+
+.bottom {
+  margin-top: auto;
+  margin-bottom: 96px;
 }
+
+nav > * {
+  width: 240px;
+  padding: 16px 0;
+  padding-left: 24px;
+  font-size: 16pt;
+  color: black;
+  text-decoration: none;
+}
+
 .router-view {
   max-width: 768px;
   min-height: calc(100vh - 72px);
   margin: auto;
 }
 
+@media screen and (max-width: 768px) {
+  header > p {
+    font-size: 14pt;
+  }
+
+  header > button {
+    margin-left: 24px;
+  }
+
+  header > button > img {
+    width: 24px;
+  }
+}
+
 /* 트랜지션 기능 테스트 */
-.slide-right-enter-active {
+.fade-enter-active {
   transition: opacity 0.25s ease;
 }
-.slide-right-leave-active {
+.fade-leave-active {
   transition: opacity 0.25s ease;
 }
 
-.slide-right-enter-from {
+.fade-enter-from {
   opacity: 0;
 }
-.slide-right-enter-to {
+.fade-enter-to {
   opacity: 1;
 }
-.slide-right-leave-from {
+.fade-leave-from {
   opacity: 1;
 }
-.slide-right-leave-to {
+.fade-leave-to {
   opacity: 0;
 }
 </style>

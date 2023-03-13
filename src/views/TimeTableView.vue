@@ -1,72 +1,22 @@
 <template>
   <main>
     <h1>타임 테이블</h1>
-    <div class="buttonGroup">
-      <button @click="() => changeDay(1)">화요일</button>
-      <button @click="() => changeDay(2)">수요일</button>
-      <button @click="() => changeDay(3)">목요일</button>
+
+    <div class="button-group">
+      <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">화요일</button>
+      <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">수요일</button>
+      <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
     </div>
-    <div class="tableContainer">
-      <div class="left table">
-        <div class="schedule-group">
-          <div class="schedule-header">
-            <p class="schedule-time">11:00 ~ 17:00</p>
-            <div class="schedule-pin"></div>
-          </div>
-          <div class="schedule-content">
-            <div class="schedule-item">
-              <p class="schedule-title">한림오락실</p>
-              <p class="schedule-location">CLC 2층</p>
-            </div>
-            <div class="schedule-item">
-              <p class="schedule-title">교내 부스</p>
-              <p class="schedule-location">교내 전체</p>
-            </div>
-          </div>
-        </div>
-        <div class="schedule-group" style="margin-top: 150px">
-          <div class="schedule-header">
-            <p class="schedule-time">16:00 ~ 22:00</p>
-            <div class="schedule-pin"></div>
-          </div>
-          <div class="schedule-content">
-            <div class="schedule-item">
-              <p class="schedule-title">연예인 공연</p>
-              <p class="schedule-location">대운동장</p>
-            </div>
-            <div class="schedule-item">
-              <p class="schedule-title">야시장 & 주점</p>
-              <p class="schedule-location">교내 전체</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
+    <div class="table-wrapper">
       <div class="divider"></div>
-      <div class="right table">
-        <div class="schedule-group" style="margin-top: 60px">
-          <div class="schedule-header">
+      <div class="table">
+        <template v-for="(item, index) in filltered_list">
+          <div class="schedule-group">
             <div class="schedule-pin"></div>
-            <p class="schedule-time">11:30 ~ 16:30</p>
+            <p class="schedule-time" v-text="`${item.time} ${item.title}`"></p>
           </div>
-          <div class="schedule-content">
-            <div class="schedule-item">
-              <p class="schedule-title">푸드 트럭</p>
-              <p class="schedule-location">CLC 앞</p>
-            </div>
-          </div>
-        </div>
-        <div class="schedule-group" style="margin-top: 40px">
-          <div class="schedule-header">
-            <div class="schedule-pin"></div>
-            <p class="schedule-time">13:30 ~ 15:30</p>
-          </div>
-          <div class="schedule-content">
-            <div class="schedule-item">
-              <p class="schedule-title">퍼포먼스 쇼</p>
-              <p class="schedule-location">학교 어딘가..</p>
-            </div>
-          </div>
-        </div>
+        </template>
       </div>
     </div>
   </main>
@@ -76,11 +26,51 @@
 export default {
   data() {
     return {
+      list: [
+        {
+          time: '09:00 ~ 10:00',
+          title: '축제 아이템 1 (수, 목)',
+          day: [2, 3]
+        },
+        {
+          time: '10:00 ~ 11:00',
+          title: '축제 아이템 2 (화, 목)',
+          day: [1, 3]
+        },
+        {
+          time: '11:00 ~ 12:00',
+          title: '축제 아이템 3 (수, 목)',
+          day: [2, 3]
+        },
+        {
+          time: '14:00 ~ 16:00',
+          title: '축제 아이템 4 (화, 수)',
+          day: [1, 2]
+        },
+        {
+          time: '16:00 ~ 18:00',
+          title: '축제 아이템 5 (화, 수, 목)',
+          day: [1, 2, 3]
+        },
+        {
+          time: '18:00 ~ 22:00',
+          title: '축제 아이템 6 (수)',
+          day: [2]
+        }
+      ],
       day: 0
     };
   },
+  computed: {
+    filltered_list() {
+      return this.list.filter((item) => {
+        // 1. 요일에 따른 필터링
+        return this.day === 0 || item.day.includes(this.day);
+      });
+    }
+  },
   methods: {
-    changeDay(day) {
+    selectDay(day) {
       if (this.day === day) {
         this.day = 0;
       } else {
@@ -92,6 +82,11 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin: 0;
+  color: black;
+}
+
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -99,120 +94,80 @@ h1 {
   padding: 36px 0;
 }
 
-.buttonGroup {
+.button-group {
   display: flex;
   justify-content: center;
 }
 
-.buttonGroup > button {
+.button-group > button {
   margin: 0 10px;
   padding: 5px 18px;
   border: none;
   border-radius: 16px;
+  color: black;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
+  transition: background-color 0.25s, color 0.25s;
 }
 
-.tableContainer {
+.button-group > button.selected {
+  background-color: #509bf8;
+  color: white;
+}
+
+.table-wrapper {
+  max-width: 500px;
+  margin: auto;
   margin-top: 48px;
+
+  padding: 0 48px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.tableContainer > * {
-  height: 600px;
+.table-wrapper > * {
+  height: 900px;
+}
+.divider {
+  border-right: 6px solid #4c97f12b;
+  /* border-image: linear-gradient(180deg, rgba(29, 181, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); */
+  border-image-slice: 1;
 }
 
 .table {
-  width: 300px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
 
-.table.right > .schedule-group {
-  margin-left: 36px;
-}
-.table.left > .schedule-group {
-  margin-right: 36px;
-}
-
-.table.right .schedule-content {
-  padding-right: 20px;
-}
-.table.left .schedule-content {
-  padding-left: 20px;
-}
-
-.table.left {
-  text-align: right;
-  align-items: flex-end;
-}
-
-.divider {
-  border-right: 2px solid transparent;
-  border-image: linear-gradient(180deg, rgba(29, 181, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-  border-image-slice: 1;
-}
-
-p {
-  margin: 0;
-  color: black;
-}
-
-.schedule {
-}
-
-.schedule-header {
+.schedule-group {
   display: flex;
-}
-
-.table.left .schedule-header {
-  justify-content: flex-end;
-}
-
-.schedule-content {
-  display: flex;
-  flex-direction: column;
+  margin-top: -24px;
+  margin-left: 24px;
+  margin-bottom: 48px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8f9fd;
 }
 
 .schedule-time {
+  margin-left: 24px;
   font-size: 14pt;
   color: #333333;
 }
 
 .schedule-pin {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 
-  background-color: #27c2a3;
-  border-radius: 12px;
-}
+  border-radius: 20px;
 
-.table.left .schedule-pin {
-  margin-right: -49px;
-}
-.table.right .schedule-pin {
-  margin-left: -49px;
-}
+  margin-left: -53px;
 
-.table.left .schedule-time {
-  margin-right: 24px;
-}
-.table.right .schedule-time {
-  margin-left: 24px;
-}
-
-.schedule-item {
-  margin: 6px 0;
-}
-
-.schedule-title {
-  font-size: 18pt;
-}
-
-.schedule-location {
-  font-size: 11pt;
-  line-height: 11pt;
+  background-color: #ffffff; /* 중심 흰색원 */
+  border: 6px solid #4c97f1; /* 파란색 원 */
+  outline: 8px solid #ffffff; /* 제일 바깥 흰색원 */
 }
 </style>

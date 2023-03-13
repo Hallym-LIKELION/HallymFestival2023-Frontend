@@ -26,7 +26,7 @@ export default {
     image: {
       type: String,
       default() {
-        return 'https://via.placeholder.com/60x60/4d4d4d/b8b8b8';
+        return 'https://via.placeholder.com/60x60/D9D9D9/b8b8b8';
       }
     },
     imageAlt: {
@@ -52,7 +52,7 @@ export default {
   justify-content: left;
   align-items: center;
   border-radius: 4px;
-  background-color: lightgray;
+  background-color: #eef3f6;
   height: 70px;
   overflow: hidden;
 }
