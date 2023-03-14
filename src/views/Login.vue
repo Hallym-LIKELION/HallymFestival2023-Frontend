@@ -1,34 +1,33 @@
 <template>
   <main>
-    <h1>관리자 로그인 화면</h1>
-    <p>
-      일반 학우분들에게는 로그인 권한이 없습니다. 축준위 및 각 동아리 부스 관리자만 로그인이
-      가능합니다.
-    </p>
-    <div id="loginForm">
+    <h1>로그인</h1>
+    <div class="form">
       <form @submit.prevent="fnLogin">
-        <p><input class="w3-input" name="uid" placeholder="Input Your ID" v-model="id" /><br /></p>
-        <p>
-          <input
-            name="password"
-            class="w3-input"
-            placeholder="Input Your PW"
-            v-model="password"
-            type="password"
-          />
-        </p>
-        <p>
-          <button type="submit" class="w3-button w3-green w3-round">Login</button>
-        </p>
+        <div class="input id">
+          <img :src="userImage" alt="" />
+          <input name="uid" placeholder="아이디" v-model="id" />
+        </div>
+        <div class="input password">
+          <img :src="lockImage" alt="" />
+          <input name="uid" placeholder="비밀번호" v-model="password" type="password" />
+        </div>
+        <div class="button">
+          <button type="submit" class="w3-button w3-green w3-round">로그인</button>
+        </div>
       </form>
     </div>
   </main>
 </template>
 
 <script>
+import userImage from '@/assets/user.png';
+import lockImage from '@/assets/lock.png';
+
 export default {
   data() {
     return {
+      userImage,
+      lockImage,
       id: '',
       password: ''
     };
@@ -45,7 +44,7 @@ export default {
         return;
       }
 
-      alert('정상적으로 로그인 되었습니다.');
+      alert(`id: ${this.id}\npass: ${this.password}\n\n정상적으로 로그인 되었습니다.`);
     }
   }
 };
@@ -66,7 +65,58 @@ p {
   padding: 36px 0;
 }
 
-#loginForm {
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.form {
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding: 8px 12px;
+  margin-top: 18px;
+  border: 1px solid gray;
+  border-radius: 18px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+img {
+  width: 18px;
+  margin-right: 8px;
+}
+
+.input > input {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.button > button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 8px 0;
+  font-size: 18pt;
+  border-radius: 12px;
+  color: white;
+  background-color: #466efe;
+  transition: background-color 0.1s;
+}
+
+.button > button:hover {
+  background-color: #0f8bff;
 }
 </style>

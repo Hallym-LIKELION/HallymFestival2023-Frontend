@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('../views/BoothMapView.vue')
     },
     {
+      path: '/booth/:id',
+      name: 'booth',
+      component: () => import('../views/BoothView.vue')
+    },
+    {
       path: '/timetable',
       name: 'timetable',
       component: () => import('../views/TimeTableView.vue')
@@ -30,19 +35,24 @@ const router = createRouter({
       component: () => import('../views/ProgramListView.vue')
     },
     {
+      path: '/comment',
+      name: 'comment',
+      component: () => import('../views/CommentView.vue')
+    },
+    {
       path: '/aboutus',
       name: 'aboutus',
       component: () => import('../views/AboutUs.vue')
     },
     {
-      path: '/feature-test',
-      name: 'API 데모',
-      component: () => import('../views/AxiosDemoView.vue')
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notfound',
+      component: () => import('../views/NotFoundView.vue')
     }
   ]
 });

@@ -13,7 +13,7 @@
         />
       </template>
     </div>
-    <div class="buttonGroup">
+    <div class="button-group">
       <button @click="() => writeArticle()">글쓰기</button>
     </div>
   </main>
@@ -104,12 +104,10 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin: 0 10px;
-  padding: 0 16px;
 }
 
 .announcement-list > * {
   width: 100%;
-  margin: 0;
   border-top: 1px solid #00000052;
   cursor: pointer;
 }
@@ -118,14 +116,13 @@ h1 {
   border-bottom: 1px solid #00000052;
 }
 
-.buttonGroup {
+.button-group {
   display: flex;
   justify-content: flex-end;
-  padding: 0 8px;
 }
 
-.buttonGroup > button {
-  margin: 8px 10px;
+.button-group > button {
+  margin: 8px 0;
   padding: 8px 24px;
   border: none;
   border-radius: 24px;

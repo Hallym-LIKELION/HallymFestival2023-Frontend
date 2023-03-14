@@ -8,16 +8,13 @@
       <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
     </div>
 
-    <div class="table-wrapper">
-      <div class="divider"></div>
-      <div class="table">
-        <template v-for="(item, index) in filltered_list">
-          <div class="schedule-group">
-            <div class="schedule-pin"></div>
-            <p class="schedule-time" v-text="`${item.time} ${item.title}`"></p>
-          </div>
-        </template>
-      </div>
+    <div class="table">
+      <template v-for="(item, index) in filltered_list">
+        <div class="schedule-group">
+          <div class="schedule-pin"></div>
+          <p class="schedule-content" v-text="`${item.time} ${item.title}`"></p>
+        </div>
+      </template>
     </div>
   </main>
 </template>
@@ -115,59 +112,52 @@ h1 {
   color: white;
 }
 
-.table-wrapper {
-  max-width: 500px;
-  margin: auto;
-  margin-top: 48px;
-
-  padding: 0 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.table-wrapper > * {
-  height: 900px;
-}
-.divider {
-  border-right: 6px solid #4c97f12b;
-  /* border-image: linear-gradient(180deg, rgba(29, 181, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); */
-  border-image-slice: 1;
-}
-
 .table {
-  width: 100%;
+  max-width: 500px;
+
+  margin: 48px auto;
+
   display: flex;
   flex-direction: column;
-  z-index: 1;
+
+  /* 왼쪽에 옅은 파란선 그리기 */
+  border-left: 6px solid #4c97f12b;
+  border-image-slice: 1;
 }
 
 .schedule-group {
   display: flex;
-  margin-top: -24px;
-  margin-left: 24px;
-  margin-bottom: 48px;
+
+  margin-top: -24px; /* top -> pin을 좌측 선의 맨 윗부분에 두기 위해서 지정 */
+  margin-left: 24px; /* left -> 좌측 선에서 좀 때어두기 위해서 지정 */
+  margin-bottom: 48px; /* bottom -> top 때문에 간격이 너무 줄어서 간격을 다시 늘리기 위해 지정 */
+
   padding: 10px;
   border-radius: 10px;
   background-color: #f8f9fd;
 }
 
-.schedule-time {
-  margin-left: 24px;
-  font-size: 14pt;
-  color: #333333;
+.schedule-group:last-child {
+  margin-bottom: 0px; /* bottom -> top 때문에 간격이 너무 줄어서 간격을 다시 늘리기 위해 지정 */
 }
 
 .schedule-pin {
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
 
-  border-radius: 20px;
+  /* 절대적인 위치를 갖도록하여 content와의 간섭을 줄이고, margin으로 왼쪽 선에 갖다두기 */
+  position: absolute;
+  margin-left: -49px;
 
-  margin-left: -53px;
+  border-radius: 12px;
 
   background-color: #ffffff; /* 중심 흰색원 */
   border: 6px solid #4c97f1; /* 파란색 원 */
   outline: 8px solid #ffffff; /* 제일 바깥 흰색원 */
+}
+
+.schedule-content {
+  font-size: 14pt;
+  color: #333333;
 }
 </style>

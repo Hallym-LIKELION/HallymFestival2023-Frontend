@@ -49,7 +49,6 @@ h1 {
 .menu {
   max-width: 380px;
   margin: auto;
-  padding: 0 24px;
   display: flex;
   flex-direction: column;
   align-items: center;

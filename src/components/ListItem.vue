@@ -3,7 +3,7 @@
     <img class="image-content" :src="image" :alt="imageAlt" />
     <div class="text-content">
       <h3 v-text="title" />
-      <p v-text="`${type} - ${content}`" />
+      <p v-text="`${content}`" />
     </div>
   </div>
 </template>
@@ -33,12 +33,6 @@ export default {
       type: String,
       default() {
         return '공지사항에 대한 이미지';
-      }
-    },
-    type: {
-      type: String,
-      default() {
-        return 'default';
       }
     }
   }

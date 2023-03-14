@@ -75,7 +75,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin: 0 10px;
-  padding: 0 16px;
 }
 
 .program-list > * {

@@ -18,11 +18,9 @@
       <template v-for="(item, index) in filltered_list">
         <ListItem
           @click="() => showBooth(item.id)"
-          :title="item.title"
-          :content="item.content"
+          :title="item.name"
+          :content="item.shortDescription"
           :image="item.image"
-          :type="item.type"
-          imageAlt="이미지"
         />
       </template>
     </div>
@@ -32,6 +30,7 @@
 <script>
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
+import { GetDemoBoothList } from '../api/api-client';
 import mapImage from '@/assets/map.jpg';
 
 export default {
@@ -42,36 +41,7 @@ export default {
   data() {
     return {
       mapImage,
-      list: [
-        {
-          id: 1,
-          title: '쿠키스 (화)',
-          content: '수제 쿠키 판매',
-          image:
-            'https://images.unsplash.com/photo-1585608726082-19c119c55c28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80',
-          type: '1'
-        },
-        {
-          id: 2,
-          title: '더 사이언스 (수)',
-          content: '과학 퀴즈 및 체험',
-          image:
-            'https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=834&q=80',
-          type: '2'
-        },
-        {
-          id: 3,
-          title: '대충 아무 부스 (목)',
-          content: '대충 아무 내용',
-          type: '3'
-        },
-        {
-          id: 3,
-          title: '대충 아무 부스 (화)',
-          content: '대충 아무 내용',
-          type: '1'
-        }
-      ],
+      list: [],
       search: '',
       day: 0
     };
@@ -80,7 +50,7 @@ export default {
     filltered_list() {
       return this.list.filter((item) => {
         // 1. 요일에 따른 필터링
-        const isChoosedDay = this.day === 0 || item.type === this.day.toString();
+        const isChoosedDay = this.day === 0 || item.day.includes(this.day);
 
         // 2. 검색에 따른 필터링
         const isContainSearchString =
@@ -94,8 +64,7 @@ export default {
   },
   methods: {
     showBooth(id) {
-      // TODO: 부스 상세 페이지를 띄우는 코드 작성하기
-      alert(`booth item ${id} clicked`);
+      this.$router.push('/booth/' + id);
     },
     selectDay(day) {
       if (this.day === day) {
@@ -104,6 +73,18 @@ export default {
         this.day = day;
       }
     }
+  },
+  created() {
+    // 데이터 가져오기
+    GetDemoBoothList()
+      .then((data) => {
+        console.log(data);
+        this.list = data;
+      })
+      .catch((err) => {
+        alert('Unexpected error has occured. Please try again later.');
+        console.log(err);
+      });
   }
 };
 </script>
@@ -118,7 +99,6 @@ h1 {
 
 .poster {
   max-width: 100%;
-  padding: 0 24px;
 }
 
 .poster > img {
@@ -141,11 +121,11 @@ h1 {
 
 .button-group > button {
   margin: 8px 10px;
-  padding: 8px 24px;
+  padding: 6px 16px;
   border: none;
   border-radius: 24px;
   color: black;
-  font-size: 12pt;
+  font-size: 11pt;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
   transition: background-color 0.25s, color 0.25s;
@@ -160,11 +140,11 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
 }
 
 .booth-list > * {
   max-width: 400px;
   margin: 10px 0;
+  cursor: pointer;
 }
 </style>
