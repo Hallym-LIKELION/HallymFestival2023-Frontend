@@ -130,30 +130,9 @@ export default {
 </script>
 
 <style scoped>
-p {
-  margin: 0;
-}
-
 h1 {
   font-size: 20pt;
   text-align: left;
-  margin: 0;
-}
-
-textarea {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-button {
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: black;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header {

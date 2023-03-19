@@ -51,9 +51,6 @@ export default {
 };
 </script>
 <style scoped>
-p {
-  margin: 0;
-}
 .wrapper {
   width: 100%;
   padding: 0 8px;
