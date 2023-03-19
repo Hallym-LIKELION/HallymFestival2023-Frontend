@@ -1,85 +1,175 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <button @click="showMenu = !showMenu">
+      <img :src="menuButtonImage" width="32" />
+    </button>
+    <p>2023 한림대학교 비봉축전</p>
   </header>
+  <div class="dimmer" :class="{ hidden: !showMenu }" @click="() => (showMenu = false)"></div>
+  <div class="wrapper">
+    <nav :class="{ hidden: !showMenu }">
+      <template v-for="{ url, name, bottom = false } in navList">
+        <RouterLink
+          :to="'/' + url"
+          v-text="name"
+          :class="{ bottom }"
+          @click="() => (showMenu = false)"
+        />
+      </template>
+    </nav>
 
-  <RouterView />
+    <RouterView v-slot="{ Component }" class="router-view">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
+  </div>
 </template>
+
+<script>
+import { RouterLink, RouterView } from 'vue-router';
+import menuButtonImage from '@/assets/hamburger.png';
+
+export default {
+  components: {
+    RouterLink,
+    RouterView
+  },
+  data() {
+    return {
+      showMenu: false,
+      menuButtonImage,
+      navList: [
+        { name: 'HOME', url: '' },
+        { name: '공지사항', url: 'announcement' },
+        { name: '부스 배치도', url: 'boothmap' },
+        { name: '타임 테이블', url: 'timetable' },
+        { name: '프로그램', url: 'program' },
+        { name: '방명록', url: 'comment' },
+        { name: 'About Us', url: 'aboutus' },
+        { name: '로그인', url: 'login', bottom: true }
+      ]
+    };
+  }
+};
+</script>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 8px #00000066;
+  align-items: center;
+  justify-content: stretch;
+  z-index: 999;
+}
+header > button {
+  margin-left: 24px;
+  position: absolute;
+  /* 이미지를 하얗게 */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+header > p {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-size: 18pt;
+  font-weight: 600;
+}
+.wrapper {
+  padding-top: 72px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+/* 사이드 메뉴 열었을때 배경 흐리게 */
+.dimmer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background-color: #00000077;
+  opacity: 1;
+  transition: opacity 0.25s;
+}
+
+.dimmer.hidden {
+  opacity: 0;
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  padding: 8px;
+  overflow: auto;
+  z-index: 99;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.hidden {
+  display: none;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.bottom {
+  margin-top: auto;
+  margin-bottom: 96px;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+nav > * {
+  width: 240px;
+  padding: 16px 0;
+  padding-left: 24px;
+  font-size: 16pt;
+  color: black;
+  text-decoration: none;
 }
 
-nav a:first-of-type {
-  border: 0;
+.router-view {
+  max-width: 768px;
+  min-height: calc(100vh - 72px);
+  margin: auto;
+  padding: 0 28px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+@media screen and (max-width: 768px) {
+  header > p {
+    font-size: 14pt;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  header > button {
+    margin-left: 24px;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  header > button > img {
+    width: 24px;
   }
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+/* 트랜지션 기능 테스트 */
+.fade-enter-active {
+  transition: opacity 0.25s ease;
+}
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
