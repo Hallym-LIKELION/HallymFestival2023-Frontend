@@ -1,21 +1,23 @@
 <template>
-  <div class="modal">
-    <div class="modal-background" @click.self="$emit('close')"></div>
-    <div class="modal-wrapper">
-      <div class="modal-header">
-        <slot name="header">이름 없는 헤더</slot>
-        <button class="close-button" @click="$emit('close')">
-          <img :src="CloseImage" alt="닫기" />
-        </button>
-      </div>
-      <div class="modal-content">
-        <slot name="content"></slot>
-      </div>
-      <div class="modal-footer">
-        <slot name="footer"> </slot>
+  <Transition name="modal">
+    <div class="modal" v-if="show">
+      <div class="modal-background" @click="$emit('close')"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <slot name="header">이름 없는 헤더</slot>
+          <button class="close-button" @click="$emit('close')">
+            <img :src="CloseImage" alt="닫기" />
+          </button>
+        </div>
+        <div class="modal-body">
+          <slot name="body"></slot>
+        </div>
+        <div class="modal-footer">
+          <slot name="footer"> </slot>
+        </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script>
@@ -26,6 +28,14 @@ export default {
     return {
       CloseImage
     };
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default() {
+        return false;
+      }
+    }
   },
   methods: {},
   created() {}
@@ -54,6 +64,7 @@ button {
   align-items: center;
   /* background-color: #00000099; */
   z-index: 9999;
+  transition: opacity 0.3s ease;
 }
 
 .modal-background {
@@ -65,7 +76,7 @@ button {
   background-color: #00000099;
 }
 
-.modal-wrapper {
+.modal-container {
   width: 768px;
   height: 300px;
 
@@ -76,9 +87,10 @@ button {
   box-shadow: 0px 0px 6px #00000099;
   background-color: #ffffff;
   z-index: 9999;
+  transition: all 0.3s ease;
 }
 
-.modal-wrapper > div {
+.modal-container > div {
   margin-left: 24px;
   margin-right: 24px;
 }
@@ -100,7 +112,7 @@ button {
   line-height: 24pt;
 }
 
-.modal-content {
+.modal-body {
   height: 100%;
 }
 
@@ -109,5 +121,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.modal-enter-from {
+  opacity: 0;
+}
+
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .modal-container,
+.modal-leave-to .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>
