@@ -19,7 +19,7 @@
         <ListItem
           @click="() => showBooth(item.id)"
           :title="item.name"
-          :content="item.shortDescription"
+          :content="item.summary"
           :image="item.image"
         />
       </template>
