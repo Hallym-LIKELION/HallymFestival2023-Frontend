@@ -15,7 +15,7 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="(item, index) in filltered_list">
+      <template v-for="item in filltered_list" :key="item.id">
         <ListItem
           @click="() => showBooth(item.id)"
           :title="item.name"
