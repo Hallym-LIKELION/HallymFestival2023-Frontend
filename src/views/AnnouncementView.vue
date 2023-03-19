@@ -1,8 +1,8 @@
 <template>
   <main>
-    <h1>공지사항</h1>
-    <div class="search-bar"><SearchBar v-model="search" /></div>
-    <div class="announcement-list">
+    <h1 ref="title">공지사항</h1>
+    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
+    <div class="announcement-list" ref="announcementList">
       <template v-for="(item, index) in filltered_list">
         <FoldingArticle
           @click="() => showAnnouncement(item.id)"
@@ -13,13 +13,14 @@
         />
       </template>
     </div>
-    <div class="button-group">
+    <div class="button-group" ref="buttonGroup">
       <button @click="() => writeArticle()">글쓰기</button>
     </div>
   </main>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
 
@@ -80,6 +81,73 @@ export default {
       // 글쓰기 기능 구현
       alert('TODO');
     }
+  },
+  mounted() {
+    // 타이틀 애니메이션
+    gsap.fromTo(
+      this.$refs.title,
+      {
+        opacity: 0,
+        transform: 'translateY(-10%)'
+      },
+      {
+        delay: 0,
+        duration: 0.5,
+        opacity: 1,
+        transform: 'none'
+      }
+    );
+
+    // 검색창 애니메이션
+    gsap.fromTo(
+      this.$refs.searchBar,
+      {
+        transform: 'translateX(-3%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 0.5,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
+
+    // 글 목록 애니메이션
+    gsap.fromTo(
+      this.$refs.announcementList,
+      {
+        transform: 'translateX(-10%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 1,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
+
+    // 글쓰기 버튼 애니메이션
+    gsap.fromTo(
+      this.$refs.buttonGroup,
+      {
+        transform: 'translateX(2%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 1.5,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
   }
 };
 </script>
