@@ -22,10 +22,9 @@
 
       <div class="header-content">
         <p class="header-tag">
-          <img
-            class="header-image"
-            :src="data.image || 'https://via.placeholder.com/700x400/D9D9D9/aaaaaa'"
-          />{{ data.tag?.map((item) => '#' + item).join(' ') || 'Loading...' }}
+          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />{{
+            data.tag?.map((item) => '#' + item).join(' ') || 'Loading...'
+          }}
         </p>
       </div>
     </div>

@@ -26,7 +26,7 @@ export default {
     image: {
       type: String,
       default() {
-        return 'https://via.placeholder.com/700x400/D9D9D9/b8b8b8';
+        return 'https://placehold.co/300x210';
       }
     }
   }
