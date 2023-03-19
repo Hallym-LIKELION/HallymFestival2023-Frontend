@@ -1,16 +1,14 @@
 <template>
   <main>
-    <div class="example-modal-window">
-      <MyModal @close="closeModal" v-if="modal" class="modal">
-        <template v-slot:header> 부스 소개문 수정 </template>
-        <template v-slot:content>
-          <textarea class="modal-input" v-model="message"></textarea>
-        </template>
-        <template v-slot:footer>
-          <button class="modal-button" @click="doSend">수정하기</button>
-        </template>
-      </MyModal>
-    </div>
+    <Modal :show="modal" @close="closeModal">
+      <template #header> 부스 소개문 수정 </template>
+      <template #body>
+        <textarea class="modal-input" v-model="message"></textarea>
+      </template>
+      <template #footer>
+        <button class="modal-button" @click="doSend">수정하기</button>
+      </template>
+    </Modal>
     <div class="header">
       <div class="header-title">
         <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
@@ -29,40 +27,63 @@
       </div>
     </div>
 
-    <div class="description">
-      <h1>부스 소개</h1>
-      <button class="edit-button" @click="modal = !modal"><img :src="EditImage" alt="" /></button>
-    </div>
+    <div class="content">
+      <div class="section">
+        <div class="section-header">
+          <h1>부스 소개</h1>
+          <button class="edit-button" @click="modal = !modal">
+            <img :src="EditImage" alt="" />
+          </button>
+        </div>
+        <hr />
+        <p class="section-text" v-text="data.description || 'Loading...'"></p>
+      </div>
 
-    <hr />
-    <p class="description-text" v-text="data.description || 'Loading...'"></p>
+      <div class="section">
+        <div class="section-header">
+          <h1>부스 메뉴</h1>
+        </div>
+        <hr />
+        <p class="section-text">TODO: 부스 메뉴 넣기</p>
+      </div>
 
-    <div class="menu-list">
-      <h1>메뉴 소개</h1>
-    </div>
+      <div class="section">
+        <div class="section-header">
+          <h1>댓글 <span>21</span></h1>
+        </div>
+        <hr />
 
-    <hr />
-    <p v-text="'대충 소개'"></p>
-
-    <div class="menu-list">
-      <h1>댓글</h1>
-    </div>
-
-    <hr />
-    <div class="nickname">
-      <p>
-        닉네임: <input class="user-name" type="nickname" @input="userId = $event.target.value" />
-      </p>
-    </div>
-    <div class="password">
-      <p>
-        비밀번호:
-        <input class="user-pw" type="pw" maxlength="4" @input="userId = $event.target.value" />
-      </p>
-    </div>
-
-    <div class="login_button">
-      <button class="edit-button"><img :src="EditImage" alt="" /></button>
+        <div class="comment">
+          <div class="write-container">
+            <div class="write-header">
+              <img class="write-header-profile" src="https://placehold.co/48x48" alt="" />
+              <p class="write-header-nickname">멋있는 사자</p>
+            </div>
+            <div class="write-content">
+              <textarea
+                class="write-content-text"
+                placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
+              ></textarea>
+              <div class="write-footer">
+                <input
+                  class="write-footer-password"
+                  type="password"
+                  placeholder="비밀번호를 입력..."
+                  maxlength="30"
+                  @input="userId = $event.target.value"
+                />
+                <button class="write-footer-button">
+                  <img :src="SendImage" alt="" srcset="" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="comment-content">
+            <Comment :id="3" :name="'아무 댓글'" :comment="'임시입니다'" />
+            <Comment :id="4" :name="'댓글 222'" :comment="'123 123 123 33 '" />
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 임시로 만든 버튼 -- 기획에서 디자인 줘야됨 -->
@@ -75,15 +96,18 @@
 <script>
 import HeartImage from '../assets/heart.png';
 import EditImage from '../assets/edit_button.png';
+import SendImage from '../assets/send.png';
 import { GetDemoBooth } from '../api/api-client';
-import MyModal from '../components/MyModal.vue';
+import Modal from '../components/MyModal.vue';
+import Comment from '../components/Comment.vue';
 
 export default {
-  components: { MyModal },
+  components: { Modal, Comment },
   data() {
     return {
       HeartImage,
       EditImage,
+      SendImage,
       data: {},
       modal: false,
       message: ''
@@ -192,7 +216,7 @@ h1 {
 }
 .return-button > button {
   width: 200px;
-  margin-top: 18px;
+  margin: 18px 0;
   padding: 8px 0;
   font-size: 18pt;
   border-radius: 12px;
@@ -232,7 +256,7 @@ hr {
   color: white;
 }
 
-.description {
+.section-header {
   font-size: 20pt;
   text-align: left;
   margin: 0;
@@ -240,7 +264,74 @@ hr {
   justify-content: space-between;
 }
 
-.description-text {
+.section-header > h1 > span {
+  font-size: 12pt;
+  font-weight: 500;
+}
+
+.section-text {
+  min-height: 100px;
+  font-size: 14pt;
   white-space: pre;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.write-header {
+  display: flex;
+  align-items: center;
+}
+.write-header-profile {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border-radius: 100%;
+}
+.write-content {
+  width: calc(100% - 20px);
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #dddddd;
+}
+
+.write-content-text {
+  width: 100%;
+  height: 60px;
+  background: none;
+  overflow: hidden;
+  outline: none;
+  font-size: 16pt;
+  resize: none;
+}
+.write-footer {
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* .write-footer-hint {
+  margin-right: 8px;
+  font-size: 14pt;
+} */
+
+.write-footer-password {
+  font-size: 14pt;
+  margin-right: 12px;
+}
+
+.write-footer-button {
+  margin-right: 8px;
+}
+.write-footer-button > img {
+  width: 24px;
+  height: 24px;
+}
+
+.comment-content > * {
+  margin-top: 12px;
 }
 </style>
