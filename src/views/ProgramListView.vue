@@ -141,7 +141,6 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
-  margin: 0;
   padding: 36px 0;
 }
 .poster {
@@ -159,7 +158,7 @@ h1 {
 }
 
 .program-list > * {
-  max-width: 400px;
+  max-width: 360px;
   margin-top: 12px;
   padding: 12px 0;
   border-bottom: 1px solid #00000052;

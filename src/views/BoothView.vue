@@ -22,10 +22,9 @@
 
       <div class="header-content">
         <p class="header-tag">
-          <img
-            class="header-image"
-            :src="data.image || 'https://via.placeholder.com/700x400/D9D9D9/aaaaaa'"
-          />{{ data.tag?.map((item) => '#' + item).join(' ') || 'Loading...' }}
+          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />{{
+            data.tag?.map((item) => '#' + item).join(' ') || 'Loading...'
+          }}
         </p>
       </div>
     </div>
@@ -131,30 +130,9 @@ export default {
 </script>
 
 <style scoped>
-p {
-  margin: 0;
-}
-
 h1 {
   font-size: 20pt;
   text-align: left;
-  margin: 0;
-}
-
-textarea {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-button {
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: black;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header {
