@@ -5,18 +5,22 @@
     </button>
     <p>2023 한림대학교 비봉축전</p>
   </header>
-  <div class="dimmer" :class="{ hidden: !showMenu }" @click="() => (showMenu = false)"></div>
+  <Transition name="fade">
+    <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
+  </Transition>
   <div class="wrapper">
-    <nav :class="{ hidden: !showMenu }">
-      <template v-for="{ url, name, bottom = false } in navList">
-        <RouterLink
-          :to="'/' + url"
-          v-text="name"
-          :class="{ bottom }"
-          @click="() => (showMenu = false)"
-        />
-      </template>
-    </nav>
+    <Transition name="slide">
+      <nav v-if="showMenu">
+        <template v-for="{ url, name, bottom = false } in navList">
+          <RouterLink
+            :to="'/' + url"
+            v-text="name"
+            :class="{ bottom }"
+            @click="() => (showMenu = false)"
+          />
+        </template>
+      </nav>
+    </Transition>
 
     <RouterView v-slot="{ Component }" class="router-view">
       <Transition name="fade" mode="out-in">
@@ -171,5 +175,28 @@ nav > * {
 }
 .fade-leave-to {
   opacity: 0;
+}
+
+/* 트랜지션 기능 테스트 */
+.slide-enter-active {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.slide-leave-active {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(-25%);
+}
+.slide-enter-to {
+  opacity: 1;
+}
+.slide-leave-from {
+  opacity: 1;
+}
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-25%);
 }
 </style>

@@ -7,13 +7,16 @@
         <img :src="arrowImage" />
       </div>
     </div>
-    <div class="article" :class="{ hidden: !showContent }">
-      <p class="content" v-text="content"></p>
-    </div>
+    <transition name="expand" @enter="expandEnter" @leave="expandLeave">
+      <div class="article" v-if="showContent">
+        <p class="content" v-text="content"></p>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import arrowImage from '@/assets/down.png';
 
 export default {
@@ -46,6 +49,30 @@ export default {
       default() {
         return false;
       }
+    }
+  },
+
+  methods: {
+    expandEnter(element, done) {
+      return gsap.timeline({ onComplete: done }).fromTo(
+        element,
+        {
+          duration: 0.25,
+          height: 0,
+          marginBottom: 0
+        },
+        {
+          duration: 0.25,
+          height: 'auto',
+          marginBottom: '16px'
+        },
+        0
+      );
+    },
+    expandLeave(element, done) {
+      return gsap
+        .timeline({ onComplete: done })
+        .to(element, { duration: 0.25, height: 0, marginBottom: 0 }, 0);
     }
   }
 };
