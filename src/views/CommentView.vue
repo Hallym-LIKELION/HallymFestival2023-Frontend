@@ -9,6 +9,7 @@
           :comment="item.comment"
           :showMenu="item.showMenu"
           @showContextMenu="handleContextMenu"
+          @focusout="handleFocusOut"
         />
       </template>
     </div>
@@ -81,8 +82,12 @@ export default {
       for (const item of this.list) {
         item.showMenu = item.id === this.context;
       }
+    },
+    handleFocusOut() {
+      this.handleContextMenu(this.context);
     }
-  }
+  },
+  created() {}
 };
 </script>
 
