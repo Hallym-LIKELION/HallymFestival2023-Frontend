@@ -1,35 +1,41 @@
-@import './base.css';
-
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+  height: 100%;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+p {
+  margin: 0;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Noto Sans KR', sans-serif;
 }
