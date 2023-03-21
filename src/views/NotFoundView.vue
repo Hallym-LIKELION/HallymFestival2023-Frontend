@@ -19,7 +19,6 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
-  margin: 0;
   padding: 36px 0;
 }
 

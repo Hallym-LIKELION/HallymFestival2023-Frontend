@@ -21,11 +21,11 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="(item) in filltered_list" :key="item.id">
+      <template v-for="item in filltered_list" :key="item.id">
         <ListItem
           @click="() => showBooth(item.id)"
           :title="item.name"
-          :content="item.shortDescription"
+          :content="item.summary"
           :image="item.image"
         />
       </template>

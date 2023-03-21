@@ -7,13 +7,16 @@
         <img :src="arrowImage" />
       </div>
     </div>
-    <div class="article" :class="{ hidden: !showContent }">
-      <p class="content" v-text="content"></p>
-    </div>
+    <transition name="expand" @enter="expandEnter" @leave="expandLeave">
+      <div class="article" v-if="showContent">
+        <p class="content" v-text="content"></p>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import arrowImage from '@/assets/down.png';
 
 export default {
@@ -65,9 +68,6 @@ export default {
 };
 </script>
 <style scoped>
-p {
-  margin: 0;
-}
 .wrapper {
   width: 100%;
   padding: 0 8px;
