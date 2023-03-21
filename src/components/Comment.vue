@@ -1,12 +1,13 @@
 <template>
   <div class="wrapper" :style="'background-color: ' + color">
     <div :class="['context-menu', { hidden: !showMenu }]">
-      <button class="delete-button">삭제하기</button>
-      <button class="report-button">신고하기</button>
+      <button class="delete-button" @click="clickDeleteButton">삭제하기</button>
+      <button class="report-button" @click="clickReportButton">신고하기</button>
     </div>
     <div class="header">
+      <img class="picture" :src="picture" v-if="picture !== ''" />
       <p class="name" v-text="name"></p>
-      <button class="menu-button" @click="showContextMenu">
+      <button class="menu-button" @click="clickMenuButton">
         <img :src="arrowImage" alt="" srcset="" />
       </button>
     </div>
@@ -28,6 +29,10 @@ export default {
       type: Number,
       default: 0
     },
+    picture: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: '사용자'
@@ -46,8 +51,16 @@ export default {
     }
   },
   methods: {
-    showContextMenu(evt) {
-      this.$emit('showContextMenu', this.id);
+    clickMenuButton(evt) {
+      this.$emit('clickMenu', this.id);
+    },
+    clickDeleteButton(evt) {
+      this.$emit('clickDelete', this.id);
+      // this.$emit('focusout');
+    },
+    clickReportButton(evt) {
+      this.$emit('clickReport', this.id);
+      // this.$emit('focusout');
     }
   }
 };
@@ -82,6 +95,14 @@ export default {
   width: 16px;
   height: 16px;
 }
+
+.picture {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  border-radius: 12px;
+}
+
 .name {
   width: 100%;
   font-weight: 600;

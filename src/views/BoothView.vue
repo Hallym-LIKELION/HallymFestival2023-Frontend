@@ -9,6 +9,11 @@
         <button class="modal-button" @click="doSend">수정하기</button>
       </template>
     </Modal>
+    <PasswordModal
+      :show="passwordModal"
+      @close="closePasswordModal"
+      @modalComplete="deleteComment"
+    />
     <div class="header">
       <div class="header-title">
         <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
@@ -46,12 +51,19 @@
           <h1>부스 메뉴</h1>
         </div>
         <hr />
-        <p class="section-text">TODO: 부스 메뉴 넣기</p>
+        <div class="booth-menu">
+          <template v-for="item in data.menu">
+            <div class="menu-group">
+              <p class="menu-title" v-text="item.title"></p>
+              <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
+            </div>
+          </template>
+        </div>
       </div>
 
       <div class="section">
         <div class="section-header">
-          <h1>댓글 <span>21</span></h1>
+          <h1>댓글 <span v-text="comment_count.toFixed(0)"></span></h1>
         </div>
         <hr />
 
@@ -64,25 +76,40 @@
             <div class="write-content">
               <textarea
                 class="write-content-text"
+                v-model="commentContent"
+                @keydown.enter.prevent="sendComment"
                 placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
               ></textarea>
               <div class="write-footer">
                 <input
                   class="write-footer-password"
+                  v-model="commentPassword"
                   type="password"
                   placeholder="비밀번호를 입력..."
                   maxlength="30"
+                  @keypress.enter="sendComment"
                   @input="userId = $event.target.value"
                 />
-                <button class="write-footer-button">
+                <button class="write-footer-button" @click="sendComment">
                   <img :src="SendImage" alt="" srcset="" />
                 </button>
               </div>
             </div>
           </div>
           <div class="comment-content">
-            <Comment :id="3" :name="'아무 댓글'" :comment="'임시입니다'" />
-            <Comment :id="4" :name="'댓글 222'" :comment="'123 123 123 33 '" />
+            <template v-for="item in comment_list" :key="item.id">
+              <Comment
+                :id="item.id"
+                :name="GetRandomNickName(item.ip)"
+                :comment="item.comment"
+                :showMenu="item.showMenu"
+                picture="https://placehold.co/60x60"
+                @clickMenu="handleMenu"
+                @clickDelete="handleDelete"
+                @focusout="handleFocusOut"
+                color="#f1f1f1"
+              />
+            </template>
           </div>
         </div>
       </div>
@@ -102,20 +129,29 @@ import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
 import SendImage from '../assets/send.png';
 import { GetDemoBooth } from '../api/api-client';
+import { GetRandomNickName } from '../library/name-generator';
 import Modal from '../components/MyModal.vue';
+import PasswordModal from '../components/PasswordModal.vue';
 import Comment from '../components/Comment.vue';
 
 export default {
-  components: { Modal, Comment },
+  components: { Modal, Comment, PasswordModal },
   data() {
     return {
       EditImage,
       SendImage,
       likeImage: HeartImage,
       data: {},
+      comment_list: [],
       like_display: 0,
+      comment_count: 0,
       modal: false,
-      message: ''
+      passwordModal: false,
+      message: '',
+      context: -1,
+
+      commentContent: '',
+      commentPassword: ''
     };
   },
   methods: {
@@ -133,6 +169,9 @@ export default {
         this.modal = false;
       }
     },
+    closePasswordModal(password) {
+      this.passwordModal = false;
+    },
     doSend() {
       if (this.message.length > 0) {
         this.data.description = this.message;
@@ -140,6 +179,47 @@ export default {
       } else {
         alert('내용은 0자 이상이어야 합니다.');
       }
+    },
+    deleteComment(password) {
+      this.passwordModal = false;
+      const failed = password !== '1111';
+
+      // TODO: id로 delete 요청 보낼 것
+      // 요청 보내서 200 뜨면 failed = false, 400 류는 true
+      if (failed) {
+        alert(password);
+        return;
+      }
+
+      this.comment_list = this.comment_list.filter((item) => item.id !== this.context);
+    },
+
+    sendComment() {
+      console.log(this.commentContent);
+      console.log(this.commentPassword);
+
+      if (this.commentContent.length === 0) {
+        alert('댓글 내용을 입력하세요.');
+        return;
+      }
+      if (this.commentPassword.length < 4) {
+        alert('4자리 이상의 비밀번호를 입력하세요.');
+        return;
+      }
+
+      // TODO API와 이것저것 검증 ㅁㄴㅇㄻ
+
+      this.comment_list.unshift({
+        id: this.comment_list[0].id + 1,
+        ip: `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(
+          Math.random() * 256
+        )}.${Math.floor(Math.random() * 256)}`,
+        comment: this.commentContent,
+        showMenu: false
+      });
+
+      this.commentContent = '';
+      this.commentPassword = '';
     },
     likeHandler(evt) {
       if (this.data.liked === true) {
@@ -162,12 +242,37 @@ export default {
       });
 
       // API :: 부스 좋아요 등록/철회 요청 보내기
-    }
+    },
+    handleMenu(id) {
+      if (id === this.context) {
+        this.context = -1;
+      } else {
+        this.context = id;
+      }
+      for (const item of this.comment_list) {
+        item.showMenu = item.id === this.context;
+      }
+    },
+    handleDelete() {
+      this.passwordModal = true;
+    },
+    GetRandomNickName
   },
   watch: {
     'data.like'(n) {
       // 좋아요 수 애니메이션
       gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
+    },
+    comment_list: {
+      handler(n) {
+        // 댓글 수 애니메이션
+        gsap.to(this, {
+          duration: 1,
+          comment_count: Number(n.length) || 0,
+          ease: 'Expo.easeOut'
+        });
+      },
+      deep: true
     }
   },
   created() {
@@ -175,6 +280,11 @@ export default {
     GetDemoBooth(parseInt(this.$route.params.id))
       .then((data) => {
         console.log(data);
+        this.comment_list = [
+          { id: 3, ip: '30.10.3.4', comment: '안녕하세요 ~~ ㅋㅋㅋ', showMenu: false },
+          { id: 2, ip: '30.200.40.4', comment: '타코야키 맛있어요', showMenu: false },
+          { id: 1, ip: '53.30.10.4', comment: '좋아요~~', showMenu: false }
+        ];
         this.data = data;
         this.message = data.description;
       })
@@ -316,6 +426,21 @@ hr {
   flex-direction: column;
 }
 
+.menu-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-title {
+  text-align: left;
+  font-size: 15pt;
+}
+
+.menu-price {
+  text-align: right;
+  font-size: 15pt;
+}
+
 .write-header {
   display: flex;
   align-items: center;
@@ -331,7 +456,7 @@ hr {
   margin-top: 8px;
   padding: 10px;
   border-radius: 8px;
-  background-color: #dddddd;
+  background-color: #f1f1f1;
 }
 
 .write-content-text {

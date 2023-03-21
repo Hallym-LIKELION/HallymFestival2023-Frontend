@@ -8,7 +8,7 @@
           :name="GetRandomNickName(item.ip)"
           :comment="item.comment"
           :showMenu="item.showMenu"
-          @showContextMenu="handleContextMenu"
+          @clickMenu="handleMenu"
           @focusout="handleFocusOut"
         />
       </template>
@@ -74,7 +74,7 @@ export default {
       // 글쓰기 기능 구현
       alert('TODO');
     },
-    handleContextMenu(id) {
+    handleMenu(id) {
       if (id === this.context) {
         this.context = -1;
       } else {
@@ -85,7 +85,7 @@ export default {
       }
     },
     handleFocusOut() {
-      this.handleContextMenu(this.context);
+      this.handleMenu(this.context);
     },
     GetRandomNickName
   },
