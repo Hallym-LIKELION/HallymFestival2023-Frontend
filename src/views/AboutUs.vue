@@ -25,7 +25,7 @@
 
       <!-- 프론트엔드 -->
       <TeamText className="team" text-align: center><h3>Front-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black;">
+      <hr style="border: solid 1px black" />
 
       <div class="floatt">
         <div class="dcard">
@@ -33,7 +33,7 @@
           <div class="inform">
             <h2>오소현</h2>
             <p>빅데이터학과 20</p>
-            <div class="button">소현's Github > </div>
+            <div class="button">소현's Github ></div>
           </div>
         </div>
         <div class="dcard">
@@ -41,16 +41,16 @@
           <div class="inform">
             <h2>김경재</h2>
             <p>빅데이터학과 20</p>
-            <div class="button">경재's Github > </div>
+            <div class="button">경재's Github ></div>
           </div>
         </div>
       </div>
-      
+
       <div class="next"></div>
 
       <!-- 백엔드 -->
       <TeamText className="team" text-align: center><h3>Back-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black;">
+      <hr style="border: solid 1px black" />
 
       <div class="floatt">
         <div class="dcard">
@@ -58,7 +58,7 @@
           <div class="inform">
             <h2>이동헌</h2>
             <p>빅데이터학과 15</p>
-            <div class="button">동헌's Github > </div>
+            <div class="button">동헌's Github ></div>
           </div>
         </div>
 
@@ -67,7 +67,7 @@
           <div class="inform">
             <h2>박주영</h2>
             <p>콘텐츠IT학과 19</p>
-            <div class="button">주영's Github > </div>
+            <div class="button">주영's Github ></div>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
           <div class="inform">
             <h2>이강훈</h2>
             <p>빅데이터학과 18</p>
-            <div class="button">강훈's Github > </div>
+            <div class="button">강훈's Github ></div>
           </div>
         </div>
         <div class="dcard">
@@ -88,7 +88,7 @@
           <div class="inform">
             <h2>김미진</h2>
             <p>빅데이터학과 20</p>
-            <div class="button">미진's Github > </div>
+            <div class="button">미진's Github ></div>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@
 
       <!-- 기획/디자인 -->
       <TeamText className="team" text-align: center><h3>PM / DESGIN TEAM</h3></TeamText>
-      <hr style="border: solid 1px black;">
+      <hr style="border: solid 1px black" />
 
       <div class="floatt">
         <div class="dcard">
@@ -122,6 +122,17 @@
 <script></script>
 
 <style scoped>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 16px 0;
+}
+p {
+  margin: 10px 0;
+}
 .title {
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
