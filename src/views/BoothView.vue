@@ -13,8 +13,10 @@
       <div class="header-title">
         <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
         <div class="header-like">
-          <p class="header-like-count" v-text="data.like || 0"></p>
-          <button class="header-like-button"><img :src="HeartImage" alt="" /></button>
+          <p class="header-like-count" v-text="data.like || '-'"></p>
+          <button class="header-like-button" @click="likeHandler">
+            <img :src="HeartImage" alt="" />
+          </button>
         </div>
       </div>
 
@@ -135,6 +137,11 @@ export default {
       } else {
         alert('내용은 0자 이상이어야 합니다.');
       }
+    },
+    likeHandler() {
+      this.data.like++;
+
+      // API :: 부스 좋아요 요청 보내기
     }
   },
   created() {
