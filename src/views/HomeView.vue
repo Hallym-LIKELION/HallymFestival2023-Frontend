@@ -11,6 +11,7 @@
       <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
+      
     </div>
   </main>
 </template>
@@ -23,7 +24,8 @@ import festivalImage from '@/assets/poster.jpg';
 export default {
   data() {
     return {
-      festivalImage
+      festivalImage,
+      storytelling:''
     };
   },
   mounted() {
@@ -73,6 +75,8 @@ export default {
         }
       );
     }
+
+    
   }
 };
 </script>
