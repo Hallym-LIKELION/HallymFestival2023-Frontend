@@ -75,6 +75,7 @@ export default {
         { name: '부스 배치도', url: 'boothmap' },
         { name: '타임 테이블', url: 'timetable' },
         { name: '프로그램', url: 'program' },
+        { name: '축제 굿즈 안내', url: 'goods' },
         { name: '방명록', url: 'comment' },
         { name: '오시는 길', url: 'togo' },
         { name: 'About Us', url: 'aboutus' },
