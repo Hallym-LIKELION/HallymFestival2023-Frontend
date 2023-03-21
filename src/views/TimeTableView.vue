@@ -9,14 +9,10 @@
     </div>
 
     <div class="table">
-      <template v-for="item in filltered_list">
-        <div class="table-col-1">
+      <template v-for="item in filltered_list" :key="item.id">
+        <div class="schedule-group">
           <div class="schedule-pin"></div>
-          <div class="schedule-line" v-if="!item.hideLine"></div>
-        </div>
-        <div class="table-col-2">
-          <div class="schedule-time" v-text="item.time"></div>
-          <div class="schedule-text" v-text="item.content.join('\n')"></div>
+          <p class="schedule-content" v-text="`${item.time} ${item.title}`"></p>
         </div>
       </template>
     </div>
@@ -30,28 +26,33 @@ export default {
       list: [
         {
           time: '09:00 ~ 10:00',
-          content: ['테스트 11', '테스트 22'],
+          title: '축제 아이템 1 (수, 목)',
           day: [2, 3]
         },
         {
-          time: '11:00 ~ 12:00',
-          content: ['테스트 AAA', '테스트 B'],
+          time: '10:00 ~ 11:00',
+          title: '축제 아이템 2 (화, 목)',
           day: [1, 3]
         },
         {
-          time: '13:00 ~ 14:00',
-          content: ['테스트 CC', '테스트 DD'],
-          day: [2]
+          time: '11:00 ~ 12:00',
+          title: '축제 아이템 3 (수, 목)',
+          day: [2, 3]
         },
         {
-          time: '14:00 ~ 15:00',
-          content: ['테스트 33', '테스트 4'],
+          time: '14:00 ~ 16:00',
+          title: '축제 아이템 4 (화, 수)',
+          day: [1, 2]
+        },
+        {
+          time: '16:00 ~ 18:00',
+          title: '축제 아이템 5 (화, 수, 목)',
           day: [1, 2, 3]
         },
         {
-          time: '16:00 ~ 17:00',
-          content: ['테스트 EE', '테스트 FF', '테스트 GG', '테스트 HH'],
-          day: [1, 3]
+          time: '18:00 ~ 22:00',
+          title: '축제 아이템 6 (수)',
+          day: [2]
         }
       ],
       day: 0
@@ -59,18 +60,10 @@ export default {
   },
   computed: {
     filltered_list() {
-      // 요일에 따른 필터링
-      let result = this.list.filter((item) => {
+      return this.list.filter((item) => {
+        // 1. 요일에 따른 필터링
         return this.day === 0 || item.day.includes(this.day);
       });
-
-      // 마지막 항목의 경우, 선을 표시하지 않음
-      return result.map((item, index) => ({
-        time: item.time,
-        content: item.content,
-        day: item.day,
-        hideLine: index === result.length - 1
-      }));
     }
   },
   methods: {
@@ -86,9 +79,15 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin: 0;
+  color: black;
+}
+
 h1 {
   font-size: 20pt;
   text-align: center;
+  margin: 0;
   padding: 36px 0;
 }
 
@@ -118,17 +117,38 @@ h1 {
 
   margin: 48px auto;
 
-  display: grid;
-  grid-template-columns: 48px 1fr;
+  display: flex;
+  flex-direction: column;
+
+  /* 왼쪽에 옅은 파란선 그리기 */
+  border-left: 6px solid #4c97f12b;
+  border-image-slice: 1;
+}
+
+.schedule-group {
+  display: flex;
+
+  margin-top: -24px; /* top -> pin을 좌측 선의 맨 윗부분에 두기 위해서 지정 */
+  margin-left: 24px; /* left -> 좌측 선에서 좀 때어두기 위해서 지정 */
+  margin-bottom: 48px; /* bottom -> top 때문에 간격이 너무 줄어서 간격을 다시 늘리기 위해 지정 */
+
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8f9fd;
+}
+
+.schedule-group:last-child {
+  margin-bottom: 0px; /* bottom -> top 때문에 간격이 너무 줄어서 간격을 다시 늘리기 위해 지정 */
 }
 
 .schedule-pin {
   width: 12px;
   height: 12px;
 
+  /* 절대적인 위치를 갖도록하여 content와의 간섭을 줄이고, margin으로 왼쪽 선에 갖다두기 */
   position: absolute;
+  margin-left: -49px;
 
-  margin-top: 22px;
   border-radius: 12px;
 
   background-color: #ffffff; /* 중심 흰색원 */
@@ -136,40 +156,8 @@ h1 {
   outline: 8px solid #ffffff; /* 제일 바깥 흰색원 */
 }
 
-.schedule-line {
-  width: 5px;
-  height: calc(100% + 16px);
-
-  margin-top: 16px;
-  margin-bottom: -16px;
-
-  background-color: #4c97f12b;
-}
-
-.table-col-1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.table-col-2 {
-  margin: 12px 0;
-  padding: 8px 8px;
+.schedule-content {
   font-size: 14pt;
-
-  border-radius: 4px;
-
-  display: flex;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: pre-wrap;
-
   color: #333333;
-  background-color: #f8f9fd;
-}
-
-.schedule-text {
-  margin-left: 12px;
 }
 </style>

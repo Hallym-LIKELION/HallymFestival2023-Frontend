@@ -45,6 +45,8 @@ export default {
       }
 
       alert(`id: ${this.id}\npass: ${this.password}\n\n정상적으로 로그인 되었습니다.`);
+
+      this.$router.push('/');
     }
   }
 };
@@ -54,13 +56,24 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
+  margin: 0;
   padding: 36px 0;
 }
 
 p {
   font-size: 10pt;
   text-align: center;
+  margin: 0;
   padding: 36px 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .form {

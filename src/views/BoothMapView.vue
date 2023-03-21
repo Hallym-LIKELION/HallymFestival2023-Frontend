@@ -3,7 +3,13 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <img :src="mapImage" alt="한림대학교 비봉축전" />
+      <div class="poster-placeholder" v-if="!isImageLoaded"></div>
+      <img
+        :class="{ hidden: !isImageLoaded }"
+        :src="mapImage"
+        @load="onImageLoad"
+        alt="한림대학교 비봉축전"
+      />
     </div>
 
     <div class="search-bar"><SearchBar v-model="search" /></div>
@@ -15,11 +21,11 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="item in filltered_list" :key="item.id">
+      <template v-for="(item) in filltered_list" :key="item.id">
         <ListItem
           @click="() => showBooth(item.id)"
           :title="item.name"
-          :content="item.summary"
+          :content="item.shortDescription"
           :image="item.image"
         />
       </template>
@@ -43,7 +49,8 @@ export default {
       mapImage,
       list: [],
       search: '',
-      day: 0
+      day: 0,
+      isImageLoaded: false
     };
   },
   computed: {
@@ -72,6 +79,9 @@ export default {
       } else {
         this.day = day;
       }
+    },
+    onImageLoad() {
+      this.isImageLoaded = true;
     }
   },
   created() {
@@ -93,6 +103,7 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
+  margin: 0;
   padding: 24px 0;
 }
 
@@ -100,10 +111,25 @@ h1 {
   max-width: 100%;
 }
 
+.poster-placeholder {
+  max-width: 970px;
+  max-height: 420px;
+  margin: 0 auto;
+  background-color: #00000055;
+  aspect-ratio: 970 / 689;
+}
+
 .poster > img {
   width: 100%;
-  max-height: 480px;
+  max-height: 420px;
   object-fit: contain;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 .search-bar {
@@ -142,7 +168,7 @@ h1 {
 }
 
 .booth-list > * {
-  max-width: 400px;
+  max-width: 420px;
   margin: 10px 0;
   cursor: pointer;
 }

@@ -31,28 +31,71 @@ export async function GetDemoPost(id) {
 const demoBoothData = JSON.stringify([
   {
     id: 1,
-    name: '타코야키',
-    image: 'https://placehold.co/500x400?text=test+1',
-    summary: '맛있는 타코야키 팔아요',
-    description: '타코야키 정말 맛있어요',
-    menu: [
-      { title: '타코야키', price: 3000 },
-      { title: '타코야키 XL', price: 4000 }
-    ],
-    like: 123,
-    day: [1, 2],
-    tag: ['타코야키', '맛있어요', '푸드트럭']
+    name: '네이버',
+    image: 'https://via.placeholder.com/700x400/fcaccf/117788?text=NAVER',
+    shortDescription: '네이버, 라인, 웹툰, 등등..',
+    mainDescription:
+      '네이버는 수많은 SME와 창작자, 파트너들이 미래 기술을 활용해 글로벌 시장에서 더 큰 성장을 이룰 수 있도록 지원하는 글로벌 테크 플랫폼입니다.',
+    menuDescription:
+      '주요서비스: 온라인 검색포털, 모바일 메신저 플랫폼\n 주요사업: 온라인 광고 및 콘텐츠 사업\n 해외 계열 법인: 일본, 미국, 프랑스, 중국, 베트남, 대만, 태국, 인도네시아 외',
+    day: [1, 2]
   },
   {
     id: 2,
-    name: '그냥 부스',
-    image: 'https://placehold.co/700x400?text=test+2',
-    summary: '아무것도 없는 그냥 부스',
-    description: '안녕하새요',
-    menu: [],
-    like: 1,
-    day: [2, 3],
-    tag: ['안녕하세요']
+    name: '구글',
+    image: 'https://via.placeholder.com/700x400/ccffcc/115533?text=Google',
+    shortDescription: '구글, 안드로이드, 클라우드 서비스, 등등...',
+    mainDescription:
+      'Google의 목표는 전 세계의 정보를 체계화하여 모두가 편리 하게 이용할 수 있도록 하는 것입니다.',
+    menuDescription: '주요서비스: 모든것\n 주요사업: 모든 온라인 사업\n 해외 계열 법인: 전세계',
+    day: [2, 3]
+  },
+  {
+    id: 3,
+    name: '카카오',
+    image: 'https://via.placeholder.com/700x400/aacccc/336644?text=KAKAO',
+    shortDescription: '이것저것..',
+    mainDescription:
+      'Kakao의 목표는 전 세계의 정보를 체계화하여 모두가 편리 하게 이용할 수 있도록 하는 것입니다.',
+    menuDescription:
+      '주요서비스: 12312312312\n 주요사업: 1231231231212312312312\n 해외 계열 법인: 12312312312',
+    day: [1, 2, 3]
+  },
+  {
+    id: 4,
+    name: '아무거나 예시 1',
+    image: 'https://via.placeholder.com/700x400/ccccff/afafaf?text=SAMPLE1',
+    shortDescription: '아무거나..',
+    mainDescription: '아무거나 설명',
+    menuDescription: '아무거나 메뉴',
+    day: [1, 3]
+  },
+  {
+    id: 5,
+    name: '아무거나 예시 2',
+    image: 'https://via.placeholder.com/700x400/aaccff/aaaaaa?text=SAMPLE2',
+    shortDescription: '아무거나...',
+    mainDescription: '아무거나 설명',
+    menuDescription: '아무거나 메뉴',
+    day: [1]
+  },
+  {
+    id: 6,
+    name: '아무거나 예시 3',
+    image: 'https://via.placeholder.com/700x400/aaffee/dddddd?text=SAMPLE3',
+    shortDescription: '아무거나....',
+    mainDescription: '아무거나 설명',
+    menuDescription: '아무거나 메뉴',
+    day: [3]
+  },
+  {
+    id: 7,
+    name: '아무거나 예시 4',
+    image: 'https://via.placeholder.com/700x400/eeffaa/cccccc?text=SAMPLE4',
+    shortDescription: '아무거나.....',
+    mainDescription: '아무거나 설명',
+    menuDescription: '아무거나 메뉴',
+    day: [1, 3]
   }
 ]);
 

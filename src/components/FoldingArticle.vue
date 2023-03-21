@@ -7,16 +7,13 @@
         <img :src="arrowImage" />
       </div>
     </div>
-    <transition name="expand" @enter="expandEnter" @leave="expandLeave">
-      <div class="article" v-if="showContent">
-        <p class="content" v-text="content"></p>
-      </div>
-    </transition>
+    <div class="article" :class="{ hidden: !showContent }">
+      <p class="content" v-text="content"></p>
+    </div>
   </div>
 </template>
 
 <script>
-import { gsap } from 'gsap';
 import arrowImage from '@/assets/down.png';
 
 export default {
@@ -28,27 +25,19 @@ export default {
   props: {
     id: {
       type: Number,
-      default() {
-        return 0;
-      }
+      default: 0
     },
     title: {
       type: String,
-      default() {
-        return 'Untitled Announcement';
-      }
+      default: 'Untitled Announcement'
     },
     content: {
       type: String,
-      default() {
-        return '내용입니다.';
-      }
+      default: '내용입니다.'
     },
     showContent: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
     }
   },
 
@@ -57,27 +46,28 @@ export default {
       return gsap.timeline({ onComplete: done }).fromTo(
         element,
         {
-          duration: 0.25,
           height: 0,
           marginBottom: 0
         },
         {
-          duration: 0.25,
+          duration: 0.2,
           height: 'auto',
           marginBottom: '16px'
-        },
-        0
+        }
       );
     },
     expandLeave(element, done) {
       return gsap
         .timeline({ onComplete: done })
-        .to(element, { duration: 0.25, height: 0, marginBottom: 0 }, 0);
+        .to(element, { duration: 0.2, height: 0, marginBottom: 0 });
     }
   }
 };
 </script>
 <style scoped>
+p {
+  margin: 0;
+}
 .wrapper {
   width: 100%;
   padding: 0 8px;

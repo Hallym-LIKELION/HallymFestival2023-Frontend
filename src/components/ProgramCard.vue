@@ -13,21 +13,15 @@ export default {
   props: {
     title: {
       type: String,
-      default() {
-        return 'Untitled Program';
-      }
+      default: 'Untitled Program'
     },
     description: {
       type: String,
-      default() {
-        return '프로그램 설명.';
-      }
+      default: '프로그램 설명.'
     },
     image: {
       type: String,
-      default() {
-        return 'https://placehold.co/300x210';
-      }
+      default: 'https://placehold.co/300x210'
     }
   }
 };
@@ -47,11 +41,12 @@ p {
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
 }
 
 .image > img {
   width: 100%;
+  max-height: 240px;
   object-fit: contain;
 }
 
