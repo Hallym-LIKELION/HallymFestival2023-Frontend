@@ -63,6 +63,20 @@ export default {
 };
 </script>
 <style scoped>
+p {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  line-height: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .wrapper {
   padding: 10px;
   padding-bottom: 20px;
