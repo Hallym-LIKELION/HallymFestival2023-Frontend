@@ -1,5 +1,99 @@
 <template>
-    <main>
+  <main>
+    <Modal :show="modal" @close="closeModal">
+      <template #header> 부스 소개문 수정 </template>
+      <template #body>
+        <textarea class="modal-input" v-model="message"></textarea>
+      </template>
+      <template #footer>
+        <button class="modal-button" @click="doSend">수정하기</button>
+      </template>
+    </Modal>
+    <div class="header">
+      <div class="header-title">
+        <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
+        <div class="header-like">
+          <p class="header-like-count" v-text="like_display.toFixed(0)"></p>
+          <button class="header-like-button" @click="likeHandler">
+            <img :src="likeImage" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <div class="header-content">
+        <p class="header-tag">
+          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />{{
+            data.tag?.map((item) => '#' + item).join(' ') || 'Loading...'
+          }}
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <div class="section-header">
+          <h1>부스 소개</h1>
+          <button class="edit-button" @click="modal = !modal">
+            <img :src="EditImage" alt="" />
+          </button>
+        </div>
+        <hr />
+        <p class="section-text" v-text="data.description || 'Loading...'"></p>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h1>부스 메뉴</h1>
+        </div>
+        <hr />
+        <p class="section-text">TODO: 부스 메뉴 넣기</p>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h1>댓글 <span>21</span></h1>
+        </div>
+        <hr />
+
+        <div class="comment">
+          <div class="write-container">
+            <div class="write-header">
+              <img class="write-header-profile" src="https://placehold.co/48x48" alt="" />
+              <p class="write-header-nickname">멋있는 사자</p>
+            </div>
+            <div class="write-content">
+              <textarea
+                class="write-content-text"
+                placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
+              ></textarea>
+              <div class="write-footer">
+                <input
+                  class="write-footer-password"
+                  type="password"
+                  placeholder="비밀번호를 입력..."
+                  maxlength="30"
+                  @input="userId = $event.target.value"
+                />
+                <button class="write-footer-button">
+                  <img :src="SendImage" alt="" srcset="" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="comment-content">
+            <Comment :id="3" :name="'아무 댓글'" :comment="'임시입니다'" />
+            <Comment :id="4" :name="'댓글 222'" :comment="'123 123 123 33 '" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 임시로 만든 버튼 -- 기획에서 디자인 줘야됨 -->
+    <div class="return-button">
+      <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
+    </div>
+  </main>
+  <div>
     <h1 v-text="data.name || 'Loading...'"></h1>
     <div class="image">
       <img :src="data.image || 'https://via.placeholder.com/700x400/D9D9D9/aaaaaa'" />
@@ -7,26 +101,8 @@
 
     <div class="edit">
       <h1>부스 소개</h1>
-      <div class="example-modal-window">
-        <button @click="openModal" type="Edbutton">
-          <img src="@/assets/edit_button.png" alt="" />
-        </button>
-
-        <!-- 컴포넌트 MyModal -->
-        <MyModal @close="closeModal" v-if="modal">
-          <!-- default 슬롯 콘텐츠 -->
-          <p>관리자 내용 수정 창</p>
-          <div><input v-model="message" /></div>
-          <!-- /default -->
-          <!-- footer 슬롯 콘텐츠 -->
-          <template slot="footer">
-            <button @click="doSend">수정하기</button>
-          </template>
-          <!-- /footer -->
-        </MyModal>
-      </div>
+      <button type="Edbutton"><img src="@/assets/edit_button.png" alt="" /></button>
     </div>
-
     <hr class="hr-solid" />
     <p v-text="data.mainDescription || 'Loading...'"></p>
 
@@ -39,48 +115,20 @@
 
     <h2>댓글</h2>
     <hr class="hr-solid" />
-    <p v-text="data.menuDescription || 'Loading...'"></p>
-
-    <div class="button">
-      <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
+    <div class="nickname">
+      <p>
+        닉네임: <input class="user-name" type="nickname" @input="userId = $event.target.value" />
+      </p>
     </div>
-  </main>
-  <div>
-    <h1 v-text="data.name || 'Loading...'"></h1>
-    <div class="image">
-      <img :src="data.image || 'https://via.placeholder.com/700x400/D9D9D9/aaaaaa'" />
+    <div class="password">
+      <p>
+        비밀번호:
+        <input class="user-pw" type="pw" maxlength="4" @input="userId = $event.target.value" />
+      </p>
     </div>
-
-    <div class="edit">
-      <h1>부스 소개</h1>
-      <button type="Edbutton"><img src="@/assets/edit_button.png" alt=""></button>
+    <div class="login_button">
+      <button type="Edbutton"><img src="@/assets/edit_button.png" alt="" /></button>
     </div>
-    <hr class='hr-solid'/>
-    <p v-text="data.mainDescription || 'Loading...'"></p>
-
-    <div class="edit">
-      <h1>메뉴 소개</h1>
-      <button type="Edbutton"><img src="@/assets/edit_button.png" alt=""></button>
-    </div>
-    <hr class='hr-solid'/>
-    <p v-text="data.menuDescription || 'Loading...'"></p>
-
-    <h2>댓글 </h2>
-    <hr class='hr-solid'/>
-    <div class = "nickname">
-    <p>닉네임: <input class="user-name"
-        type="nickname" 
-        @input="userId = $event.target.value"/></p>
-    </div>
-    <div class = "password">
-    <p>비밀번호: <input class="user-pw"
-        type="pw" maxlength='4'
-        @input="userId = $event.target.value"/></p>
-    </div>
-    <div class ="login_button">
-      <button type="Edbutton"><img src="@/assets/edit_button.png" alt=""></button>
-    </div>
-
 
     <div class="button">
       <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
@@ -88,35 +136,72 @@
   </div>
 </template>
 
-
 <script>
+import { gsap } from 'gsap';
+import HeartImage from '../assets/heart.png';
+import HeartActiveImage from '../assets/heart-active.png';
+import EditImage from '../assets/edit_button.png';
+import SendImage from '../assets/send.png';
 import { GetDemoBooth } from '../api/api-client';
-import MyModal from '../components/MyModal.vue';
+import Modal from '../components/MyModal.vue';
+import Comment from '../components/Comment.vue';
 
 export default {
-  components: { MyModal },
+  components: { Modal, Comment },
   data() {
     return {
+      EditImage,
+      SendImage,
+      likeImage: HeartImage,
       data: {},
+      like_display: 0,
       modal: false,
       message: ''
-    }
+    };
   },
   methods: {
     openModal() {
-      this.modal = true
+      this.modal = true;
     },
     closeModal() {
-      this.modal = false
+      this.modal = false;
     },
     doSend() {
       if (this.message.length > 0) {
         alert(this.message);
         this.message = '';
-        this.closeModal()
+        this.closeModal();
       } else {
         alert('내용을 수정해주세요.');
       }
+    },
+    likeHandler(evt, arg2, arg3) {
+      if (this.data.liked === true) {
+        this.likeImage = HeartImage;
+        this.data.like--;
+      } else {
+        this.likeImage = HeartActiveImage;
+        this.data.like++;
+      }
+
+      this.data.liked = !this.data.liked;
+
+      // 좋아요 버튼 애니메이션
+      gsap.to(evt.target, {
+        keyframes: [
+          { duration: 0.1, transform: 'scale(1.6)' },
+          { duration: 0.3, transform: 'scale(1)' }
+        ],
+        ease: 'Expo.easeOut'
+      });
+
+      // API :: 부스 좋아요 등록/철회 요청 보내기
+    }
+  },
+  watch: {
+    'data.like'(n) {
+      // 좋아요 수 애니메이션
+      gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
     }
   },
   created() {
@@ -144,10 +229,13 @@ h1 {
   text-align: left;
   margin: 0;
 }
-.edit {
-  font-size: 20pt;
-  text-align: left;
-  margin: 0;
+
+.header {
+  margin-top: 24px;
+}
+
+.header-title {
+  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
 }
@@ -176,7 +264,7 @@ button {
 }
 .button > button {
   width: 200px;
-  margin-top: 18px;
+  margin: 18px 0;
   padding: 8px 0;
   font-size: 18pt;
   border-radius: 12px;
@@ -187,5 +275,114 @@ button {
 
 .button > button:hover {
   background-color: #0f8bff;
+}
+
+.edit-button > img {
+  width: 32px;
+  height: 32px;
+}
+
+hr {
+  border: 0px;
+  border-top: 3px solid #000000;
+}
+
+.modal-input {
+  width: calc(100% - 20px);
+  height: calc(100% - 40px);
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #dfdfdf;
+  font-size: 16pt;
+  resize: none;
+}
+
+.modal-button {
+  padding: 10px;
+  border-radius: 24px;
+  background-color: #466efe;
+  color: white;
+}
+
+.section {
+  margin: 24px 0;
+}
+.section-header {
+  font-size: 20pt;
+  text-align: left;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-header > h1 > span {
+  font-size: 12pt;
+  font-weight: 500;
+}
+
+.section-text {
+  min-height: 100px;
+  font-size: 14pt;
+  white-space: pre;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.write-header {
+  display: flex;
+  align-items: center;
+}
+.write-header-profile {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border-radius: 100%;
+}
+.write-content {
+  width: calc(100% - 20px);
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #dddddd;
+}
+
+.write-content-text {
+  width: 100%;
+  height: 60px;
+  background: none;
+  overflow: hidden;
+  outline: none;
+  font-size: 16pt;
+  resize: none;
+}
+.write-footer {
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* .write-footer-hint {
+  margin-right: 8px;
+  font-size: 14pt;
+} */
+
+.write-footer-password {
+  font-size: 14pt;
+  margin-right: 12px;
+}
+
+.write-footer-button {
+  margin-right: 8px;
+}
+.write-footer-button > img {
+  width: 24px;
+  height: 24px;
+}
+
+.comment-content > * {
+  margin-top: 12px;
 }
 </style>

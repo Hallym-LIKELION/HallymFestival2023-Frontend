@@ -25,27 +25,41 @@ export default {
   props: {
     id: {
       type: Number,
-      default() {
-        return 0;
-      }
+      default: 0
     },
     title: {
       type: String,
-      default() {
-        return 'Untitled Announcement';
-      }
+      default: 'Untitled Announcement'
     },
     content: {
       type: String,
-      default() {
-        return '내용입니다.';
-      }
+      default: '내용입니다.'
     },
     showContent: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
+    }
+  },
+
+  methods: {
+    expandEnter(element, done) {
+      return gsap.timeline({ onComplete: done }).fromTo(
+        element,
+        {
+          height: 0,
+          marginBottom: 0
+        },
+        {
+          duration: 0.2,
+          height: 'auto',
+          marginBottom: '16px'
+        }
+      );
+    },
+    expandLeave(element, done) {
+      return gsap
+        .timeline({ onComplete: done })
+        .to(element, { duration: 0.2, height: 0, marginBottom: 0 });
     }
   }
 };

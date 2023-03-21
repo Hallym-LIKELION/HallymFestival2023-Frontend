@@ -13,21 +13,15 @@ export default {
   props: {
     title: {
       type: String,
-      default() {
-        return 'Untitled Program';
-      }
+      default: 'Untitled Program'
     },
     description: {
       type: String,
-      default() {
-        return '프로그램 설명.';
-      }
+      default: '프로그램 설명.'
     },
     image: {
       type: String,
-      default() {
-        return 'https://via.placeholder.com/700x400/D9D9D9/b8b8b8';
-      }
+      default: 'https://placehold.co/300x210'
     }
   }
 };

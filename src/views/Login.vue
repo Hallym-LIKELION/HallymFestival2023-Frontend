@@ -45,6 +45,8 @@ export default {
       }
 
       alert(`id: ${this.id}\npass: ${this.password}\n\n정상적으로 로그인 되었습니다.`);
+
+      this.$router.push('/');
     }
   }
 };

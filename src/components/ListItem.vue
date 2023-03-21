@@ -13,27 +13,19 @@ export default {
   props: {
     title: {
       type: String,
-      default() {
-        return 'Untitled Announcement';
-      }
+      default: 'Untitled Announcement'
     },
     content: {
       type: String,
-      default() {
-        return '내용입니다.';
-      }
+      default: '내용입니다.'
     },
     image: {
       type: String,
-      default() {
-        return 'https://via.placeholder.com/60x60/D9D9D9/b8b8b8';
-      }
+      default: 'https://placehold.co/60x60'
     },
     imageAlt: {
       type: String,
-      default() {
-        return '공지사항에 대한 이미지';
-      }
+      default: '공지사항에 대한 이미지'
     }
   }
 };

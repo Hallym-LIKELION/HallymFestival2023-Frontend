@@ -3,7 +3,7 @@
     <h1>공지사항</h1>
     <div class="search-bar"><SearchBar v-model="search" /></div>
     <div class="announcement-list">
-      <template v-for="(item) in filltered_list" :key="item.id">
+      <template v-for="item in filltered_list" :key="item.id">
         <FoldingArticle
           @click="() => showAnnouncement(item.id)"
           :id="item.id"
@@ -80,6 +80,73 @@ export default {
       // 글쓰기 기능 구현
       alert('TODO');
     }
+  },
+  mounted() {
+    // 타이틀 애니메이션
+    gsap.fromTo(
+      this.$refs.title,
+      {
+        opacity: 0,
+        transform: 'translateY(-10%)'
+      },
+      {
+        delay: 0,
+        duration: 0.5,
+        opacity: 1,
+        transform: 'none'
+      }
+    );
+
+    // 검색창 애니메이션
+    gsap.fromTo(
+      this.$refs.searchBar,
+      {
+        transform: 'translateX(-3%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 0.5,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
+
+    // 글 목록 애니메이션
+    gsap.fromTo(
+      this.$refs.announcementList,
+      {
+        transform: 'translateX(-10%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 0.75,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
+
+    // 글쓰기 버튼 애니메이션
+    gsap.fromTo(
+      this.$refs.buttonGroup,
+      {
+        transform: 'translateX(2%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 1,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
   }
 };
 </script>

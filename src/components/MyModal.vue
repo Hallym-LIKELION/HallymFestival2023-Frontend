@@ -3,7 +3,7 @@
     <div class="modal modal-overlay" @click.self="$emit('close')">
       <div class="modal-window">
         <div class="modal-content">
-          <slot/>
+          <slot />
         </div>
         <footer class="modal-footer">
           <slot name="footer">
@@ -15,8 +15,27 @@
   </transition>
 </template>
 
-<style scoped>
+<script>
+import CloseImage from '../assets/close.png';
 
+export default {
+  data() {
+    return {
+      CloseImage
+    };
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {},
+  created() {}
+};
+</script>
+
+<style scoped>
 .modal-footer {
   background: #ccc;
   padding: 10px;
@@ -45,12 +64,10 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.modal-enter-active, .modal-leave-active {
+.modal-enter-active,
+.modal-leave-active {
   /* 오버레이 트랜지션 */
   transition: opacity 0.4s;
-
- 
-
 }
 
 .modal-window {
@@ -61,10 +78,9 @@
   transition: opacity 0.6s ease 0.4s;
 }
 
-.modal-enter, .modal-leave-to {
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
-
-
 }
 
 .modal-window {
