@@ -49,7 +49,6 @@
       </v-app>
     </div>
   </div>
-</main>
   <Footer></Footer>
 </template>
 
@@ -84,21 +83,21 @@ export default {
     };
   },
   mounted() {
-	// goTop을 위해 mount 시 element 설정
-	this.scrollTarget = document.getElementById('scroll-target');
+    // goTop을 위해 mount 시 element 설정
+    this.scrollTarget = document.getElementById('scroll-target');
   },
   methods: {
     onScroll(e) {
-    	// 스크롤 움직일 때 마다 호출됨
-    	this.scroll = e.target.scrollTop;
+      // 스크롤 움직일 때 마다 호출됨
+      this.scroll = e.target.scrollTop;
     },
-	goTop() {
-		if (this.scrollTarget) {
-			this.scrollTarget.scrollTop = 0;
-		}
+    goTop() {
+      if (this.scrollTarget) {
+        this.scrollTarget.scrollTop = 0;
+      }
     }
-}
-}
+  }
+};
 </script>
 
 <style scoped>
@@ -128,10 +127,10 @@ header > p {
   font-size: 18pt;
   font-weight: 600;
 }
-.v-main{
+.v-main {
   min-height: 100%;
 }
-.scroll-target{
+.scroll-target {
   max-height: 100%;
 }
 .wrapper {
