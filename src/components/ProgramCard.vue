@@ -26,7 +26,7 @@ export default {
     image: {
       type: String,
       default() {
-        return 'https://placehold.co/300x210';
+        return 'https://via.placeholder.com/700x400/D9D9D9/b8b8b8';
       }
     }
   }
@@ -47,11 +47,12 @@ p {
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
 }
 
 .image > img {
   width: 100%;
+  max-height: 240px;
   object-fit: contain;
 }
 

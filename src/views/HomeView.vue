@@ -1,12 +1,12 @@
 <template>
   <main>
-    <div class="poster" ref="poster">
+    <div class="poster">
       <img :src="festivalImage" alt="한림대학교 비봉축전" />
     </div>
 
-    <h1 ref="slogan">(2023 축제 슬로건)</h1>
+    <h1>(2023 축제 슬로건)</h1>
 
-    <div class="menu" ref="menu">
+    <div class="menu">
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
 import festivalImage from '@/assets/poster.jpg';
 
@@ -25,60 +24,13 @@ export default {
     return {
       festivalImage
     };
-  },
-  mounted() {
-    // 포스터 애니메이션
-    gsap.fromTo(
-      this.$refs.poster,
-      {
-        opacity: 0,
-        transform: 'scale(0.7)'
-      },
-      {
-        delay: 0.25,
-        duration: 0.5,
-        opacity: 1,
-        transform: 'none'
-      }
-    );
-
-    // 슬로건 애니메이션
-    gsap.fromTo(
-      this.$refs.slogan,
-      {
-        opacity: 0
-      },
-      {
-        delay: 0.75,
-        duration: 1,
-        opacity: 1
-      }
-    );
-
-    // 메뉴 애니메이션
-    for (let i = 0; i < 4; i++) {
-      gsap.fromTo(
-        this.$refs.menu.childNodes[i],
-        {
-          transform: 'translateX(-10%)',
-          opacity: 0,
-          pointerEvents: 'none'
-        },
-        {
-          delay: 1.25 + i * 0.25,
-          duration: 0.5,
-          transform: 'none',
-          opacity: 1,
-          pointerEvents: 'auto'
-        }
-      );
-    }
   }
 };
 </script>
 
 <style scoped>
 h1 {
+  margin: 0;
   font-size: 20pt;
   text-align: center;
 }
