@@ -124,7 +124,7 @@ export default {
         pointerEvents: 'none'
       },
       {
-        delay: 1,
+        delay: 0.75,
         duration: 0.5,
         transform: 'none',
         opacity: 1,
@@ -141,7 +141,7 @@ export default {
         pointerEvents: 'none'
       },
       {
-        delay: 1.5,
+        delay: 1,
         duration: 0.5,
         transform: 'none',
         opacity: 1,
