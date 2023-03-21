@@ -13,9 +13,9 @@
       <div class="header-title">
         <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
         <div class="header-like">
-          <p class="header-like-count" v-text="data.like || '-'"></p>
+          <p class="header-like-count" v-text="like_display.toFixed(0)"></p>
           <button class="header-like-button" @click="likeHandler">
-            <img :src="HeartImage" alt="" />
+            <img :src="likeImage" alt="" />
           </button>
         </div>
       </div>
@@ -96,7 +96,9 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import HeartImage from '../assets/heart.png';
+import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
 import SendImage from '../assets/send.png';
 import { GetDemoBooth } from '../api/api-client';
@@ -107,10 +109,11 @@ export default {
   components: { Modal, Comment },
   data() {
     return {
-      HeartImage,
       EditImage,
       SendImage,
+      likeImage: HeartImage,
       data: {},
+      like_display: 0,
       modal: false,
       message: ''
     };
@@ -138,10 +141,33 @@ export default {
         alert('내용은 0자 이상이어야 합니다.');
       }
     },
-    likeHandler() {
-      this.data.like++;
+    likeHandler(evt, arg2, arg3) {
+      if (this.data.liked === true) {
+        this.likeImage = HeartImage;
+        this.data.like--;
+      } else {
+        this.likeImage = HeartActiveImage;
+        this.data.like++;
+      }
 
-      // API :: 부스 좋아요 요청 보내기
+      this.data.liked = !this.data.liked;
+
+      // 좋아요 버튼 애니메이션
+      gsap.to(evt.target, {
+        keyframes: [
+          { duration: 0.1, transform: 'scale(1.6)' },
+          { duration: 0.3, transform: 'scale(1)' }
+        ],
+        ease: 'Expo.easeOut'
+      });
+
+      // API :: 부스 좋아요 등록/철회 요청 보내기
+    }
+  },
+  watch: {
+    'data.like'(n) {
+      // 좋아요 수 애니메이션
+      gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
     }
   },
   created() {
@@ -167,7 +193,7 @@ h1 {
 }
 
 .header {
-  margin: 24px 0;
+  margin-top: 24px;
 }
 
 .header-title {
@@ -263,6 +289,9 @@ hr {
   color: white;
 }
 
+.section {
+  margin: 24px 0;
+}
 .section-header {
   font-size: 20pt;
   text-align: left;
