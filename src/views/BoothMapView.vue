@@ -21,11 +21,11 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="item in filltered_list" :key="item.id">
+      <template v-for="(item) in filltered_list" :key="item.id">
         <ListItem
           @click="() => showBooth(item.id)"
           :title="item.name"
-          :content="item.summary"
+          :content="item.shortDescription"
           :image="item.image"
         />
       </template>
@@ -103,6 +103,7 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
+  margin: 0;
   padding: 24px 0;
 }
 

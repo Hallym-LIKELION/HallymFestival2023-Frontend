@@ -41,11 +41,12 @@ p {
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
 }
 
 .image > img {
   width: 100%;
+  max-height: 240px;
   object-fit: contain;
 }
 

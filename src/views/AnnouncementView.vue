@@ -1,9 +1,9 @@
 <template>
   <main>
-    <h1 ref="title">공지사항</h1>
-    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
-    <div class="announcement-list" ref="announcementList">
-      <template v-for="(item, index) in filltered_list">
+    <h1>공지사항</h1>
+    <div class="search-bar"><SearchBar v-model="search" /></div>
+    <div class="announcement-list">
+      <template v-for="item in filltered_list" :key="item.id">
         <FoldingArticle
           @click="() => showAnnouncement(item.id)"
           :id="item.id"
@@ -13,14 +13,13 @@
         />
       </template>
     </div>
-    <div class="button-group" ref="buttonGroup">
+    <div class="button-group">
       <button @click="() => writeArticle()">글쓰기</button>
     </div>
   </main>
 </template>
 
 <script>
-import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
 
@@ -156,6 +155,7 @@ export default {
 h1 {
   font-size: 20pt;
   text-align: center;
+  margin: 0;
   padding: 36px 0;
 }
 

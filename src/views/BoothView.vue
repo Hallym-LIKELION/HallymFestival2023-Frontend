@@ -93,6 +93,47 @@
       <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
     </div>
   </main>
+  <div>
+    <h1 v-text="data.name || 'Loading...'"></h1>
+    <div class="image">
+      <img :src="data.image || 'https://via.placeholder.com/700x400/D9D9D9/aaaaaa'" />
+    </div>
+
+    <div class="edit">
+      <h1>부스 소개</h1>
+      <button type="Edbutton"><img src="@/assets/edit_button.png" alt="" /></button>
+    </div>
+    <hr class="hr-solid" />
+    <p v-text="data.mainDescription || 'Loading...'"></p>
+
+    <div class="edit">
+      <h1>메뉴 소개</h1>
+      <button type="Edbutton"><img src="@/assets/edit_button.png" alt="" /></button>
+    </div>
+    <hr class="hr-solid" />
+    <p v-text="data.menuDescription || 'Loading...'"></p>
+
+    <h2>댓글</h2>
+    <hr class="hr-solid" />
+    <div class="nickname">
+      <p>
+        닉네임: <input class="user-name" type="nickname" @input="userId = $event.target.value" />
+      </p>
+    </div>
+    <div class="password">
+      <p>
+        비밀번호:
+        <input class="user-pw" type="pw" maxlength="4" @input="userId = $event.target.value" />
+      </p>
+    </div>
+    <div class="login_button">
+      <button type="Edbutton"><img src="@/assets/edit_button.png" alt="" /></button>
+    </div>
+
+    <div class="button">
+      <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -123,22 +164,15 @@ export default {
       this.modal = true;
     },
     closeModal() {
-      if (this.message !== this.data.description) {
-        const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
-        if (choose) {
-          this.message = this.data.description;
-          this.modal = false;
-        }
-      } else {
-        this.modal = false;
-      }
+      this.modal = false;
     },
     doSend() {
       if (this.message.length > 0) {
-        this.data.description = this.message;
+        alert(this.message);
+        this.message = '';
         this.closeModal();
       } else {
-        alert('내용은 0자 이상이어야 합니다.');
+        alert('내용을 수정해주세요.');
       }
     },
     likeHandler(evt, arg2, arg3) {
@@ -176,7 +210,6 @@ export default {
       .then((data) => {
         console.log(data);
         this.data = data;
-        this.message = data.description;
       })
       .catch((err) => {
         alert('Unexpected error has occured. Please try again later.');
@@ -187,9 +220,14 @@ export default {
 </script>
 
 <style scoped>
+.hr-solid {
+  border: 0px;
+  border-top: 3px solid #000000;
+}
 h1 {
   font-size: 20pt;
   text-align: left;
+  margin: 0;
 }
 
 .header {
@@ -199,55 +237,32 @@ h1 {
 .header-title {
   margin-bottom: 24px;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+}
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
-.header-name {
-  width: 100%;
-  font-size: 32pt;
-}
-
-.header-like {
-  display: flex;
-  align-items: center;
-  line-height: 24pt;
-}
-
-.header-like-count {
-  margin-right: 8px;
-  font-size: 18pt;
-  line-height: 18pt;
-}
-
-.header-like-button > img {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
-}
-
-.header-content {
+.image {
   max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.header-tag {
-  font-weight: 600;
-}
-
-.header-image {
+.image > img {
+  width: 100%;
   max-height: 240px;
-  margin: auto;
   object-fit: contain;
-  display: block;
 }
 
-.return-button {
+.button {
   display: flex;
   justify-content: center;
 }
-.return-button > button {
+.button > button {
   width: 200px;
   margin: 18px 0;
   padding: 8px 0;
@@ -258,7 +273,7 @@ h1 {
   transition: background-color 0.1s;
 }
 
-.return-button > button:hover {
+.button > button:hover {
   background-color: #0f8bff;
 }
 

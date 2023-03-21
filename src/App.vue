@@ -5,22 +5,19 @@
     </button>
     <p>2023 한림대학교 비봉축전</p>
   </header>
-  <Transition name="fade">
-    <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
-  </Transition>
+  <main>
+  <div class="dimmer" :class="{ hidden: !showMenu }" @click="() => (showMenu = false)"></div>
   <div class="wrapper">
-    <Transition name="slide">
-      <nav v-if="showMenu">
-        <template v-for="{ url, name, bottom = false } in navList">
-          <RouterLink
-            :to="'/' + url"
-            v-text="name"
-            :class="{ bottom }"
-            @click="() => (showMenu = false)"
-          />
-        </template>
-      </nav>
-    </Transition>
+    <nav :class="{ hidden: !showMenu }">
+      <template v-for="{ url, name, bottom = false } in navList">
+        <RouterLink
+          :to="'/' + url"
+          v-text="name"
+          :class="{ bottom }"
+          @click="() => (showMenu = false)"
+        />
+      </template>
+    </nav>
 
     <RouterView v-slot="{ Component }" class="router-view">
       <Transition name="fade" mode="out-in">
@@ -28,21 +25,48 @@
       </Transition>
     </RouterView>
   </div>
+  <div class="v-main__wrap">
+    <div>
+      <v-app id="app">
+        <v-app-bar> </v-app-bar>
+        <v-main>
+          <v-container id="scroll-target" class="overflow-y-auto"> </v-container>
+          <v-btn
+            v-show="scroll > 0"
+            fab
+            fixed
+            dark
+            bottom
+            v-scroll:#scroll-target="onScroll"
+            @click="goTop"
+          >
+            <v-icon>mdi-menu-up</v-icon>
+          </v-btn>
+        </v-main>
+      </v-app>
+    </div>
+  </div>
+</main>
+  <Footer></Footer>
 </template>
 
 <script>
 import { RouterLink, RouterView } from 'vue-router';
 import menuButtonImage from '@/assets/hamburger.png';
+import Footer from '@/components/Footer.vue';
 
 export default {
   components: {
     RouterLink,
-    RouterView
+    RouterView,
+    Footer
   },
   data() {
     return {
       showMenu: false,
       menuButtonImage,
+      scroll: 0,
+      scrollTarget: null,
       navList: [
         { name: 'HOME', url: '' },
         { name: '공지사항', url: 'announcement' },
@@ -50,12 +74,28 @@ export default {
         { name: '타임 테이블', url: 'timetable' },
         { name: '프로그램', url: 'program' },
         { name: '방명록', url: 'comment' },
+        { name: '오시는 길', url: 'togo' },
         { name: 'About Us', url: 'aboutus' },
         { name: '로그인', url: 'login', bottom: true }
       ]
     };
-  }
-};
+  },
+  mounted() {
+	// goTop을 위해 mount 시 element 설정
+	this.scrollTarget = document.getElementById('scroll-target');
+  },
+  methods: {
+    onScroll(e) {
+    	// 스크롤 움직일 때 마다 호출됨
+    	this.scroll = e.target.scrollTop;
+    },
+	goTop() {
+		if (this.scrollTarget) {
+			this.scrollTarget.scrollTop = 0;
+		}
+    }
+}
+}
 </script>
 
 <style scoped>
@@ -84,6 +124,12 @@ header > p {
   margin: 0;
   font-size: 18pt;
   font-weight: 600;
+}
+.v-main{
+  min-height: 100%;
+}
+.scroll-target{
+  max-height: 100%;
 }
 .wrapper {
   padding-top: 72px;
@@ -175,28 +221,5 @@ nav > * {
 }
 .fade-leave-to {
   opacity: 0;
-}
-
-/* 트랜지션 기능 테스트 */
-.slide-enter-active {
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-.slide-leave-active {
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.slide-enter-from {
-  opacity: 0;
-  transform: translateX(-25%);
-}
-.slide-enter-to {
-  opacity: 1;
-}
-.slide-leave-from {
-  opacity: 1;
-}
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-25%);
 }
 </style>
