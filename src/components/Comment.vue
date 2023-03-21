@@ -26,33 +26,23 @@ export default {
   props: {
     id: {
       type: Number,
-      default() {
-        return 0;
-      }
+      default: 0
     },
     name: {
       type: String,
-      default() {
-        return '사용자';
-      }
+      default: '사용자'
     },
     comment: {
       type: String,
-      default() {
-        return '내용입니다.';
-      }
+      default: '내용입니다.'
     },
     color: {
       type: String,
-      default() {
-        return '#FFF4CE';
-      }
+      default: '#FFF4CE'
     },
     showMenu: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
     }
   },
   methods: {

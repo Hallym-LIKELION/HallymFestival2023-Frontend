@@ -32,9 +32,7 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
     }
   },
   methods: {},

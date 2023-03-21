@@ -28,27 +28,19 @@ export default {
   props: {
     id: {
       type: Number,
-      default() {
-        return 0;
-      }
+      default: 0
     },
     title: {
       type: String,
-      default() {
-        return 'Untitled Announcement';
-      }
+      default: 'Untitled Announcement'
     },
     content: {
       type: String,
-      default() {
-        return '내용입니다.';
-      }
+      default: '내용입니다.'
     },
     showContent: {
       type: Boolean,
-      default() {
-        return false;
-      }
+      default: false
     }
   },
 
@@ -57,22 +49,20 @@ export default {
       return gsap.timeline({ onComplete: done }).fromTo(
         element,
         {
-          duration: 0.25,
           height: 0,
           marginBottom: 0
         },
         {
-          duration: 0.25,
+          duration: 0.2,
           height: 'auto',
           marginBottom: '16px'
-        },
-        0
+        }
       );
     },
     expandLeave(element, done) {
       return gsap
         .timeline({ onComplete: done })
-        .to(element, { duration: 0.25, height: 0, marginBottom: 0 }, 0);
+        .to(element, { duration: 0.2, height: 0, marginBottom: 0 });
     }
   }
 };
