@@ -12,14 +12,6 @@
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
     </div>
-
-    <div id="sec1" data-aos="fade">
-    </div>
-    
-    <div data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-      <img src="https://placehold.co/700x500" alt="한림대학교 비봉축전" />
-   
-    </div>
   </main>
 </template>
 
@@ -63,8 +55,6 @@ export default {
         opacity: 1
       }
     );
-    //AOS INIT
-    AOS.init();
 
     // 메뉴 애니메이션
     for (let i = 0; i < 4; i++) {
@@ -90,10 +80,12 @@ export default {
 
 <style scoped>
 .se1{
-  font-size: 20pt;
   text-align: center;
-
+  display: flex;
+  padding: 36px 0;
+  justify-content:space-between;
 }
+
 h1 {
   font-size: 20pt;
   text-align: center;
