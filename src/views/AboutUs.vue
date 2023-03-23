@@ -33,16 +33,24 @@
           <div class="inform">
             <h2>오소현</h2>
             <p>빅데이터학과 20</p>
-            <div class="button">소현's Github ></div>
+            <button>
+              <a href="https://github.com/osohyun0224">
+                <div class="button">소현's Github ></div>
+              </a>
+            </button>
           </div>
         </div>
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>김경재</h2>
-            <p>빅데이터학과 20</p>
-            <div class="button">경재's Github ></div>
-          </div>
+      </div>
+      <div class="dcard">
+        <img src="@/assets/osohyun.png" alt="" />
+        <div class="inform">
+          <h2>김경재</h2>
+          <p>빅데이터학과 20</p>
+          <button>
+              <a href="https://github.com/PortalCube">
+                <div class="button">경재's Github ></div>
+              </a>
+            </button>
         </div>
       </div>
 
@@ -58,7 +66,11 @@
           <div class="inform">
             <h2>이동헌</h2>
             <p>빅데이터학과 15</p>
-            <div class="button">동헌's Github ></div>
+            <button>
+              <a href="https://github.com/Sirius506775">
+                <div class="button">동헌's Github ></div>
+              </a>
+            </button>
           </div>
         </div>
 
@@ -67,7 +79,11 @@
           <div class="inform">
             <h2>박주영</h2>
             <p>콘텐츠IT학과 19</p>
-            <div class="button">주영's Github ></div>
+            <button>
+              <a href="https://github.com/mythpoy">
+                <div class="button">주영's Github ></div>
+              </a>
+            </button>
           </div>
         </div>
       </div>
@@ -80,7 +96,11 @@
           <div class="inform">
             <h2>이강훈</h2>
             <p>빅데이터학과 18</p>
-            <div class="button">강훈's Github ></div>
+            <button>
+              <a href="https://github.com/kangwhon">
+                <div class="button">강훈's Github ></div>
+              </a>
+            </button>
           </div>
         </div>
         <div class="dcard">
@@ -88,7 +108,11 @@
           <div class="inform">
             <h2>김미진</h2>
             <p>빅데이터학과 20</p>
-            <div class="button">미진's Github ></div>
+            <button>
+              <a href="https://github.com/mijin0721">
+                <div class="button">미진's Github ></div>
+              </a>
+            </button>
           </div>
         </div>
       </div>
