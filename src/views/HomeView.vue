@@ -23,7 +23,8 @@ import festivalImage from '@/assets/poster.jpg';
 export default {
   data() {
     return {
-      festivalImage
+      festivalImage,
+      storytelling: ''
     };
   },
   mounted() {
@@ -78,6 +79,13 @@ export default {
 </script>
 
 <style scoped>
+.se1{
+  text-align: center;
+  display: flex;
+  padding: 36px 0;
+  justify-content:space-between;
+}
+
 h1 {
   font-size: 20pt;
   text-align: center;
