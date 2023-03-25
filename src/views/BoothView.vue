@@ -9,6 +9,7 @@
         <button class="modal-button" @click="doSend">수정하기</button>
       </template>
     </Modal>
+    
     <div class="header">
       <div class="header-title">
         <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
