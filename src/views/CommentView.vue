@@ -2,6 +2,16 @@
   <main>
     <h1>방명록</h1>
     <div class="comment-list">
+      <Modal :show="modal" @close="closeModal">
+      <template #header> 방명록 작성하기 </template>
+      <template #body>
+        <textarea class="modal-input" v-model="message"></textarea>
+      </template>
+      <template #footer>
+        <button class="modal-button" @click="doSend">입력하기</button>
+      </template>
+    </Modal>
+
       <template v-for="(item, index) in list">
         <Comment
           :id="item.id"
@@ -14,7 +24,7 @@
       </template>
     </div>
     <div class="button-group">
-      <button @click="() => writeArticle()">글쓰기</button>
+      <button @click="modal = !modal">글쓰기</button>
     </div>
   </main>
 </template>
@@ -23,10 +33,12 @@
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
+import Modal from '../components/MyModal.vue';
 
 export default {
   name: 'CommentView',
   components: {
+    Modal,
     SearchBar,
     Comment
   },
@@ -66,10 +78,34 @@ export default {
           showMenu: false
         }
       ],
+      modal: false,
+      message: '',
       context: -1
     };
   },
   methods: {
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      if (this.message !== this.data.description) {
+        const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
+        if (choose) {
+          this.message = this.data.description;
+          this.modal = false;
+        }
+      } else {
+        this.modal = false;
+      }
+    },
+    doSend() {
+      if (this.message.length > 0) {
+        this.data.description = this.message;
+        this.closeModal();
+      } else {
+        alert('내용은 0자 이상이어야 합니다.');
+      }
+    },
     writeArticle() {
       // 글쓰기 기능 구현
       alert('TODO');
@@ -94,10 +130,30 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  margin-top: 24px;
+}
+
 h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
+}
+
+.modal-input {
+  width: calc(100% - 20px);
+  height: calc(100% - 40px);
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #dfdfdf;
+  font-size: 16pt;
+  resize: none;
+}
+.modal-button {
+  padding: 10px;
+  border-radius: 24px;
+  background-color: #466efe;
+  color: white;
 }
 
 .search-bar {
