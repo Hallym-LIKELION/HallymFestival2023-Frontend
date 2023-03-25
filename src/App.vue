@@ -54,8 +54,8 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router';
-import menuButtonImage from '@/assets/hamburger.png';
-import Footer from '@/components/Footer.vue';
+import menuButtonImage from './assets/hamburger.png';
+import Footer from './components/Footer.vue';
 
 export default {
   components: {
