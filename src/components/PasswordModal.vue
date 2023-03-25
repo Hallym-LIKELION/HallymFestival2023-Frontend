@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <p>댓글의 비밀번호를 입력해주세요.</p>
-          <input type="password" v-model="password" />
+          <input type="password" v-model="password" @keydown.enter="deleteComment" />
         </div>
         <div class="modal-footer">
           <button class="modal-button" @click="deleteComment">삭제하기</button>
