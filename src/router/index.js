@@ -55,11 +55,24 @@ const router = createRouter({
       component: () => import('../views/Login.vue')
     },
     {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/NotFoundView.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'notfound',
       component: () => import('../views/NotFoundView.vue')
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // 애니메이션 0.25s 기다린 후 스크롤 올리기
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ left: 0, top: 0 });
+      }, 250);
+    });
+  }
 });
 
 export default router;
