@@ -77,7 +77,6 @@ export default {
         { name: '프로그램', url: 'program' },
         { name: '축제 굿즈 안내', url: 'goods' },
         { name: '방명록', url: 'comment' },
-        { name: '오시는 길', url: 'togo' },
         { name: 'About Us', url: 'aboutus' },
         { name: '로그인', url: 'login', bottom: true }
       ]

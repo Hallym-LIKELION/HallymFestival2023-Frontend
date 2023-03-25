@@ -27,9 +27,7 @@
 
       <div class="header-content">
         <p class="header-tag">
-          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />{{
-            data.tag?.map((item) => '#' + item).join(' ') || 'Loading...'
-          }}
+          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
         </p>
       </div>
     </div>
@@ -113,11 +111,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- 임시로 만든 버튼 -- 기획에서 디자인 줘야됨 -->
-    <div class="return-button">
-      <button @click="() => $router.push('/boothmap')">뒤로 돌아가기</button>
     </div>
   </main>
 </template>
