@@ -2,7 +2,7 @@
   <Transition name="modal">
     <div class="modal" v-if="visible">
       <div class="modal-background" @click="$emit('dispose')"></div>
-      <div class="modal-container">
+      <div class="modal-container" :style="{ width: width }">
         <slot></slot>
       </div>
     </div>
@@ -15,6 +15,10 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    width: {
+      type: String,
+      default: 'auto'
     }
   }
 };
