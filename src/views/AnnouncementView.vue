@@ -174,7 +174,7 @@ h1 {
 }
 
 .announcement-list > * {
-  width: 100%;
+  max-width: 540px;
   border-top: 1px solid #00000052;
   cursor: pointer;
 }
@@ -184,6 +184,8 @@ h1 {
 }
 
 .button-group {
+  max-width: 560px;
+  margin: auto;
   display: flex;
   justify-content: flex-end;
 }
@@ -195,7 +197,7 @@ h1 {
   border-radius: 24px;
   background-color: #509bf8;
   color: white;
-  font-size: 12pt;
+  font-size: 10pt;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
 }

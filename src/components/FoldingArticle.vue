@@ -86,7 +86,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  font-size: 16pt;
+  font-size: 14pt;
 }
 
 .header > .title {
@@ -117,6 +117,7 @@ export default {
 
 .content {
   margin: 0 28px;
+  font-size: 11pt;
 }
 
 .hidden {
