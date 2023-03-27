@@ -180,10 +180,10 @@ nav > div {
 }
 
 nav > div > * {
-  width: 240px;
-  padding: 16px 0;
+  width: 200px;
+  padding: 12px 0;
   padding-left: 24px;
-  font-size: 16pt;
+  font-size: 13pt;
   color: black;
   text-decoration: none;
 }
