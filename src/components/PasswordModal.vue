@@ -1,30 +1,30 @@
 <template>
-  <Transition name="modal">
-    <div class="modal" v-if="show">
-      <div class="modal-background" @click="closeModal"></div>
-      <div class="modal-container">
-        <div class="modal-header">
-          댓글 삭제하기
-          <button class="close-button" @click="closeModal">
-            <img :src="CloseImage" alt="닫기" />
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>댓글의 비밀번호를 입력해주세요.</p>
-          <input type="password" v-model="password" @keydown.enter="deleteComment" />
-        </div>
-        <div class="modal-footer">
-          <button class="modal-button" @click="deleteComment">삭제하기</button>
-        </div>
-      </div>
+  <Modal class="modal" :visible="visible" @close="close">
+    <div class="modal-header">
+      <p class="normal">댓글을 삭제하려면 비밀번호를 입력하세요</p>
+      <p class="error" v-if="!status">비밀번호가 일치하지 않습니다. 다시 입력하세요</p>
+      <!-- <button class="close-button" @click="close">
+        <img :src="CloseImage" alt="닫기" />
+      </button> -->
     </div>
-  </Transition>
+    <div class="modal-body">
+      <input type="password" v-model="password" @keydown.enter="deleteComment" />
+    </div>
+    <div class="modal-footer">
+      <button class="modal-button back" @click="close">돌아가기</button>
+      <button class="modal-button delete" @click="deleteComment">삭제하기</button>
+    </div>
+  </Modal>
 </template>
 
 <script>
+import Modal from './Modal.vue';
 import CloseImage from '../assets/close.png';
 
 export default {
+  components: {
+    Modal
+  },
   data() {
     return {
       CloseImage,
@@ -32,18 +32,22 @@ export default {
     };
   },
   props: {
-    show: {
+    visible: {
       type: Boolean,
       default: false
+    },
+    status: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    closeModal() {
+    close() {
       this.password = '';
       this.$emit('close');
     },
     deleteComment() {
-      this.$emit('modalComplete', this.password);
+      this.$emit('complete', this.password);
       this.password = '';
     }
   },
@@ -52,49 +56,6 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 28px;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #00000099; */
-  z-index: 9999;
-  transition: opacity 0.3s ease;
-}
-
-.modal-background {
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-  background-color: #00000099;
-}
-
-.modal-container {
-  width: 768px;
-  height: 180px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 16px;
-  box-shadow: 0px 0px 6px #00000099;
-  background-color: #ffffff;
-  z-index: 9999;
-  transition: all 0.3s ease;
-}
-
-.modal-container > div {
-  margin-left: 24px;
-  margin-right: 24px;
-}
-
 .close-button {
   line-height: 24pt;
 }
@@ -105,52 +66,59 @@ export default {
 }
 
 .modal-header {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 24pt;
-  line-height: 24pt;
+  width: 500px;
+  margin-top: 8px;
+}
+
+.modal-header > p {
+  font-size: 15pt;
+  text-align: center;
+}
+
+.modal-header > p.error {
+  color: #ff3333;
+  font-size: 10pt;
 }
 
 .modal-body {
   height: 100%;
+  margin: 8px;
 }
 
 input {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 6px;
   padding: 0;
   border: 0;
-  outline: 1px solid black;
-  font-size: 24pt;
+  background-color: #efefef;
+  /* outline: 1px solid black; */
+  font-size: 18pt;
+  text-align: center;
+  font-family: Verdana;
+  letter-spacing: 0.125em;
 }
 
 .modal-footer {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .modal-button {
+  width: 160px;
+  margin: 0 8px;
   margin-top: 10px;
-  padding: 5px 10px;
+  padding: 8px;
   border-radius: 24px;
+  font-size: 11pt;
   color: white;
+}
+
+.modal-button.delete {
   background-color: #ff3333;
 }
-
-.modal-enter-from {
-  opacity: 0;
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.modal-button.back {
+  background-color: #434343;
 }
 </style>

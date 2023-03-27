@@ -1,18 +1,17 @@
 <template>
   <main>
-    <Modal :show="modal" @close="closeModal">
-      <template #header> 부스 소개문 수정 </template>
-      <template #body>
-        <textarea class="modal-input" v-model="message"></textarea>
-      </template>
-      <template #footer>
-        <button class="modal-button" @click="doSend">수정하기</button>
-      </template>
-    </Modal>
+    <BoothEditModal
+      :visible="editModal"
+      :status="editStatus"
+      v-model="message"
+      @close="closeEditModal"
+      @complete="editNotice"
+    />
     <PasswordModal
-      :show="passwordModal"
+      :visible="passwordModal"
+      :status="passwordStatus"
       @close="closePasswordModal"
-      @modalComplete="deleteComment"
+      @complete="deleteComment"
     />
     <div class="header">
       <div class="header-title">
@@ -36,7 +35,7 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 소개</h1>
-          <button class="edit-button" @click="modal = !modal">
+          <button class="edit-button" @click="editModal = !editModal">
             <img :src="EditImage" alt="" />
           </button>
         </div>
@@ -61,7 +60,7 @@
 
       <div class="section">
         <div class="section-header">
-          <h1>댓글 <span v-text="comment_count.toFixed(0)"></span></h1>
+          <h1>댓글 <span v-text="commentCount.toFixed(0)"></span></h1>
         </div>
         <hr />
 
@@ -95,7 +94,7 @@
             </div>
           </div>
           <div class="comment-content">
-            <template v-for="item in comment_list" :key="item.id">
+            <template v-for="item in commentList" :key="item.id">
               <Comment
                 :id="item.id"
                 :name="GetRandomNickName(item.ip)"
@@ -123,69 +122,78 @@ import EditImage from '../assets/edit_button.png';
 import SendImage from '../assets/send.png';
 import { GetDemoBooth } from '../api/api-client';
 import { GetRandomNickName } from '../library/name-generator';
-import Modal from '../components/MyModal.vue';
+import BoothEditModal from '../components/BoothEditModal.vue';
 import PasswordModal from '../components/PasswordModal.vue';
 import Comment from '../components/Comment.vue';
 
 export default {
-  components: { Modal, Comment, PasswordModal },
+  components: { BoothEditModal, Comment, PasswordModal },
   data() {
     return {
       EditImage,
       SendImage,
       likeImage: HeartImage,
       data: {},
-      comment_list: [],
+
       like_display: 0,
-      comment_count: 0,
-      modal: false,
-      passwordModal: false,
+
+      editModal: false,
+      editStatus: true,
+
       message: '',
+
+      passwordModal: false,
+      passwordStatus: true,
+
       context: -1,
+
+      commentList: [],
+      commentCount: 0,
 
       commentContent: '',
       commentPassword: ''
     };
   },
   methods: {
-    openModal() {
-      this.modal = true;
-    },
-    closeModal() {
-      if (this.message !== this.data.description) {
+    closeEditModal() {
+      if (this.data.description !== this.message) {
         const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
         if (choose) {
           this.message = this.data.description;
-          this.modal = false;
+          this.editModal = false;
+          this.editStatus = true;
         }
       } else {
-        this.modal = false;
+        this.editModal = false;
+        this.editStatus = true;
+      }
+    },
+    editNotice() {
+      if (this.message.length > 0) {
+        this.data.description = this.message;
+        this.closeEditModal();
+      } else {
+        this.editStatus = false;
       }
     },
     closePasswordModal() {
+      this.passwordStatus = true;
       this.passwordModal = false;
-    },
-    doSend() {
-      if (this.message.length > 0) {
-        this.data.description = this.message;
-        this.closeModal();
-      } else {
-        alert('내용은 0자 이상이어야 합니다.');
-      }
     },
     deleteComment(password) {
       const failed = password !== '1111';
 
+      this.passwordStatus = !failed;
+
       // TODO: id로 delete 요청 보낼 것
       // 요청 보내서 200 뜨면 failed = false, 400 류는 true
       if (failed) {
-        alert(password);
         return;
       }
 
       this.passwordModal = false;
 
-      this.comment_list = this.comment_list.filter((item) => item.id !== this.context);
+      this.comment_list = this.commentList.filter((item) => item.id !== this.context);
     },
 
     sendComment() {
@@ -203,8 +211,8 @@ export default {
 
       // TODO API와 이것저것 검증 ㅁㄴㅇㄻ
 
-      this.comment_list.unshift({
-        id: this.comment_list[0].id + 1,
+      this.commentList.unshift({
+        id: this.commentList[0].id + 1,
         ip: `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(
           Math.random() * 256
         )}.${Math.floor(Math.random() * 256)}`,
@@ -243,7 +251,7 @@ export default {
       } else {
         this.context = id;
       }
-      for (const item of this.comment_list) {
+      for (const item of this.commentList) {
         item.showMenu = item.id === this.context;
       }
     },
@@ -274,7 +282,7 @@ export default {
     GetDemoBooth(parseInt(this.$route.params.id))
       .then((data) => {
         console.log(data);
-        this.comment_list = [
+        this.commentList = [
           { id: 3, ip: '30.10.3.4', comment: '안녕하세요 ~~ ㅋㅋㅋ', showMenu: false },
           { id: 2, ip: '30.200.40.4', comment: '타코야키 맛있어요', showMenu: false },
           { id: 1, ip: '53.30.10.4', comment: '좋아요~~', showMenu: false }
@@ -374,23 +382,6 @@ h1 {
 hr {
   border: 0px;
   border-top: 3px solid #000000;
-}
-
-.modal-input {
-  width: calc(100% - 20px);
-  height: calc(100% - 40px);
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #dfdfdf;
-  font-size: 16pt;
-  resize: none;
-}
-
-.modal-button {
-  padding: 10px;
-  border-radius: 24px;
-  background-color: #466efe;
-  color: white;
 }
 
 .section {
