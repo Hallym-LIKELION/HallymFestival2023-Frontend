@@ -162,7 +162,7 @@ export default {
         this.modal = false;
       }
     },
-    closePasswordModal(password) {
+    closePasswordModal() {
       this.passwordModal = false;
     },
     doSend() {
@@ -174,7 +174,6 @@ export default {
       }
     },
     deleteComment(password) {
-      this.passwordModal = false;
       const failed = password !== '1111';
 
       // TODO: id로 delete 요청 보낼 것
@@ -183,6 +182,8 @@ export default {
         alert(password);
         return;
       }
+
+      this.passwordModal = false;
 
       this.comment_list = this.comment_list.filter((item) => item.id !== this.context);
     },
@@ -432,6 +433,10 @@ hr {
 .menu-price {
   text-align: right;
   font-size: 15pt;
+}
+
+.write-container {
+  margin-bottom: 16px;
 }
 
 .write-header {
