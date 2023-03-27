@@ -1,0 +1,134 @@
+<template>
+  <div class="container">
+    <div class="header">
+      <img class="profile" src="https://placehold.co/48x48" alt="" />
+      <p class="nickname">멋있는 사자</p>
+    </div>
+    <div class="body">
+      <textarea
+        class="body-input"
+        v-model="commentContent"
+        @keydown.enter.prevent="send"
+        placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
+      ></textarea>
+      <div class="footer">
+        <input
+          class="footer-password"
+          v-model="commentPassword"
+          type="password"
+          placeholder="비밀번호를 입력..."
+          maxlength="32"
+          @keypress.enter="send"
+          @input="userId = $event.target.value"
+        />
+        <button class="footer-button" @click="send">
+          <img :src="SendImage" alt="" srcset="" />
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import SendImage from '../../assets/send.png';
+
+export default {
+  data() {
+    return {
+      SendImage,
+      commentContent: '',
+      commentPassword: ''
+    };
+  },
+  props: {
+    id: {
+      type: Number,
+      default: -1
+    }
+  },
+  methods: {
+    send() {
+      if (this.commentContent.length === 0) {
+        alert('댓글 내용을 입력하세요.');
+        return;
+      }
+      if (this.commentPassword.length < 4) {
+        alert('4자리 이상의 비밀번호를 입력하세요.');
+        return;
+      }
+
+      // TODO API와 이것저것 검증 ㅁㄴㅇㄻ
+
+      // API를 여기서 처리할 것 (send 이벤트는 API 요청이 완벽히 성공하면 호출)
+
+      // TEMP: 랜덤 아이피
+      let ip = [];
+      for (let i = 0; i < 4; i++) {
+        ip.push(Math.floor(Math.random() * 256));
+      }
+      // ----------------
+
+      const data = {
+        ip: ip.join('.'),
+        comment: this.commentContent
+      };
+
+      this.$emit('send', data);
+
+      this.commentContent = '';
+      this.commentPassword = '';
+    }
+  },
+  created() {}
+};
+</script>
+<style scoped>
+.container {
+  margin-bottom: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.profile {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  border-radius: 100%;
+}
+.body {
+  width: calc(100% - 20px);
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+}
+
+.body-input {
+  width: 100%;
+  height: 48px;
+  background: none;
+  overflow: hidden;
+  outline: none;
+  font-size: 12pt;
+  resize: none;
+}
+.footer {
+  height: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+.footer-password {
+  font-size: 11pt;
+  margin-right: 12px;
+}
+
+.footer-button {
+  margin-right: 8px;
+}
+.footer-button > img {
+  width: 18px;
+  height: 18px;
+}
+</style>
