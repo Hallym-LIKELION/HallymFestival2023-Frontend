@@ -37,7 +37,7 @@
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import { GetDemoBoothList } from '../api/api-client';
-import mapImage from '@/assets/map.jpg';
+import mapImage from '../assets/map.jpg';
 
 export default {
   components: {
