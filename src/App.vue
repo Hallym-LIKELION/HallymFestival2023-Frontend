@@ -56,6 +56,7 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router';
+import AOS from 'aos';
 import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
 
@@ -86,6 +87,10 @@ export default {
         { name: '회원가입', url: 'register' }
       ]
     };
+  },
+  created() {
+    // 애니메이션 라이브러리 init
+    AOS.init();
   },
   mounted() {
     // goTop을 위해 mount 시 element 설정
