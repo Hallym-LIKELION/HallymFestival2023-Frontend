@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     addComment(data) {
-      data.id = this.list[0].id + 1; // 임시로 여기서 처리, API 연결하면 API에서 받아올것
+      data.id = (this.list[0]?.id || 1) + 1; // 임시로 여기서 처리, API 연결하면 API에서 받아올것
       data.showMenu = false;
       this.list.unshift(data);
     },

@@ -50,7 +50,8 @@ export default {
 }
 
 .modal-container {
-  padding: 10px;
+  max-height: calc(100% - 60px);
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -58,6 +59,7 @@ export default {
   box-shadow: 0px 0px 6px #00000099;
   background-color: #ffffff;
   z-index: 9999;
+  overflow: auto;
   transition: all 0.3s ease;
 }
 
