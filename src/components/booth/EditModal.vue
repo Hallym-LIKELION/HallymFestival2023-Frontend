@@ -1,5 +1,5 @@
 <template>
-  <Modal :visible="visible" @dispose="close">
+  <Modal :visible="visible" @dispose="close" width="420px">
     <div class="modal-header">
       부스 소개 편집하기
       <button class="close-button" @click="close">
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Modal from './Modal.vue';
-import CloseImage from '../assets/close.png';
+import Modal from '../Modal.vue';
+import CloseImage from '../../assets/close.png';
 
 export default {
   components: {
@@ -61,7 +61,6 @@ export default {
 
 <style scoped>
 .modal-header {
-  width: 420px;
   display: flex;
   justify-content: space-between;
   font-size: 15pt;
