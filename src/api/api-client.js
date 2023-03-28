@@ -204,3 +204,34 @@ export async function UnlikeBooth(id) {
   console.log(document.cookie);
   return res;
 }
+
+/* 공지사항 api  @백엔드-미진/@프론트-소현 */
+//게시물 게시
+export async function PostNotice() {
+  const res = await axios.get(HOST + '/notice');
+  return res.data;
+}
+//게시물 목록 조회
+export async function GetNoticeList(id) {
+  const res = await axios.get(HOST + '/notice/' + id);
+  return res.data;
+}
+//게시물 삭제
+export async function DeleteNotice(id) {
+  const res = await axios.delete(HOST + '/notice/' + id);
+  return res.data;
+}
+//게시물 검색
+export async function GetNoticeList(keyword, id) {
+  const data = {
+    keyword
+  };
+  const res = await axios.get(HOST + '/notice/' + keyword ,id);
+  return res.data;
+ }
+
+//게시물 수정
+export async function RemoveNotice(id) {
+  const res = await axios.delete(HOST + '/notice/' + id);
+  return res.data;
+}
