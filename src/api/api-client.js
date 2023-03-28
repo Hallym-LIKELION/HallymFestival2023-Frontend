@@ -255,3 +255,29 @@ export async function DeleteVisitComment(id) {
   const res = await axios.delete(HOST + '/visitComment/list'+id);
   return res.data;
 }
+
+/* 부스 메뉴 api  @백엔드-미진/@프론트-경재 */
+
+/* 메뉴 추가 */
+export async function PostBoothMenu(id) {
+  const res = await axios.post(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 목록 조회 */
+export async function GetBoothMenuList(id) {
+  const res = await axios.get(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 수정 */
+export async function RemoveBoothMenu(id) {
+  const res = await axios.put(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 삭제 */
+export async function DeleteBoothMenu(id) {
+  const res = await axios.delete(HOST + '/menu/' + id);
+  return res.data;
+}
