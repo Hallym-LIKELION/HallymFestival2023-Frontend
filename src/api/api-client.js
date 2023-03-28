@@ -204,3 +204,80 @@ export async function UnlikeBooth(id) {
   console.log(document.cookie);
   return res;
 }
+
+/* 공지사항 api  @백엔드-미진/@프론트-소현 */
+
+/*게시물 게시*/
+export async function PostNotice() {
+  const res = await axios.post(HOST + '/notice');
+  return res.data;
+}
+/*게시물 목록 조회*/
+export async function GetNoticeList(id) {
+  const res = await axios.get(HOST + '/notice/' + id);
+  return res.data;
+}
+/*게시물 삭제*/
+export async function DeleteNotice(id) {
+  const res = await axios.delete(HOST + '/notice/' + id);
+  return res.data;
+}
+/*게시물 검색*/
+export async function GetNoticeList(keyword, id) {
+  const data = {
+    keyword
+  };
+  const res = await axios.get(HOST + '/notice/' + keyword ,id);
+  return res.data;
+ }
+
+/*게시물 수정*/
+export async function RemoveNotice(id) {
+  const res = await axios.put(HOST + '/notice/' + id);
+  return res.data;
+}
+
+/* 방명록 api  @백엔드-미진/@프론트-소현 */
+
+/*방명록 생성 */
+export async function PostVisitComment() {
+  const res = await axios.post(HOST + '/visitComment/create');
+  return res.data;
+}
+
+/*방명록 전체 게시물 조회*/
+export async function GetVisitComment() {
+  const res = await axios.get(HOST + '/visitComment/list');
+  return res.data;
+}
+/*방명록 삭제*/
+export async function DeleteVisitComment(id) {
+  const res = await axios.delete(HOST + '/visitComment/list'+id);
+  return res.data;
+}
+
+/* 부스 메뉴 api  @백엔드-미진/@프론트-경재 */
+
+/* 메뉴 추가 */
+export async function PostBoothMenu(id) {
+  const res = await axios.post(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 목록 조회 */
+export async function GetBoothMenuList(id) {
+  const res = await axios.get(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 수정 */
+export async function RemoveBoothMenu(id) {
+  const res = await axios.put(HOST + '/menu/' + id);
+  return res.data;
+}
+
+/* 메뉴 삭제 */
+export async function DeleteBoothMenu(id) {
+  const res = await axios.delete(HOST + '/menu/' + id);
+  return res.data;
+}
