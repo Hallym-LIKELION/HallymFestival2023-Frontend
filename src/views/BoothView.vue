@@ -26,9 +26,7 @@
       </div>
 
       <div class="header-content">
-        <p class="header-tag">
-          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
-        </p>
+        <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
       </div>
     </div>
 
@@ -47,7 +45,7 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 메뉴</h1>
-          <button class="edit-menu-button" @click="editMenuModal = !editMenuModal">
+          <button class="edit-button" @click="editMenuModal = !editMenuModal">
             <img :src="EditImage" alt="" />
           </button>
         </div>
@@ -198,8 +196,15 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 20pt;
+  font-size: 18pt;
   text-align: left;
+}
+
+.header,
+.content,
+.section {
+  max-width: 400px;
+  margin: auto;
 }
 
 .header {
@@ -214,24 +219,22 @@ h1 {
 
 .header-name {
   width: 100%;
-  font-size: 32pt;
+  font-size: 24pt;
 }
 
 .header-like {
   display: flex;
   align-items: center;
-  line-height: 24pt;
 }
 
 .header-like-count {
   margin-right: 8px;
-  font-size: 18pt;
-  line-height: 18pt;
+  font-size: 16pt;
 }
 
 .header-like-button > img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   vertical-align: middle;
 }
 
@@ -242,49 +245,50 @@ h1 {
   align-items: center;
 }
 
-.header-tag {
-  font-weight: 600;
-}
-
 .header-image {
-  max-height: 240px;
+  max-height: 200px;
   margin: auto;
   object-fit: contain;
   display: block;
 }
 
 .edit-button > img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 hr {
   border: 0px;
-  border-top: 3px solid #000000;
+  border-top: 2px solid #333333;
 }
 
 .section {
-  margin: 24px 0;
+  margin: 16px 0;
 }
 .section-header {
-  font-size: 20pt;
-  text-align: left;
-  margin: 0;
   display: flex;
   justify-content: space-between;
 }
 
 .section-header > h1 > span {
-  font-size: 12pt;
+  font-size: 11pt;
   font-weight: 500;
 }
 
 .section-text {
+  width: 100%;
   min-height: 100px;
-  font-size: 14pt;
-  white-space: pre;
+  max-height: 200px;
+
+  overflow: hidden;
+  font-size: 13pt;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
+.booth-menu {
+  min-height: 80px;
+}
 .menu-group {
   display: flex;
   justify-content: space-between;
@@ -292,11 +296,11 @@ hr {
 
 .menu-title {
   text-align: left;
-  font-size: 15pt;
+  font-size: 13pt;
 }
 
 .menu-price {
   text-align: right;
-  font-size: 15pt;
+  font-size: 13pt;
 }
 </style>
