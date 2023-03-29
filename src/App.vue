@@ -1,57 +1,41 @@
 <template>
-  <header>
-    <button @click="showMenu = !showMenu">
-      <img :src="menuButtonImage" width="32" />
-    </button>
-    <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
-  </header>
-  <Transition name="fade">
-    <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
-  </Transition>
-  <div class="wrapper">
-    <Transition name="slide">
-      <nav v-if="showMenu">
-        <div class="top-menu">
-          <template v-for="{ url, name } in navList">
-            <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
-          </template>
-        </div>
-        <div class="bottom-menu">
-          <template v-for="{ url, name } in navBottomList">
-            <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
-          </template>
-        </div>
-      </nav>
+  <main>
+    <Transition name="fade">
+      <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
     </Transition>
 
-    <RouterView v-slot="{ Component }" class="router-view">
-      <Transition name="fade" mode="out-in">
-        <component :is="Component" />
+    <header>
+      <button @click="showMenu = !showMenu">
+        <img :src="menuButtonImage" width="24" />
+      </button>
+      <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
+    </header>
+
+    <div class="wrapper">
+      <Transition name="slide">
+        <nav v-if="showMenu">
+          <div class="top-menu">
+            <template v-for="{ url, name } in navList">
+              <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+            </template>
+          </div>
+          <div class="bottom-menu">
+            <template v-for="{ url, name } in navBottomList">
+              <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+            </template>
+          </div>
+        </nav>
       </Transition>
-    </RouterView>
-  </div>
-  <div class="v-main__wrap">
-    <div>
-      <v-app id="app">
-        <v-app-bar> </v-app-bar>
-        <v-main>
-          <v-container id="scroll-target" class="overflow-y-auto"> </v-container>
-          <v-btn
-            v-show="scroll > 0"
-            fab
-            fixed
-            dark
-            bottom
-            v-scroll:#scroll-target="onScroll"
-            @click="goTop"
-          >
-            <v-icon>mdi-menu-up</v-icon>
-          </v-btn>
-        </v-main>
-      </v-app>
+
+      <RouterView v-slot="{ Component }" class="router-view">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
     </div>
-  </div>
-  <Footer></Footer>
+
+    <Footer></Footer>
+  </main>
 </template>
 
 <script>
@@ -92,29 +76,16 @@ export default {
     // 애니메이션 라이브러리 init
     AOS.init();
   },
-  mounted() {
-    // goTop을 위해 mount 시 element 설정
-    this.scrollTarget = document.getElementById('scroll-target');
-  },
-  methods: {
-    onScroll(e) {
-      // 스크롤 움직일 때 마다 호출됨
-      this.scroll = e.target.scrollTop;
-    },
-    goTop() {
-      if (this.scrollTarget) {
-        this.scrollTarget.scrollTop = 0;
-      }
-    }
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
 
 <style scoped>
-
 header {
   width: 100%;
-  height: 72px;
+  height: 56px;
+  /* margin-top: -56px; */
   display: flex;
   position: fixed;
   background-color: #ffffff;
@@ -125,7 +96,7 @@ header {
 }
 header > button {
   left: 24px;
-  height: 32px;
+  height: 20px;
   position: absolute;
   /* 이미지를 하얗게 */
   background: none;
@@ -137,22 +108,11 @@ header > .title {
   padding: 10px 0;
   color: black;
   text-decoration: none;
-  font-size: 18pt;
+  font-size: 16pt;
   font-weight: 600;
-}
-.v-main {
-  min-height: 100%;
-}
-.scroll-target {
-  max-height: 100%;
-}
-.v-main__wrap{
-  min-height: 100%;
-  padding-bottom: 50px;
 }
 .wrapper {
   min-height: 100%;
-  padding-bottom: 50px;
 }
 
 /* 사이드 메뉴 열었을때 배경 흐리게 */
@@ -173,13 +133,14 @@ header > .title {
 }
 
 nav {
-  height: calc(100% - 72px - 16px);
+  height: calc(100% - 56px - 16px);
+  margin-top: 56px;
+  padding: 8px;
   background-color: #ffffff;
   display: flex;
   position: fixed;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
   overflow: auto;
   z-index: 99;
 }
@@ -201,24 +162,10 @@ nav > div > * {
 
 .router-view {
   max-width: 768px;
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 56px - 70px);
   margin: auto;
   padding: 0 28px;
-}
-
-@media screen and (max-width: 768px) {
-  header > .title {
-    font-size: 14pt;
-  }
-
-  header > button {
-    left: 24px;
-    height: 24px;
-  }
-
-  header > button > img {
-    width: 24px;
-  }
+  padding-top: 56px;
 }
 
 /* 트랜지션 기능 테스트 */
