@@ -81,7 +81,7 @@ import EditImage from '../assets/edit_button.png';
 import { GetDemoBooth } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
-import BoothEditMenuModal from '../components/booth/EditMenuModal.vue';
+import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
 
 import axios from 'axios';
