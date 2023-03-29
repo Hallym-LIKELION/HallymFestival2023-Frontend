@@ -3,14 +3,14 @@
     <h1>방명록</h1>
     <div class="comment-list">
       <Modal :show="modal" @close="closeModal">
-      <template #header> 방명록 작성하기 </template>
-      <template #body>
-        <textarea class="modal-input" v-model="message"></textarea>
-      </template>
-      <template #footer>
-        <button class="modal-button" @click="doSend">입력하기</button>
-      </template>
-    </Modal>
+        <template #header> 방명록 작성하기 </template>
+        <template #body>
+          <textarea class="modal-input" v-model="message"></textarea>
+        </template>
+        <template #footer>
+          <button class="modal-button" @click="doSend">입력하기</button>
+        </template>
+      </Modal>
 
       <template v-for="(item, index) in list">
         <Comment
@@ -164,10 +164,11 @@ h1 {
 }
 
 .comment-list {
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
+  margin: auto;
 }
 
 .comment-list > * {
@@ -176,13 +177,14 @@ h1 {
 }
 
 .button-group {
+  max-width: 416px;
+  margin: auto;
   display: flex;
   justify-content: flex-end;
-  padding: 0 8px;
 }
 
 .button-group > button {
-  margin: 8px 10px;
+  margin: 8px 0;
   padding: 8px 24px;
   border: none;
   border-radius: 24px;
