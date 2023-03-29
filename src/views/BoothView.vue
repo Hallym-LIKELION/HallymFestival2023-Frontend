@@ -2,10 +2,16 @@
   <main>
     <BoothEditModal
       :visible="editModal"
-      :status="editStatus"
-      v-model="editValue"
+      :data="editData"
       @close="closeEditModal"
-      @complete="editNotice"
+      @complete="editBoothData"
+    />
+
+    <BoothEditMenuModal
+      :visible="editMenuModal"
+      :data="editMenuData"
+      @close="closeEditMenuModal"
+      @complete="editBoothMenuData"
     />
 
     <div class="header">
@@ -41,12 +47,15 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 메뉴</h1>
+          <button class="edit-menu-button" @click="editMenuModal = !editMenuModal">
+            <img :src="EditImage" alt="" />
+          </button>
         </div>
         <hr />
         <div class="booth-menu">
           <template v-for="(item, index) in data.menu" :key="index">
             <div class="menu-group">
-              <p class="menu-title" v-text="item.title"></p>
+              <p class="menu-title" v-text="item.name"></p>
               <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
             </div>
           </template>
@@ -72,10 +81,15 @@ import EditImage from '../assets/edit_button.png';
 import { GetDemoBooth } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
+import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
 
+import axios from 'axios';
+
+window.axios = axios;
+
 export default {
-  components: { BoothEditModal, BoothCommentSection },
+  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection },
   data() {
     return {
       EditImage,
@@ -85,8 +99,15 @@ export default {
       like_display: 0,
 
       editModal: false,
-      editStatus: true,
-      editValue: '',
+      editData: {
+        title: '',
+        description: '',
+        type: '플리마켓',
+        status: true
+      },
+
+      editMenuModal: false,
+      editMenuData: [],
 
       commentCount: 0,
       commentDisplayCount: 0
@@ -94,32 +115,26 @@ export default {
   },
   methods: {
     closeEditModal() {
-      if (this.data.description !== this.editValue) {
-        // TODO: choose를 modal로 빼거나 다른 방법을 찾아볼 것
-        // 아니면 기획팀과 협의 후 그냥 안 물어보고 끄도록 할 것
-        const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
-        if (choose) {
-          this.editValue = this.data.description;
-          this.editModal = false;
-          this.editStatus = true;
-        }
-      } else {
-        this.editModal = false;
-        this.editStatus = true;
-      }
+      this.editModal = false;
     },
-    editNotice() {
-      if (this.editValue.length > 0) {
-        this.data.description = this.editValue;
-        this.closeEditModal();
-      } else {
-        this.editStatus = false;
-      }
+    editBoothData(data) {
+      // this.data = data;
+      this.data.name = data.title;
+      this.data.description = data.description;
+      this.closeEditModal();
+    },
+    closeEditMenuModal() {
+      this.editMenuModal = false;
+    },
+    editBoothMenuData(data) {
+      this.data.menu = data;
+      this.closeEditMenuModal();
     },
     loadCommentCount(count) {
       this.commentCount = count;
     },
     likeHandler(evt) {
+      // TODO: 좋아요 사이에 딜레이 넣을 것 (0.3초)
       if (this.data.liked === true) {
         this.likeImage = HeartImage;
         this.data.like--;
@@ -143,6 +158,18 @@ export default {
     }
   },
   watch: {
+    data: {
+      deep: true,
+      handler(data) {
+        this.editData = {
+          title: data.name,
+          description: data.description,
+          type: '플리마켓',
+          status: true
+        };
+        this.editMenuData = this.data.menu;
+      }
+    },
     'data.like'(n) {
       // 좋아요 수 애니메이션
       gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
@@ -160,7 +187,6 @@ export default {
     GetDemoBooth(parseInt(this.$route.params.id))
       .then((data) => {
         this.data = data;
-        this.editValue = data.description;
       })
       .catch((err) => {
         alert('Unexpected error has occured. Please try again later.');

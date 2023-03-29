@@ -36,8 +36,8 @@ const demoBoothData = JSON.stringify([
     summary: '맛있는 타코야키 팔아요',
     description: '타코야키 정말 맛있어요',
     menu: [
-      { title: '타코야키', price: 3000 },
-      { title: '타코야키 XL', price: 4000 }
+      { name: '타코야키', price: 3000, isSoldout: false },
+      { name: '타코야키 XL', price: 4000, isSoldout: true }
     ],
     like: 123,
     day: [1, 2],
@@ -61,11 +61,11 @@ const demoBoothData = JSON.stringify([
     summary: '핫도그 팝니다~',
     description: '맛있는 핫도그를 팔아요~',
     menu: [
-      { title: '핫도그', price: 3000 },
-      { title: '매운 핫도그', price: 4000 },
-      { title: '치즈 핫도그', price: 5000 },
-      { title: '크림 핫도그', price: 5000 },
-      { title: '핫도그 핫도그', price: 5500 }
+      { name: '핫도그', price: 3000, isSoldout: true },
+      { name: '매운 핫도그', price: 4000, isSoldout: false },
+      { name: '치즈 핫도그', price: 5000, isSoldout: true },
+      { name: '크림 핫도그', price: 5000, isSoldout: false },
+      { name: '핫도그 핫도그', price: 5500, isSoldout: false }
     ],
     like: 1200,
     day: [1, 3],
