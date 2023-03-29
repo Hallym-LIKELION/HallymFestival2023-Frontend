@@ -32,7 +32,7 @@
       <div><button class="modal-button add" @click="addItem">항목 추가하기</button></div>
       <div>
         <button class="modal-button back" @click="close">돌아가기</button>
-        <button class="modal-button apply" @click="applyMenu">삭제하기</button>
+        <button class="modal-button apply" @click="applyMenu">적용하기</button>
       </div>
     </div>
   </Modal>
