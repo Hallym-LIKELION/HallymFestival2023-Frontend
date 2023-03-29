@@ -223,6 +223,7 @@ export async function DeleteNotice(id) {
   return res.data;
 }
 /*게시물 검색*/
+//게시물 검색 함수 수정
 export async function GetNotice(keyword, id) {
   const data = {
     keyword
