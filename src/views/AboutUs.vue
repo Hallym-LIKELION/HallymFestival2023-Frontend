@@ -12,7 +12,7 @@
         <p>2023년도 한림대학교 대동제를 위하여</p>
         <p>한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고,</p>
         <p>
-          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 빌더팀이 축제 웹사이트를 개발하였습니다.
+          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이 축제 웹사이트를 개발하였습니다.
         </p>
         <p>
           이번 2023 한림대학교 대동제가 여느때보다 즐겁고 행복한 축제가 되시기를 진심으로
@@ -27,32 +27,23 @@
       <TeamText className="team" text-align: center><h3>Front-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
-      <div class="floatt">
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>오소현</h2>
-            <p>빅데이터학과 20</p>
-            <button>
-              <a href="https://github.com/osohyun0224">
-                <div class="button">소현's Github ></div>
-              </a>
-            </button>
+          <div class="card" >
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">오소현</h2>
+              <h5 class="card-text">빅데이터학과 20 </h5>
+              <button><a href="https://github.com/osohyun0224"><div class="button">소현's Github ></div></a></button>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="dcard">
-        <img src="@/assets/osohyun.png" alt="" />
-        <div class="inform">
-          <h2>김경재</h2>
-          <p>빅데이터학과 20</p>
-          <button>
-              <a href="https://github.com/PortalCube">
-                <div class="button">경재's Github ></div>
-              </a>
-            </button>
-        </div>
-      </div>
+
+          <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">김경재</h2>
+              <h5 class="card-text">빅데이터학과 20 </h5>
+              <button><a href="https://github.com/PortalCube"><div class="button">경재's Github ></div></a></button>
+            </div>
+          </div>
 
       <div class="next"></div>
 
@@ -60,62 +51,34 @@
       <TeamText className="team" text-align: center><h3>Back-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
-      <div class="floatt">
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>이동헌</h2>
-            <p>빅데이터학과 15</p>
-            <button>
-              <a href="https://github.com/Sirius506775">
-                <div class="button">동헌's Github ></div>
-              </a>
-            </button>
+      <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">이동헌</h2>
+              <h5 class="card-text">빅데이터학과 15 </h5>
+              <button><a href="https://github.com/Sirius506775"><div class="button">동헌's Github ></div></a></button>
+            </div>
           </div>
-        </div>
-
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>박주영</h2>
-            <p>콘텐츠IT학과 19</p>
-            <button>
-              <a href="https://github.com/mythpoy">
-                <div class="button">주영's Github ></div>
-              </a>
-            </button>
+        
+          <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">박주영</h2>
+              <h5 class="card-text">빅데이터학과 19 </h5>
+              <button><a href="https://github.com/mythpoy"><div class="button">주영's Github ></div></a></button>
+            </div>
           </div>
-        </div>
-      </div>
 
       <div class="next"></div>
 
-      <div class="floatt">
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>이강훈</h2>
-            <p>빅데이터학과 18</p>
-            <button>
-              <a href="https://github.com/kangwhon">
-                <div class="button">강훈's Github ></div>
-              </a>
-            </button>
+      <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">김미진</h2>
+              <h5 class="card-text">빅데이터학과 19 </h5>
+              <button><a href="https://github.com/mijin0721"><div class="button">미진's Github ></div></a></button>
+            </div>
           </div>
-        </div>
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>김미진</h2>
-            <p>빅데이터학과 20</p>
-            <button>
-              <a href="https://github.com/mijin0721">
-                <div class="button">미진's Github ></div>
-              </a>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <div class="next"></div>
 
@@ -123,22 +86,22 @@
       <TeamText className="team" text-align: center><h3>PM / DESGIN TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
-      <div class="floatt">
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>최아리</h2>
-            <p>경영학과 21</p>
+      <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">최아리</h2>
+              <h5 class="card-text">경영학과 19 </h5>
+            </div>
           </div>
-        </div>
-        <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
-          <div class="inform">
-            <h2>오유진</h2>
-            <p>광고홍보학과 19</p>
+
+          <div class="card">
+            <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+            <div class="card-body">
+              <h2 class="card-title">오유진</h2>
+              <h5 class="card-text">광고홍보학과 19 </h5>
+            </div>
           </div>
-        </div>
-      </div>
+
     </TitleContainer>
   </main>
 </template>
@@ -150,14 +113,35 @@
 <style scoped>
 h1,
 h2,
-h3,
-h4,
+h3{
+  margin: 12px 0;
+  font-size: 2vw;
+  text-size-adjust: auto;
+}
+h4{
+  margin: 20px 0;
+  font-size: 2vw;
+}
 h5,
 h6 {
   margin: 16px 0;
 }
 p {
-  margin: 10px 0;
+  margin: 12px 0;
+  word-wrap:break-word;
+  text-size-adjust: auto;
+  font-size: 1vw;
+}
+.card{
+  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
+  border-radius: 10px;
+  width: 32%;
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  float: left;
 }
 .title {
   font-family: 'Noto Sans KR', sans-serif;
@@ -198,17 +182,6 @@ p {
   margin: 0;
   padding: 36px 0;
   clear: both;
-}
-.dcard {
-  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
-  border-radius: 10px;
-  width: 32%;
-  padding: 10px;
-  margin: 10px;
-  text-decoration: none;
-  text-align: center;
-  color: black;
-  float: left;
 }
 .next {
   clear: both;
