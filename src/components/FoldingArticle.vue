@@ -80,7 +80,7 @@ export default {
 
 .header {
   width: 100%;
-  height: 42px;
+  height: 36px;
   margin: 8px 0;
   display: flex;
   justify-content: space-between;
@@ -117,7 +117,7 @@ export default {
 
 .content {
   margin: 0 28px;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .hidden {
