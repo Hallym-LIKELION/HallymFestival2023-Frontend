@@ -128,7 +128,7 @@ h1 {
 
   position: absolute;
 
-  margin-top: 22px;
+  margin-top: 20px;
   border-radius: 12px;
 
   background-color: #ffffff; /* 중심 흰색원 */
@@ -155,7 +155,7 @@ h1 {
 .table-col-2 {
   margin: 12px 0;
   padding: 8px 8px;
-  font-size: 14pt;
+  font-size: 11pt;
 
   border-radius: 4px;
 

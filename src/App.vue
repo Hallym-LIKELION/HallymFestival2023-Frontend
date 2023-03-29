@@ -3,7 +3,7 @@
     <button @click="showMenu = !showMenu">
       <img :src="menuButtonImage" width="32" />
     </button>
-    <p>2023 한림대학교 비봉축전</p>
+    <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
   </header>
   <Transition name="fade">
     <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
@@ -11,14 +11,16 @@
   <div class="wrapper">
     <Transition name="slide">
       <nav v-if="showMenu">
-        <template v-for="{ url, name, bottom = false } in navList">
-          <RouterLink
-            :to="'/' + url"
-            v-text="name"
-            :class="{ bottom }"
-            @click="() => (showMenu = false)"
-          />
-        </template>
+        <div class="top-menu">
+          <template v-for="{ url, name } in navList">
+            <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+          </template>
+        </div>
+        <div class="bottom-menu">
+          <template v-for="{ url, name } in navBottomList">
+            <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+          </template>
+        </div>
       </nav>
     </Transition>
 
@@ -54,6 +56,7 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router';
+import AOS from 'aos';
 import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
 
@@ -70,17 +73,24 @@ export default {
       scroll: 0,
       scrollTarget: null,
       navList: [
-        { name: 'HOME', url: '' },
         { name: '공지사항', url: 'announcement' },
         { name: '부스 배치도', url: 'boothmap' },
         { name: '타임 테이블', url: 'timetable' },
         { name: '프로그램', url: 'program' },
         { name: '축제 굿즈 안내', url: 'goods' },
         { name: '방명록', url: 'comment' },
-        { name: 'About Us', url: 'aboutus' },
-        { name: '로그인', url: 'login', bottom: true }
+        { name: '오시는 길', url: 'togo' },
+        { name: 'About Us', url: 'aboutus' }
+      ],
+      navBottomList: [
+        { name: '로그인', url: 'login' },
+        { name: '회원가입', url: 'register' }
       ]
     };
+  },
+  created() {
+    // 애니메이션 라이브러리 init
+    AOS.init();
   },
   mounted() {
     // goTop을 위해 mount 시 element 설정
@@ -110,21 +120,23 @@ header {
   background-color: #ffffff;
   box-shadow: 0px 1px 8px #00000066;
   align-items: center;
-  justify-content: stretch;
+  justify-content: center;
   z-index: 999;
 }
 header > button {
-  margin-left: 24px;
+  left: 24px;
+  height: 32px;
   position: absolute;
   /* 이미지를 하얗게 */
   background: none;
   border: none;
   cursor: pointer;
 }
-header > p {
-  width: 100%;
+header > .title {
   text-align: center;
-  margin: 0;
+  padding: 10px 0;
+  color: black;
+  text-decoration: none;
   font-size: 18pt;
   font-weight: 600;
 }
@@ -161,30 +173,28 @@ header > p {
 }
 
 nav {
-  height: 100%;
+  height: calc(100% - 72px - 16px);
   background-color: #ffffff;
   display: flex;
   position: fixed;
   flex-direction: column;
+  justify-content: space-between;
   padding: 8px;
   overflow: auto;
   z-index: 99;
 }
 
-.hidden {
-  display: none;
+nav > div {
+  display: flex;
+  flex-direction: column;
+  /* overflow: auto; */
 }
 
-.bottom {
-  margin-top: auto;
-  margin-bottom: 96px;
-}
-
-nav > * {
-  width: 240px;
-  padding: 16px 0;
+nav > div > * {
+  width: 200px;
+  padding: 12px 0;
   padding-left: 24px;
-  font-size: 16pt;
+  font-size: 13pt;
   color: black;
   text-decoration: none;
 }
@@ -197,12 +207,13 @@ nav > * {
 }
 
 @media screen and (max-width: 768px) {
-  header > p {
+  header > .title {
     font-size: 14pt;
   }
 
   header > button {
-    margin-left: 24px;
+    left: 24px;
+    height: 24px;
   }
 
   header > button > img {

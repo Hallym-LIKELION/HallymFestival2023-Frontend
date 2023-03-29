@@ -37,7 +37,7 @@
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import { GetDemoBoothList } from '../api/api-client';
-import mapImage from '@/assets/map.jpg';
+import mapImage from '../assets/map.jpg';
 
 export default {
   components: {
@@ -62,8 +62,8 @@ export default {
         // 2. 검색에 따른 필터링
         const isContainSearchString =
           this.search === '' ||
-          item.title.includes(this.search) ||
-          item.content.includes(this.search);
+          item.name.includes(this.search) ||
+          item.summary.includes(this.search);
 
         return isChoosedDay && isContainSearchString;
       });

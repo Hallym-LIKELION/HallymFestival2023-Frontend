@@ -79,13 +79,6 @@ export default {
 </script>
 
 <style scoped>
-.se1{
-  text-align: center;
-  display: flex;
-  padding: 36px 0;
-  justify-content:space-between;
-}
-
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -103,7 +96,7 @@ h1 {
 }
 
 .menu {
-  max-width: 380px;
+  max-width: 320px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -115,9 +108,9 @@ h1 {
 .menu > * {
   width: 100%;
   margin: 4px;
-  padding: 12px 0;
+  padding: 10px 0;
   border-radius: 4px;
-  font-size: 16pt;
+  font-size: 13pt;
   text-align: center;
   text-decoration: none;
   color: black;
