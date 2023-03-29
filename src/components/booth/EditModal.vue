@@ -15,10 +15,13 @@
 
       <p class="label">사진</p>
       <div class="input image">
-        <img src="https://placehold.co/400x400" alt="" />
+        <img :src="image" alt="" />
         <p class="error">파일이 이미지가 아닙니다. 다른 파일로 다시 시도하세요.</p>
         <input ref="upload" type="file" accept="image/*" v-show="false" @change="uploadImage" />
-        <button class="button" @click="showFileSelector">이미지 업로드</button>
+        <button class="button" @click="showFileSelector">
+          <p class="title">이미지 업로드</p>
+          <p class="subtitle">권장 크기: 000px x 000px, 0MB 이하의 jpg, png, gif만 가능</p>
+        </button>
       </div>
 
       <p class="label">설명</p>
@@ -70,6 +73,7 @@ export default {
       title: '',
       description: '',
       type: '플리마켓',
+      image: 'https://placehold.co/300x300', // TODO: 서버에 등록된 이미지로 불러올 것
       imageUploaded: false,
       status: true
     };
@@ -141,6 +145,15 @@ export default {
         alert('크기가 너무 큽니다');
         return;
       }
+
+      const self = this;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        console.log(reader.result);
+        self.image = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   },
   watch: {
@@ -205,12 +218,19 @@ export default {
 }
 
 .input.image > img {
-  max-width: min(100%, 240px);
-  /* object-fit: contain; */
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
 }
 
 .input.image > button {
   margin-top: 10px;
+}
+.input.image > button > .title {
+  font-size: 12pt;
+}
+.input.image > button > .subtitle {
+  font-size: 7pt;
 }
 
 .input.description > textarea {
@@ -265,7 +285,7 @@ export default {
 
 .button {
   width: 100%;
-  height: 36px;
+  padding: 6px 0;
   border-radius: 4px;
   background-color: #466efe;
   color: white;
