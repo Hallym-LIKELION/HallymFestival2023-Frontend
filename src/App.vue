@@ -58,13 +58,12 @@ export default {
       scrollTarget: null,
       navList: [
         { name: '공지사항', url: 'announcement' },
-        { name: '부스 배치도', url: 'boothmap' },
-        { name: '타임 테이블', url: 'timetable' },
+        { name: '부스', url: 'boothmap' },
+        { name: '시간표', url: 'timetable' },
         { name: '프로그램', url: 'program' },
-        { name: '축제 굿즈 안내', url: 'goods' },
+        { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
-        { name: '오시는 길', url: 'togo' },
-        { name: 'About Us', url: 'aboutus' }
+        { name: '만든이들', url: 'aboutus' }
       ],
       navBottomList: [
         { name: '로그인', url: 'login' },
@@ -152,7 +151,7 @@ nav > div {
 }
 
 nav > div > * {
-  width: 200px;
+  width: 180px;
   padding: 12px 0;
   padding-left: 24px;
   font-size: 13pt;
