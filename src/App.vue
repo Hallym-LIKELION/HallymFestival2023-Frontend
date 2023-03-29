@@ -101,6 +101,7 @@ export default {
 </script>
 
 <style scoped>
+
 header {
   width: 100%;
   height: 72px;
@@ -133,8 +134,13 @@ header > p {
 .scroll-target {
   max-height: 100%;
 }
+.v-main__wrap{
+  min-height: 100%;
+  padding-bottom: 50px;
+}
 .wrapper {
-  padding-top: 72px;
+  min-height: 100%;
+  padding-bottom: 50px;
 }
 
 /* 사이드 메뉴 열었을때 배경 흐리게 */

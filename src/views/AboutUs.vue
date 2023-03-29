@@ -183,17 +183,6 @@ p {
   padding: 36px 0;
   clear: both;
 }
-.dcard {
-  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
-  border-radius: 10px;
-  width: 32%;
-  padding: 10px;
-  margin: 10px;
-  text-decoration: none;
-  text-align: center;
-  color: black;
-  float: left;
-}
 .next {
   clear: both;
 }
