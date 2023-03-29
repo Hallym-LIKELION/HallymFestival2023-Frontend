@@ -223,7 +223,7 @@ export async function DeleteNotice(id) {
   return res.data;
 }
 /*게시물 검색*/
-export async function GetNoticeList(keyword, id) {
+export async function GetNotice(keyword, id) {
   const data = {
     keyword
   };
