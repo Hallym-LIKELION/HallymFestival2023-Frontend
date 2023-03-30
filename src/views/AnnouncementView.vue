@@ -3,6 +3,7 @@
     <h1 ref="title">공지사항</h1>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
+      <div v-for="user in users">{{ user.id }}</div>
       <template v-for="(item, index) in filltered_list">
         <FoldingArticle
           @click="() => showAnnouncement(item.id)"
@@ -23,6 +24,7 @@
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
+import axios from "axios";
 
 export default {
   name: 'AnnouncementView',
@@ -148,7 +150,17 @@ export default {
         pointerEvents: 'auto'
       }
     );
-  }
+  },
+  created() {
+    PostNotice(parseInt(this.$route.params))
+      this.$axios.get('http://localhost:8080/notice').then((data) =>{
+        this.data=title;
+        this.data=content;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+},
 };
 </script>
 
