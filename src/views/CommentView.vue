@@ -1,110 +1,142 @@
 <template>
   <main>
+    <PasswordModal
+      :visible="passwordModal"
+      :status="passwordStatus"
+      @close="closePasswordModal"
+      @complete="deleteComment"
+    />
+
+    <CommentModal
+      :visible="commentModal"
+      :status="commentStatus"
+      @close="closeCommentModal"
+      @complete="sendComment"
+    />
+
     <h1>방명록</h1>
     <div class="comment-list">
-      <Modal :show="modal" @close="closeModal">
-        <template #header> 방명록 작성하기 </template>
-        <template #body>
-          <textarea class="modal-input" v-model="message"></textarea>
-        </template>
-        <template #footer>
-          <button class="modal-button" @click="doSend">입력하기</button>
-        </template>
-      </Modal>
-
-      <template v-for="(item, index) in list">
+      <template v-for="(item, index) in list" :key="item.id">
         <Comment
           :id="item.id"
           :name="GetRandomNickName(item.ip)"
           :comment="item.comment"
           :showMenu="item.showMenu"
           @clickMenu="handleMenu"
+          @clickDelete="handleDelete"
           @focusout="handleFocusOut"
         />
       </template>
     </div>
     <div class="button-group">
-      <button @click="modal = !modal">글쓰기</button>
+      <button @click="commentModal = !commentModal">글쓰기</button>
     </div>
   </main>
 </template>
 
 <script>
+import CommentModal from '../components/CommentModal.vue';
+import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import Modal from '../components/MyModal.vue';
 
 export default {
   name: 'CommentView',
   components: {
-    Modal,
     SearchBar,
-    Comment
+    Comment,
+    PasswordModal,
+    CommentModal
   },
   data() {
     return {
       list: [
         {
-          id: 1,
+          id: 5,
           ip: '1.2.3.4',
           comment:
             '여기는 학생 여러분들께서 마음껏 작성할 수 있는 방명록입니다~ 자유롭게 사용해주세요!',
           showMenu: false
         },
         {
-          id: 5,
+          id: 4,
           ip: '1.2.3.255',
           comment: '한림대학교 화이팅~~',
           showMenu: false
         },
         {
-          id: 2,
+          id: 3,
           ip: '1.2.255.4',
           comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
           showMenu: false
         },
         {
-          id: 3,
+          id: 2,
           ip: '1.200.3.4',
           comment: '아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글',
           showMenu: false
         },
         {
-          id: 4,
+          id: 1,
           ip: '100.2.3.4',
           comment:
             '수 보내는 사람은 그러므로 싶이 작고 가장 사라지지 돋고, 것이다. 얼마나 예가 꽃이 미묘한 수 따뜻한 칼이다. 찬미를.',
           showMenu: false
         }
       ],
-      modal: false,
-      message: '',
+
+      commentModal: false,
+      commentStatus: false,
+
+      passwordModal: false,
+      passwordStatus: false,
+
       context: -1
     };
   },
   methods: {
-    openModal() {
-      this.modal = true;
+    closeCommentModal() {
+      this.commentModal = false;
     },
-    closeModal() {
-      if (this.message !== this.data.description) {
-        const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
-        if (choose) {
-          this.message = this.data.description;
-          this.modal = false;
-        }
-      } else {
-        this.modal = false;
+    sendComment(content, password) {
+      // TEMP: 랜덤 아이피
+      let ip = [];
+      for (let i = 0; i < 4; i++) {
+        ip.push(Math.floor(Math.random() * 256));
       }
+      // ----------------
+
+      const data = {
+        id: (this.list[0]?.id || 0) + 1,
+        ip: ip.join('.'),
+        comment: content,
+        password,
+        showMenu: false
+      };
+
+      this.list.unshift(data);
+
+      this.closeCommentModal();
     },
-    doSend() {
-      if (this.message.length > 0) {
-        this.data.description = this.message;
-        this.closeModal();
-      } else {
-        alert('내용은 0자 이상이어야 합니다.');
+    closePasswordModal() {
+      this.passwordStatus = true;
+      this.passwordModal = false;
+    },
+    deleteComment(password) {
+      const failed = password !== '1111';
+
+      this.passwordStatus = !failed;
+
+      // TODO: id로 delete 요청 보낼 것
+      // 결과를 failed에 담을 것
+      if (failed) {
+        return;
       }
+
+      this.passwordModal = false;
+
+      this.list = this.list.filter((item) => item.id !== this.context);
     },
     writeArticle() {
       // 글쓰기 기능 구현
@@ -120,8 +152,12 @@ export default {
         item.showMenu = item.id === this.context;
       }
     },
+    handleDelete() {
+      console.log('test');
+      this.passwordModal = true;
+    },
     handleFocusOut() {
-      this.handleMenu(this.context);
+      // this.handleMenu(this.context);
     },
     GetRandomNickName
   },

@@ -116,26 +116,13 @@ export async function GetDemoBoothLike(id) {
 
 const HOST = '';
 
-// {
-//   "regDate": "2023-03-21T19:25:11.515529",
-//   "modDate": "2023-03-21T19:25:11.515529",
-//   "bno": 1,
-//   "booth_title": "부스 제목1",
-//   "booth_content": "부스 내용1",
-//   "writer": "작성자1",
-//   "booth_type": "플리마켓",
-//   "active": true,
-//   "comments": [],
-//   "_deleted": false
-// }
-
 export async function GetBoothList() {
   const res = await axios.get(HOST + '/booth/list');
   return res.data;
 }
 
-export async function GetBoothData(id) {
-  const res = await axios.get(HOST + '/booth/' + id);
+export async function GetBooth(booth_id) {
+  const res = await axios.get(HOST + '/booth/' + booth_id);
   return res.data;
 }
 
@@ -150,62 +137,84 @@ export async function CreateBooth(title, content, writer, type) {
   return res.data;
 }
 
-export async function ModifyBooth(id, title, content, writer, type, active) {
+export async function ModifyBooth(booth_id, title, content, writer, type, active) {
   const data = {
-    bno: id,
+    bno: booth_id,
     booth_title: title,
     booth_content: content,
     writer,
     booth_type: type,
     active
   };
-  const res = await axios.put(HOST + '/booth/modify/' + id, data);
+  const res = await axios.put(HOST + '/booth/modify/' + booth_id, data);
   return res.data;
 }
 
-export async function DeleteBooth(id) {
-  const res = await axios.delete(HOST + '/booth/' + id);
+export async function DeleteBooth(booth_id) {
+  const res = await axios.delete(HOST + '/booth/' + booth_id);
   return res.data;
 }
 
-export async function GetBoothComment(id) {
-  const res = await axios.get(HOST + '/comment/' + id);
+export async function GetBoothComment(booth_id) {
+  const res = await axios.get(HOST + '/comment/' + booth_id);
   return res.data;
 }
 
-export async function CreateBoothComment(id, content, password) {
+export async function CreateBoothComment(booth_id, content, password) {
   const data = {
     content,
     password
   };
-  const res = await axios.post(HOST + '/comment/' + id, data);
+  const res = await axios.post(HOST + '/comment/' + booth_id, data);
   return res.data;
 }
 
-export async function DeleteBoothComment(id, password) {
+export async function DeleteBoothComment(comment_id, password) {
   const data = {
     password
   };
-  const res = await axios.delete(HOST + '/comment/' + id, data);
+  const res = await axios.delete(HOST + '/comment/' + comment_id, data);
   return res.data;
 }
 
-export async function GetBoothLike(id) {
-  const res = await axios.get(HOST + '/like/' + id);
+export async function GetBoothLike(booth_id) {
+  const res = await axios.get(HOST + '/like/' + booth_id);
   return res.data;
 }
 
-export async function LikeBooth(id) {
+export async function PostBoothLike(id) {
   // credentials을 설정하면 쿠키를 주고받을 수 있음
-  const res = await axios.post(HOST + '/like/' + id, '', { credentials: true });
+  const res = await axios.post(HOST + '/like/' + id, '', { withCredentials: true });
   console.log(document.cookie);
   return res;
 }
-export async function UnlikeBooth(id) {
-  // credentials을 설정하면 쿠키를 주고받을 수 있음
-  const res = await axios.get(HOST + '/like/' + id, '', { credentials: true });
-  console.log(document.cookie);
-  return res;
+
+export async function GetBoothMenu(booth_id) {
+  const res = await axios.get(HOST + '/menu/' + booth_id);
+  return res.data;
+}
+
+export async function CreateBoothMenu(booth_id, name, price) {
+  const data = {
+    name,
+    price
+  };
+  const res = await axios.post(HOST + '/menu/' + booth_id, data);
+  return res.data;
+}
+
+export async function ModifyBoothMenu(menu_id, name, price) {
+  const data = {
+    name,
+    price
+  };
+  const res = await axios.put(HOST + '/menu/' + menu_id, data);
+  return res.data;
+}
+
+export async function DeleteBoothMenu(menu_id) {
+  const res = await axios.delete(HOST + '/menu/' + menu_id);
+  return res.data;
 }
 
 /* 공지사항 api  @백엔드-미진/@프론트-소현 */
@@ -300,6 +309,7 @@ export async function GetVisitComment() {
   const res = await axios.get(HOST + '/visitComment/list');
   return res.data;
 }
+
 /*방명록 삭제*/
 export async function DeleteVisitComment(id) {
   const res = await axios.delete(HOST + '/visitComment/list' + id);
@@ -308,26 +318,26 @@ export async function DeleteVisitComment(id) {
 
 /* 부스 메뉴 api  @백엔드-미진/@프론트-경재 */
 
-/* 메뉴 추가 */
-export async function PostBoothMenu(id) {
-  const res = await axios.post(HOST + '/menu/' + id);
-  return res.data;
-}
+// /* 메뉴 추가 */
+// export async function PostBoothMenu(id) {
+//   const res = await axios.post(HOST + '/menu/' + id);
+//   return res.data;
+// }
 
-/* 메뉴 목록 조회 */
-export async function GetBoothMenuList(id) {
-  const res = await axios.get(HOST + '/menu/' + id);
-  return res.data;
-}
+// /* 메뉴 목록 조회 */
+// export async function GetBoothMenuList(id) {
+//   const res = await axios.get(HOST + '/menu/' + id);
+//   return res.data;
+// }
 
-/* 메뉴 수정 */
-export async function RemoveBoothMenu(id) {
-  const res = await axios.put(HOST + '/menu/' + id);
-  return res.data;
-}
+// /* 메뉴 수정 */
+// export async function RemoveBoothMenu(id) {
+//   const res = await axios.put(HOST + '/menu/' + id);
+//   return res.data;
+// }
 
-/* 메뉴 삭제 */
-export async function DeleteBoothMenu(id) {
-  const res = await axios.delete(HOST + '/menu/' + id);
-  return res.data;
-}
+// /* 메뉴 삭제 */
+// export async function DeleteBoothMenu(id) {
+//   const res = await axios.delete(HOST + '/menu/' + id);
+//   return res.data;
+// }
