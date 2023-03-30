@@ -3,7 +3,9 @@
     <div class="modal" v-if="visible">
       <div class="modal-background" @click="$emit('dispose')"></div>
       <div class="modal-container" :style="{ width: width }">
-        <slot></slot>
+        <div class="modal-content">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </Transition>
@@ -51,7 +53,7 @@ export default {
 
 .modal-container {
   max-height: calc(100% - 60px);
-  padding: 10px 20px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,8 +61,13 @@ export default {
   box-shadow: 0px 0px 6px #00000099;
   background-color: #ffffff;
   z-index: 9999;
-  overflow: auto;
+  overflow: hidden;
   transition: all 0.3s ease;
+}
+
+.modal-content {
+  padding: 10px 20px;
+  overflow-y: auto;
 }
 
 .modal-enter-from {

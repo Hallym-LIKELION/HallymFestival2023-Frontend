@@ -1,50 +1,86 @@
 <template>
   <Modal :visible="visible" @dispose="close" width="500px">
-    <div class="modal-header">
-      부스 페이지 수정하기
-      <button class="close-button" @click="close">
-        <img :src="CloseImage" alt="닫기" />
-      </button>
-    </div>
-    <div class="modal-body">
-      <p class="label">이름</p>
-      <div class="input name">
-        <input type="text" v-model="title" />
-        <p class="error">이름은 공란으로 둘 수 없습니다.</p>
-      </div>
-
-      <p class="label">사진</p>
-      <div class="input image">
-        <img :src="image" alt="" />
-        <p class="error">파일이 이미지가 아닙니다. 다른 파일로 다시 시도하세요.</p>
-        <input ref="upload" type="file" accept="image/*" v-show="false" @change="uploadImage" />
-        <button class="button" @click="showFileSelector">
-          <p class="title">이미지 업로드</p>
-          <p class="subtitle">권장 크기: 000px x 000px, 0MB 이하의 jpg, png, gif만 가능</p>
+    <div class="modal-container">
+      <div class="modal-header">
+        부스 페이지 수정하기
+        <button class="close-button" @click="close">
+          <img :src="CloseImage" alt="닫기" />
         </button>
       </div>
+      <div class="modal-body">
+        <p class="label">이름</p>
+        <div class="input name">
+          <input type="text" v-model="title" />
+          <p class="error">이름은 공란으로 둘 수 없습니다.</p>
+        </div>
 
-      <p class="label">설명</p>
-      <div class="input description">
-        <textarea class="" v-model="description"></textarea>
-        <p class="error">설명은 공란으로 둘 수 없습니다.</p>
-      </div>
+        <p class="label">사진</p>
+        <div class="input image">
+          <img :src="image" alt="" />
+          <p class="error">파일이 이미지가 아닙니다. 다른 파일로 다시 시도하세요.</p>
+          <input ref="upload" type="file" accept="image/*" v-show="false" @change="uploadImage" />
+          <button class="button" @click="showFileSelector">
+            <p class="title">이미지 업로드</p>
+            <p class="subtitle">권장 크기: 000px x 000px, 0MB 이하의 jpg, png, gif만 가능</p>
+          </button>
+        </div>
 
-      <!-- <p class="label">메뉴판</p>
+        <p class="label">설명</p>
+        <div class="input description">
+          <textarea class="" v-model="description"></textarea>
+          <p class="error">설명은 공란으로 둘 수 없습니다.</p>
+        </div>
+
+        <p class="label">타입</p>
+        <div class="input type">
+          <button
+            class="button"
+            :class="{ active: type === '주점' }"
+            @click="() => (type = '주점')"
+          >
+            <img :src="BeerImage" alt="주점" />
+          </button>
+          <button
+            class="button"
+            :class="{ active: type === '부스' }"
+            @click="() => (type = '부스')"
+          >
+            <img :src="BoothImage" alt="부스" />
+          </button>
+          <button
+            class="button"
+            :class="{ active: type === '플리마켓' }"
+            @click="() => (type = '플리마켓')"
+          >
+            <img :src="FleaMarketImage" alt="플리마켓" />
+          </button>
+          <button
+            class="button"
+            :class="{ active: type === '푸드트럭' }"
+            @click="() => (type = '푸드트럭')"
+          >
+            <img :src="FoodTruckImage" alt="푸드트럭" />
+          </button>
+        </div>
+
+        <!-- <p class="label">메뉴판</p>
       <div class="input menu">
         <button class="button" @click="">메뉴판 수정하기</button>
       </div> -->
 
-      <p class="label">상태</p>
-      <div class="input status">
-        <button class="open select">OPEN</button>
-        <button class="close">CLOSE</button>
-      </div>
+        <p class="label">상태</p>
+        <div class="input status">
+          <button :class="['open', { active: status }]" @click="() => (status = true)">OPEN</button>
+          <button :class="['close', { active: !status }]" @click="() => (status = false)">
+            CLOSE
+          </button>
+        </div>
 
-      <p class="label"></p>
-      <div class="footer">
-        <button class="modal-button" @click="close">취소</button>
-        <button class="modal-button" @click="editNotice">적용</button>
+        <p class="label"></p>
+        <div class="footer">
+          <button class="modal-button" @click="close">취소</button>
+          <button class="modal-button" @click="editNotice">적용</button>
+        </div>
       </div>
     </div>
   </Modal>
@@ -53,6 +89,11 @@
 <script>
 import Modal from '../Modal.vue';
 import CloseImage from '../../assets/close.png';
+
+import BeerImage from '../../assets/beer.png';
+import BoothImage from '../../assets/photo-booth.png';
+import FleaMarketImage from '../../assets/flea-market.png';
+import FoodTruckImage from '../../assets/food-truck.png';
 
 const ERROR_MESSAGE = {
   empty_title: '이름은 공란으로 둘 수 없습니다.',
@@ -69,10 +110,15 @@ export default {
     return {
       CloseImage,
 
+      BeerImage,
+      BoothImage,
+      FleaMarketImage,
+      FoodTruckImage,
+
       // 사용자가 입력한 데이터들
       title: '',
       description: '',
-      type: '플리마켓',
+      type: '주점',
       image: 'https://placehold.co/300x300', // TODO: 서버에 등록된 이미지로 불러올 것
       imageUploaded: false,
       status: true
@@ -86,7 +132,7 @@ export default {
     data: {
       type: Object,
       default() {
-        return { title: '', description: '', type: '플리마켓', status: true };
+        return { title: '', description: '', type: '주점', status: true };
       }
     }
   },
@@ -133,9 +179,6 @@ export default {
       const file = this.$refs.upload.files[0];
       const ACCEPT_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp'];
 
-      console.log(event);
-      console.log(file);
-
       if (!ACCEPT_TYPES.includes(file.type)) {
         alert('지원하지 않는 파일');
         return;
@@ -150,7 +193,6 @@ export default {
 
       const reader = new FileReader();
       reader.onload = function () {
-        console.log(reader.result);
         self.image = reader.result;
       };
       reader.readAsDataURL(file);
@@ -219,7 +261,7 @@ export default {
 
 .input.image > img {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 200px;
   object-fit: contain;
 }
 
@@ -240,6 +282,31 @@ export default {
   resize: none;
 }
 
+.input.type {
+  display: flex;
+}
+
+.input.type > .button {
+  margin: 0 5px;
+  background-color: #dfdfdf;
+}
+
+.input.type > .button.active {
+  background-color: #466efe;
+}
+
+.input.type > .button:nth-child(1) {
+  margin-left: 0;
+}
+.input.type > .button:nth-child(4) {
+  margin-right: 0;
+}
+
+.input.type > .button > img {
+  width: 24px;
+  height: 24px;
+}
+
 .input.status > button {
   width: calc(50% - 5px);
   height: 30px;
@@ -255,7 +322,7 @@ export default {
   margin-left: 5px;
 }
 
-.input.status > button.select {
+.input.status > button.active {
   color: white;
   background-color: #466efe;
 }
