@@ -24,7 +24,7 @@
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   name: 'AnnouncementView',
@@ -154,57 +154,91 @@ export default {
   created() {
     /* 공지사항 모든 API */
     //공지사항 게시판 POST
-    PostNotice(parseInt(this.$route.params))
-      this.$axios.get('http://localhost:8080/notice').then((data) =>{
-        this.data=title;
-        this.data=content;
+    PostNotice(parseInt(this.$route.params));
+    this.$axios
+      .get('http://localhost:8080/notice')
+      .then((data) => {
+        this.data = title;
+        this.data = content;
         //data가 성공적으로 도달하였을 때 알람 삽입
-        if(res.data.sucess){
+        if (res.data.sucess == true) {
           alert('작성되었습니다.');
-        }else{
+        } else {
           alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
 
     //공지사항 게시물 목록 GET
-    GetNoticeList(parseInt(this.$route.params))
-        this.$axios.get('http://localhost:8080/notice/1' + this.$axios.id).then((res) =>{
-          console.log(data);
-          this.data = res.data.id;
-          this.data = res.data.title;
-          this.data = res.data.content;
-          this.data = res.data.active;
-          this.data = res.data.regDate;
-          this.data = res.data.modeDate;
-        })
-        .catch(error => {
+    GetNoticeList(parseInt(this.$route.params));
+    this.$axios
+      .get('http://localhost:8080/notice/' + this.$axios.id)
+      .then((res) => {
+        console.log(data);
+        this.data = res.data.id;
+        this.data = res.data.title;
+        this.data = res.data.content;
+        this.data = res.data.active;
+        this.data = res.data.regDate;
+        this.data = res.data.modeDate;
+      })
+      .catch((error) => {
         console.log(error);
       });
 
     // 공지사항 게시물 목록 DELETE
-    DeleteNotice(parseInt(this.$route.params))
-        this.$axios.get('http://localhost:8080/notice/1').then((res) =>{
-          console.log(data);
-          this.data = data;
-        });
+    DeleteNotice(parseInt(this.$route.params));
+    this.$axios
+      .delete('http://localhost:8080/notice/' + this.$axios.id)
+      .then((res) => {
+        console.log(data);
+        this.data = res.data.id;
+        //data가 성공적으로 도달하였을 때 알람삽입 -> 걍 백엔드 테스트 때문에넣었어요 나중에 기획팀에서 빼라하면 뺄게여
+        if (res.data.sucess == true) {
+          alert('삭제되었습니다.');
+        } else {
+          alert('삭제를 실패하였습니다. 다시 시도해주세요.');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('삭제를 실패하였습니다. 다시 시도해주세요.');
+      });
 
     // 공지사항 게시물 검색 GET
-    GetNotice(parseInt(this.$route.params))
-        this.$axios.get('http://localhost:8080/notice/search?keyword=1').then((res) =>{
-          console.log(data);
-          this.data = data;
-        });
+    GetNotice(parseInt(this.$route.params));
+    this.$axios
+      .get('http://localhost:8080/notice/' + this.$axios.search + this.$axios.keyword)
+      .then((res) => {
+        console.log(data);
+        this.data = res.data.id;
+        this.data = res.data.title;
+        this.data = res.data.content;
+        this.data = res.data.active;
+        this.data = res.data.regDate;
+        this.data = res.data.modeDate;
+      });
 
     // 공지사항 게시물 수정 PUT
-    RemoveNotice(parseInt(this.$route.params))
-      this.$axios.get('http://localhost:8080/notice/1').then((res)=>{
-        console.log(data);
-        this.data=data;
+    RemoveNotice(parseInt(this.$route.params));
+    this.$axios.put('http://localhost:8080/notice/'+this.$axios.id).then((res) => {
+      console.log(data);
+      this.data = res.data.id;
+      this.data = res.data.content;
+    //data가 성공적으로 도달하였을 때 알람삽입 -> 걍 백엔드 테스트 때문에 넣어둠 나중에 기획팀에서 빼라하면 뺄게여
+    if (res.data.sucess == true) {
+          alert('수정되었습니다.');
+        } else {
+          alert('수정을 실패하였습니다. 다시 시도해주세요.');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('수정을 실패하였습니다. 다시 시도해주세요.');
       });
-},
+  }
 };
 </script>
 
