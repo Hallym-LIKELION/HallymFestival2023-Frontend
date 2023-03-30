@@ -163,13 +163,19 @@ export default {
       });
     //공지사항 게시물 목록 GET
     GetNoticeList(parseInt(this.$route.params))
-        this.$axios.get('http://localhost:8080/notice/1').then(res =>{
+        this.$axios.get('http://localhost:8080/notice/1').then((res) =>{
           console.log(data);
-          this.list = data;
+          this.data = data;
         })
         .catch(error => {
         console.log(error);
       });
+    // 공지사항 게시물 목록 DELETE
+    DeleteNotice(parseInt(this.$route.params))
+        this.$axios.get('http://localhost:8080/notice/1').then((res) =>{
+          console.log(data);
+          this.data = data;
+        })
 },
 };
 </script>
