@@ -9,31 +9,31 @@
     <div class="modal-body">
       <p class="label">이름</p>
       <div class="input name">
-        <input type="text" />
+        <input type="text" v-model="title" />
         <p class="error">이름은 공란으로 둘 수 없습니다.</p>
       </div>
 
       <p class="label">사진</p>
       <div class="input image">
-        <img src="https://placehold.co/400x400" alt="" />
+        <img :src="image" alt="" />
         <p class="error">파일이 이미지가 아닙니다. 다른 파일로 다시 시도하세요.</p>
-        <button class="button" @click="">이미지 업로드</button>
+        <input ref="upload" type="file" accept="image/*" v-show="false" @change="uploadImage" />
+        <button class="button" @click="showFileSelector">
+          <p class="title">이미지 업로드</p>
+          <p class="subtitle">권장 크기: 000px x 000px, 0MB 이하의 jpg, png, gif만 가능</p>
+        </button>
       </div>
 
       <p class="label">설명</p>
       <div class="input description">
-        <textarea
-          class=""
-          :value="modelValue"
-          @input="$emit('update:modelValue', $event.target.value)"
-        ></textarea>
+        <textarea class="" v-model="description"></textarea>
         <p class="error">설명은 공란으로 둘 수 없습니다.</p>
       </div>
 
-      <p class="label">메뉴판</p>
+      <!-- <p class="label">메뉴판</p>
       <div class="input menu">
         <button class="button" @click="">메뉴판 수정하기</button>
-      </div>
+      </div> -->
 
       <p class="label">상태</p>
       <div class="input status">
@@ -42,7 +42,10 @@
       </div>
 
       <p class="label"></p>
-      <button class="modal-button" @click="editNotice">수정 완료</button>
+      <div class="footer">
+        <button class="modal-button" @click="close">취소</button>
+        <button class="modal-button" @click="editNotice">적용</button>
+      </div>
     </div>
   </Modal>
 </template>
@@ -51,13 +54,28 @@
 import Modal from '../Modal.vue';
 import CloseImage from '../../assets/close.png';
 
+const ERROR_MESSAGE = {
+  empty_title: '이름은 공란으로 둘 수 없습니다.',
+  empty_description: '설명은 공란으로 둘 수 없습니다.',
+  not_an_image: '업로드한 파일이 이미지가 아닙니다. 다시 시도하세요.',
+  image_processing_error: '이미지를 처리하는데 실패했습니다. 다른 이미지로 시도하세요.'
+};
+
 export default {
   components: {
     Modal
   },
   data() {
     return {
-      CloseImage
+      CloseImage,
+
+      // 사용자가 입력한 데이터들
+      title: '',
+      description: '',
+      type: '플리마켓',
+      image: 'https://placehold.co/300x300', // TODO: 서버에 등록된 이미지로 불러올 것
+      imageUploaded: false,
+      status: true
     };
   },
   props: {
@@ -65,21 +83,84 @@ export default {
       type: Boolean,
       default: false
     },
-    status: {
-      type: Boolean,
-      default: true
-    },
-    modelValue: {
-      type: String,
-      default: ''
+    data: {
+      type: Object,
+      default() {
+        return { title: '', description: '', type: '플리마켓', status: true };
+      }
     }
   },
   methods: {
+    updateData() {
+      this.title = this.data.title;
+      this.description = this.data.description;
+      this.type = this.data.type;
+      this.status = this.data.status;
+      this.imageUploaded = false;
+    },
     close() {
+      const flags = [
+        this.title === this.data.title,
+        this.description === this.data.description,
+        this.type === this.data.type,
+        this.status === this.data.status,
+        !this.imageUploaded
+      ];
+
+      if (!flags.every((item) => item == true)) {
+        if (confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?') === false) {
+          // TODO: choose를 modal로 빼거나 다른 방법을 찾아볼 것
+          // 아니면 기획팀과 협의 후 그냥 안 물어보고 끄도록 할 것
+          return;
+        }
+      }
+
       this.$emit('close');
     },
     editNotice() {
-      this.$emit('complete');
+      this.$emit('complete', {
+        title: this.title,
+        description: this.description,
+        type: this.type,
+        status: this.status,
+        image: this.$refs.upload.files[0]
+      });
+    },
+    showFileSelector() {
+      this.$refs.upload.click();
+    },
+    uploadImage(event) {
+      const file = this.$refs.upload.files[0];
+      const ACCEPT_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp'];
+
+      console.log(event);
+      console.log(file);
+
+      if (!ACCEPT_TYPES.includes(file.type)) {
+        alert('지원하지 않는 파일');
+        return;
+      }
+
+      if (file.size > 5242880) {
+        alert('크기가 너무 큽니다');
+        return;
+      }
+
+      const self = this;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        console.log(reader.result);
+        self.image = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  },
+  watch: {
+    visible(value) {
+      if (value === true) {
+        this.updateData();
+      }
     }
   },
   created() {}
@@ -137,12 +218,19 @@ export default {
 }
 
 .input.image > img {
-  max-width: min(100%, 240px);
-  /* object-fit: contain; */
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
 }
 
 .input.image > button {
   margin-top: 10px;
+}
+.input.image > button > .title {
+  font-size: 12pt;
+}
+.input.image > button > .subtitle {
+  font-size: 7pt;
 }
 
 .input.description > textarea {
@@ -179,15 +267,25 @@ export default {
 }
 
 .modal-button {
-  width: 100%;
+  width: calc(50% - 5px);
   padding: 10px 0;
   border-radius: 24px;
   background-color: #466efe;
   color: white;
 }
+
+.footer > .modal-button:nth-child(1) {
+  margin-right: 5px;
+  background-color: #dfdfdf;
+  color: black;
+}
+.footer > .modal-button:nth-child(2) {
+  margin-left: 5px;
+}
+
 .button {
   width: 100%;
-  height: 28px;
+  padding: 6px 0;
   border-radius: 4px;
   background-color: #466efe;
   color: white;

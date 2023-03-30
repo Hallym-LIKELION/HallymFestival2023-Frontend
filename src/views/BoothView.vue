@@ -2,10 +2,16 @@
   <main>
     <BoothEditModal
       :visible="editModal"
-      :status="editStatus"
-      v-model="editValue"
+      :data="editData"
       @close="closeEditModal"
-      @complete="editNotice"
+      @complete="editBoothData"
+    />
+
+    <BoothEditMenuModal
+      :visible="editMenuModal"
+      :data="editMenuData"
+      @close="closeEditMenuModal"
+      @complete="editBoothMenuData"
     />
 
     <div class="header">
@@ -20,9 +26,7 @@
       </div>
 
       <div class="header-content">
-        <p class="header-tag">
-          <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
-        </p>
+        <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
       </div>
     </div>
 
@@ -41,12 +45,15 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 메뉴</h1>
+          <button class="edit-button" @click="editMenuModal = !editMenuModal">
+            <img :src="EditImage" alt="" />
+          </button>
         </div>
         <hr />
         <div class="booth-menu">
           <template v-for="(item, index) in data.menu" :key="index">
             <div class="menu-group">
-              <p class="menu-title" v-text="item.title"></p>
+              <p class="menu-title" v-text="item.name"></p>
               <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
             </div>
           </template>
@@ -72,10 +79,15 @@ import EditImage from '../assets/edit_button.png';
 import { GetDemoBooth } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
+import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
 
+import axios from 'axios';
+
+window.axios = axios;
+
 export default {
-  components: { BoothEditModal, BoothCommentSection },
+  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection },
   data() {
     return {
       EditImage,
@@ -85,8 +97,15 @@ export default {
       like_display: 0,
 
       editModal: false,
-      editStatus: true,
-      editValue: '',
+      editData: {
+        title: '',
+        description: '',
+        type: '플리마켓',
+        status: true
+      },
+
+      editMenuModal: false,
+      editMenuData: [],
 
       commentCount: 0,
       commentDisplayCount: 0
@@ -94,32 +113,26 @@ export default {
   },
   methods: {
     closeEditModal() {
-      if (this.data.description !== this.editValue) {
-        // TODO: choose를 modal로 빼거나 다른 방법을 찾아볼 것
-        // 아니면 기획팀과 협의 후 그냥 안 물어보고 끄도록 할 것
-        const choose = confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?');
-        if (choose) {
-          this.editValue = this.data.description;
-          this.editModal = false;
-          this.editStatus = true;
-        }
-      } else {
-        this.editModal = false;
-        this.editStatus = true;
-      }
+      this.editModal = false;
     },
-    editNotice() {
-      if (this.editValue.length > 0) {
-        this.data.description = this.editValue;
-        this.closeEditModal();
-      } else {
-        this.editStatus = false;
-      }
+    editBoothData(data) {
+      // this.data = data;
+      this.data.name = data.title;
+      this.data.description = data.description;
+      this.closeEditModal();
+    },
+    closeEditMenuModal() {
+      this.editMenuModal = false;
+    },
+    editBoothMenuData(data) {
+      this.data.menu = data;
+      this.closeEditMenuModal();
     },
     loadCommentCount(count) {
       this.commentCount = count;
     },
     likeHandler(evt) {
+      // TODO: 좋아요 사이에 딜레이 넣을 것 (0.3초)
       if (this.data.liked === true) {
         this.likeImage = HeartImage;
         this.data.like--;
@@ -143,6 +156,18 @@ export default {
     }
   },
   watch: {
+    data: {
+      deep: true,
+      handler(data) {
+        this.editData = {
+          title: data.name,
+          description: data.description,
+          type: '플리마켓',
+          status: true
+        };
+        this.editMenuData = this.data.menu;
+      }
+    },
     'data.like'(n) {
       // 좋아요 수 애니메이션
       gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
@@ -160,7 +185,6 @@ export default {
     GetDemoBooth(parseInt(this.$route.params.id))
       .then((data) => {
         this.data = data;
-        this.editValue = data.description;
       })
       .catch((err) => {
         alert('Unexpected error has occured. Please try again later.');
@@ -172,8 +196,15 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 20pt;
+  font-size: 18pt;
   text-align: left;
+}
+
+.header,
+.content,
+.section {
+  max-width: 400px;
+  margin: auto;
 }
 
 .header {
@@ -188,24 +219,22 @@ h1 {
 
 .header-name {
   width: 100%;
-  font-size: 32pt;
+  font-size: 24pt;
 }
 
 .header-like {
   display: flex;
   align-items: center;
-  line-height: 24pt;
 }
 
 .header-like-count {
   margin-right: 8px;
-  font-size: 18pt;
-  line-height: 18pt;
+  font-size: 16pt;
 }
 
 .header-like-button > img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   vertical-align: middle;
 }
 
@@ -216,49 +245,50 @@ h1 {
   align-items: center;
 }
 
-.header-tag {
-  font-weight: 600;
-}
-
 .header-image {
-  max-height: 240px;
+  max-height: 200px;
   margin: auto;
   object-fit: contain;
   display: block;
 }
 
 .edit-button > img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 hr {
   border: 0px;
-  border-top: 3px solid #000000;
+  border-top: 2px solid #333333;
 }
 
 .section {
-  margin: 24px 0;
+  margin: 16px 0;
 }
 .section-header {
-  font-size: 20pt;
-  text-align: left;
-  margin: 0;
   display: flex;
   justify-content: space-between;
 }
 
 .section-header > h1 > span {
-  font-size: 12pt;
+  font-size: 11pt;
   font-weight: 500;
 }
 
 .section-text {
+  width: 100%;
   min-height: 100px;
-  font-size: 14pt;
-  white-space: pre;
+  max-height: 200px;
+
+  overflow: hidden;
+  font-size: 13pt;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
+.booth-menu {
+  min-height: 80px;
+}
 .menu-group {
   display: flex;
   justify-content: space-between;
@@ -266,11 +296,11 @@ hr {
 
 .menu-title {
   text-align: left;
-  font-size: 15pt;
+  font-size: 13pt;
 }
 
 .menu-price {
   text-align: right;
-  font-size: 15pt;
+  font-size: 13pt;
 }
 </style>

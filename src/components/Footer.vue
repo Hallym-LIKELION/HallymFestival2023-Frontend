@@ -1,17 +1,26 @@
 <template>
   <div class="footer">
-    <h3>한림대학교 멋쟁이사자처럼 Builder Team</h3>
-    <p>Hallym Likelion</p>
+    <p class="title">한림대학교 멋쟁이사자처럼 Builder Team</p>
+    <p class="subtitle">Hallym Likelion</p>
   </div>
 </template>
 <style scoped>
 .footer {
-  clear:both;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  background-color: darkgray;
-  position: relative;
+  background-color: #dfdfdf;
   width: 100%;
-  height: 50px; /* footer의 높이 */
-  bottom: 0;
+  min-height: 70px; /* footer의 높이 */
+}
+
+.footer > p.title {
+  font-size: 12pt;
+  color: #222222;
+}
+.footer > p.subtitle {
+  font-size: 9pt;
+  color: #555555;
 }
 </style>
