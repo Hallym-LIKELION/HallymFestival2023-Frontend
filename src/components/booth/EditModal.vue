@@ -70,8 +70,10 @@
 
         <p class="label">상태</p>
         <div class="input status">
-          <button class="open select">OPEN</button>
-          <button class="close">CLOSE</button>
+          <button :class="['open', { active: status }]" @click="() => (status = true)">OPEN</button>
+          <button :class="['close', { active: !status }]" @click="() => (status = false)">
+            CLOSE
+          </button>
         </div>
 
         <p class="label"></p>
@@ -324,7 +326,7 @@ export default {
   margin-left: 5px;
 }
 
-.input.status > button.select {
+.input.status > button.active {
   color: white;
   background-color: #466efe;
 }
