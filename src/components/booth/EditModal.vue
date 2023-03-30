@@ -179,9 +179,6 @@ export default {
       const file = this.$refs.upload.files[0];
       const ACCEPT_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp'];
 
-      console.log(event);
-      console.log(file);
-
       if (!ACCEPT_TYPES.includes(file.type)) {
         alert('지원하지 않는 파일');
         return;
@@ -196,7 +193,6 @@ export default {
 
       const reader = new FileReader();
       reader.onload = function () {
-        console.log(reader.result);
         self.image = reader.result;
       };
       reader.readAsDataURL(file);
