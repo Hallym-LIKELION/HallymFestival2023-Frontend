@@ -152,30 +152,58 @@ export default {
     );
   },
   created() {
+    /* 공지사항 모든 API */
     //공지사항 게시판 POST
     PostNotice(parseInt(this.$route.params))
       this.$axios.get('http://localhost:8080/notice').then((data) =>{
         this.data=title;
         this.data=content;
+        //data가 성공적으로 도달하였을 때 알람 삽입
+        if(res.data.sucess){
+          alert('작성되었습니다.');
+        }else{
+          alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
+        }
       })
       .catch(error => {
         console.log(error);
       });
+
     //공지사항 게시물 목록 GET
     GetNoticeList(parseInt(this.$route.params))
-        this.$axios.get('http://localhost:8080/notice/1').then((res) =>{
+        this.$axios.get('http://localhost:8080/notice/1' + this.$axios.id).then((res) =>{
           console.log(data);
-          this.data = data;
+          this.data = res.data.id;
+          this.data = res.data.title;
+          this.data = res.data.content;
+          this.data = res.data.active;
+          this.data = res.data.regDate;
+          this.data = res.data.modeDate;
         })
         .catch(error => {
         console.log(error);
       });
+
     // 공지사항 게시물 목록 DELETE
     DeleteNotice(parseInt(this.$route.params))
         this.$axios.get('http://localhost:8080/notice/1').then((res) =>{
           console.log(data);
           this.data = data;
-        })
+        });
+
+    // 공지사항 게시물 검색 GET
+    GetNotice(parseInt(this.$route.params))
+        this.$axios.get('http://localhost:8080/notice/search?keyword=1').then((res) =>{
+          console.log(data);
+          this.data = data;
+        });
+
+    // 공지사항 게시물 수정 PUT
+    RemoveNotice(parseInt(this.$route.params))
+      this.$axios.get('http://localhost:8080/notice/1').then((res)=>{
+        console.log(data);
+        this.data=data;
+      });
 },
 };
 </script>
