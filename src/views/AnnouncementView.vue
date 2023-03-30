@@ -152,12 +152,22 @@ export default {
     );
   },
   created() {
+    //공지사항 게시판 POST
     PostNotice(parseInt(this.$route.params))
       this.$axios.get('http://localhost:8080/notice').then((data) =>{
         this.data=title;
         this.data=content;
       })
       .catch(error => {
+        console.log(error);
+      });
+    //공지사항 게시물 목록 GET
+    GetNoticeList(parseInt(this.$route.params))
+        this.$axios.get('http://localhost:8080/notice/1').then(res =>{
+          console.log(data);
+          this.list = data;
+        })
+        .catch(error => {
         console.log(error);
       });
 },
