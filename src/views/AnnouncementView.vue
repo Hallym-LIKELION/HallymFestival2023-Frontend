@@ -26,7 +26,15 @@
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
-import { GetFakeNoticeList, GetNoticeList, DeleteNotice, PostNotice, GetNotice, RemoveNotice ,SearchNotice} from '../api/api-client';
+import {
+  GetFakeNoticeList,
+  GetNoticeList,
+  DeleteNotice,
+  PostNotice,
+  GetNotice,
+  RemoveNotice,
+  SearchNotice
+} from '../api/api-client';
 
 export default {
   name: 'AnnouncementView',
@@ -81,33 +89,38 @@ export default {
         this.showingContent = id;
       }
     },
+
     /* 공지사항 - 게시물 삭제 하는 메소드 */
     //공지사항 게시물 삭제
     deleteAnnouncement(id) {
-      DeleteNotice(id).then((data) => {
-        if (data.result.includes("success")) {
-          console.log("삭제 성공");
-        } else {
-          console.error("삭제 실패");
-        }
-      }).catch((err) => {
-        console.error("삭제 실패", err);
-      });
+      DeleteNotice(id)
+        .then((data) => {
+          if (data.result.includes('success')) {
+            console.log('삭제 성공');
+          } else {
+            console.error('삭제 실패');
+          }
+        })
+        .catch((err) => {
+          console.error('삭제 실패', err);
+        });
     },
     /* 공지사항 - 게시물 수정 하는 메소드 */
-    //공지사항 게시물 수정 
-    removeAnnoucement(id){
-      RemoveNotice(id).then((data)=> {
-        if (data.result.includes("success")) {
-          console.log("수정 성공");
-        } else {
-          console.error("수정 실패");
-        }
-      }).catch((err) => {
-        console.error("수정 실패", err);
-      });
+    //공지사항 게시물 수정
+    removeAnnoucement(id) {
+      RemoveNotice(id)
+        .then((data) => {
+          if (data.result.includes('success')) {
+            console.log('수정 성공');
+          } else {
+            console.error('수정 실패');
+          }
+        })
+        .catch((err) => {
+          console.error('수정 실패', err);
+        });
     },
-  
+
     writeArticle() {
       // 글쓰기 기능 구현
       alert('TODO');
@@ -181,37 +194,37 @@ export default {
     );
   },
   created() {
-
     /* 공지사항 모든 API */
     // 모든 공지사항 목록을 가져오기
     // 그 데이터를 컴포넌트를 이용해서 사용자에게 뿌리기
-    
-    //공지사항 게시물 목록 GET
-    GetFakeNoticeList().then((data) => {
-      data = data.filter(item => item.active); //true 인것만 필터됨
 
-      this.list = data.map(item => ({
-        id: item.id,
-        title: item.title,
-        content: item.content
-      }));
-      
-    }).catch((error) => {
-      alert("오류가 발생했습니다. " + error.toString());
-    });
-    
-/* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
-    // GetNoticeList().then((data) => {
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    //공지사항 게시물 목록 GET
+    GetFakeNoticeList()
+      .then((data) => {
+        data = data.filter((item) => item.active); //true 인것만 필터됨
+
+        this.list = data.map((item) => ({
+          id: item.id,
+          title: item.title,
+          content: item.content
+        }));
+      })
+      .catch((error) => {
+        alert('오류가 발생했습니다. ' + error.toString());
+      });
+
+    /* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
+    GetNoticeList().then((data) => {
+     })
+       .catch((error) => {
+        console.log(error);
+       });
 
     //공지사항 게시판 POST
-    PostNotice("제목", "내용")
-      .then((data) => {
+    PostNotice('제목', '내용')
+      .then(() => {
         //data가 성공적으로 도달하였을 때 알람 삽입
-        if (res.result.includes("success")) {
+        if (res.result.includes('success')) {
           alert('작성되었습니다.');
         } else {
           alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
@@ -221,40 +234,38 @@ export default {
         console.log(error);
       });
 
-    
-
     /* 공지사항 게시물 목록 DELETE */
     // 상단 메소드에 구현됨
 
-    /* 공지사항 게시물 한개 조회 GET */ 
-    GetNotice(id).then((data)=>{
-      this.postData = {
-        id: data.id,
-        title: data.title,
-        content:data.content
-      };
-    })
-    .catch((error) => {
+    /* 공지사항 게시물 한개 조회 GET */
+    GetNotice(id)
+      .then((data) => {
+        this.postData = {
+          id: data.id,
+          title: data.title,
+          content: data.content
+        };
+      })
+      .catch((error) => {
         console.log(error);
       });
 
-
     /* 공지사항 게시물 검색 GET */
-    SearchNotice(keyword).then((data)=> {
-      //검색된 것 리스트 형식으로 보여줌
-      this.list = data.map(item => ({
-        id: item.id,
-        title: item.title,
-        content: item.content
-      }))
-    }).catch((err) => {
-        console.error("검색 실패", err);
+    SearchNotice(keyword)
+      .then((data) => {
+        //검색된 것 리스트 형식으로 보여줌
+        this.list = data.map((item) => ({
+          id: item.id,
+          title: item.title,
+          content: item.content
+        }));
+      })
+      .catch((err) => {
+        console.error('검색 실패', err);
       });
 
-    /* 공지사항 게시물 수정 PUT */ 
+    /* 공지사항 게시물 수정 PUT */
     // 상단 메소드에 구현됨
-
-
   }
 };
 </script>

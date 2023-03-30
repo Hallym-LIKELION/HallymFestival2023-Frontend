@@ -34,6 +34,7 @@ import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
 import Modal from '../components/MyModal.vue';
+import {PostVisitCommit, DeleteVisitCommit, GetVisitCommit, ReportVisitCommit} from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -125,8 +126,20 @@ export default {
     },
     GetRandomNickName
   },
-  created() {}
-};
+  created() {
+
+    // /* 방명록 전체 게시물 조회 */
+    // GetVisitComment()
+    //   .then((data)=>{
+    //   this.list = data.map(item => ({
+    //     visit_content: item.visit_content
+    //   }))
+    // }).catch((err) => {
+    //     console.error(err);
+    //   });
+    // }
+}
+}
 </script>
 
 <style scoped>

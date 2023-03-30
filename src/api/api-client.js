@@ -284,24 +284,18 @@ export async function RemoveNotice(id) {
   return res.data;
 }
 
-/* 방명록 api  @백엔드-미진/@프론트-소현 */
+/* 방명록 api  @백엔드-주영/@프론트-소현 */
 
-/*방명록 생성 */
-export async function PostVisitComment() {
-  const res = await axios.post(HOST + '/visitComment/create');
-  return res.data;
+/* 방명록 등록 POST */
+export async function PostVisitCommit(){
+  const res = await axios.post(HOST +'/visitcomment');
+}
+/* 방명록 삭제 DELETE */
+export async function DeleteVisitCommit(id){
+  const res = await axios.delete(HOST +'/visitcomment/' +id);
 }
 
-/*방명록 전체 게시물 조회*/
-export async function GetVisitComment() {
-  const res = await axios.get(HOST + '/visitComment/list');
-  return res.data;
-}
-/*방명록 삭제*/
-export async function DeleteVisitComment(id) {
-  const res = await axios.delete(HOST + '/visitComment/list'+id);
-  return res.data;
-}
+
 
 /* 부스 메뉴 api  @백엔드-미진/@프론트-경재 */
 

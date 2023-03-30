@@ -12,6 +12,7 @@
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
     </div>
+    
   </main>
 </template>
 
@@ -19,6 +20,7 @@
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
 import festivalImage from '@/assets/poster.jpg';
+import osohyun from '@/assets/osohyun.png';
 
 export default {
   data() {
