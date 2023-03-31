@@ -220,12 +220,58 @@ export async function DeleteBoothMenu(menu_id) {
 /* 공지사항 api  @백엔드-미진/@프론트-소현 */
 
 /*게시물 게시*/
-export async function PostNotice() {
-  const res = await axios.post(HOST + '/notice');
+export async function PostNotice(title, content) {
+  const data = {title, content};
+  const res = await axios.post(HOST + '/notice', data);
   return res.data;
 }
 /*게시물 목록 조회*/
-export async function GetNoticeList(id) {
+export async function GetNoticeList() {
+  const res = await axios.get(HOST + '/notice/');
+  return res.data;
+}
+
+export async function GetFakeNoticeList() {
+  await new Promise((resolve) => setTimeout(resolve, 300)); // 0.3초 기다리기
+
+  return [
+    {
+      "id": 2,
+      "title": "제목1",
+      "content": "내용1",
+      "active": true,
+      "regDate": "2023-03-27T10:48:46.44316",
+      "modDate": "2023-03-27T10:48:46.44316"
+    },
+    {
+      "id": 3,
+      "title": "제목2",
+      "content": "내용2",
+      "active": true,
+      "regDate": "2023-03-27T10:48:47.45858",
+      "modDate": "2023-03-27T10:48:47.45858"
+    },
+    {
+      "id": 4,
+      "title": "제목3",
+      "content": "내용3",
+      "active": true,
+      "regDate": "2023-03-27T10:48:48.326315",
+      "modDate": "2023-03-27T10:48:48.326315"
+    },
+    {
+      "id": 5,
+      "title": "제목1",
+      "content": "내용1",
+      "active": true,
+      "regDate": "2023-03-27T10:48:49.394248",
+      "modDate": "2023-03-27T10:48:49.394248"
+    }
+  ]
+}
+
+/*게시물 한개 조회*/
+export async function GetNotice(id) {
   const res = await axios.get(HOST + '/notice/' + id);
   return res.data;
 }
@@ -236,7 +282,7 @@ export async function DeleteNotice(id) {
 }
 /*게시물 검색*/
 //게시물 검색 함수 수정
-export async function GetNotice(keyword, id) {
+export async function SearchNotice(keyword, id) {
   const data = {
     keyword
   };
@@ -250,12 +296,15 @@ export async function RemoveNotice(id) {
   return res.data;
 }
 
-/* 방명록 api  @백엔드-미진/@프론트-소현 */
+/* 방명록 api  @백엔드-주영/@프론트-소현 */
 
-/*방명록 생성 */
-export async function PostVisitComment() {
-  const res = await axios.post(HOST + '/visitComment/create');
-  return res.data;
+/* 방명록 등록 POST */
+export async function PostVisitCommit(){
+  const res = await axios.post(HOST +'/visitcomment');
+}
+/* 방명록 삭제 DELETE */
+export async function DeleteVisitCommit(id){
+  const res = await axios.delete(HOST +'/visitcomment/' +id);
 }
 
 /*방명록 전체 게시물 조회*/
