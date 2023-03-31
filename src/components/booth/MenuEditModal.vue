@@ -12,8 +12,8 @@
       <p class="item-label">가격</p>
       <p class="item-label">품절</p>
 
-      <template v-for="(item, index) in items" :key="index">
-        <button class="item-remove" @click="() => deleteItem(index)">
+      <template v-for="item in items" :key="item.id">
+        <button class="item-remove" @click="() => deleteItem(item.id)">
           <img class="close-image" :src="CloseImage" alt="닫기" />
         </button>
         <input class="item-name" placeholder="메뉴명..." type="text" v-model="item.name" />
@@ -22,7 +22,7 @@
           placeholder="가격..."
           type="text"
           maxlength="6"
-          @input="(evt) => checkNumber(evt, index)"
+          @input="(evt) => checkNumber(evt, item.id)"
           v-model="item.price"
         />
         <input class="item-soldout" type="checkbox" v-model="item.isSoldout" />
@@ -85,14 +85,16 @@ export default {
 
       this.$emit('close');
     },
-    checkNumber(event, index) {
+    checkNumber(event, id) {
       event.target.value = event.target.value.replaceAll(/[^0-9]/g, '');
 
       if (event.target.value.length === 0) {
         event.target.value = 0;
       }
 
-      this.items[index].price = parseInt(event.target.value);
+      const item = this.items.filter((item) => item.id === id)[0];
+
+      item.price = parseInt(event.target.value);
       this.$emit('update:modelValue', event.target.value);
     },
     addItem() {
@@ -103,7 +105,7 @@ export default {
       });
     },
     deleteItem(id) {
-      this.items = this.items.filter((item, index) => index !== id);
+      this.items = this.items.filter((item) => item.id !== id);
     },
     applyMenu() {
       const isEmptyMenu = this.items.some((item) => item.name === '');

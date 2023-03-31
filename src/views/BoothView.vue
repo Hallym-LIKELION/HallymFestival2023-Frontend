@@ -16,7 +16,7 @@
 
     <div class="header">
       <div class="header-title">
-        <h1 class="header-name" v-text="data.name || 'Loading...'"></h1>
+        <h1 class="header-name" v-text="boothData.booth_title || 'Loading...'"></h1>
         <div class="header-like">
           <p class="header-like-count" v-text="like_display.toFixed(0)"></p>
           <button class="header-like-button" @click="likeHandler">
@@ -26,7 +26,7 @@
       </div>
 
       <div class="header-content">
-        <img class="header-image" :src="data.image || 'https://placehold.co/700x400'" />
+        <img class="header-image" :src="boothData.temp_image || 'https://placehold.co/700x400'" />
       </div>
     </div>
 
@@ -39,7 +39,7 @@
           </button>
         </div>
         <hr />
-        <p class="section-text" v-text="data.description || 'Loading...'"></p>
+        <p class="section-text" v-text="boothData.booth_content || 'Loading...'"></p>
       </div>
 
       <div class="section">
@@ -51,7 +51,7 @@
         </div>
         <hr />
         <div class="booth-menu">
-          <template v-for="(item, index) in data.menu" :key="index">
+          <template v-for="(item, index) in menuData" :key="index">
             <div class="menu-group">
               <p class="menu-title" v-text="item.name"></p>
               <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
@@ -76,7 +76,7 @@ import { gsap } from 'gsap';
 import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
-import { GetDemoBooth } from '../api/api-client';
+import { GetDemoBooth, GetDemoBoothMenu, GetDemoBoothLike } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
 import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
@@ -92,7 +92,11 @@ export default {
     return {
       EditImage,
       likeImage: HeartImage,
-      data: {},
+
+      boothData: {},
+      menuData: [],
+      likeValueData: 0,
+      isLikedData: false,
 
       like_display: 0,
 
@@ -100,7 +104,7 @@ export default {
       editData: {
         title: '',
         description: '',
-        type: '플리마켓',
+        type: '부스',
         status: true
       },
 
@@ -117,15 +121,17 @@ export default {
     },
     editBoothData(data) {
       // this.data = data;
-      this.data.name = data.title;
-      this.data.description = data.description;
+      this.boothData.booth_title = data.title;
+      this.boothData.booth_content = data.description;
+      this.boothData.booth_type = data.type;
+      this.boothData.active = data.status ? 'OPEN' : 'CLOSE';
       this.closeEditModal();
     },
     closeEditMenuModal() {
       this.editMenuModal = false;
     },
     editBoothMenuData(data) {
-      this.data.menu = data;
+      this.menuData = data;
       this.closeEditMenuModal();
     },
     loadCommentCount(count) {
@@ -133,15 +139,15 @@ export default {
     },
     likeHandler(evt) {
       // TODO: 좋아요 사이에 딜레이 넣을 것 (0.3초)
-      if (this.data.liked === true) {
+      if (this.isLikedData === true) {
         this.likeImage = HeartImage;
-        this.data.like--;
+        this.likeValueData--;
       } else {
         this.likeImage = HeartActiveImage;
-        this.data.like++;
+        this.likeValueData++;
       }
 
-      this.data.liked = !this.data.liked;
+      this.isLikedData = !this.isLikedData;
 
       // 좋아요 버튼 애니메이션
       gsap.to(evt.target, {
@@ -156,21 +162,26 @@ export default {
     }
   },
   watch: {
-    data: {
+    boothData: {
       deep: true,
       handler(data) {
         this.editData = {
-          title: data.name,
-          description: data.description,
-          type: '플리마켓',
-          status: true
+          title: data.booth_title,
+          description: data.booth_content,
+          type: data.booth_type,
+          status: data.active === 'OPEN'
         };
-        this.editMenuData = this.data.menu;
       }
     },
-    'data.like'(n) {
+    menuData: {
+      deep: true,
+      handler(data) {
+        this.editMenuData = data;
+      }
+    },
+    likeValueData(n) {
       // 좋아요 수 애니메이션
-      gsap.to(this, { duration: 2, like_display: Number(n) || 0, ease: 'Expo.easeOut' });
+      gsap.to(this, { duration: 2, like_display: Number(n) || '0', ease: 'Expo.easeOut' });
     },
     commentCount(n) {
       gsap.to(this, {
@@ -180,16 +191,16 @@ export default {
       });
     }
   },
-  created() {
-    // 데이터 가져오기
-    GetDemoBooth(parseInt(this.$route.params.id))
-      .then((data) => {
-        this.data = data;
-      })
-      .catch((err) => {
-        alert('Unexpected error has occured. Please try again later.');
-        // console.log(err);
-      });
+  async created() {
+    const id = parseInt(this.$route.params.id);
+    try {
+      this.boothData = await GetDemoBooth(id);
+      this.menuData = await GetDemoBoothMenu(id);
+      this.likeValueData = await GetDemoBoothLike(id);
+    } catch (e) {
+      alert('알 수 없는 오류가 발생했습니다.');
+      console.error(e);
+    }
   }
 };
 </script>
