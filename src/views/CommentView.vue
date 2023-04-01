@@ -40,7 +40,10 @@ import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import {PostVisitCommit, DeleteVisitCommit, GetVisitCommit, ReportVisitCommit} from '../api/api-client';
+import {
+  GetVisitComment,
+  PostBadVisitComment
+} from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -139,9 +142,16 @@ export default {
 
       this.list = this.list.filter((item) => item.id !== this.context);
     },
+    
     writeArticle() {
-      // 글쓰기 기능 구현
-      alert('TODO');
+      /* 방명록 등록하기 POST */
+      PostVisitComment().
+      then((data) => {
+      
+      })
+      .catch((err) => {
+        console.error('방명록 등록 실패', err);
+      });
     },
     handleMenu(id) {
       if (id === this.context) {
@@ -163,19 +173,42 @@ export default {
     GetRandomNickName
   },
   created() {
+    /* 방명록 전체 게시물 조회 */
+    GetVisitComment(page)
+      .then((data) => {
+        this.list = data.map((item) => ({
+          page: item.page,
+          size: item.size,
+          total: item.total,
+          start: item.start,
+          end: item.end,
+          prev: item.prev,
+          next: item.next,
+          //dtoList
+          dtoList: item.dtoList
+        }));
+      })
+      .catch((err) => {
+        console.error('조회 실패', err);
+      });
 
-    // /* 방명록 전체 게시물 조회 */
-    // GetVisitComment()
-    //   .then((data)=>{
-    //   this.list = data.map(item => ({
-    //     visit_content: item.visit_content
-    //   }))
-    // }).catch((err) => {
-    //     console.error(err);
-    //   });
-    // }
-}
-}
+    /* 방명록 신고 */
+    PostBadVisitComment(id)
+      .then((data) => {
+        this.postData = {
+          result: data.result
+        };
+        if (data.result.includes('success')) {
+          console.log('report success');
+        } else {
+          console.log('already reported');
+        }
+      })
+      .catch((err) => {
+        console.error('does not exist visit comment', err);
+      });
+  }
+};
 </script>
 
 <style scoped>
