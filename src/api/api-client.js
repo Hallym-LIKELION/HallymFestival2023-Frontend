@@ -298,24 +298,44 @@ export async function RemoveNotice(id) {
 
 /* 방명록 api  @백엔드-주영/@프론트-소현 */
 
-/* 방명록 등록 POST */
-export async function PostVisitComment(){
-  const res = await axios.post(HOST +'/visitcomment');
+/* 방명록 등록 POST -> writeArticle()*/
+export async function PostVisitComment(content, password){
+  const data = {
+    content,
+    password
+  };
+  const res = await axios.post(HOST +'/visitcomment',data);
+  return res.data;
 }
 /* 방명록 삭제 DELETE */
-export async function DeleteVisitComment(id){
-  const res = await axios.delete(HOST +'/visitcomment/' +id);
+export async function DeleteVisitComment(comment_id, password){
+  const data ={
+    password
+  };
+  const res = await axios.delete(HOST +'/visitcomment/' +comment_id,data);
+  return res.data;
 }
 
 /*방명록 전체 게시물 조회*/
-export async function GetVisitComment(page) {
-  const res = await axios.get(HOST + '/visitComment/list/'+page);
+export async function GetVisitComment(comment_page) {
+  const data = {
+    comment_page: page,
+    size,
+    total,
+    start,
+    end,
+    preview,
+    next,
+    //dtoList구현 아직 안됨
+    
+  };
+  const res = await axios.get(HOST + '/visitComment/list/'+comment_page,data);
   return res.data;
 }
 
 /*방명록 신고*/
-export async function PostBadVisitComment(id) {
-  const res = await axios.post(HOST + '/visitComment/' + id);
+export async function PostBadVisitComment(comment_id) {
+  const res = await axios.post(HOST + '/visitComment/' + comment_id);
   return res.data;
 }
 

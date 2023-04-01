@@ -142,9 +142,16 @@ export default {
 
       this.list = this.list.filter((item) => item.id !== this.context);
     },
+    
     writeArticle() {
-      // 글쓰기 기능 구현
-      alert('TODO');
+      /* 방명록 등록하기 POST */
+      PostVisitComment().
+      then((data) => {
+      
+      })
+      .catch((err) => {
+        console.error('방명록 등록 실패', err);
+      });
     },
     handleMenu(id) {
       if (id === this.context) {
