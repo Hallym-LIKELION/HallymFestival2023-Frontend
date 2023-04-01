@@ -299,23 +299,23 @@ export async function RemoveNotice(id) {
 /* 방명록 api  @백엔드-주영/@프론트-소현 */
 
 /* 방명록 등록 POST */
-export async function PostVisitCommit(){
+export async function PostVisitComment(){
   const res = await axios.post(HOST +'/visitcomment');
 }
 /* 방명록 삭제 DELETE */
-export async function DeleteVisitCommit(id){
+export async function DeleteVisitComment(id){
   const res = await axios.delete(HOST +'/visitcomment/' +id);
 }
 
 /*방명록 전체 게시물 조회*/
-export async function GetVisitComment() {
-  const res = await axios.get(HOST + '/visitComment/list');
+export async function GetVisitComment(page) {
+  const res = await axios.get(HOST + '/visitComment/list/'+page);
   return res.data;
 }
 
-/*방명록 삭제*/
-export async function DeleteVisitComment(id) {
-  const res = await axios.delete(HOST + '/visitComment/list' + id);
+/*방명록 신고*/
+export async function PostBadVisitComment(id) {
+  const res = await axios.post(HOST + '/visitComment/' + id);
   return res.data;
 }
 
