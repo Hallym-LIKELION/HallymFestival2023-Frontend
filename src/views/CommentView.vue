@@ -145,9 +145,12 @@ export default {
     
     writeArticle() {
       /* 방명록 등록하기 POST */
-      PostVisitComment().
+      PostVisitComment(content, password).
       then((data) => {
-      
+        this.postData = {
+          content: data.content,
+          password: data.password
+        };
       })
       .catch((err) => {
         console.error('방명록 등록 실패', err);
