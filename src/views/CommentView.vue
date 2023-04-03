@@ -25,6 +25,7 @@
           @clickMenu="handleMenu"
           @clickDelete="handleDelete"
           @focusout="handleFocusOut"
+          @clickReport="reportComment"
         />
       </template>
     </div>
@@ -128,9 +129,17 @@ export default {
       this.passwordModal = false;
     },
     deleteComment(password) {
-      const failed = password !== '1111';
-
-      this.passwordStatus = !failed;
+      //const failed = password !== '1111';
+      //this.passwordStatus = !failed;
+      PostBadVisitComment(comment_id, password).
+      then((data) => {
+        if (data === "delete success") {
+          
+        }
+      })
+      .catch((err) => {
+        console.error('방명록 등록 실패', err);
+      });
 
       // TODO: id로 delete 요청 보낼 것
       // 결과를 failed에 담을 것
@@ -139,15 +148,16 @@ export default {
       }
 
       this.passwordModal = false;
-
       this.list = this.list.filter((item) => item.id !== this.context);
     },
     
     writeArticle() {
       /* 방명록 등록하기 POST */
-      PostVisitComment().
+      PostVisitComment(content, password).
       then((data) => {
-      
+        if (data === "create success") {
+          // content와  this.list에 넣어주기(원래 가지고 있는것을 넣어주기)
+        }
       })
       .catch((err) => {
         console.error('방명록 등록 실패', err);
@@ -170,30 +180,9 @@ export default {
     handleFocusOut() {
       // this.handleMenu(this.context);
     },
-    GetRandomNickName
-  },
-  created() {
-    /* 방명록 전체 게시물 조회 */
-    GetVisitComment(page)
-      .then((data) => {
-        this.list = data.map((item) => ({
-          page: item.page,
-          size: item.size,
-          total: item.total,
-          start: item.start,
-          end: item.end,
-          prev: item.prev,
-          next: item.next,
-          //dtoList
-          dtoList: item.dtoList
-        }));
-      })
-      .catch((err) => {
-        console.error('조회 실패', err);
-      });
-
+    reportComment(comment_id) {
     /* 방명록 신고 */
-    PostBadVisitComment(id)
+    PostBadVisitComment(comment_id)
       .then((data) => {
         this.postData = {
           result: data.result
@@ -206,6 +195,23 @@ export default {
       })
       .catch((err) => {
         console.error('does not exist visit comment', err);
+      });
+    },
+    GetRandomNickName
+  },
+  created() {
+    /* 방명록 전체 게시물 조회 */
+    GetVisitComment()
+      .then((data) => {
+        this.list = data.dtoList.map((item) => ({
+          id: item.vno,
+          comment: item.content,
+          ip: item.ip,
+          showMenu: false
+        }));
+      })
+      .catch((err) => {
+        console.error('조회 실패', err);
       });
   }
 };
