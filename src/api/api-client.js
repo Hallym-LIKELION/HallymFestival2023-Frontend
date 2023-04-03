@@ -114,7 +114,7 @@ export async function GetDemoBoothLike(id) {
   return 300;
 }
 
-const HOST = '';
+const HOST = 'http://141.164.51.53';
 
 export async function GetBoothList() {
   const res = await axios.get(HOST + '/booth/list');
@@ -312,24 +312,17 @@ export async function DeleteVisitComment(comment_id, password){
   const data ={
     password
   };
-  const res = await axios.delete(HOST +'/visitcomment/' +comment_id,data);
+  const res = await axios.delete(HOST +'/visitcomment/' + comment_id, data);
   return res.data;
 }
 
 /*방명록 전체 게시물 조회*/
-export async function GetVisitComment(comment_page) {
-  const data = {
-    comment_page: page,
-    size,
-    total,
-    start,
-    end,
-    preview,
-    next,
-    //dtoList구현 아직 안됨
-    
-  };
-  const res = await axios.get(HOST + '/visitComment/list/'+comment_page,data);
+export async function GetVisitComment(comment_page = 0) {
+  let url = HOST + '/visitComment/list';
+  if (comment_page !== 0) {
+    url += "?page=" + comment_page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 

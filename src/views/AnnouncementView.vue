@@ -213,6 +213,9 @@ export default {
         alert('오류가 발생했습니다. ' + error.toString());
       });
 
+
+      return;
+
     /* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
     GetNoticeList().then((data) => {
      })
