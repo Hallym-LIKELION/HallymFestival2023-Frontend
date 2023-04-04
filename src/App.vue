@@ -44,6 +44,10 @@ import AOS from 'aos';
 import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
 
+import * as API from './api/api-client.js';
+
+window.API = API;
+
 export default {
   components: {
     RouterLink,

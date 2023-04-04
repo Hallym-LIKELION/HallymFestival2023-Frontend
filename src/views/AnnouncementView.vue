@@ -4,7 +4,7 @@
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
       <div v-for="user in users">{{ user.id }}</div>
-      <template v-for="(item, index) in filltered_list">
+      <template v-for="item in displayList" :key="item.id">
         <FoldingArticle
           @click="() => showAnnouncement(item.id)"
           :id="item.id"
@@ -12,8 +12,8 @@
           :content="item.content"
           :showContent="item.id === showingContent"
         />
-        <button @click="() => deleteAnnouncement(item.id)">삭제</button>
-        <button @click="() => removeAnnouncement(item.id)">수정</button>
+        <!-- <button @click="() => deleteAnnouncement(item.id)">삭제</button>
+        <button @click="() => removeAnnouncement(item.id)">수정</button> -->
       </template>
     </div>
     <div class="button-group" ref="buttonGroup">
@@ -26,15 +26,7 @@
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
-import {
-  GetFakeNoticeList,
-  GetNoticeList,
-  DeleteNotice,
-  PostNotice,
-  GetNotice,
-  RemoveNotice,
-  SearchNotice
-} from '../api/api-client';
+import { GetNoticeList, DeleteNotice, RemoveNotice, SearchNotice } from '../api/api-client';
 
 export default {
   name: 'AnnouncementView',
@@ -44,37 +36,13 @@ export default {
   },
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          title: '축제 진행에 대한 공지',
-          content: '안녕하세요. 2023 한림대학교 비봉축전 준비 위원회 공지사항입니다. 감사합니다.'
-        },
-        {
-          id: 2,
-          title: 'Lorem Ipsum',
-          content:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        },
-        {
-          id: 3,
-          title: '축제 관리자 회원가입에 대한 안내',
-          content:
-            '안녕하세요. 축제준비위원회입니다. 지금부터 2023 한림대학교 비봉축전 웹사이트의 관리자 가입이 시작되었습니다. 가입은 다음주 일요일 23:59까지 가능하며 모든 위원회 관계자 분 및 부스 관리자 인원들은 반드시 이 기간에 가입을 완료해주시기 바랍니다. 가입에 문제가 있는 경우 010-0000-0000으로 문의바랍니다. 감사합니다.'
-        },
-        {
-          id: 4,
-          title: '한글입숨',
-          content:
-            '수 보내는 사람은 그러므로 싶이 작고 가장 사라지지 돋고, 것이다. 얼마나 예가 꽃이 미묘한 수 따뜻한 칼이다. 찬미를 청춘이 힘차게 행복스럽고 끓는다. 하였으며, 품었기 관현악이며, 불러 봄바람이다. 긴지라 피어나기 뼈 피다. 거친 심장의 황금시대의 피다. 커다란 유소년에게서 그들의 만물은 없으면 끓는 가는 이상은 있는가? 끝까지 무엇을 장식하는 이것이야말로 보배를 능히 싹이 그리하였는가? 방황하여도, 설산에서 이상의 천하를 것이다. 꽃이 실현에 그들에게 끝까지 크고 소리다.이것은 힘차게 칼이다. 꾸며 피고, 할지라도 청춘 천자만홍이 그들을 끝까지 그들은 것이다.'
-        }
-      ],
+      list: [],
       search: '',
       showingContent: null
     };
   },
   computed: {
-    filltered_list() {
+    displayList() {
       const search = this.search;
       return this.list.filter(
         (item) => search === '' || item.title.includes(search) || item.content.includes(search)
@@ -193,82 +161,117 @@ export default {
       }
     );
   },
-  created() {
-    /* 공지사항 모든 API */
-    // 모든 공지사항 목록을 가져오기
-    // 그 데이터를 컴포넌트를 이용해서 사용자에게 뿌리기
+  async created() {
+    // 공지사항 불러와서 data에 넣어주기.
 
-    //공지사항 게시물 목록 GET
-    GetFakeNoticeList()
-      .then((data) => {
-        data = data.filter((item) => item.active); //true 인것만 필터됨
+    const data = await GetNoticeList();
+    this.list = data.filter((item) => !item.is_deleted);
 
-        this.list = data.map((item) => ({
-          id: item.id,
-          title: item.title,
-          content: item.content
-        }));
-      })
-      .catch((error) => {
-        alert('오류가 발생했습니다. ' + error.toString());
-      });
+    // 오류 발생하는 코드 임시 주석 처리, 구현할때 주석 풀고 사용해주세요~
 
+    // //공지사항 게시판 POST
+    // PostNotice(parseInt(this.$route.params));
+    // this.$axios
+    //   .get('http://localhost:8080/notice')
+    //   .then((data) => {
+    //     data = data.filter((item) => item.active); //true 인것만 필터됨
 
-      return;
+    //     this.list = data.map((item) => ({
+    //       id: item.id,
+    //       title: item.title,
+    //       content: item.content
+    //     }));
+    //   })
+    //   .catch((error) => {
+    //     alert('오류가 발생했습니다. ' + error.toString());
+    //   });
 
-    /* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
-    GetNoticeList().then((data) => {
-     })
-       .catch((error) => {
-        console.log(error);
-       });
+    // return;
 
-    //공지사항 게시판 POST
-    PostNotice('제목', '내용')
-      .then(() => {
-        //data가 성공적으로 도달하였을 때 알람 삽입
-        if (res.result.includes('success')) {
-          alert('작성되었습니다.');
-        } else {
-          alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // /* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
+    // GetNoticeList()
+    //   .then((data) => {})
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    /* 공지사항 게시물 목록 DELETE */
-    // 상단 메소드에 구현됨
+    // //공지사항 게시판 POST
+    // PostNotice('제목', '내용')
+    //   .then(() => {
+    //     //data가 성공적으로 도달하였을 때 알람 삽입
+    //     if (res.result.includes('success')) {
+    //       alert('작성되었습니다.');
+    //     } else {
+    //       alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    /* 공지사항 게시물 한개 조회 GET */
-    GetNotice(id)
-      .then((data) => {
-        this.postData = {
-          id: data.id,
-          title: data.title,
-          content: data.content
-        };
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // /* 공지사항 게시물 목록 DELETE */
+    // // 상단 메소드에 구현됨
 
-    /* 공지사항 게시물 검색 GET */
-    SearchNotice(keyword)
-      .then((data) => {
-        //검색된 것 리스트 형식으로 보여줌
-        this.list = data.map((item) => ({
-          id: item.id,
-          title: item.title,
-          content: item.content
-        }));
-      })
-      .catch((err) => {
-        console.error('검색 실패', err);
-      });
+    // /* 공지사항 게시물 한개 조회 GET */
+    // GetNotice(id)
+    //   .then((data) => {
+    //     this.postData = {
+    //       id: data.id,
+    //       title: data.title,
+    //       content: data.content
+    //     };
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    /* 공지사항 게시물 수정 PUT */
-    // 상단 메소드에 구현됨
+    // /* 공지사항 게시물 검색 GET */
+    // SearchNotice(keyword)
+    //   .then((data) => {
+    //     //검색된 것 리스트 형식으로 보여줌
+    //     this.list = data.map((item) => ({
+    //       id: item.id,
+    //       title: item.title,
+    //       content: item.content
+    //     }));
+    //   })
+    //   .catch((err) => {
+    //     console.error('검색 실패', err);
+    //   });
+
+    // // 공지사항 게시물 검색 GET
+    // GetNotice(parseInt(this.$route.params));
+    // this.$axios
+    //   .get('http://localhost:8080/notice/' + this.$axios.search + this.$axios.keyword)
+    //   .then((res) => {
+    //     console.log(data);
+    //     this.data = res.data.id;
+    //     this.data = res.data.title;
+    //     this.data = res.data.content;
+    //     this.data = res.data.active;
+    //     this.data = res.data.regDate;
+    //     this.data = res.data.modeDate;
+    //   });
+
+    // // 공지사항 게시물 수정 PUT
+    // RemoveNotice(parseInt(this.$route.params));
+    // this.$axios
+    //   .put('http://localhost:8080/notice/' + this.$axios.id)
+    //   .then((res) => {
+    //     console.log(data);
+    //     this.data = res.data.id;
+    //     this.data = res.data.content;
+    //     //data가 성공적으로 도달하였을 때 알람삽입 -> 걍 백엔드 테스트 때문에 넣어둠 나중에 기획팀에서 빼라하면 뺄게여
+    //     if (res.data.sucess == true) {
+    //       alert('수정되었습니다.');
+    //     } else {
+    //       alert('수정을 실패하였습니다. 다시 시도해주세요.');
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     alert('수정을 실패하였습니다. 다시 시도해주세요.');
+    //   });
   }
 };
 </script>
