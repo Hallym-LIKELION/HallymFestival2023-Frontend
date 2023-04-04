@@ -16,11 +16,11 @@
 
     <h1>방명록</h1>
     <div class="comment-list">
-      <template v-for="(item, index) in list" :key="item.id">
+      <template v-for="item in list" :key="item.vno">
         <Comment
-          :id="item.id"
+          :id="item.vno"
           :name="GetRandomNickName(item.ip)"
-          :comment="item.comment"
+          :comment="item.content"
           :showMenu="item.showMenu"
           @clickMenu="handleMenu"
           @clickDelete="handleDelete"
@@ -41,10 +41,7 @@ import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import {
-  GetVisitComment,
-  PostBadVisitComment
-} from '../api/api-client';
+import { GetVisitComment, PostBadVisitComment, GetMyIP } from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -56,40 +53,9 @@ export default {
   },
   data() {
     return {
-      list: [
-        {
-          id: 5,
-          ip: '1.2.3.4',
-          comment:
-            '여기는 학생 여러분들께서 마음껏 작성할 수 있는 방명록입니다~ 자유롭게 사용해주세요!',
-          showMenu: false
-        },
-        {
-          id: 4,
-          ip: '1.2.3.255',
-          comment: '한림대학교 화이팅~~',
-          showMenu: false
-        },
-        {
-          id: 3,
-          ip: '1.2.255.4',
-          comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          showMenu: false
-        },
-        {
-          id: 2,
-          ip: '1.200.3.4',
-          comment: '아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글 아무댓글',
-          showMenu: false
-        },
-        {
-          id: 1,
-          ip: '100.2.3.4',
-          comment:
-            '수 보내는 사람은 그러므로 싶이 작고 가장 사라지지 돋고, 것이다. 얼마나 예가 꽃이 미묘한 수 따뜻한 칼이다. 찬미를.',
-          showMenu: false
-        }
-      ],
+      list: [],
+
+      myIP: '',
 
       commentModal: false,
       commentStatus: false,
@@ -131,15 +97,14 @@ export default {
     deleteComment(password) {
       //const failed = password !== '1111';
       //this.passwordStatus = !failed;
-      PostBadVisitComment(comment_id, password).
-      then((data) => {
-        if (data === "delete success") {
-          
-        }
-      })
-      .catch((err) => {
-        console.error('방명록 등록 실패', err);
-      });
+      PostBadVisitComment(comment_id, password)
+        .then((data) => {
+          if (data === 'delete success') {
+          }
+        })
+        .catch((err) => {
+          console.error('방명록 등록 실패', err);
+        });
 
       // TODO: id로 delete 요청 보낼 것
       // 결과를 failed에 담을 것
@@ -150,18 +115,18 @@ export default {
       this.passwordModal = false;
       this.list = this.list.filter((item) => item.id !== this.context);
     },
-    
+
     writeArticle() {
       /* 방명록 등록하기 POST */
-      PostVisitComment(content, password).
-      then((data) => {
-        if (data === "create success") {
-          // content와  this.list에 넣어주기(원래 가지고 있는것을 넣어주기)
-        }
-      })
-      .catch((err) => {
-        console.error('방명록 등록 실패', err);
-      });
+      PostVisitComment(content, password)
+        .then((data) => {
+          if (data === 'create success') {
+            // content와  this.list에 넣어주기(원래 가지고 있는것을 넣어주기)
+          }
+        })
+        .catch((err) => {
+          console.error('방명록 등록 실패', err);
+        });
     },
     handleMenu(id) {
       if (id === this.context) {
@@ -181,38 +146,36 @@ export default {
       // this.handleMenu(this.context);
     },
     reportComment(comment_id) {
-    /* 방명록 신고 */
-    PostBadVisitComment(comment_id)
-      .then((data) => {
-        this.postData = {
-          result: data.result
-        };
-        if (data.result.includes('success')) {
-          console.log('report success');
-        } else {
-          console.log('already reported');
-        }
-      })
-      .catch((err) => {
-        console.error('does not exist visit comment', err);
-      });
+      /* 방명록 신고 */
+      PostBadVisitComment(comment_id)
+        .then((data) => {
+          this.postData = {
+            result: data.result
+          };
+          if (data.result.includes('success')) {
+            console.log('report success');
+          } else {
+            console.log('already reported');
+          }
+        })
+        .catch((err) => {
+          console.error('does not exist visit comment', err);
+        });
     },
     GetRandomNickName
   },
-  created() {
+  async created() {
     /* 방명록 전체 게시물 조회 */
-    GetVisitComment()
-      .then((data) => {
-        this.list = data.dtoList.map((item) => ({
-          id: item.vno,
-          comment: item.content,
-          ip: item.ip,
-          showMenu: false
-        }));
-      })
-      .catch((err) => {
-        console.error('조회 실패', err);
-      });
+    const data = await GetVisitComment();
+
+    this.myIP = await GetMyIP();
+
+    this.list = data.dtoList
+      .filter((item) => !item.is_deleted)
+      .map((item) => ({
+        ...item, // spread 문법 - item에 showMenu만 덧붙이기
+        showMenu: false
+      }));
   }
 };
 </script>
