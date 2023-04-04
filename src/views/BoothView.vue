@@ -76,7 +76,7 @@ import { gsap } from 'gsap';
 import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
-import { GetDemoBooth, GetDemoBoothMenu, GetDemoBoothLike } from '../api/api-client';
+import { GetBooth, GetBoothMenu, GetBoothLike } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
 import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
@@ -194,9 +194,9 @@ export default {
   async created() {
     const id = parseInt(this.$route.params.id);
     try {
-      this.boothData = await GetDemoBooth(id);
-      this.menuData = await GetDemoBoothMenu(id);
-      this.likeValueData = await GetDemoBoothLike(id);
+      this.boothData = await GetBooth(id);
+      this.menuData = await GetBoothMenu(id);
+      this.likeValueData = await GetBoothLike(id);
     } catch (e) {
       alert('알 수 없는 오류가 발생했습니다.');
       console.error(e);
