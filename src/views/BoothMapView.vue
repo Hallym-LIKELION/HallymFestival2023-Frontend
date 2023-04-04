@@ -36,7 +36,7 @@
 <script>
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
-import { GetDemoBoothList } from '../api/api-client';
+import { GetBoothList } from '../api/api-client';
 import mapImage from '../assets/map.jpg';
 
 export default {
@@ -84,17 +84,11 @@ export default {
       this.isImageLoaded = true;
     }
   },
-  created() {
+  async created() {
     // 데이터 가져오기
-    GetDemoBoothList()
-      .then((data) => {
-        console.log(data);
-        this.list = data;
-      })
-      .catch((err) => {
-        alert('Unexpected error has occured. Please try again later.');
-        console.log(err);
-      });
+
+    const data = await GetBoothList();
+    this.list = data.dtoList;
   }
 };
 </script>
