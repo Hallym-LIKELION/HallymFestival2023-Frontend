@@ -4,6 +4,13 @@ import axios from 'axios';
 // const HOST = 'http://127.0.0.1:8080';
 const HOST = 'https://dev-api.prisism.io';
 
+// 임시: 1.0.0.1 API 사용
+export async function GetMyIP() {
+  const res = await axios.get('https://1.0.0.1/cdn-cgi/trace');
+  const data = res.data.split('\n')[2].split('=')[1];
+  return data;
+}
+
 export async function GetBoothList() {
   const res = await axios.get(HOST + '/booth/list');
   return res.data;
