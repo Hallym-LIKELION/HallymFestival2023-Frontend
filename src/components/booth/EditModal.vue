@@ -63,11 +63,6 @@
           </button>
         </div>
 
-        <!-- <p class="label">메뉴판</p>
-      <div class="input menu">
-        <button class="button" @click="">메뉴판 수정하기</button>
-      </div> -->
-
         <p class="label">상태</p>
         <div class="input status">
           <button :class="['open', { active: status }]" @click="() => (status = true)">OPEN</button>
@@ -79,7 +74,7 @@
         <p class="label"></p>
         <div class="footer">
           <button class="modal-button" @click="close">취소</button>
-          <button class="modal-button" @click="editNotice">적용</button>
+          <button class="modal-button" @click="apply">적용</button>
         </div>
       </div>
     </div>
@@ -94,6 +89,8 @@ import BeerImage from '../../assets/beer.png';
 import BoothImage from '../../assets/photo-booth.png';
 import FleaMarketImage from '../../assets/flea-market.png';
 import FoodTruckImage from '../../assets/food-truck.png';
+
+import { ModifyBooth } from '../../api/api-client';
 
 const ERROR_MESSAGE = {
   empty_title: '이름은 공란으로 둘 수 없습니다.',
@@ -163,7 +160,7 @@ export default {
 
       this.$emit('close');
     },
-    editNotice() {
+    apply() {
       this.$emit('complete', {
         title: this.title,
         description: this.description,

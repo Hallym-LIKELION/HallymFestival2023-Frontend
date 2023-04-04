@@ -6,20 +6,27 @@
       @close="closePasswordModal"
       @complete="deleteComment"
     />
+
+    <CommentContextMenu
+      :show="showContextMenu"
+      :x="contextMenuX"
+      :y="contextMenuY"
+      @clickDelete="openPasswordModal"
+      @clickReport="reportComment"
+      @clickOutside="closeMenu"
+    />
+
     <div class="write-container">
       <CommentWrite :id="id" @send="addComment" />
     </div>
     <div class="comment-container">
-      <template v-for="item in list" :key="item.id">
+      <template v-for="item in list" :key="item.cno">
         <Comment
-          :id="item.id"
+          :id="item.cno"
           :name="GetRandomNickName(item.ip)"
-          :comment="item.comment"
-          :showMenu="item.showMenu"
+          :comment="item.content"
           picture="https://placehold.co/60x60"
-          @clickMenu="handleMenu"
-          @clickDelete="handleDelete"
-          @focusout="handleFocusOut"
+          @clickMenu="toggleMenu"
           color="#f1f1f1"
         />
       </template>
@@ -31,21 +38,29 @@
 import PasswordModal from '../PasswordModal.vue';
 import CommentWrite from './CommentWrite.vue';
 import Comment from '../Comment.vue';
+import CommentContextMenu from '../CommentContextMenu.vue';
 import SendImage from '../../assets/send.png';
 import { GetRandomNickName } from '../../library/name-generator';
+import { GetBoothComment, DeleteBoothComment } from '../../api/api-client';
 
 export default {
   components: {
     PasswordModal,
     CommentWrite,
-    Comment
+    Comment,
+    CommentContextMenu
   },
   data() {
     return {
       SendImage,
       list: [],
 
-      context: -1,
+      myIP: '',
+
+      showContextMenu: false,
+      contextMenuTargetID: -1,
+      contextMenuX: 0,
+      contextMenuY: 0,
 
       commentCount: 0,
 
@@ -72,51 +87,84 @@ export default {
   },
   methods: {
     addComment(data) {
-      data.id = (this.list[0]?.id || 1) + 1; // 임시로 여기서 처리, API 연결하면 API에서 받아올것
-      data.showMenu = false;
       this.list.unshift(data);
     },
     closePasswordModal() {
       this.passwordStatus = true;
       this.passwordModal = false;
     },
-    deleteComment(password) {
-      const failed = password !== '1111';
+    async deleteComment(password) {
+      let data;
+      try {
+        // data = await DeleteBoothComment(this.context, password);
+        data = { result: 'success' };
+      } catch (e) {
+        // 알 수 없는 오류
 
-      this.passwordStatus = !failed;
+        this.passwordStatus = false;
+        return;
+      }
 
-      // TODO: id로 delete 요청 보낼 것
-      // 결과를 failed에 담을 것
-      if (failed) {
+      if (data.result.includes('wrong password')) {
+        // 비밀번호 오류
+        this.passwordStatus = false;
+        return;
+      } else if (data.result.includes('null comment')) {
+        // 댓글이 없음 (이미 삭제되었거나 ㅁㄴㅇㄹ)
+        this.passwordStatus = false;
         return;
       }
 
       this.passwordModal = false;
-
-      this.list = this.list.filter((item) => item.id !== this.context);
+      this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
-    handleMenu(id) {
-      if (id === this.context) {
-        this.context = -1;
+    closeMenu() {
+      this.contextMenuTargetID = -1;
+      this.showContextMenu = false;
+    },
+    toggleMenu(evt, id) {
+      if (this.showContextMenu) {
+        this.contextMenuTargetID = -1;
+        this.showContextMenu = false;
       } else {
-        this.context = id;
-      }
-      for (const item of this.list) {
-        item.showMenu = item.id === this.context;
+        this.contextMenuX = evt.target.offsetLeft;
+        this.contextMenuY = evt.target.offsetTop;
+        this.contextMenuTargetID = id;
+        this.showContextMenu = true;
       }
     },
-    handleDelete() {
+    openPasswordModal() {
+      this.showContextMenu = false;
       this.passwordModal = true;
+    },
+    reportComment(comment_id) {
+      this.showContextMenu = false;
+      /* 방명록 신고 */
+      // PostBadVisitComment(comment_id)
+      //   .then((data) => {
+      //     this.postData = {
+      //       result: data.result
+      //     };
+      //     if (data.result.includes('success')) {
+      //       console.log('report success');
+      //     } else {
+      //       console.log('already reported');
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error('does not exist visit comment', err);
+      //   });
     },
     GetRandomNickName
   },
-  created() {
+  async created() {
     // TODO: API로 가져오기
-    this.list = [
-      { id: 3, ip: '30.10.3.4', comment: '안녕하세요 ~~ ㅋㅋㅋ', showMenu: false },
-      { id: 2, ip: '30.200.40.4', comment: '타코야키 맛있어요', showMenu: false },
-      { id: 1, ip: '53.30.10.4', comment: '좋아요~~', showMenu: false }
-    ];
+    const data = await GetBoothComment(this.id);
+
+    this.list = data.dtoList.map((item) => ({
+      ...item,
+      showMenu: false
+    }));
   }
 };
 </script>

@@ -3,6 +3,7 @@
     <BoothEditModal
       :visible="editModal"
       :data="editData"
+      :id="id"
       @close="closeEditModal"
       @complete="editBoothData"
     />
@@ -73,10 +74,17 @@
 
 <script>
 import { gsap } from 'gsap';
+import { get, set } from 'idb-keyval';
 import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
-import { GetBooth, GetBoothMenu, GetBoothLike } from '../api/api-client';
+import {
+  GetBooth,
+  GetBoothMenu,
+  GetBoothLike,
+  PostBoothLike,
+  ModifyBooth
+} from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
 import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
@@ -91,7 +99,8 @@ export default {
   data() {
     return {
       EditImage,
-      likeImage: HeartImage,
+
+      id: -1,
 
       boothData: {},
       menuData: [],
@@ -99,6 +108,8 @@ export default {
       isLikedData: false,
 
       like_display: 0,
+
+      isLikeDelayed: false,
 
       editModal: false,
       editData: {
@@ -119,35 +130,85 @@ export default {
     closeEditModal() {
       this.editModal = false;
     },
-    editBoothData(data) {
-      // this.data = data;
+    async editBoothData(data) {
+      const res = await ModifyBooth(
+        this.id,
+        data.title,
+        data.description,
+        '테스1트',
+        data.type,
+        data.status
+      );
+
+      if (!res.result.includes('success')) {
+        alert('부스를 수정하는데 실패했습니다.\n' + res.result);
+        return;
+      }
+
       this.boothData.booth_title = data.title;
       this.boothData.booth_content = data.description;
       this.boothData.booth_type = data.type;
-      this.boothData.active = data.status ? 'OPEN' : 'CLOSE';
+      this.boothData.booth_active = data.status;
       this.closeEditModal();
     },
     closeEditMenuModal() {
       this.editMenuModal = false;
     },
-    editBoothMenuData(data) {
-      this.menuData = data;
+    async editBoothMenuData() {
+      let data = await GetBoothMenu(this.id);
+      data.forEach((item) => (item.booth = item.booth.bno));
+      this.menuData = data.filter((item) => !item._deleted);
+
       this.closeEditMenuModal();
     },
     loadCommentCount(count) {
       this.commentCount = count;
     },
-    likeHandler(evt) {
-      // TODO: 좋아요 사이에 딜레이 넣을 것 (0.3초)
-      if (this.isLikedData === true) {
-        this.likeImage = HeartImage;
-        this.likeValueData--;
-      } else {
-        this.likeImage = HeartActiveImage;
-        this.likeValueData++;
+    async likeHandler(evt) {
+      // 딜레이 중이면 종료
+      if (this.isLikeDelayed) {
+        return;
       }
 
-      this.isLikedData = !this.isLikedData;
+      // 딜레이 ON
+      this.isLikeDelayed = true;
+
+      // 서버에 좋아요 보내고 결과 받기
+      const data = await PostBoothLike(this.id);
+
+      if (data.result === 'like create success') {
+        this.isLikedData = true;
+      } else if (data.result === 'like delete success') {
+        this.isLikedData = false;
+      } else {
+        alert('좋아요을 전송하는데 오류가 발생했습니다.\n' + data.result);
+        console.error(data);
+        this.isLikeDelayed = false;
+        return;
+      }
+
+      // 표면적인 값 바꾸기
+      if (this.isLikedData === true) {
+        this.likeValueData++;
+      } else {
+        this.likeValueData--;
+      }
+
+      // 좋아요 눌렀는지를 idb에 저장
+      const idb = await get('like-data');
+      if (idb === undefined) {
+        await set('like-data', [this.id]);
+      } else {
+        if (!this.isLikedData) {
+          await set(
+            'like-data',
+            idb.filter((item) => item !== this.id)
+          );
+        } else {
+          idb.push(this.id);
+          await set('like-data', idb);
+        }
+      }
 
       // 좋아요 버튼 애니메이션
       gsap.to(evt.target, {
@@ -158,7 +219,14 @@ export default {
         ease: 'Expo.easeOut'
       });
 
-      // API :: 부스 좋아요 등록/철회 요청 보내기
+      // 0.3초 기다리기
+      await new Promise((r) => setTimeout(r, 50));
+      this.isLikeDelayed = false;
+    }
+  },
+  computed: {
+    likeImage() {
+      return this.isLikedData ? HeartActiveImage : HeartImage;
     }
   },
   watch: {
@@ -169,7 +237,7 @@ export default {
           title: data.booth_title,
           description: data.booth_content,
           type: data.booth_type,
-          status: data.active === 'OPEN'
+          status: data.booth_active
         };
       }
     },
@@ -192,11 +260,25 @@ export default {
     }
   },
   async created() {
-    const id = parseInt(this.$route.params.id);
+    this.id = parseInt(this.$route.params.id);
     try {
-      this.boothData = await GetBooth(id);
-      this.menuData = await GetBoothMenu(id);
-      this.likeValueData = await GetBoothLike(id);
+      let data;
+
+      data = await GetBooth(this.id);
+      data.booth_active = data.booth_active === 'OPEN' ? true : false;
+      this.boothData = data;
+
+      data = await GetBoothMenu(this.id);
+      data.forEach((item) => (item.booth = item.booth.bno));
+      this.menuData = data.filter((item) => !item._deleted);
+
+      console.log(this.menuData);
+
+      data = await GetBoothLike(this.id);
+      this.likeValueData = data.result;
+
+      data = await get('like-data');
+      this.isLikedData = data.includes(this.id);
     } catch (e) {
       alert('알 수 없는 오류가 발생했습니다.');
       console.error(e);

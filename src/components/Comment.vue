@@ -1,9 +1,5 @@
 <template>
   <div class="wrapper" :style="'background-color: ' + color">
-    <div :class="['context-menu', { hidden: !showMenu }]">
-      <button class="delete-button" @click="clickDeleteButton">삭제하기</button>
-      <button class="report-button" @click="clickReportButton">신고하기</button>
-    </div>
     <div class="header">
       <img class="picture" :src="picture" v-if="picture !== ''" />
       <p class="name" v-text="name"></p>
@@ -17,7 +13,6 @@
 
 <script>
 import arrowImage from '@/assets/down.png';
-
 export default {
   data() {
     return {
@@ -44,23 +39,12 @@ export default {
     color: {
       type: String,
       default: '#FFF4CE'
-    },
-    showMenu: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
     clickMenuButton(evt) {
-      this.$emit('clickMenu', this.id);
-    },
-    clickDeleteButton(evt) {
-      this.$emit('clickDelete', this.id);
-      // this.$emit('focusout');
-    },
-    clickReportButton(evt) {
-      this.$emit('clickReport', this.id);
-      // this.$emit('focusout');
+      this.$emit('clickMenu', evt, this.id);
+      evt.stopPropagation();
     }
   }
 };
@@ -110,39 +94,5 @@ export default {
 
 .comment {
   width: 100%;
-
-  /* 텍스트 오버플로우를 ... 으로 숨기기 */
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
-}
-
-.context-menu {
-  width: 130px;
-  margin-top: 30px;
-  position: absolute;
-
-  display: flex;
-  flex-direction: column;
-
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0px 0px 8px #00000033;
-}
-
-.context-menu > button {
-  height: 42px;
-  margin: 4px 12px;
-  font-size: 12pt;
-  text-align: left;
-  transition: background-color 0.25s;
-}
-
-.context-menu > button:hover {
-  background-color: #00000033;
-}
-
-.hidden {
-  display: none;
 }
 </style>

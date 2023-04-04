@@ -13,19 +13,27 @@
       <p class="item-label">품절</p>
 
       <template v-for="item in items" :key="item.id">
-        <button class="item-remove" @click="() => deleteItem(item.id)">
+        <button class="item-remove" @click="() => deleteItem(item)">
           <img class="close-image" :src="CloseImage" alt="닫기" />
         </button>
-        <input class="item-name" placeholder="메뉴명..." type="text" v-model="item.name" />
+        <input
+          class="item-name"
+          placeholder="메뉴명..."
+          :disabled="item._deleted"
+          type="text"
+          v-model="item.name"
+        />
         <input
           class="item-price"
           placeholder="가격..."
+          :disabled="item._deleted"
           type="text"
           maxlength="6"
-          @input="(evt) => checkNumber(evt, item.id)"
+          @input="(evt) => checkNumber(evt, item)"
           v-model="item.price"
         />
-        <input class="item-soldout" type="checkbox" v-model="item.isSoldout" />
+        <input class="item-soldout" type="checkbox" :disabled="item._deleted" />
+        <!-- v-model="item.isSoldout"  -->
       </template>
     </div>
     <div class="modal-footer">
@@ -41,6 +49,7 @@
 <script>
 import Modal from '../Modal.vue';
 import CloseImage from '../../assets/close.png';
+import { CreateBoothMenu, ModifyBoothMenu, DeleteBoothMenu } from '../../api/api-client';
 
 const ERROR_MESSAGE = {
   empty_title: '메뉴명은 공란으로 둘 수 없습니다.',
@@ -85,14 +94,12 @@ export default {
 
       this.$emit('close');
     },
-    checkNumber(event, id) {
+    checkNumber(event, item) {
       event.target.value = event.target.value.replaceAll(/[^0-9]/g, '');
 
       if (event.target.value.length === 0) {
         event.target.value = 0;
       }
-
-      const item = this.items.filter((item) => item.id === id)[0];
 
       item.price = parseInt(event.target.value);
       this.$emit('update:modelValue', event.target.value);
@@ -101,15 +108,20 @@ export default {
       this.items.push({
         name: '',
         price: 1000,
-        isSoldout: false
+        _created: true
       });
     },
-    deleteItem(id) {
-      this.items = this.items.filter((item) => item.id !== id);
+    deleteItem(item) {
+      if (item._deleted) {
+        item._deleted = false;
+      } else {
+        item._deleted = true;
+      }
     },
-    applyMenu() {
-      const isEmptyMenu = this.items.some((item) => item.name === '');
-      const isEmptyPrice = this.items.some((item) => item.price === '');
+    async applyMenu() {
+      const boothId = parseInt(this.$route.params.id);
+      const isEmptyMenu = this.items.some((item) => !item._deleted && item.name === '');
+      const isEmptyPrice = this.items.some((item) => !item._deleted && item.price === '');
 
       if (isEmptyMenu) {
         alert(ERROR_MESSAGE.empty_title);
@@ -121,10 +133,53 @@ export default {
         return;
       }
 
-      // 가격을 number로 변환
-      this.items.forEach((item) => (item.price = parseInt(item.price)));
+      const promiseList = [];
+      // Create Operation
+      const createdList = this.items.filter((item) => item._deleted !== true && item._created);
+      console.log('Created', createdList);
 
-      this.$emit('complete', this.items);
+      for (const item of createdList) {
+        promiseList.push(CreateBoothMenu(boothId, item.name, item.price));
+      }
+
+      // Modify Operation
+      const modifiedList = this.items.filter((item) => {
+        if (item._created || item._deleted) {
+          return false;
+        }
+        const original = this.data.filter((oItem) => item.id === oItem.id)[0];
+
+        if (!original) {
+          return false;
+        }
+
+        return original.name !== item.name || original.price !== item.price;
+      });
+      console.log('Modified', modifiedList);
+
+      for (const item of modifiedList) {
+        promiseList.push(ModifyBoothMenu(item.id, item.name, item.price));
+      }
+
+      // Delete Operation
+      const deletedList = this.items.filter((item) => item.id && item._deleted);
+      console.log('Deleted', deletedList);
+
+      for (const item of deletedList) {
+        promiseList.push(DeleteBoothMenu(item.id));
+      }
+
+      try {
+        await Promise.all(promiseList);
+      } catch (e) {
+        alert('메뉴를 수정하는데 오류가 발생했습니다.\n' + e);
+        console.error(e);
+        return;
+      }
+
+      console.log(123);
+
+      this.$emit('complete');
     }
   },
   watch: {
@@ -156,7 +211,7 @@ export default {
   width: 100%;
   min-height: 500px;
   display: grid;
-  grid-template-columns: 18px 3fr 1fr 24px;
+  grid-template-columns: 18px 5fr 2fr 24px;
   grid-auto-rows: max(24px);
   row-gap: 16px;
   column-gap: 10px;
@@ -229,5 +284,11 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0;
+}
+
+input:disabled {
+  background-color: #ffb6b4;
+  color: #c04846;
+  text-decoration: line-through;
 }
 </style>

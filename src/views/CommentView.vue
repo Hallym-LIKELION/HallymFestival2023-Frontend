@@ -14,6 +14,15 @@
       @complete="sendComment"
     />
 
+    <CommentContextMenu
+      :show="showContextMenu"
+      :x="contextMenuX"
+      :y="contextMenuY"
+      @clickDelete="openPasswordModal"
+      @clickReport="reportComment"
+      @clickOutside="closeMenu"
+    />
+
     <h1>방명록</h1>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -21,11 +30,7 @@
           :id="item.vno"
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
-          :showMenu="item.showMenu"
-          @clickMenu="handleMenu"
-          @clickDelete="handleDelete"
-          @focusout="handleFocusOut"
-          @clickReport="reportComment"
+          @clickMenu="toggleMenu"
         />
       </template>
     </div>
@@ -39,15 +44,17 @@
 import CommentModal from '../components/CommentModal.vue';
 import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
+import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import { GetVisitComment, PostBadVisitComment, GetMyIP } from '../api/api-client';
+import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
 
 export default {
   name: 'CommentView',
   components: {
     SearchBar,
     Comment,
+    CommentContextMenu,
     PasswordModal,
     CommentModal
   },
@@ -55,37 +62,23 @@ export default {
     return {
       list: [],
 
-      myIP: '',
+      showContextMenu: false,
+      contextMenuTargetID: -1,
+      contextMenuX: 0,
+      contextMenuY: 0,
 
       commentModal: false,
       commentStatus: false,
 
       passwordModal: false,
-      passwordStatus: false,
-
-      context: -1
+      passwordStatus: false
     };
   },
   methods: {
     closeCommentModal() {
       this.commentModal = false;
     },
-    sendComment(content, password) {
-      // TEMP: 랜덤 아이피
-      let ip = [];
-      for (let i = 0; i < 4; i++) {
-        ip.push(Math.floor(Math.random() * 256));
-      }
-      // ----------------
-
-      const data = {
-        id: (this.list[0]?.id || 0) + 1,
-        ip: ip.join('.'),
-        comment: content,
-        password,
-        showMenu: false
-      };
-
+    sendComment(data) {
       this.list.unshift(data);
 
       this.closeCommentModal();
@@ -94,73 +87,67 @@ export default {
       this.passwordStatus = true;
       this.passwordModal = false;
     },
-    deleteComment(password) {
-      //const failed = password !== '1111';
-      //this.passwordStatus = !failed;
-      PostBadVisitComment(comment_id, password)
-        .then((data) => {
-          if (data === 'delete success') {
-          }
-        })
-        .catch((err) => {
-          console.error('방명록 등록 실패', err);
-        });
+    async deleteComment(password) {
+      let data;
+      try {
+        // data = await DeleteVisitComment(this.context, password);
+        data = { result: 'success' };
+      } catch (e) {
+        // 알 수 없는 오류
 
-      // TODO: id로 delete 요청 보낼 것
-      // 결과를 failed에 담을 것
-      if (failed) {
+        this.passwordStatus = false;
+        return;
+      }
+
+      if (data.result.includes('wrong password')) {
+        // 비밀번호 오류
+        this.passwordStatus = false;
+        return;
+      } else if (data.result.includes('null comment')) {
+        // 댓글이 없음 (이미 삭제되었거나 ㅁㄴㅇㄹ)
+        this.passwordStatus = false;
         return;
       }
 
       this.passwordModal = false;
-      this.list = this.list.filter((item) => item.id !== this.context);
+      this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
-
-    writeArticle() {
-      /* 방명록 등록하기 POST */
-      PostVisitComment(content, password)
-        .then((data) => {
-          if (data === 'create success') {
-            // content와  this.list에 넣어주기(원래 가지고 있는것을 넣어주기)
-          }
-        })
-        .catch((err) => {
-          console.error('방명록 등록 실패', err);
-        });
-    },
-    handleMenu(id) {
-      if (id === this.context) {
-        this.context = -1;
+    toggleMenu(evt, id) {
+      if (this.showContextMenu) {
+        this.contextMenuTargetID = -1;
+        this.showContextMenu = false;
       } else {
-        this.context = id;
-      }
-      for (const item of this.list) {
-        item.showMenu = item.id === this.context;
+        this.contextMenuX = evt.target.offsetLeft;
+        this.contextMenuY = evt.target.offsetTop;
+        this.contextMenuTargetID = id;
+        this.showContextMenu = true;
       }
     },
-    handleDelete() {
-      console.log('test');
+    closeMenu() {
+      this.contextMenuTargetID = -1;
+      this.showContextMenu = false;
+    },
+    openPasswordModal() {
+      this.showContextMenu = false;
       this.passwordModal = true;
     },
-    handleFocusOut() {
-      // this.handleMenu(this.context);
-    },
     reportComment(comment_id) {
+      this.showContextMenu = false;
       /* 방명록 신고 */
-      PostBadVisitComment(comment_id)
-        .then((data) => {
-          this.postData = {
-            result: data.result
-          };
-          if (data.result.includes('success')) {
-            console.log('report success');
-          } else {
-            console.log('already reported');
-          }
-        })
-        .catch((err) => {
-          console.error('does not exist visit comment', err);
-        });
+      // PostBadVisitComment(comment_id)
+      //   .then((data) => {
+      //     this.postData = {
+      //       result: data.result
+      //     };
+      //     if (data.result.includes('success')) {
+      //       console.log('report success');
+      //     } else {
+      //       console.log('already reported');
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error('does not exist visit comment', err);
+      //   });
     },
     GetRandomNickName
   },
@@ -168,14 +155,7 @@ export default {
     /* 방명록 전체 게시물 조회 */
     const data = await GetVisitComment();
 
-    this.myIP = await GetMyIP();
-
-    this.list = data.dtoList
-      .filter((item) => !item.is_deleted)
-      .map((item) => ({
-        ...item, // spread 문법 - item에 showMenu만 덧붙이기
-        showMenu: false
-      }));
+    this.list = data.dtoList.filter((item) => !item.is_deleted);
   }
 };
 </script>
