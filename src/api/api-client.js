@@ -1,7 +1,6 @@
 'use strict';
 import axios from 'axios';
 
-// const HOST = 'http://127.0.0.1:8080';
 const HOST = 'https://dev-api.prisism.io';
 
 // 임시: 1.0.0.1 API 사용
@@ -39,7 +38,7 @@ export async function ModifyBooth(booth_id, title, content, writer, type, active
     booth_content: content,
     writer,
     booth_type: type,
-    active: active === 'OPEN'
+    active
   };
   const res = await axios.put(HOST + '/booth/modify/' + booth_id, data);
   return res.data;
@@ -141,7 +140,7 @@ export async function RemoveNotice(id) {
   return res.data;
 }
 
-export async function PostVisitComment(content, password) {
+export async function CreateVisitComment(content, password) {
   const data = {
     content,
     password
