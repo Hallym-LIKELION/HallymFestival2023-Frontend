@@ -278,6 +278,10 @@ export default {
       this.likeValueData = data.result;
 
       data = await get('like-data');
+      if (data === undefined) {
+        await set('like-data', []);
+        data = [];
+      }
       this.isLikedData = data.includes(this.id);
     } catch (e) {
       alert('알 수 없는 오류가 발생했습니다.');
