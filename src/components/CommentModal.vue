@@ -7,10 +7,14 @@
       </button>
     </div>
     <div class="modal-body">
+      <div class="writer">
+        <img class="profile" src="https://placehold.co/48x48" alt="" />
+        <p class="nickname">{{ myIP ? GetRandomNickName(myIP) : '' }}</p>
+      </div>
       <textarea
         class="write-content"
         v-model="content"
-        @keydown.enter.prevent="sendComment"
+        @keydown.enter.prevent="send"
         placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
       ></textarea>
       <input
@@ -19,12 +23,12 @@
         type="password"
         placeholder="비밀번호를 입력..."
         maxlength="32"
-        @keypress.enter="sendComment"
+        @keypress.enter="send"
       />
     </div>
     <div class="modal-footer">
       <button class="modal-button back" @click="close">돌아가기</button>
-      <button class="modal-button apply" @click="sendComment">게시하기</button>
+      <button class="modal-button apply" @click="send">게시하기</button>
     </div>
   </Modal>
 </template>
@@ -32,6 +36,8 @@
 <script>
 import Modal from './Modal.vue';
 import CloseImage from '../assets/close.png';
+import { GetRandomNickName } from '../library/name-generator';
+import { GetMyIP, CreateVisitComment } from '../api/api-client';
 
 const ERROR_MESSAGE = {};
 
@@ -42,6 +48,8 @@ export default {
   data() {
     return {
       CloseImage,
+
+      myIP: '',
 
       content: '',
       password: '',
@@ -70,21 +78,44 @@ export default {
 
       this.$emit('close');
     },
-    sendComment() {
+    async send() {
       if (this.content.length == 0) {
         alert('내용은 0자 이상이어야 합니다.');
+        return;
       }
 
-      if (this.password.length <= 4) {
+      if (this.password.length < 4) {
         alert('비밀번호는 4자리 이상이어야 합니다.');
+        return;
       }
-      this.$emit('complete', this.content, this.password);
+
+      let data;
+
+      try {
+        data = await CreateVisitComment(this.content, this.password);
+      } catch (e) {
+        alert('방명록 전송에 오류가 발생했습니다.\n' + e);
+        return;
+      }
+
+      if (data.result !== 'create success') {
+        alert('방명록 전송에 오류가 발생했습니다.\n' + data.result);
+      }
+
+      this.$emit('complete', {
+        ip: this.myIP,
+        content: this.content
+      });
 
       this.content = '';
       this.password = '';
-    }
+    },
+    GetRandomNickName
   },
-  created() {}
+  async created() {
+    const data = await GetMyIP();
+    this.myIP = data;
+  }
 };
 </script>
 

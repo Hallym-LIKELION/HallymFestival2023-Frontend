@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">
       <img class="profile" src="https://placehold.co/48x48" alt="" />
-      <p class="nickname">멋있는 사자</p>
+      <p class="nickname">{{ myIP ? GetRandomNickName(myIP) : '' }}</p>
     </div>
     <div class="body">
       <textarea
@@ -31,11 +31,16 @@
 
 <script>
 import SendImage from '../../assets/send.png';
+import { GetRandomNickName } from '../../library/name-generator';
+import { GetMyIP, CreateBoothComment } from '../../api/api-client';
 
 export default {
   data() {
     return {
       SendImage,
+
+      myIP: '',
+
       commentContent: '',
       commentPassword: ''
     };
@@ -47,7 +52,7 @@ export default {
     }
   },
   methods: {
-    send() {
+    async send() {
       if (this.commentContent.length === 0) {
         alert('댓글 내용을 입력하세요.');
         return;
@@ -57,29 +62,25 @@ export default {
         return;
       }
 
-      // TODO API와 이것저것 검증 ㅁㄴㅇㄻ
-
-      // API를 여기서 처리할 것 (send 이벤트는 API 요청이 완벽히 성공하면 호출)
-
-      // TEMP: 랜덤 아이피
-      let ip = [];
-      for (let i = 0; i < 4; i++) {
-        ip.push(Math.floor(Math.random() * 256));
+      const data = await CreateBoothComment(this.id, this.commentContent, this.commentPassword);
+      if (data.result !== 'create success') {
+        alert('댓글 전송에서 에러가 발생했습니다.\n' + data.result);
       }
-      // ----------------
 
-      const data = {
-        ip: ip.join('.'),
-        comment: this.commentContent
-      };
-
-      this.$emit('send', data);
+      this.$emit('send', {
+        // id: data.id,
+        ip: this.myIP,
+        content: this.commentContent
+      });
 
       this.commentContent = '';
       this.commentPassword = '';
-    }
+    },
+    GetRandomNickName
   },
-  created() {}
+  async created() {
+    this.myIP = await GetMyIP();
+  }
 };
 </script>
 <style scoped>
