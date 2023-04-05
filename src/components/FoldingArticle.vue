@@ -10,6 +10,10 @@
     <transition name="expand" @enter="expandEnter" @leave="expandLeave">
       <div class="article" v-if="showContent">
         <p class="content" v-text="content"></p>
+        <div class="footer">
+          <button class="edit" @click="clickEdit">수정</button>
+          <button class="delete" @click="clickDelete">삭제</button>
+        </div>
       </div>
     </transition>
   </div>
@@ -63,6 +67,14 @@ export default {
       return gsap
         .timeline({ onComplete: done })
         .to(element, { duration: 0.2, height: 0, marginBottom: 0 });
+    },
+    clickEdit(evt) {
+      this.$emit('clickEdit', this.id, this.title, this.content);
+      evt.stopPropagation();
+    },
+    clickDelete(evt) {
+      this.$emit('clickDelete', this.id, this.title);
+      evt.stopPropagation();
     }
   }
 };
@@ -118,6 +130,29 @@ export default {
 .content {
   margin: 0 28px;
   font-size: 12pt;
+  white-space: pre-wrap;
+}
+
+.footer {
+  margin: 0 28px;
+  margin-top: 10px;
+  display: flex;
+  /* justify-content: flex-end; */
+}
+
+.footer > button {
+  padding: 2px 16px;
+}
+.footer > button.edit {
+  border-radius: 24px 0 0 24px;
+  border: 1px solid #4079ff;
+  border-right: none;
+  color: #4079ff;
+}
+.footer > button.delete {
+  border-radius: 0 24px 24px 0;
+  border: 1px solid #f74242;
+  color: #f74242;
 }
 
 .hidden {
