@@ -1,23 +1,32 @@
 <template>
   <main>
+    <NoticeModal
+      :visible="showNoticeModal"
+      :title="noticeModalData.title"
+      :content="noticeModalData.content"
+      @complete="completeNoticeModal"
+      @close="closeNoticeModal"
+    />
     <h1 ref="title">공지사항</h1>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
       <div v-for="user in users">{{ user.id }}</div>
       <template v-for="item in displayList" :key="item.id">
         <FoldingArticle
-          @click="() => showAnnouncement(item.id)"
           :id="item.id"
           :title="item.title"
           :content="item.content"
           :showContent="item.id === showingContent"
+          @click="() => showAnnouncement(item.id)"
+          @clickEdit="clickEdit"
+          @clickDelete="clickDelete"
         />
         <!-- <button @click="() => deleteAnnouncement(item.id)">삭제</button>
         <button @click="() => removeAnnouncement(item.id)">수정</button> -->
       </template>
     </div>
     <div class="button-group" ref="buttonGroup">
-      <button @click="() => writeArticle()">글쓰기</button>
+      <button @click="clickCreate">글쓰기</button>
     </div>
   </main>
 </template>
@@ -25,20 +34,36 @@
 <script>
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
+import NoticeModal from '../components/NoticeModal.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
-import { GetNoticeList, DeleteNotice, RemoveNotice, SearchNotice } from '../api/api-client';
+import {
+  GetNoticeList,
+  CreateNotice,
+  ModifyNotice,
+  DeleteNotice,
+  RemoveNotice,
+  SearchNotice
+} from '../api/api-client';
 
 export default {
   name: 'AnnouncementView',
   components: {
     SearchBar,
-    FoldingArticle
+    FoldingArticle,
+    NoticeModal
   },
   data() {
     return {
       list: [],
       search: '',
-      showingContent: null
+      showingContent: null,
+
+      showNoticeModal: false,
+      noticeModalID: -1,
+      noticeModalData: {
+        title: '',
+        content: ''
+      }
     };
   },
   computed: {
@@ -58,40 +83,81 @@ export default {
       }
     },
 
-    /* 공지사항 - 게시물 삭제 하는 메소드 */
-    //공지사항 게시물 삭제
-    deleteAnnouncement(id) {
-      DeleteNotice(id)
-        .then((data) => {
-          if (data.result.includes('success')) {
-            console.log('삭제 성공');
-          } else {
-            console.error('삭제 실패');
-          }
-        })
-        .catch((err) => {
-          console.error('삭제 실패', err);
-        });
-    },
-    /* 공지사항 - 게시물 수정 하는 메소드 */
-    //공지사항 게시물 수정
-    removeAnnoucement(id) {
-      RemoveNotice(id)
-        .then((data) => {
-          if (data.result.includes('success')) {
-            console.log('수정 성공');
-          } else {
-            console.error('수정 실패');
-          }
-        })
-        .catch((err) => {
-          console.error('수정 실패', err);
-        });
+    completeNoticeModal(title, content) {
+      if (this.noticeModalID === -1) {
+        this.sendNotice(title, content);
+      } else {
+        this.modifyNotice(title, content);
+      }
     },
 
-    writeArticle() {
-      // 글쓰기 기능 구현
-      alert('TODO');
+    async sendNotice(title, content) {
+      const res = await CreateNotice(title, content);
+
+      if (!res.result.includes('success')) {
+        alert('공지사항을 게시하는데 오류가 발생했습니다.\n', res.result);
+      }
+
+      const data = await GetNoticeList();
+      this.list = data.filter((item) => !item.is_deleted);
+
+      this.closeNoticeModal();
+    },
+
+    async modifyNotice(title, content) {
+      const res = await ModifyNotice(this.noticeModalID, title, content);
+
+      if (!res.result.includes('success')) {
+        alert('공지사항을 수정하는데 오류가 발생했습니다.\n', res.result);
+      }
+
+      const data = await GetNoticeList();
+      this.list = data.filter((item) => !item.is_deleted);
+
+      this.closeNoticeModal();
+    },
+
+    clickEdit(id, title, content) {
+      this.noticeModalData = {
+        title,
+        content
+      };
+      this.noticeModalID = id;
+      this.openNoticeModal();
+    },
+
+    async clickDelete(id, title) {
+      const answer = prompt(
+        `"${title}" 게시글을 삭제하려고 합니다. 계속하려면 "삭제"를 입력하세요.`
+      );
+      if (answer != '삭제') {
+        return;
+      }
+
+      const res = await RemoveNotice(id);
+      if (res.result.includes('success')) {
+        alert('게시글이 삭제되었습니다.');
+        this.list = this.list.filter((item) => item.id != id);
+      } else {
+        alert('게시글을 삭제하는데 오류가 발생했습니다.\n' + res.result);
+      }
+    },
+
+    clickCreate() {
+      this.noticeModalData = {
+        title: '',
+        content: ''
+      };
+      this.openNoticeModal();
+      this.noticeModalID = -1;
+    },
+
+    openNoticeModal() {
+      this.showNoticeModal = true;
+    },
+
+    closeNoticeModal() {
+      this.showNoticeModal = false;
     }
   },
   mounted() {
