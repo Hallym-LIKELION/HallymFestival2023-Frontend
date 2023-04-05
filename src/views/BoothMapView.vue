@@ -1,5 +1,18 @@
 <template>
   <main>
+    <BoothEditModal
+      :visible="showCreateBoothModal"
+      :data="{
+        title: '',
+        description: '',
+        type: '부스',
+        status: true
+      }"
+      :id="-1"
+      @close="closeCreateModal"
+      @complete="createBooth"
+    />
+
     <h1>부스 배치도</h1>
 
     <div class="poster">
@@ -10,6 +23,13 @@
         @load="onImageLoad"
         alt="한림대학교 비봉축전"
       />
+    </div>
+
+    <div class="banner-group">
+      <button @click="openBoothRecommendation" class="create-booth-button">
+        나에게 어울리는 부스는?
+      </button>
+      <button @click="openCreateModal" class="create-booth-button">부스 만들기</button>
     </div>
 
     <div class="search-bar"><SearchBar v-model="search" /></div>
@@ -36,13 +56,15 @@
 <script>
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
-import { GetBoothList } from '../api/api-client';
+import BoothEditModal from '../components/booth/EditModal.vue';
+import { GetBoothList, CreateBooth } from '../api/api-client';
 import mapImage from '../assets/map.jpg';
 
 export default {
   components: {
     SearchBar,
-    ListItem
+    ListItem,
+    BoothEditModal
   },
   data() {
     return {
@@ -50,20 +72,22 @@ export default {
       list: [],
       search: '',
       day: 0,
-      isImageLoaded: false
+      isImageLoaded: false,
+
+      showCreateBoothModal: false
     };
   },
   computed: {
     filltered_list() {
       return this.list.filter((item) => {
         // 1. 요일에 따른 필터링
-        const isChoosedDay = this.day === 0 || item.day.includes(this.day);
+        const isChoosedDay = true || this.day === 0 || item.day.includes(this.day);
 
         // 2. 검색에 따른 필터링
         const isContainSearchString =
           this.search === '' ||
-          item.name.includes(this.search) ||
-          item.summary.includes(this.search);
+          item.booth_title.includes(this.search) ||
+          item.booth_content.includes(this.search);
 
         return isChoosedDay && isContainSearchString;
       });
@@ -82,6 +106,30 @@ export default {
     },
     onImageLoad() {
       this.isImageLoaded = true;
+    },
+    openCreateModal() {
+      this.showCreateBoothModal = true;
+    },
+    closeCreateModal() {
+      this.showCreateBoothModal = false;
+    },
+    openBoothRecommendation() {
+      alert('준비중');
+    },
+    async createBooth(data) {
+      const res = await CreateBooth(data.title, data.description, '테스트', data.type);
+
+      if (!res.result.includes('success')) {
+        alert('부스를 생성하는데 실패했습니다.\n' + res.result);
+        return;
+      }
+
+      const newData = await GetBoothList();
+      this.list = newData.dtoList;
+
+      alert('부스를 성공적으로 생성했습니다.');
+
+      this.closeCreateModal();
     }
   },
   async created() {
@@ -153,6 +201,24 @@ h1 {
 .button-group > button.selected {
   background-color: #509bf8;
   color: white;
+}
+
+.banner-group {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.banner-group > button {
+  width: 100%;
+  height: 40px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background-color: #509bf8;
+  color: white;
+  font-size: 13pt;
 }
 
 .booth-list {
