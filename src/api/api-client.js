@@ -109,9 +109,15 @@ export async function DeleteBoothMenu(menu_id) {
   return res.data;
 }
 
-export async function PostNotice(title, content) {
+export async function CreateNotice(title, content) {
   const data = { title, content };
   const res = await axios.post(HOST + '/notice', data);
+  return res.data;
+}
+
+export async function ModifyNotice(id, title, content) {
+  const data = { title, content };
+  const res = await axios.put(HOST + '/notice/' + id, data);
   return res.data;
 }
 
