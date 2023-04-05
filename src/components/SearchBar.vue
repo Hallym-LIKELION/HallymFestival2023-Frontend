@@ -43,6 +43,7 @@ img {
 
 input {
   width: 100%;
+  background-color: white;
   border: none;
   outline: none;
   font-family: 'Noto Sans KR', sans-serif;

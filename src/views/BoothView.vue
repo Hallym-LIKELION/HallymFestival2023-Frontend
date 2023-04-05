@@ -35,9 +35,14 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 소개</h1>
-          <button class="edit-button" @click="editModal = !editModal">
-            <img :src="EditImage" alt="" />
-          </button>
+          <div class="section-header-button-group">
+            <button class="delete-button" @click="deleteBooth">
+              <img :src="CloseImage" alt="" />
+            </button>
+            <button class="edit-button" @click="editModal = !editModal">
+              <img :src="EditImage" alt="" />
+            </button>
+          </div>
         </div>
         <hr />
         <p class="section-text" v-text="boothData.booth_content || 'Loading...'"></p>
@@ -78,12 +83,14 @@ import { get, set } from 'idb-keyval';
 import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
+import CloseImage from '../assets/close.png';
 import {
   GetBooth,
   GetBoothMenu,
   GetBoothLike,
   PostBoothLike,
-  ModifyBooth
+  ModifyBooth,
+  DeleteBooth
 } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
@@ -99,6 +106,7 @@ export default {
   data() {
     return {
       EditImage,
+      CloseImage,
 
       id: -1,
 
@@ -222,6 +230,21 @@ export default {
       // 0.3초 기다리기
       await new Promise((r) => setTimeout(r, 50));
       this.isLikeDelayed = false;
+    },
+    async deleteBooth() {
+      let answer = prompt(
+        `${this.boothData.booth_title} 부스를 삭제하려 합니다. 삭제를 진행하려면 "삭제"라고 입력해주세요.`,
+        ''
+      );
+      if (answer) {
+        const res = await DeleteBooth(this.boothData.bno);
+        if (res.result.includes('success')) {
+          alert('부스가 삭제되었습니다.');
+          this.$router.push('/boothmap');
+        } else {
+          alert('부스를 삭제하는데 오류가 발생했습니다.\n' + res.result);
+        }
+      }
     }
   },
   computed: {
@@ -348,10 +371,27 @@ h1 {
   object-fit: contain;
   display: block;
 }
+.section-header-button-group {
+  display: flex;
+  align-items: center;
+}
 
 .edit-button > img {
   width: 28px;
   height: 28px;
+  vertical-align: middle;
+}
+
+.delete-button {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 28px;
+  background-color: #d9d9d9;
+}
+.delete-button > img {
+  width: 12px;
+  height: 12px;
 }
 
 hr {
