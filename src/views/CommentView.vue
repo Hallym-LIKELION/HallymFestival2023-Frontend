@@ -116,16 +116,14 @@ export default {
     async postbadComment(comment_id){
       let data;
       try{ 
-        data= {result: 'report success'};
+        data= await PostBadVisitComment(comment_id);
     } catch(err){
       return;
     }
     if (data.result.includes('already report')) {
-        data= {result: 'already reported'};
-        return data;
+        alert("이미 신고했습니다.");
       } else if (data.result.includes('null comment')) {
-        data= {result: 'does not exist visit comment'};
-        return data;
+        alert("존재하지 않는 댓글입니다.");
       }
       },
 
