@@ -96,8 +96,8 @@ export default {
     async deleteComment(password) {
       let data;
       try {
-        // data = await DeleteBoothComment(this.context, password);
-        data = { result: 'success' };
+        data = await DeleteBoothComment(this.context, password);
+        // data = { result: 'success' };
       } catch (e) {
         // 알 수 없는 오류
 
