@@ -50,7 +50,8 @@ export default {
   components: {
     SearchBar,
     FoldingArticle,
-    NoticeModal
+    NoticeModal,
+
   },
   data() {
     return {
@@ -63,7 +64,7 @@ export default {
       noticeModalData: {
         title: '',
         content: ''
-      }
+      },
     };
   },
   computed: {

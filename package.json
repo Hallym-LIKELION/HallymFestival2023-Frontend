@@ -15,7 +15,8 @@
     "gsap": "^3.11.5",
     "idb-keyval": "^6.2.0",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
