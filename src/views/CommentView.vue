@@ -112,6 +112,25 @@ export default {
       this.passwordModal = false;
       this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
+    //방명록 신고
+    async postbadComment(comment_id){
+      let data;
+      try{ 
+        data= {result: 'report success'};
+    } catch(err){
+      return;
+    }
+    if (data.result.includes('already report')) {
+        data= {result: 'already reported'};
+        return data;
+      } else if (data.result.includes('null comment')) {
+        data= {result: 'does not exist visit comment'};
+        return data;
+      }
+      },
+
+    
+    
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
         this.contextMenuTargetID = -1;
