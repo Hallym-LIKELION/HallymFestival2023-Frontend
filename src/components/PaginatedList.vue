@@ -2,7 +2,7 @@
   <section class="paging">
       <a class="pagingFirst" 
       @click = "prevPage()"
-      :disabled = "page.page == 1">처음</a>
+      :disabled = "page.page == 1">First</a>
           <ul class="pagingList">
               <li 
               v-for = "item in countInPages" 
@@ -11,7 +11,7 @@
               @click = "selectPage( (startPage-1)+item )"
               > {{(startPage-1) + item}} </li>
           </ul>
-      <a class="pagingLast" @click = "nextPage()">끝</a>
+      <a class="pagingLast" @click = "nextPage()">End</a>
   </section>
 </template>
 <script>
