@@ -90,7 +90,7 @@ export default {
     async deleteComment(password) {
       let data;
       try {
-        data = await DeleteVisitComment(this.context, password);
+        data = await DeleteVisitComment(this.contextMenuTargetID, password);
         // data = { result: 'success' };
       } catch (e) {
         // 알 수 없는 오류
