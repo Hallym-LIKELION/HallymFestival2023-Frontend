@@ -28,6 +28,7 @@
     <div class="button-group" ref="buttonGroup">
       <button @click="clickCreate">글쓰기</button>
     </div>
+
   </main>
 </template>
 
@@ -36,6 +37,7 @@ import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
+
 import {
   GetNoticeList,
   CreateNotice,
@@ -50,7 +52,9 @@ export default {
   components: {
     SearchBar,
     FoldingArticle,
-    NoticeModal
+    NoticeModal,
+    pagination
+
   },
   data() {
     return {
@@ -63,7 +67,12 @@ export default {
       noticeModalData: {
         title: '',
         content: ''
-      }
+      },
+      total: showingContent.length,
+      page: 1,
+      limit: 5,
+      block: 5
+      
     };
   },
   computed: {
@@ -75,6 +84,7 @@ export default {
     }
   },
   methods: {
+    
     showAnnouncement(id) {
       if (id === this.showingContent) {
         this.showingContent = null;
@@ -161,6 +171,7 @@ export default {
     }
   },
   mounted() {
+    this.pagingMethod(this.page)
     // 타이틀 애니메이션
     gsap.fromTo(
       this.$refs.title,

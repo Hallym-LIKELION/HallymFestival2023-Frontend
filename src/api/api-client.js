@@ -171,7 +171,7 @@ export async function GetVisitComment(comment_page = 0) {
   const res = await axios.get(url);
   return res.data;
 }
-
+//신고기능
 export async function PostBadVisitComment(comment_id) {
   const res = await axios.post(HOST + '/report/visitcomment/' + comment_id, null, {
     // withCredentials: true

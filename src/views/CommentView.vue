@@ -112,6 +112,23 @@ export default {
       this.passwordModal = false;
       this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
+    //방명록 신고
+    async postbadComment(comment_id){
+      let data;
+      try{ 
+        data= await PostBadVisitComment(comment_id);
+    } catch(err){
+      return;
+    }
+    if (data.result.includes('already report')) {
+        alert("이미 신고했습니다.");
+      } else if (data.result.includes('null comment')) {
+        alert("존재하지 않는 댓글입니다.");
+      }
+      },
+
+    
+    
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
         this.contextMenuTargetID = -1;
