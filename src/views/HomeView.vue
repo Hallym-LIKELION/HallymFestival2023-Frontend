@@ -20,7 +20,6 @@
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
 import festivalImage from '@/assets/poster.jpg';
-import osohyun from '@/assets/osohyun.png';
 
 export default {
   data() {
