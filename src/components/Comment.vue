@@ -2,17 +2,21 @@
   <div class="wrapper" :style="'background-color: ' + color">
     <div class="header">
       <img class="picture" :src="picture" v-if="picture !== ''" />
-      <p class="name" v-text="name"></p>
+
+      <h3 class="name" v-text="name"></h3> 
       <button class="menu-button" @click="clickMenuButton">
         <img :src="arrowImage" alt="" srcset="" />
       </button>
     </div>
     <p class="comment" v-text="comment"></p>
+    <p class="booth" v-text="booth"></p>
+    <p class="warn" v-text="warn" ></p> 
+    <p class="time" v-text="time"></p>
   </div>
 </template>
 
 <script>
-import arrowImage from '@/assets/down.png';
+import arrowImage from '@/assets/ownermenu.png';
 export default {
   data() {
     return {
@@ -38,8 +42,20 @@ export default {
     },
     color: {
       type: String,
-      default: '#FFF4CE'
-    }
+      default: '#D9D9D9'
+    },
+    booth: {
+      type: String,
+      default: '부스명'
+    },
+    time: {
+      type: String,
+      default: '2023-00-00 00:00'
+    },
+    warn: {
+      type: String,
+      default: '신고 0회'
+    },
   },
   methods: {
     clickMenuButton(evt) {
@@ -50,6 +66,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .wrapper {
   padding: 10px;
   padding-bottom: 20px;
@@ -95,4 +112,5 @@ export default {
 .comment {
   width: 100%;
 }
+
 </style>

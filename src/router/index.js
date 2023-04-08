@@ -66,6 +66,16 @@ const router = createRouter({
       component: () => import('../views/OwnerDashBoard.vue')
     },
     {
+      path: '/ownerbcomment',
+      name: 'ownerbcomment',
+      component: () => import('../views/OwnerBoothComment.vue')
+    },
+    {
+      path: '/ownercomment',
+      name: 'ownercomment',
+      component: () => import('../views/OwnerComment.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'notfound',
       component: () => import('../views/NotFoundView.vue')

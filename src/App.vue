@@ -68,11 +68,13 @@ export default {
         { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
         { name: '만든이들', url: 'aboutus' },
-        { name: '(테)관리자홈', url: 'ownerhome' }
+        { name: '(테)관리자홈', url: 'ownerhome' },
+        { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
+        { name: '(테)관리자방명록', url: 'ownercomment' }
       ],
       navBottomList: [
         { name: '로그인', url: 'login' },
-        { name: '회원가입', url: 'register' }
+        { name: '(404)', url: 'register' }
       ]
     };
   },
