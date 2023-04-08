@@ -23,6 +23,7 @@
       @clickOutside="closeMenu"
     />
 
+
     <h1>방명록</h1>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -48,6 +49,7 @@ import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
 import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
+
 
 export default {
   name: 'CommentView',

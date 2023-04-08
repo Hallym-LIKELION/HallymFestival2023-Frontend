@@ -28,8 +28,7 @@
     <div class="button-group" ref="buttonGroup">
       <button @click="clickCreate">글쓰기</button>
     </div>
-
-  </main>
+    </main>
 </template>
 
 <script>
@@ -52,9 +51,7 @@ export default {
   components: {
     SearchBar,
     FoldingArticle,
-    NoticeModal,
-    pagination
-
+    NoticeModal
   },
   data() {
     return {
@@ -68,11 +65,10 @@ export default {
         title: '',
         content: ''
       },
-      total: showingContent.length,
-      page: 1,
-      limit: 5,
-      block: 5
-      
+      // total: showingContent.length,
+      // page: 1,
+      // limit: 5,
+      // block: 5
     };
   },
   computed: {
@@ -84,7 +80,6 @@ export default {
     }
   },
   methods: {
-    
     showAnnouncement(id) {
       if (id === this.showingContent) {
         this.showingContent = null;
@@ -168,10 +163,11 @@ export default {
 
     closeNoticeModal() {
       this.showNoticeModal = false;
-    }
+    },
+   
   },
   mounted() {
-    this.pagingMethod(this.page)
+    // this.pagingMethod(this.page);
     // 타이틀 애니메이션
     gsap.fromTo(
       this.$refs.title,
@@ -354,6 +350,7 @@ export default {
 </script>
 
 <style scoped>
+
 h1 {
   font-size: 20pt;
   text-align: center;

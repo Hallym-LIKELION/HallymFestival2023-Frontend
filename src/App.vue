@@ -67,11 +67,12 @@ export default {
         { name: '프로그램', url: 'program' },
         { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
-        { name: '만든이들', url: 'aboutus' }
+        { name: '만든이들', url: 'aboutus' },
+        { name: '(테)관리자홈', url: 'aboutus' }
       ],
       navBottomList: [
         { name: '로그인', url: 'login' },
-        { name: '회원가입', url: 'register' }
+        { name: '회원가입', url: 'owerhome' }
       ]
     };
   },
