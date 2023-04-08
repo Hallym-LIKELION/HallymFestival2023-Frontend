@@ -67,7 +67,8 @@ export default {
         { name: '프로그램', url: 'program' },
         { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
-        { name: '만든이들', url: 'aboutus' }
+        { name: '만든이들', url: 'aboutus' },
+        { name: '(테)관리자홈', url: 'ownerhome' }
       ],
       navBottomList: [
         { name: '로그인', url: 'login' },
