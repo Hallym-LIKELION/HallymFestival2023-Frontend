@@ -61,8 +61,8 @@ const router = createRouter({
       component: () => import('../views/NotFoundView.vue')
     },
     {
-      path: '/owerhome',
-      name: 'owerhome',
+      path: '/ownerhome',
+      name: 'ownerhome',
       component: () => import('../views/OwnerDashBoard.vue')
     },
     {
