@@ -74,7 +74,7 @@ export default {
       ],
       navBottomList: [
         { name: '로그인', url: 'login' },
-        { name: '회원가입', url: 'register' }
+        { name: '(404)', url: 'register' }
       ]
     };
   },

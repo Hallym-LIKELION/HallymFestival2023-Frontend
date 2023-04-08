@@ -1,6 +1,7 @@
 <template>
   <div class="footer">
-    <p class="title">한림대학교 멋쟁이사자처럼 Builder Team</p>
+    <p class="title">한림대학교 멋쟁이사자처럼 Builder Team<br> Sponsored for Naver Cloud </p>
+    <br>
     <p class="subtitle">Hallym Likelion</p>
   </div>
 </template>
@@ -20,7 +21,7 @@
   color: #222222;
 }
 .footer > p.subtitle {
-  font-size: 9pt;
+  font-size: 10pt;
   color: #555555;
 }
 </style>
