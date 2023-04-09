@@ -351,6 +351,7 @@ h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
+  color: #FFFFFF; 
 }
 
 .search-bar {

@@ -147,6 +147,7 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 24px 0;
+  color: #FFFFFF;
 }
 
 .poster {
@@ -191,7 +192,7 @@ h1 {
   padding: 6px 16px;
   border: none;
   border-radius: 24px;
-  color: black;
+  color: #FFFFFF;
   font-size: 11pt;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;

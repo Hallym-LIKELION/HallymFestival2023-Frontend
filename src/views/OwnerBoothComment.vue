@@ -94,6 +94,7 @@ export default {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
+  color: #FFFFFF;
 }
 
 .button-group {

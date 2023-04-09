@@ -91,7 +91,7 @@ export default {
 <style scoped>
 .background{
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   margin: 0;
   background-image: url("./assets/mainbackg.png");
   background-size: cover;

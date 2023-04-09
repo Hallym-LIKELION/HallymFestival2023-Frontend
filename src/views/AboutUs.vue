@@ -175,6 +175,7 @@ p {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
+  color: #FFFFFF;
 }
 .introment {
   font-family: 'Noto Sans KR', sans-serif;

@@ -90,6 +90,7 @@ h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
+  color: #FFFFFF;
 }
 
 .button-group {
@@ -102,7 +103,7 @@ h1 {
   padding: 5px 18px;
   border: none;
   border-radius: 16px;
-  color: black;
+  color: #FFFFFF;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
   transition: background-color 0.25s, color 0.25s;
