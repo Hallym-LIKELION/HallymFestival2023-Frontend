@@ -77,7 +77,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/parkjuyoung.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">박주영</h2>
             <h5 class="card-text">빅데이터학과 19</h5>
