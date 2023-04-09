@@ -1,5 +1,6 @@
 <template>
   <main>
+    <div class="background">
     <Transition name="fade">
       <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
     </Transition>
@@ -33,7 +34,7 @@
         </Transition>
       </RouterView>
     </div>
-
+  </div>
     <Footer></Footer>
   </main>
 </template>
@@ -88,6 +89,15 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  background-image: url("./assets/mainbackg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 header {
   width: 100%;
   height: 56px;
