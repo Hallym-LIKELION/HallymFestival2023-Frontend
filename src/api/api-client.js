@@ -121,8 +121,12 @@ export async function ModifyNotice(id, title, content) {
   return res.data;
 }
 
-export async function GetNoticeList() {
-  const res = await axios.get(HOST + '/notice/');
+export async function GetNoticeList(notice_page) {
+  let url = HOST + '/notice/list';
+  if (notice_page !== 0) {
+    url += '?page=' + notice_page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 

@@ -1,18 +1,24 @@
 <template>
   <main>
-    <div class="poster" ref="poster">
-      <img :src="festivalImage" alt="한림대학교 비봉축전" />
-    </div>
-
-    <h1 ref="slogan">(2023 축제 슬로건)</h1>
-
+    <div class="introment">
+    <p>"우리의 모든 시간은 연결되어있어"</p>
+  </div>
+  <div class="logo">
+      <img src="@/assets/logo.png" alt="" />
+  </div>
+  <div class ="title">
+    <h3>한림대학교 비봉축전</h3><br>
+    <p>2023.05.16 ~ 05.18</p>
+  </div>
     <div class="menu" ref="menu">
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
     </div>
-    
+    <div class="test-group">
+        <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
+      </div>
   </main>
 </template>
 
@@ -27,6 +33,11 @@ export default {
       festivalImage,
       storytelling: ''
     };
+  },
+  methods: {
+    openBoothRecommendation() {
+      alert('준비중');
+    }
   },
   mounted() {
     // 포스터 애니메이션
@@ -84,18 +95,25 @@ h1 {
   font-size: 20pt;
   text-align: center;
 }
-
-.poster {
-  padding: 36px 0;
+.logo {
   display: flex;
   justify-content: center;
 }
-
-.poster > img {
-  max-height: 38vh;
-  width: auto;
+.introment {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 13px;
+  text-align: center;
+  letter-spacing: 0.15em;
+  margin: 0;
+  padding: 36px 0;
 }
 
+.title{
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
 .menu {
   max-width: 320px;
   margin: auto;
@@ -110,11 +128,34 @@ h1 {
   width: 100%;
   margin: 4px;
   padding: 10px 0;
-  border-radius: 4px;
+  border-radius: 46.25px;
   font-size: 13pt;
   text-align: center;
   text-decoration: none;
   color: black;
   background-color: lightgray;
+  opacity: 0.7;
+}
+.test-group {
+  max-width: 320px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.test-group > button {
+  width: 100%;
+  margin: 4px 0;
+  padding: 10px 0;
+  border-radius: 46.25px;
+  background-color: #ca434c;
+  opacity: 0.7;
+  color: white;
+  font-size: 13pt;
+  text-align: center;
+  text-decoration: none;
 }
 </style>

@@ -11,17 +11,18 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-color: #dfdfdf;
+  background-color: #363636;
   width: 100%;
   min-height: 70px; /* footer의 높이 */
 }
 
 .footer > p.title {
-  font-size: 12pt;
-  color: #222222;
+  font-size: 10pt;
+  color: #FFFFFF;
 }
 .footer > p.subtitle {
-  font-size: 10pt;
-  color: #555555;
+  font-size: 9pt;
+  color: #FFFFFF;
+  opacity: 0.6;
 }
 </style>
