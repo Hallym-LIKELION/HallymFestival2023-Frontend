@@ -65,10 +65,7 @@ export default {
         title: '',
         content: ''
       },
-      // total: showingContent.length,
-      // page: 1,
-      // limit: 5,
-      // block: 5
+
     };
   },
   computed: {
@@ -104,7 +101,7 @@ export default {
       }
 
       const data = await GetNoticeList();
-      this.list = data.filter((item) => !item.is_deleted);
+      this.list = data.dtoList.filter((item) => !item.is_deleted);
 
       this.closeNoticeModal();
     },
@@ -117,7 +114,7 @@ export default {
       }
 
       const data = await GetNoticeList();
-      this.list = data.filter((item) => !item.is_deleted);
+      this.list = data.dtoList.filter((item) => !item.is_deleted);
 
       this.closeNoticeModal();
     },
@@ -236,9 +233,8 @@ export default {
   },
   async created() {
     // 공지사항 불러와서 data에 넣어주기.
-
     const data = await GetNoticeList();
-    this.list = data.filter((item) => !item.is_deleted);
+    this.list = data.dtoList.filter((item) => !item.is_deleted);
 
     // 오류 발생하는 코드 임시 주석 처리, 구현할때 주석 풀고 사용해주세요~
 
