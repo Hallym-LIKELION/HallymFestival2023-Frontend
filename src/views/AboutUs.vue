@@ -40,8 +40,8 @@
           <div class="card-body">
             <h2 class="card-title">오소현</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button>
-              <a href="https://github.com/osohyun0224"><div class="button">소현's Github ></div></a>
+            <button @click="opengithubsohyun" class="git-button">
+              소현's Github
             </button>
           </div>
         </div>
@@ -51,8 +51,8 @@
           <div class="card-body">
             <h2 class="card-title">김경재</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button>
-              <a href="https://github.com/PortalCube"><div class="button">경재's Github ></div></a>
+            <button @click="opengithubkungjae" class="git-button">
+              경재's Github
             </button>
           </div>
         </div>
@@ -64,14 +64,12 @@
 
       <div class="grid">
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/leedongheon.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">이동헌</h2>
             <h5 class="card-text">빅데이터학과 15</h5>
-            <button>
-              <a href="https://github.com/Sirius506775"
-                ><div class="button">동헌's Github ></div></a
-              >
+            <button @click="opengithubdongheon" class="git-button">
+              동헌's Github
             </button>
           </div>
         </div>
@@ -80,9 +78,9 @@
           <img src="@/assets/parkjuyoung.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">박주영</h2>
-            <h5 class="card-text">빅데이터학과 19</h5>
-            <button>
-              <a href="https://github.com/mythpoy"><div class="button">주영's Github ></div></a>
+            <h5 class="card-text">콘텐츠IT학과 19</h5>
+            <button @click="opengithubjuyoung" class="git-button">
+              주영's Github
             </button>
           </div>
         </div>
@@ -92,8 +90,8 @@
           <div class="card-body">
             <h2 class="card-title">김미진</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button>
-              <a href="https://github.com/mijin0721"><div class="button">미진's Github ></div></a>
+            <button @click="opengithubmijin" class="git-button">
+              미진's Github
             </button>
           </div>
         </div>
@@ -124,7 +122,27 @@
   </main>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    opengithubsohyun() {
+      window.open("https://github.com/osohyun0224", "_blank");
+    },
+    opengithubkungjae(){
+      window.open("https://github.com/PortalCube", "_blank");
+    },
+    opengithubdongheon(){
+      window.open("https://github.com/Sirius506775", "_blank");
+    },
+    opengithubjuyoung(){
+      window.open("https://github.com/mythpoy","_blank");
+    },
+    opengithubmijin(){
+      window.open("https://github.com/mijin0721","_blank");
+    }
+  }
+}
+</script>
 
 <style scoped>
 h1,
@@ -148,7 +166,22 @@ p {
   text-size-adjust: auto;
   font-size: 1vw;
 }
-
+.git-button{
+  margin-top: 15px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #5C859B;
+  font-size: 12pt;
+  color: white;
+}
+.git-button > button{
+  margin-top: 15px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #5C859B;
+  font-size: 12pt;
+  color: white;
+}
 .grid {
   width: 80%;
   margin: auto;
@@ -175,6 +208,7 @@ p {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
+  color: #FFFFFF;
 }
 .introment {
   font-family: 'Noto Sans KR', sans-serif;
@@ -243,12 +277,5 @@ p {
   line-height: 9px;
   margin-bottom: 50px;
 }
-.button {
-  margin-top: 15px;
-  padding: 6px 10px;
-  border-radius: 18px;
-  background-color: #222324;
-  font-size: 12pt;
-  color: white;
-}
+
 </style>
