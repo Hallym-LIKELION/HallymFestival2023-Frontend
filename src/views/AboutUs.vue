@@ -3,24 +3,30 @@
     <div class="title">About US</div>
     <TitleContainer>
       <Logo className="introduce" text-align: center>
-        <h3>🦁한림대학교 멋쟁이사자처럼 Builder Team🦁</h3>
+        <h3>한림대학교 멋쟁이사자처럼 <br><br><br><br> Builder Team</h3>
+        <br>
         <h4>X</h4>
-        <h3>🎆2023 한림대학교 축제준비위원회🎆</h3>
+        <br>
+        <h3>2023 한림대학교 <br><br><br><br> 축제준비위원회</h3>
       </Logo>
+<br><br>
+      <hr style="border: solid 0.5px black" />
 
       <div class="introment">
         <p>2023년도 한림대학교 대동제를 위하여</p>
-        <p>한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고,</p>
+        <p>한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고</p>
         <p>
-          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이 축제 웹사이트를
-          개발하였습니다.
+          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이 
+          <br><br>축제 웹사이트를 개발하였습니다.
         </p>
+        <br><br><br><br>
         <p>
-          이번 2023 한림대학교 대동제가 여느때보다 즐겁고 행복한 축제가 되시기를 진심으로
+          이번 2023 한림대학교 대동제가 <br><br> 여느때보다 즐겁고 행복한 축제가 되시기를 진심으로
           소망합니다.
         </p>
-        <p>❤️학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다❤️</p>
+        <p>학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!</p>
       </div>
+      <hr style="border: solid 0.5px black" />
 
       <SubTitle className="group"><h2>Developer</h2></SubTitle>
 
@@ -41,7 +47,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/kimkyungjae.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">김경재</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
@@ -71,7 +77,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/parkjuyoung.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">박주영</h2>
             <h5 class="card-text">빅데이터학과 19</h5>
@@ -82,10 +88,10 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/kimmijin.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">김미진</h2>
-            <h5 class="card-text">빅데이터학과 19</h5>
+            <h5 class="card-text">빅데이터학과 20</h5>
             <button>
               <a href="https://github.com/mijin0721"><div class="button">미진's Github ></div></a>
             </button>
@@ -99,15 +105,15 @@
 
       <div class="grid">
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/choiari.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">최아리</h2>
-            <h5 class="card-text">경영학과 19</h5>
+            <h5 class="card-text">경영학과 21</h5>
           </div>
         </div>
 
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/oyujin.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">오유진</h2>
             <h5 class="card-text">광고홍보학과 19</h5>
@@ -124,7 +130,7 @@
 h1,
 h2,
 h3 {
-  margin: 12px 0;
+  margin: 8px 0;
   font-size: 2vw;
   text-size-adjust: auto;
 }

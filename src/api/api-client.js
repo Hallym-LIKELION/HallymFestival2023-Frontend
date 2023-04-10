@@ -121,8 +121,12 @@ export async function ModifyNotice(id, title, content) {
   return res.data;
 }
 
-export async function GetNoticeList() {
-  const res = await axios.get(HOST + '/notice/');
+export async function GetNoticeList(notice_page) {
+  let url = HOST + '/notice/list';
+  if (notice_page !== 0) {
+    url += '?page=' + notice_page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 
@@ -171,7 +175,7 @@ export async function GetVisitComment(comment_page = 0) {
   const res = await axios.get(url);
   return res.data;
 }
-
+//신고기능
 export async function PostBadVisitComment(comment_id) {
   const res = await axios.post(HOST + '/report/visitcomment/' + comment_id, null, {
     // withCredentials: true

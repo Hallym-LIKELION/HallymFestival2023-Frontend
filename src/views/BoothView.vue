@@ -74,6 +74,10 @@
         <BoothCommentSection :id="parseInt($route.params.id)" @update="loadCommentCount" />
       </div>
     </div>
+
+    <button @click="boothdelelete" class="delete-booth-button">
+        부스 삭제
+      </button>
   </main>
 </template>
 
@@ -137,6 +141,9 @@ export default {
   methods: {
     closeEditModal() {
       this.editModal = false;
+    },
+    boothdelelete() {
+      alert('삭제아직적용안돼여');
     },
     async editBoothData(data) {
       const res = await ModifyBooth(
@@ -319,7 +326,16 @@ h1 {
   font-size: 18pt;
   text-align: left;
 }
-
+.delete-booth-button{
+  width: 50%;
+  height: 40px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background-color: #CA434C;
+  color: white;
+  font-size: 13pt;
+  align-items: center;
+}
 .header,
 .content,
 .section {

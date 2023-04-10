@@ -40,13 +40,13 @@ export default {
       list: [
         {
           id: 1,
-          title: '프로그램 1',
-          description: '대충 아무 프로그램 설명...'
+          title: '2023 대동제 가요제',
+          description: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)'
         },
         {
           id: 2,
-          title: 'Lorem Ipsum',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+          title: '2023 대동제 댄스 경연대회',
+          description: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:).'
         },
         {
           id: 3,

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -58,6 +59,21 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: () => import('../views/NotFoundView.vue')
+    },
+    {
+      path: '/ownerhome',
+      name: 'ownerhome',
+      component: () => import('../views/OwnerDashBoard.vue')
+    },
+    {
+      path: '/ownerbcomment',
+      name: 'ownerbcomment',
+      component: () => import('../views/OwnerBoothComment.vue')
+    },
+    {
+      path: '/ownercomment',
+      name: 'ownercomment',
+      component: () => import('../views/OwnerComment.vue')
     },
     {
       path: '/:pathMatch(.*)*',

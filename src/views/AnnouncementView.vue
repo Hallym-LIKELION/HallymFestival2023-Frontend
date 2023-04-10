@@ -28,7 +28,7 @@
     <div class="button-group" ref="buttonGroup">
       <button @click="clickCreate">글쓰기</button>
     </div>
-  </main>
+    </main>
 </template>
 
 <script>
@@ -36,6 +36,7 @@ import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
+
 import {
   GetNoticeList,
   CreateNotice,
@@ -63,7 +64,8 @@ export default {
       noticeModalData: {
         title: '',
         content: ''
-      }
+      },
+
     };
   },
   computed: {
@@ -99,7 +101,7 @@ export default {
       }
 
       const data = await GetNoticeList();
-      this.list = data.filter((item) => !item.is_deleted);
+      this.list = data.dtoList.filter((item) => !item.is_deleted);
 
       this.closeNoticeModal();
     },
@@ -112,7 +114,7 @@ export default {
       }
 
       const data = await GetNoticeList();
-      this.list = data.filter((item) => !item.is_deleted);
+      this.list = data.dtoList.filter((item) => !item.is_deleted);
 
       this.closeNoticeModal();
     },
@@ -158,9 +160,11 @@ export default {
 
     closeNoticeModal() {
       this.showNoticeModal = false;
-    }
+    },
+   
   },
   mounted() {
+    // this.pagingMethod(this.page);
     // 타이틀 애니메이션
     gsap.fromTo(
       this.$refs.title,
@@ -229,9 +233,8 @@ export default {
   },
   async created() {
     // 공지사항 불러와서 data에 넣어주기.
-
     const data = await GetNoticeList();
-    this.list = data.filter((item) => !item.is_deleted);
+    this.list = data.dtoList.filter((item) => !item.is_deleted);
 
     // 오류 발생하는 코드 임시 주석 처리, 구현할때 주석 풀고 사용해주세요~
 
@@ -343,6 +346,7 @@ export default {
 </script>
 
 <style scoped>
+
 h1 {
   font-size: 20pt;
   text-align: center;

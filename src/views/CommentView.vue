@@ -23,6 +23,7 @@
       @clickOutside="closeMenu"
     />
 
+
     <h1>방명록</h1>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -48,6 +49,7 @@ import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
 import { GetRandomNickName } from '../library/name-generator';
 import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
+
 
 export default {
   name: 'CommentView',
@@ -112,6 +114,23 @@ export default {
       this.passwordModal = false;
       this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
+    //방명록 신고
+    async postbadComment(comment_id){
+      let data;
+      try{ 
+        data= await PostBadVisitComment(comment_id);
+    } catch(err){
+      return;
+    }
+    if (data.result.includes('already report')) {
+        alert("이미 신고했습니다.");
+      } else if (data.result.includes('null comment')) {
+        alert("존재하지 않는 댓글입니다.");
+      }
+      },
+
+    
+    
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
         this.contextMenuTargetID = -1;
