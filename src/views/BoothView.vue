@@ -75,9 +75,7 @@
       </div>
     </div>
 
-    <button @click="boothdelelete" class="delete-booth-button">
-        부스 삭제
-      </button>
+    <button @click="deleteBooth" class="delete-booth-button">부스 삭제</button>
   </main>
 </template>
 
@@ -142,9 +140,6 @@ export default {
     closeEditModal() {
       this.editModal = false;
     },
-    boothdelelete() {
-      alert('삭제아직적용안돼여');
-    },
     async editBoothData(data) {
       const res = await ModifyBooth(
         this.id,
@@ -170,9 +165,7 @@ export default {
       this.editMenuModal = false;
     },
     async editBoothMenuData() {
-      let data = await GetBoothMenu(this.id);
-      data.forEach((item) => (item.booth = item.booth.bno));
-      this.menuData = data.filter((item) => !item._deleted);
+      this.menuData = await GetBoothMenu(this.id);
 
       this.closeEditMenuModal();
     },
@@ -235,7 +228,7 @@ export default {
       });
 
       // 0.3초 기다리기
-      await new Promise((r) => setTimeout(r, 50));
+      await new Promise((r) => setTimeout(r, 300));
       this.isLikeDelayed = false;
     },
     async deleteBooth() {
@@ -299,8 +292,7 @@ export default {
       this.boothData = data;
 
       data = await GetBoothMenu(this.id);
-      data.forEach((item) => (item.booth = item.booth.bno));
-      this.menuData = data.filter((item) => !item._deleted);
+      this.menuData = data;
 
       console.log(this.menuData);
 
@@ -326,12 +318,12 @@ h1 {
   font-size: 18pt;
   text-align: left;
 }
-.delete-booth-button{
+.delete-booth-button {
   width: 50%;
   height: 40px;
   margin: 5px 0;
   border-radius: 10px;
-  background-color: #CA434C;
+  background-color: #ca434c;
   color: white;
   font-size: 13pt;
   align-items: center;
