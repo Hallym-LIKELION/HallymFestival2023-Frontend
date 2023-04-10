@@ -67,7 +67,7 @@ export async function DeleteBoothComment(comment_id, password) {
   const data = {
     password
   };
-  const res = await axios.delete(HOST + '/comment/' + comment_id, data);
+  const res = await axios.delete(HOST + '/comment/' + comment_id, { data });
   return res.data;
 }
 
@@ -163,7 +163,7 @@ export async function DeleteVisitComment(comment_id, password) {
   const data = {
     password
   };
-  const res = await axios.delete(HOST + '/visitcomment/' + comment_id, data);
+  const res = await axios.delete(HOST + '/visitcomment/' + comment_id, { data });
   return res.data;
 }
 
