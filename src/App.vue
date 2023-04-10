@@ -72,10 +72,7 @@ export default {
         { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
         { name: '(테)관리자방명록', url: 'ownercomment' }
       ],
-      navBottomList: [
-        { name: '로그인', url: 'login' },
-        { name: '(404)', url: 'register' }
-      ]
+      navBottomList: [{ name: '로그인', url: 'login' }]
     };
   },
   created() {
