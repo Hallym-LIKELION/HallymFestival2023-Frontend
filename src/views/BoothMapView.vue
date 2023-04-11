@@ -16,13 +16,14 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <div class="poster-placeholder" v-if="!isImageLoaded"></div>
+      <img :class="{ hidden: isImageLoaded }" :src="skeletonImage" alt="Loading..." />
       <img
         :class="{ hidden: !isImageLoaded }"
         :src="mapImage"
         @load="onImageLoad"
         alt="한림대학교 비봉축전"
       />
+      <SwitchButton />
     </div>
 
     <div class="banner-group">
@@ -55,7 +56,9 @@
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
+import SwitchButton from '../components/SwitchButton.vue';
 import Pagination from '../components/Pagination.vue';
+import { CreateSkeletonImage } from '../library/skeleton-image';
 import { GetBoothList, CreateBooth } from '../api/api-client';
 import mapImage from '../assets/map.jpg';
 
@@ -64,6 +67,7 @@ export default {
     SearchBar,
     ListItem,
     Pagination,
+    SwitchButton,
     BoothEditModal
   },
   data() {
@@ -73,6 +77,8 @@ export default {
       search: '',
       day: 0,
       isImageLoaded: false,
+
+      skeletonImage: CreateSkeletonImage(970, 689, 300),
 
       showCreateBoothModal: false,
 
@@ -164,23 +170,30 @@ h1 {
 }
 
 .poster {
-  max-width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .poster-placeholder {
-  max-width: 970px;
-  max-height: 420px;
+  max-width: 100%;
+  max-height: 400px;
+  aspect-ratio: 970 / 689;
   margin: 0 auto;
   background-color: #00000055;
-  aspect-ratio: 970 / 689;
 }
 
 .poster > img {
-  width: 100%;
-  max-height: 420px;
+  max-width: 100%;
+  max-height: 400px;
   object-fit: contain;
   opacity: 1;
   transition: opacity 0.25s ease;
+}
+
+.poster > .switch-button {
+  margin-left: -70px;
+  margin-bottom: 6px;
 }
 
 .hidden {

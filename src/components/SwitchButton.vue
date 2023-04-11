@@ -32,8 +32,6 @@ export default {
   height: 36px;
   border-radius: 36px;
   transition: background-color 0.1s;
-
-  margin-left: -64px;
 }
 
 .switch-button.active {
