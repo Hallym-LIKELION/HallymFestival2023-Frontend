@@ -1,14 +1,17 @@
 <template>
   <main>
-    <h1>로그인</h1>
+    <div class="introment">
+    <p>"우리의 모든 시간은 연결되어있어"</p>
+  </div>
+  <div class="logo">
+      <img src="@/assets/logo.png" alt="" />
+  </div>
     <div class="form">
       <form @submit.prevent="fnLogin">
         <div class="input id">
-          <img :src="userImage" alt="" />
           <input name="uid" placeholder="아이디" v-model="id" />
         </div>
         <div class="input password">
-          <img :src="lockImage" alt="" />
           <input name="uid" placeholder="비밀번호" v-model="password" type="password" />
         </div>
         <div class="button">
@@ -53,10 +56,26 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  display: flex;
+  justify-content: center;
+}
+.introment {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 13px;
+  text-align: center;
+  letter-spacing: 0.15em;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
+  color: white;
 }
 
 p {
@@ -76,17 +95,14 @@ p {
   padding: 8px 12px;
   margin-top: 18px;
   border: 1px solid gray;
-  border-radius: 18px;
+  border-radius: 46.25px;
   background-color: #f1f1f1;
   display: flex;
   align-items: center;
   width: 300px;
+  opacity: 0.7;
 }
 
-img {
-  width: 18px;
-  margin-right: 8px;
-}
 
 .input > input {
   width: 100%;
@@ -94,20 +110,21 @@ img {
   border: none;
   outline: none;
   font-family: 'Noto Sans KR', sans-serif;
+  opacity: 0.7;
 }
 
 .button > button {
   width: 100%;
   margin-top: 18px;
   padding: 8px 0;
-  font-size: 18pt;
+  font-size: 15pt;
   border-radius: 12px;
   color: white;
-  background-color: #466efe;
+  background-color: #9C323E;
   transition: background-color 0.1s;
 }
 
 .button > button:hover {
-  background-color: #0f8bff;
+  background-color: #9C323E;
 }
 </style>
