@@ -5,7 +5,6 @@
       type="text"
       name=""
       id=""
-      placeholder="Search..."
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
     />
@@ -13,7 +12,7 @@
 </template>
 
 <script>
-import searchImage from '@/assets/search.png';
+import searchImage from '@/assets/Vector.png';
 
 export default {
   data() {
@@ -29,8 +28,9 @@ export default {
 <style scoped>
 div {
   padding: 8px 12px;
-  border: 1px solid gray;
-  border-radius: 18px;
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   width: 300px;
