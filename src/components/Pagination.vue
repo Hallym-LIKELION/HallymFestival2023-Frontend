@@ -1,21 +1,48 @@
 <template>
   <div class="paginate">
     <vue-awesome-paginate
-      :total-items="32"
-      :items-per-page="5"
+      :total-items="totalItems"
+      :items-per-page="itemsPerPage"
       :max-pages-shown="5"
+      :show-breakpoint-buttons="false"
       v-model="page"
       :on-click="onClickHandler"
-    />
+    >
+      <template #prev-button>
+        <span>
+          <img :src="Icon.leftArrow" alt="" srcset="" />
+        </span>
+      </template>
+
+      <template #next-button>
+        <span>
+          <img :src="Icon.rightArrow" alt="" srcset="" />
+        </span>
+      </template>
+    </vue-awesome-paginate>
   </div>
 </template>
 
 <script>
+import { Icon } from '../library/icon';
+
 export default {
   data() {
     return {
-      page: 1
+      page: 1,
+      Icon
     };
+  },
+
+  props: {
+    totalItems: {
+      type: Number,
+      default: 0
+    },
+    itemsPerPage: {
+      type: Number,
+      default: 10
+    }
   },
 
   methods: {
@@ -28,26 +55,27 @@ export default {
 <style scoped>
 :deep(.pagination-container) {
   display: flex;
-  column-gap: 10px;
+  column-gap: 5px;
 }
 :deep(.paginate-buttons) {
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
   cursor: pointer;
-  background-color: rgb(242, 242, 242);
-  border: 1px solid rgb(217, 217, 217);
-  color: black;
+  color: white;
+}
+
+:deep(.paginate-buttons > span > img) {
+  width: 9px;
 }
 :deep(.paginate-buttons:hover) {
-  background-color: #d8d8d8;
+  background-color: #ffffff1f;
 }
 :deep(.active-page) {
-  background-color: #3498db;
-  border: 1px solid #3498db;
+  background-color: #5c859b;
   color: white;
 }
 :deep(.active-page:hover) {
-  background-color: #2988c8;
+  background-color: #5c859b55;
 }
 </style>
