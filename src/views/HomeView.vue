@@ -18,7 +18,11 @@
     </div>
     <div class="test-group">
         <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
-      </div>
+    </div>
+    <div class ="DownBtn">
+          <p>Scroll</p>
+          <img src="@/assets/downscroll.png" alt="" />
+    </div>
   </main>
 </template>
 
@@ -91,6 +95,11 @@ export default {
 </script>
 
 <style scoped>
+p{
+  text-align: center;
+  color: white;
+
+}
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -160,5 +169,16 @@ h1 {
   font-size: 13pt;
   text-align: center;
   text-decoration: none;
+}
+.DownBtn{
+  margin: 0;
+  padding: 36px 0;
+  display: flex;
+  justify-content: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  color: white;
+  opacity: 0.7;
+
 }
 </style>
