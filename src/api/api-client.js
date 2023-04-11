@@ -14,8 +14,12 @@ export async function GetMyIP() {
 // 부스 API
 // =========================
 
-export async function GetBoothList() {
-  const res = await axios.get(HOST + '/booth/list');
+export async function GetBoothList(page = 0) {
+  let url = HOST + '/booth/list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 
@@ -57,8 +61,12 @@ export async function DeleteBooth(booth_id) {
 // 부스 댓글 API
 // =========================
 
-export async function GetBoothComment(booth_id) {
-  const res = await axios.get(HOST + '/comment/' + booth_id);
+export async function GetBoothComment(booth_id, page = 0) {
+  let url = HOST + '/comment/' + booth_id;
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 
@@ -141,10 +149,10 @@ export async function ModifyNotice(id, title, content) {
   return res.data;
 }
 
-export async function GetNoticeList(notice_page = 0) {
+export async function GetNoticeList(page = 0) {
   let url = HOST + '/notice/list';
-  if (notice_page !== 0) {
-    url += '?page=' + notice_page;
+  if (page !== 0) {
+    url += '?page=' + page;
   }
   const res = await axios.get(url);
   return res.data;
@@ -191,10 +199,10 @@ export async function DeleteVisitComment(comment_id, password) {
   return res.data;
 }
 
-export async function GetVisitComment(comment_page = 0) {
+export async function GetVisitComment(page = 0) {
   let url = HOST + '/visitcomment/list';
-  if (comment_page !== 0) {
-    url += '?page=' + comment_page;
+  if (page !== 0) {
+    url += '?page=' + page;
   }
   const res = await axios.get(url);
   return res.data;
