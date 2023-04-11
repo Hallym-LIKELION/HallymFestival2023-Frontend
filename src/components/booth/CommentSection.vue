@@ -30,6 +30,7 @@
           color="#f1f1f1"
         />
       </template>
+      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
   </div>
 </template>
@@ -39,6 +40,7 @@ import PasswordModal from '../PasswordModal.vue';
 import CommentWrite from './CommentWrite.vue';
 import Comment from '../Comment.vue';
 import CommentContextMenu from '../CommentContextMenu.vue';
+import Pagination from '../Pagination.vue';
 import SendImage from '../../assets/send.png';
 import { GetRandomNickName } from '../../library/name-generator';
 import { GetBoothComment, DeleteBoothComment } from '../../api/api-client';
@@ -48,7 +50,8 @@ export default {
     PasswordModal,
     CommentWrite,
     Comment,
-    CommentContextMenu
+    CommentContextMenu,
+    Pagination
   },
   data() {
     return {
@@ -68,21 +71,16 @@ export default {
       commentPassword: '',
 
       passwordModal: false,
-      passwordStatus: true
+      passwordStatus: true,
+
+      totalItems: 1,
+      itemsPerPage: 1
     };
   },
   props: {
     id: {
       type: Number,
       default: -1
-    }
-  },
-  watch: {
-    list: {
-      deep: true,
-      handler() {
-        this.$emit('update', this.list.length);
-      }
     }
   },
   methods: {
@@ -155,16 +153,25 @@ export default {
       //     console.error('does not exist visit comment', err);
       //   });
     },
+
+    async changePage(page) {
+      console.log(`페이지를 ${page} 페이지로 이동`);
+      const data = await GetBoothComment(this.id, page);
+      this.list = data.dtoList;
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size;
+      this.$emit('update', data.total);
+    },
+
     GetRandomNickName
   },
   async created() {
     // TODO: API로 가져오기
     const data = await GetBoothComment(this.id);
-
-    this.list = data.dtoList.map((item) => ({
-      ...item,
-      showMenu: false
-    }));
+    this.list = data.dtoList;
+    this.totalItems = data.total;
+    this.itemsPerPage = data.size;
+    this.$emit('update', data.total);
   }
 };
 </script>
@@ -176,5 +183,9 @@ export default {
 
 .comment-container > * {
   margin-top: 12px;
+}
+
+.comment-list > *:last-child {
+  width: auto;
 }
 </style>

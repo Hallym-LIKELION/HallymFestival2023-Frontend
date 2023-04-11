@@ -10,8 +10,16 @@ export async function GetMyIP() {
   return data;
 }
 
-export async function GetBoothList() {
-  const res = await axios.get(HOST + '/booth/list');
+// =========================
+// 부스 API
+// =========================
+
+export async function GetBoothList(page = 0) {
+  let url = HOST + '/booth/list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 
@@ -49,8 +57,16 @@ export async function DeleteBooth(booth_id) {
   return res.data;
 }
 
-export async function GetBoothComment(booth_id) {
-  const res = await axios.get(HOST + '/comment/' + booth_id);
+// =========================
+// 부스 댓글 API
+// =========================
+
+export async function GetBoothComment(booth_id, page = 0) {
+  let url = HOST + '/comment/' + booth_id;
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(url);
   return res.data;
 }
 
@@ -71,6 +87,10 @@ export async function DeleteBoothComment(comment_id, password) {
   return res.data;
 }
 
+// =========================
+// 부스 좋아요 API
+// =========================
+
 export async function GetBoothLike(booth_id) {
   const res = await axios.get(HOST + '/like/' + booth_id);
   return res.data;
@@ -80,6 +100,10 @@ export async function PostBoothLike(id) {
   const res = await axios.post(HOST + '/like/' + id, '', { withCredentials: true });
   return res.data;
 }
+
+// =========================
+// 부스 메뉴 API
+// =========================
 
 export async function GetBoothMenu(booth_id) {
   const res = await axios.get(HOST + '/menu/' + booth_id);
@@ -109,6 +133,10 @@ export async function DeleteBoothMenu(menu_id) {
   return res.data;
 }
 
+// =========================
+// 공지사항 API
+// =========================
+
 export async function CreateNotice(title, content) {
   const data = { title, content };
   const res = await axios.post(HOST + '/notice', data);
@@ -121,10 +149,10 @@ export async function ModifyNotice(id, title, content) {
   return res.data;
 }
 
-export async function GetNoticeList(notice_page) {
+export async function GetNoticeList(page = 0) {
   let url = HOST + '/notice/list';
-  if (notice_page !== 0) {
-    url += '?page=' + notice_page;
+  if (page !== 0) {
+    url += '?page=' + page;
   }
   const res = await axios.get(url);
   return res.data;
@@ -150,6 +178,10 @@ export async function RemoveNotice(id) {
   return res.data;
 }
 
+// =========================
+// 방명록 API
+// =========================
+
 export async function CreateVisitComment(content, password) {
   const data = {
     content,
@@ -167,21 +199,33 @@ export async function DeleteVisitComment(comment_id, password) {
   return res.data;
 }
 
-export async function GetVisitComment(comment_page = 0) {
+export async function GetVisitComment(page = 0) {
   let url = HOST + '/visitcomment/list';
-  if (comment_page !== 0) {
-    url += '?page=' + comment_page;
+  if (page !== 0) {
+    url += '?page=' + page;
   }
   const res = await axios.get(url);
   return res.data;
 }
-//신고기능
+
 export async function PostBadVisitComment(comment_id) {
   const res = await axios.post(HOST + '/report/visitcomment/' + comment_id, null, {
     // withCredentials: true
   });
   return res.data;
 }
+
+// =========================
+// 로그인 API
+// =========================
+
+// =========================
+// 백오피스 API
+// =========================
+
+// =========================
+// 이미지 업로드 API
+// =========================
 
 export async function UploadImage(formData) {
   const res = await axios.post(HOST + '/upload', formData, {

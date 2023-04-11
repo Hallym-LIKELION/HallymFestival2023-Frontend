@@ -1,40 +1,40 @@
 <template>
   <main>
     <div class="background">
-    <Transition name="fade">
-      <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
-    </Transition>
-
-    <header>
-      <button @click="showMenu = !showMenu">
-        <img :src="menuButtonImage" width="24" />
-      </button>
-      <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
-    </header>
-
-    <div class="wrapper">
-      <Transition name="slide">
-        <nav v-if="showMenu">
-          <div class="top-menu">
-            <template v-for="{ url, name } in navList">
-              <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
-            </template>
-          </div>
-          <div class="bottom-menu">
-            <template v-for="{ url, name } in navBottomList">
-              <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
-            </template>
-          </div>
-        </nav>
+      <Transition name="fade">
+        <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
       </Transition>
 
-      <RouterView v-slot="{ Component }" class="router-view">
-        <Transition name="fade" mode="out-in">
-          <component :is="Component" />
+      <header>
+        <button @click="showMenu = !showMenu">
+          <img :src="menuButtonImage" width="24" />
+        </button>
+        <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
+      </header>
+
+      <div class="wrapper">
+        <Transition name="slide">
+          <nav v-if="showMenu">
+            <div class="top-menu">
+              <template v-for="{ url, name } in navList">
+                <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+              </template>
+            </div>
+            <div class="bottom-menu">
+              <template v-for="{ url, name } in navBottomList">
+                <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+              </template>
+            </div>
+          </nav>
         </Transition>
-      </RouterView>
+
+        <RouterView v-slot="{ Component }" class="router-view">
+          <Transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </Transition>
+        </RouterView>
+      </div>
     </div>
-  </div>
     <Footer></Footer>
   </main>
 </template>
@@ -73,10 +73,7 @@ export default {
         { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
         { name: '(테)관리자방명록', url: 'ownercomment' }
       ],
-      navBottomList: [
-        { name: '로그인', url: 'login' },
-        { name: '(404)', url: 'register' }
-      ]
+      navBottomList: [{ name: '로그인', url: 'login' }]
     };
   },
   created() {
@@ -89,11 +86,11 @@ export default {
 </script>
 
 <style scoped>
-.background{
-  height: 100vh;
+.background {
+  min-height: calc(100vh - 80px);
   overflow: auto;
   margin: 0;
-  background-image: url("./assets/mainbackg.png");
+  background-image: url('./assets/mainbackg.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -178,7 +175,7 @@ nav > div > * {
 
 .router-view {
   max-width: 768px;
-  min-height: calc(100vh - 56px - 70px);
+  min-height: calc(100vh - 56px - 80px);
   margin: auto;
   padding: 0 28px;
   padding-top: 56px;
