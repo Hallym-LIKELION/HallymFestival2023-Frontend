@@ -3,10 +3,13 @@ import axios from 'axios';
 
 const HOST = 'https://dev-api.prisism.io';
 
-// 임시: 1.0.0.1 API 사용
+// =========================
+// IP API
+// =========================
+
 export async function GetMyIP() {
-  const res = await axios.get('https://1.0.0.1/cdn-cgi/trace');
-  const data = res.data.split('\n')[2].split('=')[1];
+  const res = await axios.get(HOST + '/ip');
+  const data = res.data;
   return data;
 }
 
