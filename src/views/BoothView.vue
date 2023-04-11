@@ -15,6 +15,14 @@
       @complete="editBoothMenuData"
     />
 
+    <DeleteModal
+      type="부스를"
+      :visible="deleteModal"
+      :name="boothData.booth_title"
+      @close="closeDeleteModal"
+      @complete="deleteBooth"
+    />
+
     <div class="header">
       <div class="header-title">
         <h1 class="header-name" v-text="boothData.booth_title || 'Loading...'"></h1>
@@ -43,7 +51,7 @@
         <div class="section-header">
           <h1>부스 소개</h1>
           <div class="section-header-button-group">
-            <button class="delete-button" @click="deleteBooth">
+            <button class="delete-button" @click="openDeleteModal">
               <img :src="CloseImage" alt="" />
             </button>
             <button class="edit-button" @click="editModal = !editModal">
@@ -81,8 +89,6 @@
         <BoothCommentSection :id="parseInt($route.params.id)" @update="loadCommentCount" />
       </div>
     </div>
-
-    <button @click="deleteBooth" class="delete-booth-button">부스 삭제</button>
   </main>
 </template>
 
@@ -103,6 +109,7 @@ import {
 } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
+import DeleteModal from '../components/DeleteModal.vue';
 import Image from '../components/Image.vue';
 import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
@@ -112,7 +119,7 @@ import axios from 'axios';
 window.axios = axios;
 
 export default {
-  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection, Image },
+  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection, Image, DeleteModal },
   data() {
     return {
       EditImage,
@@ -140,6 +147,8 @@ export default {
       editMenuModal: false,
       editMenuData: [],
 
+      deleteModal: false,
+
       commentCount: 0,
       commentDisplayCount: 0
     };
@@ -147,6 +156,12 @@ export default {
   methods: {
     closeEditModal() {
       this.editModal = false;
+    },
+    openDeleteModal() {
+      this.deleteModal = true;
+    },
+    closeDeleteModal() {
+      this.deleteModal = false;
     },
     async editBoothData(data) {
       const res = await ModifyBooth(
@@ -240,19 +255,9 @@ export default {
       this.isLikeDelayed = false;
     },
     async deleteBooth() {
-      let answer = prompt(
-        `${this.boothData.booth_title} 부스를 삭제하려 합니다. 삭제를 진행하려면 "삭제"라고 입력해주세요.`,
-        ''
-      );
-      if (answer) {
-        const res = await DeleteBooth(this.boothData.bno);
-        if (res.result.includes('success')) {
-          alert('부스가 삭제되었습니다.');
-          this.$router.push('/boothmap');
-        } else {
-          alert('부스를 삭제하는데 오류가 발생했습니다.\n' + res.result);
-        }
-      }
+      this.closeDeleteModal();
+      const res = await DeleteBooth(this.boothData.bno);
+      this.$router.push('/boothmap');
     }
   },
   computed: {
@@ -326,16 +331,7 @@ h1 {
   font-size: 18pt;
   text-align: left;
 }
-.delete-booth-button {
-  width: 50%;
-  height: 40px;
-  margin: 5px 0;
-  border-radius: 10px;
-  background-color: #ca434c;
-  color: white;
-  font-size: 13pt;
-  align-items: center;
-}
+
 .header,
 .content,
 .section {
