@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import arrowImage from '@/assets/ownermenu.png';
+import arrowImage from '@/assets/menu.png';
 export default {
   data() {
     return {
