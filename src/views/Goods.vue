@@ -33,6 +33,7 @@
 }
 .inform {
   font-size: 20px;
+  color: #FFFFFF;
 }
 
 .button {
@@ -42,5 +43,8 @@
   background-color: #222324;
   font-size: 12pt;
   color: white;
+}
+h1{
+  color: #FFFFFF;
 }
 </style>

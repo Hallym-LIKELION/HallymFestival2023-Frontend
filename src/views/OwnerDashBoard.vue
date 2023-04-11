@@ -39,11 +39,13 @@ export default {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
+  color: #FFFFFF;
 }
 .totalvisitor{
   text-align: center;
   margin: 0;
   padding: 10px 0;
+  color: #FFFFFF;
 }
 .ownermenu {
   font-family: 'Noto Sans KR', sans-serif;

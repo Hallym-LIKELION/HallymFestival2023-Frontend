@@ -98,6 +98,7 @@ h1 {
 .logo {
   display: flex;
   justify-content: center;
+  color: white;
 }
 .introment {
   font-family: 'Noto Sans KR', sans-serif;
@@ -108,11 +109,13 @@ h1 {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
+  color: white;
 }
 
 .title{
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
+  color: white;
 }
 .menu {
   max-width: 320px;
