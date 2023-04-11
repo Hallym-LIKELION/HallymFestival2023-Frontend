@@ -1,13 +1,17 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import VueAwesomePaginate from 'vue-awesome-paginate';
 
-import 'aos/dist/aos.css';
-
+// 축제 공용 CSS import
 import './assets/main.css';
+
+import 'vue-awesome-paginate/dist/style.css'; // Pagenation 패키지 CSS
+import 'aos/dist/aos.css'; // AOS 패키지 CSS
 
 const app = createApp(App);
 
-app.use(router);
+app.use(router); // Vue Router
+app.use(VueAwesomePaginate); // Vue Pagenation
 
 app.mount('#app');
