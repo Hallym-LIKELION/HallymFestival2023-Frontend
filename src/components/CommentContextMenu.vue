@@ -80,7 +80,8 @@ button:nth-child(2) {
 }
 
 button:hover {
-  background-color: #00000033;
+  background-color: #CA434C;
+  opacity: 0.3;
 }
 
 .hidden {
