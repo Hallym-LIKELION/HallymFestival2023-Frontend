@@ -23,7 +23,6 @@
       @clickOutside="closeMenu"
     />
 
-
     <h1>방명록</h1>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -34,6 +33,7 @@
           @clickMenu="toggleMenu"
         />
       </template>
+      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
     <div class="button-group">
       <button @click="commentModal = !commentModal">글쓰기</button>
@@ -47,9 +47,9 @@ import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
+import Pagination from '../components/Pagination.vue';
 import { GetRandomNickName } from '../library/name-generator';
 import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
-
 
 export default {
   name: 'CommentView',
@@ -58,7 +58,8 @@ export default {
     Comment,
     CommentContextMenu,
     PasswordModal,
-    CommentModal
+    CommentModal,
+    Pagination
   },
   data() {
     return {
@@ -73,7 +74,10 @@ export default {
       commentStatus: false,
 
       passwordModal: false,
-      passwordStatus: false
+      passwordStatus: false,
+
+      totalItems: 1,
+      itemsPerPage: 1
     };
   },
   methods: {
@@ -115,22 +119,20 @@ export default {
       this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
     },
     //방명록 신고
-    async postbadComment(comment_id){
+    async postbadComment(comment_id) {
       let data;
-      try{ 
-        data= await PostBadVisitComment(comment_id);
-    } catch(err){
-      return;
-    }
-    if (data.result.includes('already report')) {
-        alert("이미 신고했습니다.");
-      } else if (data.result.includes('null comment')) {
-        alert("존재하지 않는 댓글입니다.");
+      try {
+        data = await PostBadVisitComment(comment_id);
+      } catch (err) {
+        return;
       }
-      },
+      if (data.result.includes('already report')) {
+        alert('이미 신고했습니다.');
+      } else if (data.result.includes('null comment')) {
+        alert('존재하지 않는 댓글입니다.');
+      }
+    },
 
-    
-    
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
         this.contextMenuTargetID = -1;
@@ -168,13 +170,24 @@ export default {
       //     console.error('does not exist visit comment', err);
       //   });
     },
+
+    async changePage(page) {
+      console.log(`페이지를 ${page} 페이지로 이동`);
+      const data = await GetVisitComment(page);
+      this.list = data.dtoList;
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size;
+    },
+
     GetRandomNickName
   },
   async created() {
     /* 방명록 전체 게시물 조회 */
     const data = await GetVisitComment();
 
-    this.list = data.dtoList.filter((item) => !item.is_deleted);
+    this.list = data.dtoList;
+    this.totalItems = data.total;
+    this.itemsPerPage = data.size;
   }
 };
 </script>
@@ -188,7 +201,7 @@ h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .modal-input {
@@ -225,6 +238,10 @@ h1 {
 .comment-list > * {
   width: 100%;
   margin: 10px 0;
+}
+
+.comment-list > *:last-child {
+  width: auto;
 }
 
 .button-group {

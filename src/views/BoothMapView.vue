@@ -26,9 +26,6 @@
     </div>
 
     <div class="banner-group">
-      <button @click="openBoothRecommendation" class="create-booth-button">
-        나에게 어울리는 부스는?
-      </button>
       <button @click="openCreateModal" class="create-booth-button">부스 만들기</button>
     </div>
 
@@ -49,6 +46,7 @@
           :image="item.temp_image"
         />
       </template>
+      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
   </main>
 </template>
@@ -57,6 +55,7 @@
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
+import Pagination from '../components/Pagination.vue';
 import { GetBoothList, CreateBooth } from '../api/api-client';
 import mapImage from '../assets/map.jpg';
 
@@ -64,6 +63,7 @@ export default {
   components: {
     SearchBar,
     ListItem,
+    Pagination,
     BoothEditModal
   },
   data() {
@@ -74,7 +74,10 @@ export default {
       day: 0,
       isImageLoaded: false,
 
-      showCreateBoothModal: false
+      showCreateBoothModal: false,
+
+      totalItems: 1,
+      itemsPerPage: 1
     };
   },
   computed: {
@@ -130,6 +133,14 @@ export default {
       alert('부스를 성공적으로 생성했습니다.');
 
       this.closeCreateModal();
+    },
+
+    async changePage(page) {
+      console.log(`페이지를 ${page} 페이지로 이동`);
+      const data = await GetBoothList(page);
+      this.list = data.dtoList;
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size;
     }
   },
   async created() {
@@ -137,6 +148,8 @@ export default {
 
     const data = await GetBoothList();
     this.list = data.dtoList;
+    this.totalItems = data.total;
+    this.itemsPerPage = data.size;
   }
 };
 </script>
@@ -147,7 +160,7 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 24px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .poster {
@@ -192,7 +205,7 @@ h1 {
   padding: 6px 16px;
   border: none;
   border-radius: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 11pt;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;

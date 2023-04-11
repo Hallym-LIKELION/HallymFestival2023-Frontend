@@ -10,7 +10,6 @@
     <h1 ref="title">공지사항</h1>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
-      <div v-for="user in users">{{ user.id }}</div>
       <template v-for="item in displayList" :key="item.id">
         <FoldingArticle
           :id="item.id"
@@ -21,20 +20,20 @@
           @clickEdit="clickEdit"
           @clickDelete="clickDelete"
         />
-        <!-- <button @click="() => deleteAnnouncement(item.id)">삭제</button>
-        <button @click="() => removeAnnouncement(item.id)">수정</button> -->
       </template>
+      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
     <div class="button-group" ref="buttonGroup">
       <button @click="clickCreate">글쓰기</button>
     </div>
-    </main>
+  </main>
 </template>
 
 <script>
 import { gsap } from 'gsap';
 import SearchBar from '../components/SearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
+import Pagination from '../components/Pagination.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
 
 import {
@@ -51,6 +50,7 @@ export default {
   components: {
     SearchBar,
     FoldingArticle,
+    Pagination,
     NoticeModal
   },
   data() {
@@ -66,6 +66,8 @@ export default {
         content: ''
       },
 
+      totalItems: 1,
+      itemsPerPage: 1
     };
   },
   computed: {
@@ -161,7 +163,14 @@ export default {
     closeNoticeModal() {
       this.showNoticeModal = false;
     },
-   
+
+    async changePage(page) {
+      console.log(`페이지를 ${page} 페이지로 이동`);
+      const data = await GetNoticeList(page);
+      this.list = data.dtoList;
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size;
+    }
   },
   mounted() {
     // this.pagingMethod(this.page);
@@ -234,124 +243,19 @@ export default {
   async created() {
     // 공지사항 불러와서 data에 넣어주기.
     const data = await GetNoticeList();
-    this.list = data.dtoList.filter((item) => !item.is_deleted);
-
-    // 오류 발생하는 코드 임시 주석 처리, 구현할때 주석 풀고 사용해주세요~
-
-    // //공지사항 게시판 POST
-    // PostNotice(parseInt(this.$route.params));
-    // this.$axios
-    //   .get('http://localhost:8080/notice')
-    //   .then((data) => {
-    //     data = data.filter((item) => item.active); //true 인것만 필터됨
-
-    //     this.list = data.map((item) => ({
-    //       id: item.id,
-    //       title: item.title,
-    //       content: item.content
-    //     }));
-    //   })
-    //   .catch((error) => {
-    //     alert('오류가 발생했습니다. ' + error.toString());
-    //   });
-
-    // return;
-
-    // /* 일단, 230330 서버가 없어서 fake함수로 테스트 하는 중입니다. 추후에 아래로 수정 예정 */
-    // GetNoticeList()
-    //   .then((data) => {})
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // //공지사항 게시판 POST
-    // PostNotice('제목', '내용')
-    //   .then(() => {
-    //     //data가 성공적으로 도달하였을 때 알람 삽입
-    //     if (res.result.includes('success')) {
-    //       alert('작성되었습니다.');
-    //     } else {
-    //       alert('글 작성을 실패하였습니다. 다시 시도해주세요.');
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // /* 공지사항 게시물 목록 DELETE */
-    // // 상단 메소드에 구현됨
-
-    // /* 공지사항 게시물 한개 조회 GET */
-    // GetNotice(id)
-    //   .then((data) => {
-    //     this.postData = {
-    //       id: data.id,
-    //       title: data.title,
-    //       content: data.content
-    //     };
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // /* 공지사항 게시물 검색 GET */
-    // SearchNotice(keyword)
-    //   .then((data) => {
-    //     //검색된 것 리스트 형식으로 보여줌
-    //     this.list = data.map((item) => ({
-    //       id: item.id,
-    //       title: item.title,
-    //       content: item.content
-    //     }));
-    //   })
-    //   .catch((err) => {
-    //     console.error('검색 실패', err);
-    //   });
-
-    // // 공지사항 게시물 검색 GET
-    // GetNotice(parseInt(this.$route.params));
-    // this.$axios
-    //   .get('http://localhost:8080/notice/' + this.$axios.search + this.$axios.keyword)
-    //   .then((res) => {
-    //     console.log(data);
-    //     this.data = res.data.id;
-    //     this.data = res.data.title;
-    //     this.data = res.data.content;
-    //     this.data = res.data.active;
-    //     this.data = res.data.regDate;
-    //     this.data = res.data.modeDate;
-    //   });
-
-    // // 공지사항 게시물 수정 PUT
-    // RemoveNotice(parseInt(this.$route.params));
-    // this.$axios
-    //   .put('http://localhost:8080/notice/' + this.$axios.id)
-    //   .then((res) => {
-    //     console.log(data);
-    //     this.data = res.data.id;
-    //     this.data = res.data.content;
-    //     //data가 성공적으로 도달하였을 때 알람삽입 -> 걍 백엔드 테스트 때문에 넣어둠 나중에 기획팀에서 빼라하면 뺄게여
-    //     if (res.data.sucess == true) {
-    //       alert('수정되었습니다.');
-    //     } else {
-    //       alert('수정을 실패하였습니다. 다시 시도해주세요.');
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     alert('수정을 실패하였습니다. 다시 시도해주세요.');
-    //   });
+    this.list = data.dtoList;
+    this.totalItems = data.total;
+    this.itemsPerPage = data.size;
   }
 };
 </script>
 
 <style scoped>
-
 h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
-  color: #FFFFFF; 
+  color: #ffffff;
 }
 
 .search-bar {
