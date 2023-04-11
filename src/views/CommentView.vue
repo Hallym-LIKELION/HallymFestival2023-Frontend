@@ -23,6 +23,8 @@
       @clickOutside="closeMenu"
     />
 
+    <FloatButton @click="openCommentModal" />
+
     <h1>방명록</h1>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -35,9 +37,6 @@
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
-    <div class="button-group">
-      <button @click="commentModal = !commentModal">글쓰기</button>
-    </div>
   </main>
 </template>
 
@@ -47,6 +46,7 @@ import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
+import FloatButton from '../components/FloatButton.vue';
 import Pagination from '../components/Pagination.vue';
 import { GetRandomNickName } from '../library/name-generator';
 import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
@@ -59,6 +59,7 @@ export default {
     CommentContextMenu,
     PasswordModal,
     CommentModal,
+    FloatButton,
     Pagination
   },
   data() {
@@ -81,6 +82,9 @@ export default {
     };
   },
   methods: {
+    openCommentModal() {
+      this.commentModal = true;
+    },
     closeCommentModal() {
       this.commentModal = false;
     },
