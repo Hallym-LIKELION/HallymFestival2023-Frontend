@@ -3,7 +3,7 @@
     <h1>굿즈 안내서</h1>
     <div class="floatt">
         <div class="dcard">
-          <img src="@/assets/osohyun.png" alt="" />
+          <img src="@/assets/developer/osohyun.png" alt="" />
           <div class="inform">
             <h2>덕림이 소주잔</h2>
             <p>5000원</p>

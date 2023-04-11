@@ -36,7 +36,7 @@
 
       <div class="grid">
         <div class="card">
-          <img src="@/assets/osohyun.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/osohyun.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">오소현</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/kimkyungjae.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/kimkyungjae.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">김경재</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
@@ -64,7 +64,7 @@
 
       <div class="grid">
         <div class="card">
-          <img src="@/assets/leedongheon.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/leedongheon.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">이동헌</h2>
             <h5 class="card-text">빅데이터학과 15</h5>
@@ -75,7 +75,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/parkjuyoung.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/parkjuyoung.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">박주영</h2>
             <h5 class="card-text">콘텐츠IT학과 19</h5>
@@ -86,7 +86,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/kimmijin.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/kimmijin.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">김미진</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
@@ -103,7 +103,7 @@
 
       <div class="grid">
         <div class="card">
-          <img src="@/assets/choiari.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/choiari.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">최아리</h2>
             <h5 class="card-text">경영학과 21</h5>
@@ -111,7 +111,7 @@
         </div>
 
         <div class="card">
-          <img src="@/assets/oyujin.png" alt="" class="card-img-top" />
+          <img src="@/assets/developer/oyujin.png" alt="" class="card-img-top" />
           <div class="card-body">
             <h2 class="card-title">오유진</h2>
             <h5 class="card-text">광고홍보학과 19</h5>

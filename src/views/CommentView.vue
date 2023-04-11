@@ -237,6 +237,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin: auto;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 .comment-list > * {
