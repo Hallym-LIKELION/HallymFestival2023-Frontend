@@ -8,6 +8,15 @@
 
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
 
+    <CommentContextMenu
+      :show="showContextMenu"
+      :x="contextMenuX"
+      :y="contextMenuY"
+      @clickDelete="openPasswordModal"
+      @clickReport="reportComment"
+      @clickOutside="closeMenu"
+    />
+
     <div class="button-group">
       <button @click="() => selectFilter(1)" :class="{ selected: fil === 1 }">최신순</button>
       <button @click="() => selectFilter(2)" :class="{ selected: fil === 2 }">신고순</button>
@@ -21,6 +30,7 @@
           :comment="item.comment"
           :time="item.time"
           :warn="item.warn"
+          @clickMenu="toggleMenu"
         />
       </template>
     </div>
@@ -29,10 +39,13 @@
 <script>
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
+import CommentContextMenu from '../components/CommentContextMenu.vue';
+
 export default {
   components: {
     SearchBar,
-    Comment
+    Comment,
+    CommentContextMenu
   },
   data() {
   return{
@@ -59,8 +72,13 @@ export default {
 
         }
     ],
-    context: -1
+    context: -1,
+    showContextMenu: false,
+    contextMenuTargetID: -1,
+    contextMenuX: 0,
+    contextMenuY: 0
     };
+    
   },
   methods: {
     selectFilter(fil) {
@@ -69,6 +87,21 @@ export default {
       } else {
         this.fil = fil;
       }
+    },
+    toggleMenu(evt, id) {
+      if (this.showContextMenu) {
+        this.contextMenuTargetID = -1;
+        this.showContextMenu = false;
+      } else {
+        this.contextMenuX = evt.target.offsetLeft;
+        this.contextMenuY = evt.target.offsetTop;
+        this.contextMenuTargetID = id;
+        this.showContextMenu = true;
+      }
+    },
+    closeMenu() {
+      this.contextMenuTargetID = -1;
+      this.showContextMenu = false;
     }
   }
 };

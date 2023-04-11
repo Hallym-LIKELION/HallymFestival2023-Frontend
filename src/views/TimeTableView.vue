@@ -17,6 +17,7 @@
         <div class="table-col-2">
           <div class="schedule-time" v-text="item.time"></div>
           <div class="schedule-text" v-text="item.content.join('\n')"></div>
+          <div class="schedule-space" v-text="item.space"></div>
         </div>
       </template>
     </div>
@@ -31,26 +32,31 @@ export default {
         {
           time: '09:00 ~ 10:00',
           content: ['테스트 11', '테스트 22'],
+          space: '한림대 운동장',
           day: [2, 3]
         },
         {
           time: '11:00 ~ 12:00',
           content: ['테스트 AAA', '테스트 B'],
+          space: '한림대 운동장',
           day: [1, 3]
         },
         {
           time: '13:00 ~ 14:00',
           content: ['테스트 CC', '테스트 DD'],
+          space: '한림대 운동장',
           day: [2]
         },
         {
           time: '14:00 ~ 15:00',
           content: ['테스트 33', '테스트 4'],
+          space: '한림대 운동장',
           day: [1, 2, 3]
         },
         {
           time: '16:00 ~ 17:00',
           content: ['테스트 EE', '테스트 FF', '테스트 GG', '테스트 HH'],
+          space: '한림대 운동장',
           day: [1, 3]
         }
       ],
@@ -69,6 +75,7 @@ export default {
         time: item.time,
         content: item.content,
         day: item.day,
+        space: item.space,
         hideLine: index === result.length - 1
       }));
     }
@@ -110,7 +117,7 @@ h1 {
 }
 
 .button-group > button.selected {
-  background-color: #509bf8;
+  background-color: #CA434C;
   color: white;
 }
 
@@ -132,9 +139,9 @@ h1 {
   margin-top: 20px;
   border-radius: 12px;
 
-  background-color: #ffffff; /* 중심 흰색원 */
-  border: 6px solid #4c97f1; /* 파란색 원 */
-  outline: 8px solid #ffffff; /* 제일 바깥 흰색원 */
+  background-color: #CA434C; /* 중심 흰색원 */
+  border: 6px solid #CA434C; /* 파란색 원 */
+  outline: 8px solid #CA434C; /* 제일 바깥 흰색원 */
 }
 
 .schedule-line {
@@ -144,7 +151,7 @@ h1 {
   margin-top: 16px;
   margin-bottom: -16px;
 
-  background-color: #4c97f12b;
+  background-color: #FFFFFF;
 }
 
 .table-col-1 {
