@@ -1,15 +1,17 @@
 <template>
   <div class="wrapper">
-    <div class="image">
-      <img :src="image" alt="" />
-    </div>
+    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" />
     <p class="title" v-text="title"></p>
     <p class="description" v-text="description"></p>
   </div>
 </template>
 
 <script>
+import Image from './Image.vue';
 export default {
+  components: {
+    Image
+  },
   props: {
     title: {
       type: String,
@@ -40,11 +42,7 @@ p {
   overflow: hidden;
 }
 
-.image {
-  width: 100%;
-}
-
-.image > img {
+:deep(.image) {
   width: 100%;
   object-fit: contain;
 }

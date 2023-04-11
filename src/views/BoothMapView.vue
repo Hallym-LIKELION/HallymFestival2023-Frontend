@@ -16,12 +16,13 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <img :class="{ hidden: isImageLoaded }" :src="skeletonImage" alt="Loading..." />
-      <img
-        :class="{ hidden: !isImageLoaded }"
+      <Image
+        class="poster-image"
         :src="mapImage"
-        @load="onImageLoad"
         alt="한림대학교 비봉축전"
+        width="970"
+        height="689"
+        spinner-size="300"
       />
       <SwitchButton />
     </div>
@@ -57,8 +58,8 @@ import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
 import SwitchButton from '../components/SwitchButton.vue';
+import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
-import { CreateSkeletonImage } from '../library/skeleton-image';
 import { GetBoothList, CreateBooth } from '../api/api-client';
 import mapImage from '../assets/map.jpg';
 
@@ -68,6 +69,7 @@ export default {
     ListItem,
     Pagination,
     SwitchButton,
+    Image,
     BoothEditModal
   },
   data() {
@@ -76,9 +78,6 @@ export default {
       list: [],
       search: '',
       day: 0,
-      isImageLoaded: false,
-
-      skeletonImage: CreateSkeletonImage(970, 689, 300),
 
       showCreateBoothModal: false,
 
@@ -112,9 +111,6 @@ export default {
       } else {
         this.day = day;
       }
-    },
-    onImageLoad() {
-      this.isImageLoaded = true;
     },
     openCreateModal() {
       this.showCreateBoothModal = true;
@@ -175,15 +171,7 @@ h1 {
   justify-content: center;
 }
 
-.poster-placeholder {
-  max-width: 100%;
-  max-height: 400px;
-  aspect-ratio: 970 / 689;
-  margin: 0 auto;
-  background-color: #00000055;
-}
-
-.poster > img {
+:deep(.poster-image) {
   max-width: 100%;
   max-height: 400px;
   object-fit: contain;
