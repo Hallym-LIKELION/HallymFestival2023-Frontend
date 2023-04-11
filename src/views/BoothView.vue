@@ -27,7 +27,14 @@
       </div>
 
       <div class="header-content">
-        <img class="header-image" :src="boothData.temp_image || 'https://placehold.co/700x400'" />
+        <Image
+          src="https://placehold.co/400x400"
+          class="header-image"
+          width="400"
+          height="400"
+          spinner-size="200"
+          :alt="boothData.booth_title || ''"
+        />
       </div>
     </div>
 
@@ -96,6 +103,7 @@ import {
 } from '../api/api-client';
 
 import BoothEditModal from '../components/booth/EditModal.vue';
+import Image from '../components/Image.vue';
 import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
 
@@ -104,7 +112,7 @@ import axios from 'axios';
 window.axios = axios;
 
 export default {
-  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection },
+  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection, Image },
   data() {
     return {
       EditImage,

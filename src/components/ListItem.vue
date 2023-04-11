@@ -1,6 +1,6 @@
 <template>
   <div class="component-wrapper">
-    <img class="image-content" :src="image" :alt="imageAlt" />
+    <Image class="image-content" :src="image" :alt="imageAlt" width="60" height="60" />
     <div class="text-content">
       <h3 v-text="title" />
       <p v-text="`${content}`" />
@@ -9,7 +9,12 @@
 </template>
 
 <script>
+import Image from './Image.vue';
+
 export default {
+  components: {
+    Image
+  },
   props: {
     title: {
       type: String,
@@ -58,9 +63,7 @@ export default {
   white-space: nowrap;
 }
 
-.image-content {
-  width: 60px;
-  height: 60px;
+:deep(.image-content) {
   margin-left: 10px;
   border-radius: 4px;
   object-fit: cover;
