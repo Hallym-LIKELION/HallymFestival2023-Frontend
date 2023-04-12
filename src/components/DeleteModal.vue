@@ -1,5 +1,5 @@
 <template>
-  <Modal class="modal" :visible="visible" @dispose="close" width="500px">
+  <Modal class="modal" :visible="visible" @dispose="close" width="360px">
     <div class="modal-header">
       <p class="normal">{{ type }} 삭제하시겠습니까?</p>
       <button class="close-button" @click="close">
@@ -10,7 +10,7 @@
       <p>"{{ name }}" {{ type }} 삭제하려고 합니다.</p>
       <p>계속하려면 "삭제"라고 입력하세요.</p>
       <input type="text" v-model="text" @keydown.enter="complete" />
-      <p :class="['error', { hidden: !error }]">"삭제"라고 입력해주세요</p>
+      <p ref="error" :class="['error', { hidden: !error }]">"삭제"라고 입력해주세요.</p>
     </div>
     <div class="modal-footer">
       <button class="modal-button back" @click="close">돌아가기</button>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { gsap, Elastic } from 'gsap';
 import Modal from './Modal.vue';
 import CloseImage from '../assets/close.png';
 
@@ -54,14 +55,30 @@ export default {
       this.error = false;
       this.$emit('close');
     },
+    showError() {
+      this.error = true;
+      this.text = '';
+      gsap.fromTo(
+        this.$refs.error,
+        {
+          marginLeft: '24px'
+        },
+        {
+          duration: 0.5,
+          marginLeft: '0',
+          ease: Elastic.easeOut.config(2, 0)
+        }
+      );
+    },
     complete() {
-      if (this.text === '삭제') {
-        this.text = '';
-        this.error = false;
-        this.$emit('complete');
-      } else {
-        this.error = true;
+      if (this.text !== '삭제') {
+        this.showError();
+        return;
       }
+
+      this.text = '';
+      this.error = false;
+      this.$emit('complete');
     }
   },
   created() {}
@@ -93,6 +110,7 @@ export default {
 }
 
 .modal-body > p {
+  margin-bottom: 12px;
   font-size: 12pt;
   text-align: center;
 }
@@ -117,6 +135,7 @@ input {
   margin-top: 18px;
   padding: 0;
   border: 0;
+  border-radius: 10px;
   background-color: #efefef;
   /* outline: 1px solid black; */
   font-size: 18pt;
@@ -131,18 +150,19 @@ input {
 }
 
 .modal-button {
-  width: 100px;
-  margin: 0 4px;
-  padding: 6px;
+  width: 90px;
+  padding: 10px 0;
   border-radius: 24px;
-  font-size: 11pt;
-  color: white;
+}
+
+.modal-button.back {
+  color: black;
+  background-color: #dfdfdf;
 }
 
 .modal-button.delete {
-  background-color: #ff3333;
-}
-.modal-button.back {
-  background-color: #434343;
+  margin-left: 10px;
+  color: white;
+  background-color: #ca434c;
 }
 </style>
