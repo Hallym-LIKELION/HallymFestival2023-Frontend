@@ -5,14 +5,21 @@
       :data="editData"
       :id="id"
       @close="closeEditModal"
-      @complete="editBoothData"
+      @complete="editBooth"
     />
 
-    <BoothEditMenuModal
+    <BoothDescriptionEditModal
+      :visible="editDescriptionModal"
+      :data="this.boothData.booth_content"
+      @close="closeEditDescriptionModal"
+      @complete="editDescription"
+    />
+
+    <BoothMenuEditModal
       :visible="editMenuModal"
       :data="editMenuData"
       @close="closeEditMenuModal"
-      @complete="editBoothMenuData"
+      @complete="editMenu"
     />
 
     <DeleteModal
@@ -54,7 +61,10 @@
             <button class="delete-button" @click="openDeleteModal">
               <img :src="CloseImage" alt="" />
             </button>
-            <button class="edit-button" @click="editModal = !editModal">
+            <button class="edit-button" @click="openEditDescriptionModal">
+              <img :src="EditImage" alt="" />
+            </button>
+            <button class="edit-button" @click="openEditModal">
               <img :src="EditImage" alt="" />
             </button>
           </div>
@@ -66,7 +76,7 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 메뉴</h1>
-          <button class="edit-button" @click="editMenuModal = !editMenuModal">
+          <button class="edit-button" @click="openEditMenuModal">
             <img :src="EditImage" alt="" />
           </button>
         </div>
@@ -108,18 +118,26 @@ import {
   DeleteBooth
 } from '../api/api-client';
 
-import BoothEditModal from '../components/booth/EditModal.vue';
-import DeleteModal from '../components/DeleteModal.vue';
 import Image from '../components/Image.vue';
-import BoothEditMenuModal from '../components/booth/MenuEditModal.vue';
+import BoothEditModal from '../components/booth/EditModal.vue';
+import BoothMenuEditModal from '../components/booth/MenuEditModal.vue';
+import BoothDescriptionEditModal from '../components/booth/DescriptionEditModal.vue';
 import BoothCommentSection from '../components/booth/CommentSection.vue';
+import DeleteModal from '../components/DeleteModal.vue';
 
 import axios from 'axios';
 
 window.axios = axios;
 
 export default {
-  components: { BoothEditModal, BoothEditMenuModal, BoothCommentSection, Image, DeleteModal },
+  components: {
+    BoothEditModal,
+    BoothMenuEditModal,
+    BoothDescriptionEditModal,
+    BoothCommentSection,
+    Image,
+    DeleteModal
+  },
   data() {
     return {
       EditImage,
@@ -139,10 +157,11 @@ export default {
       editModal: false,
       editData: {
         title: '',
-        description: '',
-        type: '부스',
-        status: true
+        type: '부스'
       },
+
+      editDescriptionModal: false,
+      editDescriptionData: '',
 
       editMenuModal: false,
       editMenuData: [],
@@ -154,6 +173,9 @@ export default {
     };
   },
   methods: {
+    openEditModal() {
+      this.editModal = true;
+    },
     closeEditModal() {
       this.editModal = false;
     },
@@ -163,14 +185,40 @@ export default {
     closeDeleteModal() {
       this.deleteModal = false;
     },
-    async editBoothData(data) {
+    async editBooth(data) {
       const res = await ModifyBooth(
         this.id,
         data.title,
-        data.description,
+        this.boothData.booth_content,
         '테스1트',
         data.type,
-        data.status
+        true // unused
+      );
+
+      // data.day
+
+      if (!res.result.includes('success')) {
+        alert('부스를 수정하는데 실패했습니다.\n' + res.result);
+        return;
+      }
+
+      // 페이지 새로고침
+      this.$router.go();
+    },
+    openEditDescriptionModal() {
+      this.editDescriptionModal = true;
+    },
+    closeEditDescriptionModal() {
+      this.editDescriptionModal = false;
+    },
+    async editDescription(description) {
+      const res = await ModifyBooth(
+        this.id,
+        this.boothData.booth_title,
+        description,
+        this.boothData.writer,
+        this.boothData.booth_type,
+        true // unused
       );
 
       if (!res.result.includes('success')) {
@@ -178,19 +226,20 @@ export default {
         return;
       }
 
-      this.boothData.booth_title = data.title;
-      this.boothData.booth_content = data.description;
-      this.boothData.booth_type = data.type;
-      this.boothData.booth_active = data.status;
-      this.closeEditModal();
+      // 페이지 새로고침
+      this.$router.go();
+    },
+    openEditMenuModal() {
+      this.editMenuModal = true;
     },
     closeEditMenuModal() {
       this.editMenuModal = false;
     },
-    async editBoothMenuData() {
-      this.menuData = await GetBoothMenu(this.id);
-
+    async editMenu() {
       this.closeEditMenuModal();
+
+      // 페이지 새로고침
+      this.$router.go();
     },
     loadCommentCount(count) {
       this.commentCount = count;
