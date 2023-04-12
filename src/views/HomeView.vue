@@ -1,15 +1,16 @@
 <template>
   <main>
     <div class="introment">
-    <p>"우리의 모든 시간은 연결되어있어"</p>
-  </div>
-  <div class="logo">
+      <p>"우리의 모든 시간은 연결되어있어"</p>
+    </div>
+    <div class="logo">
       <img src="@/assets/logo.png" alt="" />
-  </div>
-  <div class ="title">
-    <h3>한림대학교 비봉축전</h3><br>
-    <p>2023.05.16 ~ 05.18</p>
-  </div>
+    </div>
+    <div class="title">
+      <h3>한림대학교 비봉축전</h3>
+      <br />
+      <p>2023.05.16 ~ 05.18</p>
+    </div>
     <div class="menu" ref="menu">
       <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/boothmap">부스 배치도</RouterLink>
@@ -17,11 +18,11 @@
       <RouterLink to="/announcement">공지사항</RouterLink>
     </div>
     <div class="test-group">
-        <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
+      <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
     </div>
-    <div class ="DownBtn">
-          <p>Scroll</p>
-          <img src="@/assets/downscroll.png" alt="" />
+    <div class="DownBtn">
+      <p>Scroll</p>
+      <img src="@/assets/downscroll.png" alt="" />
     </div>
   </main>
 </template>
@@ -95,10 +96,9 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
   text-align: center;
   color: white;
-
 }
 h1 {
   font-size: 20pt;
@@ -110,7 +110,7 @@ h1 {
   color: white;
 }
 .introment {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -121,8 +121,8 @@ h1 {
   color: white;
 }
 
-.title{
-  font-family: 'Noto Sans KR', sans-serif;
+.title {
+  font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
   color: white;
 }
@@ -170,15 +170,14 @@ h1 {
   text-align: center;
   text-decoration: none;
 }
-.DownBtn{
+.DownBtn {
   margin: 0;
   padding: 36px 0;
   display: flex;
   justify-content: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
   color: white;
   opacity: 0.7;
-
 }
 </style>

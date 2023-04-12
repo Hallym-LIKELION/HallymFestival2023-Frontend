@@ -46,6 +46,6 @@ input {
   background-color: white;
   border: none;
   outline: none;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 </style>

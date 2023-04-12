@@ -209,7 +209,7 @@ h1 {
   color: #ffffff;
   font-size: 11pt;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   transition: background-color 0.25s, color 0.25s;
 }
 

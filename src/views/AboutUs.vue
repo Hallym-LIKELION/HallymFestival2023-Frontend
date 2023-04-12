@@ -3,26 +3,32 @@
     <div class="title">About US</div>
     <TitleContainer>
       <Logo className="introduce" text-align: center>
-        <h3>한림대학교 멋쟁이사자처럼 <br><br><br><br> Builder Team</h3>
-        <br>
+        <h3>
+          한림대학교 멋쟁이사자처럼 <br /><br /><br /><br />
+          Builder Team
+        </h3>
+        <br />
         <h4>X</h4>
-        <br>
-        <h3>2023 한림대학교 <br><br><br><br> 축제준비위원회</h3>
+        <br />
+        <h3>
+          2023 한림대학교 <br /><br /><br /><br />
+          축제준비위원회
+        </h3>
       </Logo>
-<br><br>
+      <br /><br />
       <hr style="border: solid 0.5px black" />
 
       <div class="introment">
         <p>2023년도 한림대학교 대동제를 위하여</p>
         <p>한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고</p>
         <p>
-          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이 
-          <br><br>축제 웹사이트를 개발하였습니다.
+          학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이
+          <br /><br />축제 웹사이트를 개발하였습니다.
         </p>
-        <br><br><br><br>
+        <br /><br /><br /><br />
         <p>
-          이번 2023 한림대학교 대동제가 <br><br> 여느때보다 즐겁고 행복한 축제가 되시기를 진심으로
-          소망합니다.
+          이번 2023 한림대학교 대동제가 <br /><br />
+          여느때보다 즐겁고 행복한 축제가 되시기를 진심으로 소망합니다.
         </p>
         <p>학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!</p>
       </div>
@@ -40,9 +46,7 @@
           <div class="card-body">
             <h2 class="card-title">오소현</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button @click="opengithubsohyun" class="git-button">
-              소현's Github
-            </button>
+            <button @click="opengithubsohyun" class="git-button">소현's Github</button>
           </div>
         </div>
 
@@ -51,9 +55,7 @@
           <div class="card-body">
             <h2 class="card-title">김경재</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button @click="opengithubkungjae" class="git-button">
-              경재's Github
-            </button>
+            <button @click="opengithubkungjae" class="git-button">경재's Github</button>
           </div>
         </div>
       </div>
@@ -68,9 +70,7 @@
           <div class="card-body">
             <h2 class="card-title">이동헌</h2>
             <h5 class="card-text">빅데이터학과 15</h5>
-            <button @click="opengithubdongheon" class="git-button">
-              동헌's Github
-            </button>
+            <button @click="opengithubdongheon" class="git-button">동헌's Github</button>
           </div>
         </div>
 
@@ -79,9 +79,7 @@
           <div class="card-body">
             <h2 class="card-title">박주영</h2>
             <h5 class="card-text">콘텐츠IT학과 19</h5>
-            <button @click="opengithubjuyoung" class="git-button">
-              주영's Github
-            </button>
+            <button @click="opengithubjuyoung" class="git-button">주영's Github</button>
           </div>
         </div>
 
@@ -90,9 +88,7 @@
           <div class="card-body">
             <h2 class="card-title">김미진</h2>
             <h5 class="card-text">빅데이터학과 20</h5>
-            <button @click="opengithubmijin" class="git-button">
-              미진's Github
-            </button>
+            <button @click="opengithubmijin" class="git-button">미진's Github</button>
           </div>
         </div>
       </div>
@@ -126,22 +122,22 @@
 export default {
   methods: {
     opengithubsohyun() {
-      window.open("https://github.com/osohyun0224", "_blank");
+      window.open('https://github.com/osohyun0224', '_blank');
     },
-    opengithubkungjae(){
-      window.open("https://github.com/PortalCube", "_blank");
+    opengithubkungjae() {
+      window.open('https://github.com/PortalCube', '_blank');
     },
-    opengithubdongheon(){
-      window.open("https://github.com/Sirius506775", "_blank");
+    opengithubdongheon() {
+      window.open('https://github.com/Sirius506775', '_blank');
     },
-    opengithubjuyoung(){
-      window.open("https://github.com/mythpoy","_blank");
+    opengithubjuyoung() {
+      window.open('https://github.com/mythpoy', '_blank');
     },
-    opengithubmijin(){
-      window.open("https://github.com/mijin0721","_blank");
+    opengithubmijin() {
+      window.open('https://github.com/mijin0721', '_blank');
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -166,19 +162,19 @@ p {
   text-size-adjust: auto;
   font-size: 1vw;
 }
-.git-button{
+.git-button {
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 5px;
-  background-color: #5C859B;
+  background-color: #5c859b;
   font-size: 12pt;
   color: white;
 }
-.git-button > button{
+.git-button > button {
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 5px;
-  background-color: #5C859B;
+  background-color: #5c859b;
   font-size: 12pt;
   color: white;
 }
@@ -200,7 +196,7 @@ p {
   color: black;
 }
 .title {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
   font-style: normal;
   font-weight: 550;
@@ -208,10 +204,10 @@ p {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .introment {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -277,5 +273,4 @@ p {
   line-height: 9px;
   margin-bottom: 50px;
 }
-
 </style>

@@ -1,11 +1,11 @@
 <template>
   <main>
     <div class="introment">
-    <p>"우리의 모든 시간은 연결되어있어"</p>
-  </div>
-  <div class="logo">
+      <p>"우리의 모든 시간은 연결되어있어"</p>
+    </div>
+    <div class="logo">
       <img src="@/assets/logo.png" alt="" />
-  </div>
+    </div>
     <div class="form">
       <form @submit.prevent="fnLogin">
         <div class="input id">
@@ -61,7 +61,7 @@ export default {
   justify-content: center;
 }
 .introment {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -69,7 +69,7 @@ export default {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 h1 {
   font-size: 20pt;
@@ -103,13 +103,12 @@ p {
   opacity: 0.7;
 }
 
-
 .input > input {
   width: 100%;
   background: none;
   border: none;
   outline: none;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   opacity: 0.7;
 }
 
@@ -120,11 +119,11 @@ p {
   font-size: 15pt;
   border-radius: 12px;
   color: white;
-  background-color: #9C323E;
+  background-color: #9c323e;
   transition: background-color 0.1s;
 }
 
 .button > button:hover {
-  background-color: #9C323E;
+  background-color: #9c323e;
 }
 </style>
