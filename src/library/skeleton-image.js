@@ -2,6 +2,10 @@
 
 export function CreateSkeletonImage(width, height, size) {
   const offset = (size - 100) / -2;
+
+  // TODO
+  // 하단의 요소들을 동적으로 생성하여 라이브러리 용량을 더욱 줄이기.
+
   return (
     'data:image/svg+xml,' +
     encodeURIComponent(

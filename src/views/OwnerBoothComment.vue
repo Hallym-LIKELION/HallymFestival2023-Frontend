@@ -36,34 +36,26 @@ export default {
     Comment
   },
   data() {
-  return{
-    list: [
+    return {
+      list: [
         {
           id: 1,
           name: '집가고싶은 사자',
-          comment:
-            '그냥 집에 가고 싶어요...',
-          booth: 
-          '어셈블',
-          time:
-          '2023-04-08 18:20',
-          warn:
-          '신고 3회'
+          comment: '그냥 집에 가고 싶어요...',
+          booth: '어셈블',
+          time: '2023-04-08 18:20',
+          warn: '신고 3회'
         },
         {
           id: 2,
           name: '밥먹는 사자',
-          comment:
-            '그냥 밥먹고 싶은데요...',
-          booth: 
-          '춤바람',
-          time:
-          '2023-04-08 18:20',
-          warn:
-          '신고 3회'
+          comment: '그냥 밥먹고 싶은데요...',
+          booth: '춤바람',
+          time: '2023-04-08 18:20',
+          warn: '신고 3회'
         }
-    ],
-    context: -1
+      ],
+      context: -1
     };
   },
   methods: {
@@ -86,7 +78,7 @@ export default {
 }
 
 .intro {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -94,7 +86,7 @@ export default {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .button-group {
@@ -110,7 +102,7 @@ export default {
   background-color: #ca434c;
   font-size: 13pt;
   color: #f8f9fd;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   transition: background-color 0.25s, color 0.25s;
 }
 
@@ -121,11 +113,9 @@ export default {
 
 .comment-container > * {
   margin-top: 12px;
-
 }
 .comment-list > * {
   width: 100%;
   margin: 10px 0;
-
 }
 </style>

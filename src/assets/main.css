@@ -19,7 +19,7 @@ h6 {
 input[type='text'] {
   border: none;
   background-color: #dddddd;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 button {
@@ -28,14 +28,14 @@ button {
   background: none;
   cursor: pointer;
   color: black;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 textarea {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 body {
@@ -43,5 +43,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  src: url(./font/NanumGothic.woff2), url(./font/NanumGothic.woff), url(./font/NanumGothic.otf);
 }

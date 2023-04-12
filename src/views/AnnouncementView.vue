@@ -298,6 +298,6 @@ h1 {
   color: white;
   font-size: 10pt;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 </style>

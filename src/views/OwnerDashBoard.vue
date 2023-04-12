@@ -1,28 +1,27 @@
 <template>
   <main>
-  <div class="introment">
-    <p>"우리의 모든 시간은 연결되어있어"</p>
-  </div>
-  <div class="logo">
+    <div class="introment">
+      <p>"우리의 모든 시간은 연결되어있어"</p>
+    </div>
+    <div class="logo">
       <img src="@/assets/logo.png" alt="" />
-  </div>
-  <div class ="totalvisitor">
-    <h3>Today</h3>
-    <h1>123123</h1>
-    <img src="@/assets/emptybox.png" alt="" />
-  </div>  
-  <div class="ownermenu" ref="ownermenu">
+    </div>
+    <div class="totalvisitor">
+      <h3>Today</h3>
+      <h1>123123</h1>
+      <img src="@/assets/emptybox.png" alt="" />
+    </div>
+    <div class="ownermenu" ref="ownermenu">
       <RouterLink to="/announcement">공지사항</RouterLink>
       <RouterLink to="/boothmap">부스 현황 분석</RouterLink>
       <RouterLink to="/ownerbcomment">신고 댓글 분석</RouterLink>
       <RouterLink to="/announcement">신고 방명록 분석</RouterLink>
     </div>
- </main>
+  </main>
 </template>
 
 <script>
-export default {
-  }
+export default {};
 </script>
 
 <style scoped>
@@ -31,7 +30,7 @@ export default {
   justify-content: center;
 }
 .introment {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -39,16 +38,16 @@ export default {
   letter-spacing: 0.15em;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.totalvisitor{
+.totalvisitor {
   text-align: center;
   margin: 0;
   padding: 10px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .ownermenu {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   max-width: 322.29px;
   margin: auto;
   display: flex;

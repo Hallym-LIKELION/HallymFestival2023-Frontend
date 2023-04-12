@@ -142,7 +142,7 @@ h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .poster {
   padding: 36px 0;
@@ -156,7 +156,7 @@ h1 {
   align-items: center;
   margin: 0 10px;
   padding: 0 16px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .program-list > * {
@@ -165,7 +165,7 @@ h1 {
   padding: 12px 0;
   border-bottom: 1px solid #00000052;
   cursor: pointer;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .program-list > *:last-child {

@@ -265,6 +265,6 @@ h1 {
   color: white;
   font-size: 12pt;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 </style>
