@@ -134,12 +134,20 @@ export default {
       }
 
       const promiseList = [];
+
       // Create Operation
       const createdList = this.items.filter((item) => item._deleted !== true && item._created);
       console.log('Created', createdList);
 
+      // 생성할때는 순차적으로 생성하기 (promiseList 사용하면 순서가 꼬임)
       for (const item of createdList) {
-        promiseList.push(CreateBoothMenu(boothId, item.name, item.price));
+        try {
+          await CreateBoothMenu(boothId, item.name, item.price);
+        } catch (e) {
+          alert('메뉴를 수정하는데 오류가 발생했습니다.\n' + e);
+          console.error(e);
+          return;
+        }
       }
 
       // Modify Operation
@@ -176,8 +184,6 @@ export default {
         console.error(e);
         return;
       }
-
-      console.log(123);
 
       this.$emit('complete');
     }
