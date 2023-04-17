@@ -37,7 +37,7 @@
       <SubTitle className="group"><h2>Developer</h2></SubTitle>
 
       <!-- 프론트엔드 -->
-      <TeamText className="team" text-align: center><h3>Front-End TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3><img src="@/assets/vuelogo.png"/> Front-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
@@ -61,7 +61,7 @@
       </div>
 
       <!-- 백엔드 -->
-      <TeamText className="team" text-align: center><h3>Back-End TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3><img src="@/assets/springbootlogo.png"/>  Back-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
@@ -94,7 +94,7 @@
       </div>
 
       <!-- 기획/디자인 -->
-      <TeamText className="team" text-align: center><h3>PM / DESGIN TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3><img src="@/assets/figmalogo.png"/> PM / DESGIN TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
