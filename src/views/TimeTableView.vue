@@ -7,7 +7,7 @@
       <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">수요일</button>
       <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
     </div>
-
+    <hr style="border: solid 2px white " class ="line" />
     <div class="table">
       <template v-for="item in filltered_list">
         <div class="table-col-1">
@@ -93,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+.line{
+  opacity : 0.3;
+}
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -106,12 +109,15 @@ h1 {
 }
 
 .button-group > button {
+  width:70px;
+  height: 28px;
   margin: 0 10px;
   padding: 5px 18px;
   border: none;
   border-radius: 16px;
   color: #ffffff;
   cursor: pointer;
+  font-size: 9pt;
   font-family: 'Nanum Gothic', sans-serif;
   transition: background-color 0.25s, color 0.25s;
 }
@@ -123,6 +129,10 @@ h1 {
 
 .table {
   max-width: 500px;
+  background-color: white;
+  opacity: 0.3;
+  border: none;
+  border-radius: 16px;
 
   margin: 48px auto;
 
@@ -141,13 +151,12 @@ h1 {
 
   background-color: #CA434C; /* 중심 흰색원 */
   border: 6px solid #CA434C; /* 파란색 원 */
-  outline: 8px solid #CA434C; /* 제일 바깥 흰색원 */
 }
 
 .schedule-line {
-  width: 5px;
+  width: 3px;
   height: calc(100% + 16px);
-
+  opacity: 0.3;
   margin-top: 16px;
   margin-bottom: -16px;
 
