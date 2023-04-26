@@ -48,8 +48,7 @@ export default {
 
   methods: {
     onImageLoad() {
-      const self = this;
-      setTimeout(() => (self.loaded = true), 1000);
+      this.loaded = true;
     }
   }
 };

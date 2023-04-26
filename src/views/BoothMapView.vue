@@ -16,15 +16,49 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <Image
-        class="poster-image"
-        :src="mapImage"
-        alt="한림대학교 비봉축전"
-        width="970"
-        height="689"
-        spinner-size="300"
-      />
-      <SwitchButton />
+      <Carousel :items-to-show="1" :wrapAround="true" v-model="slide">
+        <Slide :key="1">
+          <Image
+            class="image"
+            src="https://placehold.co/500x400/aa2222/FFFFFF/png?text=Tuesday"
+            width="500"
+            height="400"
+            spinner-size="300"
+          />
+        </Slide>
+        <Slide :key="2">
+          <Image
+            class="image"
+            src="https://placehold.co/500x400/22AA22/FFFFFF/png?text=Wednesday"
+            width="500"
+            height="400"
+            spinner-size="300"
+          />
+        </Slide>
+        <Slide :key="3">
+          <Image
+            class="image"
+            src="https://placehold.co/500x400/3333AA/FFFFFF/png?text=Thursday"
+            width="500"
+            height="400"
+            spinner-size="300"
+          />
+        </Slide>
+        <Slide :key="4">
+          <Image
+            class="image"
+            src="https://placehold.co/500x400/222222/FFFFFF/png?text=Night+time"
+            width="500"
+            height="400"
+            spinner-size="300"
+          />
+        </Slide>
+
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+      <SwitchButton @change="switchDayNight" />
     </div>
 
     <div class="banner-group">
@@ -58,6 +92,7 @@ import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
 import SwitchButton from '../components/SwitchButton.vue';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
 import { GetBoothList, CreateBooth } from '../api/api-client';
@@ -68,6 +103,9 @@ export default {
     SearchBar,
     ListItem,
     Pagination,
+    Carousel,
+    Slide,
+    Navigation,
     SwitchButton,
     Image,
     BoothEditModal
@@ -78,6 +116,8 @@ export default {
       list: [],
       search: '',
       day: 0,
+
+      slide: 0,
 
       showCreateBoothModal: false,
 
@@ -109,7 +149,15 @@ export default {
       if (this.day === day) {
         this.day = 0;
       } else {
+        this.slide = day - 1;
         this.day = day;
+      }
+    },
+    switchDayNight(isDay) {
+      if (isDay) {
+        this.slide = 0;
+      } else {
+        this.slide = 3;
       }
     },
     openCreateModal() {
@@ -165,23 +213,48 @@ h1 {
   color: #ffffff;
 }
 
+:deep(.carousel) {
+  max-width: 420px;
+  margin: auto;
+}
+
+:deep(.poster .image) {
+  width: 100%;
+  object-fit: contain;
+}
+
+:deep(.carousel__prev),
+:deep(.carousel__next) {
+  color: white;
+}
+
 .poster {
+  max-width: 420px;
+  margin: auto;
+  /* overflow: hidden; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
-:deep(.poster-image) {
+@media screen and (max-width: 480px) {
+  .poster {
+    padding-right: 36px; /* ?? */
+  }
+}
+
+/* :deep(.poster-image) {
   max-width: 100%;
   max-height: 400px;
   object-fit: contain;
   opacity: 1;
   transition: opacity 0.25s ease;
-}
+} */
 
 .poster > .switch-button {
   margin-left: -70px;
   margin-bottom: 6px;
+  z-index: 9;
 }
 
 .hidden {
