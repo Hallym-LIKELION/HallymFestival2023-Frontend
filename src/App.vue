@@ -16,13 +16,13 @@
         <Transition name="slide">
           <nav v-if="showMenu">
             <div class="top-menu">
-              <template v-for="{ url, name } in navList">
-                <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+              <template v-for="{ url, name, callback = () => (showMenu = false) } in navList">
+                <RouterLink :to="'/' + url" v-text="name" @click="callback" />
               </template>
             </div>
             <div class="bottom-menu">
-              <template v-for="{ url, name } in navBottomList">
-                <RouterLink :to="'/' + url" v-text="name" @click="() => (showMenu = false)" />
+              <template v-for="{ url, name, callback = () => (showMenu = false) } in navBottomList">
+                <RouterLink :to="'/' + url" v-text="name" @click="callback" />
               </template>
             </div>
           </nav>
@@ -69,6 +69,7 @@ export default {
         { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
         { name: '만든이들', url: 'aboutus' },
+        { name: '나의 부스', url: '', callback: this.openMyBooth },
         { name: '(테)관리자홈', url: 'ownerhome' },
         { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
         { name: '(테)관리자방명록', url: 'ownercomment' }
@@ -81,12 +82,37 @@ export default {
     AOS.init();
   },
   mounted() {},
-  methods: {}
+  methods: {
+    async openMyBooth(evt) {
+      evt.stopPropagation();
+
+      // 부스 없으면 부스 만들기
+      // 추후 관련 API 스펙 확정후 제작.
+      // const result = await this.createBooth();
+
+      this.$router.push('/booth/1');
+      this.showMenu = false;
+    },
+    async createBooth() {
+      const res = await API.CreateBooth(
+        '이름 없는 부스',
+        '여러분들의 부스를 잘 나타내는 설명을 적어보세요!',
+        '테스트',
+        '부스'
+      );
+
+      if (!res.result.includes('success')) {
+        alert('오류: 부스를 생성하는데 실패했습니다.\n' + res.result);
+        return;
+      }
+
+      return res;
+    }
+  }
 };
 </script>
 
 <style scoped>
-
 .background {
   min-height: calc(100vh - 80px);
   overflow: auto;
@@ -171,8 +197,8 @@ nav > div > * {
   color: black;
   text-decoration: none;
 }
-nav :hover{
-  color:#CA434C;
+nav :hover {
+  color: #ca434c;
 }
 
 .router-view {
