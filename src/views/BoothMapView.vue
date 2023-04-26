@@ -16,11 +16,12 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <BoothCarousel :slide="slide" />
-      <SwitchButton @change="switchDayNight" />
+      <BoothCarousel :slide="slide" :isAdmin="admin" />
+      <SwitchButton v-if="!admin" @change="switchDayNight" />
     </div>
 
     <div class="banner-group">
+      <button @click="admin = !admin" class="create-booth-button">임시: 관리자 모드 전환</button>
       <button @click="openCreateModal" class="create-booth-button">부스 만들기</button>
     </div>
 
@@ -72,6 +73,8 @@ export default {
       search: '',
       day: 0,
 
+      admin: false,
+
       slide: 0,
 
       showCreateBoothModal: false,
@@ -104,7 +107,9 @@ export default {
       if (this.day === day) {
         this.day = 0;
       } else {
-        this.slide = day - 1;
+        if (!this.admin) {
+          this.slide = day - 1;
+        }
         this.day = day;
       }
     },
