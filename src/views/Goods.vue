@@ -1,18 +1,64 @@
 <template>
   <main>
-    <h1>굿즈 안내서</h1>
-    <div class="floatt">
+    <h1>굿즈</h1>
+    <br><br>
+    <p>저희가 어떻게 어떻게 하기로 했습니다 </p>
+    <br>
+    <p>많은 관심 바랍니다.</p>
+  
         <div class="dcard">
-          <img src="@/assets/developer/osohyun.png" alt="" />
+          <img src="@/assets/goodspicture.png" alt="" />
           <div class="inform">
-            <h2>덕림이 소주잔</h2>
-            <p>5000원</p>
+            <h7>굿즈명</h7>
+            <br>
+            <h4>10000원</h4>
           </div>
         </div>
+
+        <div class="dcard">
+          <img src="@/assets/goodspicture.png" alt="" />
+          <div class="inform">
+            <h7>굿즈명</h7>
+            <br>
+            <h4>10000원</h4>
+          </div>
+        </div>
+
+        <div class="dcard">
+          <img src="@/assets/goodspicture.png" alt="" />
+          <div class="inform">
+            <h7>굿즈명</h7>
+            <br>
+            <h4>10000원</h4>
+          </div>
+        </div>
+
+        <div class="dcard">
+          <img src="@/assets/goodspicture.png" alt="" />
+          <div class="inform">
+            <h7>굿즈명</h7>
+            <br>
+            <h4>10000원</h4>
+          </div>
+        </div>
+
+        <div class="dcard">
+          <img src="@/assets/goodspicture.png" alt="" />
+          <div class="inform">
+            <h7>굿즈명</h7>
+            <br>
+            <h4>10000원</h4>
+          </div>
+        </div>
+
+        <div class="DownBtn">
+          <img src="@/assets/goodsscroll.png" alt="" />
+        </div>
+
         <button>
-                <div class="button">굿즈 구매하러 가기 ></div>
+          <div class="button"><b>구매하러가기</b></div>
             </button>
-      </div>
+    
     
   </main>
 </template>
@@ -20,10 +66,27 @@
 <script></script>
 
 <style scoped>
+
+h1 {
+  font-size: 30pt;
+  text-align: center;
+}
+p {
+  font-size: 15pt;
+  text-align: center;
+  color: white;
+}
+h7{
+  color: black; 
+}
+h4{
+  color: black;
+}
 .dcard {
   background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
-  border-radius: 10px;
-  width: 32%;
+  border-radius: 16px;
+  width: 151px;
+  height: 160px;
   padding: 10px;
   margin: 10px;
   text-decoration: none;
@@ -35,16 +98,23 @@
   font-size: 20px;
   color: #FFFFFF;
 }
-
 .button {
+  width:328px;
+  height: 30px;
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 18px;
-  background-color: #222324;
-  font-size: 12pt;
+  text-align: center;
+  background-color: #CA434C;
+  font-size: 17pt;
   color: white;
 }
 h1{
   color: #FFFFFF;
+}
+
+.DownBtn{
+  padding: 10px;
+  margin: 10px;
 }
 </style>
