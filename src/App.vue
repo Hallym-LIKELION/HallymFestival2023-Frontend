@@ -9,7 +9,7 @@
         <button @click="showMenu = !showMenu">
           <img :src="menuButtonImage" width="24" />
         </button>
-        <RouterLink class="title" to="/">2023 한림대학교 비봉축전</RouterLink>
+        <RouterLink class="title" to="/"><img src="@/assets/logo2.png" alt="" /></RouterLink>
       </header>
 
       <div class="wrapper">
@@ -86,6 +86,7 @@ export default {
 </script>
 
 <style scoped>
+
 .background {
   min-height: calc(100vh - 80px);
   overflow: auto;
@@ -101,8 +102,6 @@ header {
   /* margin-top: -56px; */
   display: flex;
   position: fixed;
-  background-color: #ffffff;
-  box-shadow: 0px 1px 8px #00000066;
   align-items: center;
   justify-content: center;
   z-index: 999;
@@ -171,6 +170,9 @@ nav > div > * {
   font-size: 13pt;
   color: black;
   text-decoration: none;
+}
+nav :hover{
+  color:#CA434C;
 }
 
 .router-view {

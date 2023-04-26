@@ -24,6 +24,14 @@
       <p>Scroll</p>
       <img src="@/assets/downscroll.png" alt="" />
     </div>
+
+    <div class ="sponsor">
+      <p>이 웹사이트는</p>
+      <br>
+      <img src="@/assets/naverlogo.png" alt="" />
+      <br>
+      <p>의 서버 후원을 받아 제작되었습니다.</p>
+    </div>
   </main>
 </template>
 
@@ -94,8 +102,12 @@ export default {
   }
 };
 </script>
-
 <style scoped>
+.sponsor{
+  text-align: center;
+  color: white;
+  text-align: center;
+}
 p {
   text-align: center;
   color: white;
@@ -105,6 +117,8 @@ h1 {
   text-align: center;
 }
 .logo {
+  margin: 0;
+  padding: 36px 0;
   display: flex;
   justify-content: center;
   color: white;
