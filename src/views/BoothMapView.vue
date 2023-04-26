@@ -16,52 +16,12 @@
     <h1>부스 배치도</h1>
 
     <div class="poster">
-      <Carousel :items-to-show="1" :wrapAround="true" v-model="slide">
-        <Slide :key="1">
-          <Image
-            class="image"
-            src="https://placehold.co/500x400/aa2222/FFFFFF/png?text=Tuesday"
-            width="500"
-            height="400"
-            spinner-size="300"
-          />
-        </Slide>
-        <Slide :key="2">
-          <Image
-            class="image"
-            src="https://placehold.co/500x400/22AA22/FFFFFF/png?text=Wednesday"
-            width="500"
-            height="400"
-            spinner-size="300"
-          />
-        </Slide>
-        <Slide :key="3">
-          <Image
-            class="image"
-            src="https://placehold.co/500x400/3333AA/FFFFFF/png?text=Thursday"
-            width="500"
-            height="400"
-            spinner-size="300"
-          />
-        </Slide>
-        <Slide :key="4">
-          <Image
-            class="image"
-            src="https://placehold.co/500x400/222222/FFFFFF/png?text=Night+time"
-            width="500"
-            height="400"
-            spinner-size="300"
-          />
-        </Slide>
-
-        <template #addons>
-          <Navigation />
-        </template>
-      </Carousel>
-      <SwitchButton @change="switchDayNight" />
+      <BoothCarousel :slide="slide" :isAdmin="admin" />
+      <SwitchButton v-if="!admin" @change="switchDayNight" />
     </div>
 
     <div class="banner-group">
+      <button @click="admin = !admin" class="create-booth-button">임시: 관리자 모드 전환</button>
       <button @click="openCreateModal" class="create-booth-button">부스 만들기</button>
     </div>
 
@@ -91,31 +51,29 @@
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
+import BoothCarousel from '../components/BoothCarousel.vue';
 import SwitchButton from '../components/SwitchButton.vue';
-import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
 import { GetBoothList, CreateBooth } from '../api/api-client';
-import mapImage from '../assets/map.jpg';
 
 export default {
   components: {
     SearchBar,
     ListItem,
     Pagination,
-    Carousel,
-    Slide,
-    Navigation,
     SwitchButton,
+    BoothCarousel,
     Image,
     BoothEditModal
   },
   data() {
     return {
-      mapImage,
       list: [],
       search: '',
       day: 0,
+
+      admin: false,
 
       slide: 0,
 
@@ -149,7 +107,9 @@ export default {
       if (this.day === day) {
         this.day = 0;
       } else {
-        this.slide = day - 1;
+        if (!this.admin) {
+          this.slide = day - 1;
+        }
         this.day = day;
       }
     },
@@ -213,21 +173,6 @@ h1 {
   color: #ffffff;
 }
 
-:deep(.carousel) {
-  max-width: 420px;
-  margin: auto;
-}
-
-:deep(.poster .image) {
-  width: 100%;
-  object-fit: contain;
-}
-
-:deep(.carousel__prev),
-:deep(.carousel__next) {
-  color: white;
-}
-
 .poster {
   max-width: 420px;
   margin: auto;
@@ -236,20 +181,6 @@ h1 {
   align-items: flex-end;
   justify-content: center;
 }
-
-@media screen and (max-width: 480px) {
-  .poster {
-    padding-right: 36px; /* ?? */
-  }
-}
-
-/* :deep(.poster-image) {
-  max-width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-  opacity: 1;
-  transition: opacity 0.25s ease;
-} */
 
 .poster > .switch-button {
   margin-left: -70px;
