@@ -27,10 +27,11 @@
 
     <div class ="sponsor">
       <p>이 웹사이트는</p>
-      <br>
+      <br><br>
       <img src="@/assets/naverlogo.png" alt="" />
-      <br>
+      <br><br>
       <p>의 서버 후원을 받아 제작되었습니다.</p>
+      <br><br>
     </div>
   </main>
 </template>

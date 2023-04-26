@@ -129,6 +129,10 @@ h1 {
 
 .table {
   max-width: 500px;
+  background-color: white;
+  opacity: 0.3;
+  border: none;
+  border-radius: 16px;
 
   margin: 48px auto;
 
@@ -147,13 +151,12 @@ h1 {
 
   background-color: #CA434C; /* 중심 흰색원 */
   border: 6px solid #CA434C; /* 파란색 원 */
-  outline: 8px solid #CA434C; /* 제일 바깥 흰색원 */
 }
 
 .schedule-line {
-  width: 5px;
+  width: 3px;
   height: calc(100% + 16px);
-
+  opacity: 0.3;
   margin-top: 16px;
   margin-bottom: -16px;
 
