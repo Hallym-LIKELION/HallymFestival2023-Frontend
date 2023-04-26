@@ -1,18 +1,5 @@
 <template>
   <main>
-    <BoothEditModal
-      :visible="showCreateBoothModal"
-      :data="{
-        title: '',
-        description: '',
-        type: '부스',
-        status: true
-      }"
-      :id="-1"
-      @close="closeCreateModal"
-      @complete="createBooth"
-    />
-
     <h1>부스 배치도</h1>
 
     <div class="poster">
@@ -21,8 +8,9 @@
     </div>
 
     <div class="banner-group">
-      <button @click="admin = !admin" class="create-booth-button">임시: 관리자 모드 전환</button>
-      <button @click="openCreateModal" class="create-booth-button">부스 만들기</button>
+      <button @click="admin = !admin" class="toggle-admin">
+        임시: 관리자 모드 {{ admin ? '끄기' : '켜기' }}
+      </button>
     </div>
 
     <div class="search-bar"><SearchBar v-model="search" /></div>
@@ -39,7 +27,12 @@
           @click="() => showBooth(item.bno)"
           :title="item.booth_title"
           :content="item.booth_content"
-          :image="item.temp_image"
+          :type="item.booth_type"
+          :writer="item.writer"
+          :date="item.regDate"
+          :like="randomNumber(10, 16000)"
+          :comment="randomNumber(10, 16000)"
+          :isAdmin="admin"
         />
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
@@ -50,7 +43,6 @@
 <script>
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
-import BoothEditModal from '../components/booth/EditModal.vue';
 import BoothCarousel from '../components/BoothCarousel.vue';
 import SwitchButton from '../components/SwitchButton.vue';
 import Image from '../components/Image.vue';
@@ -64,8 +56,7 @@ export default {
     Pagination,
     SwitchButton,
     BoothCarousel,
-    Image,
-    BoothEditModal
+    Image
   },
   data() {
     return {
@@ -77,8 +68,6 @@ export default {
 
       slide: 0,
 
-      showCreateBoothModal: false,
-
       totalItems: 1,
       itemsPerPage: 1
     };
@@ -87,7 +76,7 @@ export default {
     filltered_list() {
       return this.list.filter((item) => {
         // 1. 요일에 따른 필터링
-        const isChoosedDay = true || this.day === 0 || item.day.includes(this.day);
+        // const isChoosedDay = true || this.day === 0 || item.day.includes(this.day);
 
         // 2. 검색에 따른 필터링
         const isContainSearchString =
@@ -95,7 +84,7 @@ export default {
           item.booth_title.includes(this.search) ||
           item.booth_content.includes(this.search);
 
-        return isChoosedDay && isContainSearchString;
+        return true && isContainSearchString;
       });
     }
   },
@@ -120,42 +109,21 @@ export default {
         this.slide = 3;
       }
     },
-    openCreateModal() {
-      this.showCreateBoothModal = true;
-    },
-    closeCreateModal() {
-      this.showCreateBoothModal = false;
-    },
-    openBoothRecommendation() {
-      alert('준비중');
-    },
-    async createBooth(data) {
-      const res = await CreateBooth(data.title, data.description, '테스트', data.type);
 
-      if (!res.result.includes('success')) {
-        alert('부스를 생성하는데 실패했습니다.\n' + res.result);
-        return;
-      }
-
-      const newData = await GetBoothList();
-      this.list = newData.dtoList;
-
-      alert('부스를 성공적으로 생성했습니다.');
-
-      this.closeCreateModal();
+    randomNumber(a, b) {
+      return a + Math.floor(Math.random() * (b - a));
     },
 
     async changePage(page) {
-      console.log(`페이지를 ${page} 페이지로 이동`);
       const data = await GetBoothList(page);
       this.list = data.dtoList;
       this.totalItems = data.total;
       this.itemsPerPage = data.size;
     }
   },
+
   async created() {
     // 데이터 가져오기
-
     const data = await GetBoothList();
     this.list = data.dtoList;
     this.totalItems = data.total;
@@ -233,10 +201,10 @@ h1 {
 .banner-group > button {
   width: 100%;
   height: 40px;
-  margin: 5px 0;
+  margin-top: 16px;
   border-radius: 10px;
-  background-color: #509bf8;
-  color: white;
+  border: 1px solid #509bf8;
+  color: #509bf8;
   font-size: 13pt;
 }
 
