@@ -11,7 +11,9 @@ import food from '../assets/icon/food.svg';
 import gamepad from '../assets/icon/gamepad.svg';
 import comment from '../assets/icon/comment.svg';
 import heart from '../assets/icon/heart.svg';
-// import  from '../assets/icon/';
+import trash from '../assets/icon/trash.svg';
+import pen from '../assets/icon/pen.svg';
+// import  from '../assets/icon/.svg';
 
 export const Icon = {
   leftArrow,
@@ -24,5 +26,7 @@ export const Icon = {
   food,
   gamepad,
   comment,
-  heart
+  heart,
+  trash,
+  pen
 };
