@@ -3,7 +3,7 @@
     <vue-awesome-paginate
       :total-items="totalItems"
       :items-per-page="itemsPerPage"
-      :max-pages-shown="5"
+      :max-pages-shown="6"
       :show-breakpoint-buttons="false"
       v-model="page"
       :on-click="onClickHandler"
@@ -76,13 +76,18 @@ export default {
 :deep(.paginate-buttons) {
   height: 24px;
   width: 24px;
+  box-sizing: content-box;
+  padding: 4px;
   border-radius: 24px;
   cursor: pointer;
   color: white;
+
+  font-size: 12pt;
 }
 
 :deep(.paginate-buttons > span > img) {
-  width: 9px;
+  width: 12px;
+  vertical-align: middle;
 }
 :deep(.paginate-buttons:hover) {
   background-color: #ffffff1f;
