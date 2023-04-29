@@ -1,34 +1,52 @@
 <template>
   <Modal :visible="visible" @dispose="close" width="400px">
     <div class="modal-header">
-      방명록 작성하기
+      <div class="color-picker">
+        <button class="yellow" @click="color = 'yellow'">
+          <div class="color"></div>
+          <p class="text">옐로</p>
+        </button>
+        <button class="pink" @click="color = 'pink'">
+          <div class="color"></div>
+          <p class="text">핑크</p>
+        </button>
+      </div>
       <button class="close-button" @click="close">
         <img class="close-image" :src="CloseImage" alt="닫기" />
       </button>
     </div>
     <div class="modal-body">
-      <div class="writer">
-        <img class="profile" src="https://placehold.co/48x48" alt="" />
-        <p class="nickname">{{ myIP ? GetRandomNickName(myIP) : '' }}</p>
-      </div>
       <textarea
-        class="write-content"
+        :class="[
+          'write-content',
+          {
+            yellow: color === 'yellow',
+            pink: color === 'pink'
+          }
+        ]"
         v-model="content"
         @keydown.enter.prevent="send"
-        placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
+        placeholder="타인을 비방하거나, 모욕을 주는 방명록은 삭제될 수 있습니다."
       ></textarea>
-      <input
-        class="write-password"
-        v-model="password"
-        type="password"
-        placeholder="비밀번호를 입력..."
-        maxlength="32"
-        @keypress.enter="send"
-      />
     </div>
     <div class="modal-footer">
-      <button class="modal-button back" @click="close">돌아가기</button>
-      <button class="modal-button apply" @click="send">게시하기</button>
+      <div class="writer">
+        <div class="nickname">
+          <p class="label">닉네임</p>
+          <input type="text" :value="myIP ? GetRandomNickName(myIP) : ''" disabled />
+        </div>
+        <div class="password">
+          <p class="label">비밀번호</p>
+          <input
+            class="write-password"
+            v-model="password"
+            type="password"
+            maxlength="32"
+            @keypress.enter="send"
+          />
+        </div>
+      </div>
+      <button class="modal-button apply" @click="send">등록</button>
     </div>
   </Modal>
 </template>
@@ -51,6 +69,7 @@ export default {
 
       myIP: '',
 
+      color: 'yellow',
       content: '',
       password: '',
 
@@ -77,6 +96,9 @@ export default {
       this.password = '';
 
       this.$emit('close');
+    },
+    selectColor(color) {
+      this.color = color;
     },
     async send() {
       if (this.content.length == 0) {
@@ -121,9 +143,39 @@ export default {
 
 <style scoped>
 .modal-header {
+  margin-top: 12px;
+  margin-bottom: 18px;
   display: flex;
   justify-content: space-between;
   font-size: 18pt;
+}
+
+.color-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-picker > button {
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-picker .color {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  border: 1px solid #c7c5c5;
+  border-radius: 18px;
+}
+
+.color-picker > .yellow > .color {
+  background-color: #fff4ce;
+}
+.color-picker > .pink > .color {
+  background-color: #fce3f3;
 }
 
 .close-image {
@@ -135,32 +187,74 @@ export default {
 .modal-body {
   margin: 10px 0;
   width: 100%;
-  min-height: 500px;
   display: flex;
   flex-direction: column;
 }
 
 .write-content {
   width: 100%;
-  height: 100px;
+  height: 300px;
+  padding: 16px;
+  border-radius: 18px;
+  box-sizing: border-box;
+  font-size: 18pt;
+  resize: none;
+}
+
+.write-content.yellow {
+  background-color: #fff4ce;
+}
+.write-content.pink {
+  background-color: #fce3f3;
 }
 
 .modal-footer {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.writer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.writer > div {
+  width: 100%;
+  padding: 8px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dddddd;
+  box-sizing: border-box;
+}
+
+.writer > div > p {
+  width: 100px;
+  margin-left: 8px;
+  font-size: 10pt;
+}
+
+.writer > div > input {
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.writer > .password {
+  margin-top: 10px;
 }
 
 .modal-button {
-  height: 24px;
-  border-radius: 24px;
-  background-color: #466efe;
+  width: 70px;
+  height: 80px;
+  margin-left: 10px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  background-color: #ca434c;
   color: white;
-}
-
-.modal-button.back {
-  width: calc(50% - 5px);
-  margin-right: 10px;
-}
-.modal-button.apply {
-  width: calc(50% - 5px);
 }
 </style>
