@@ -175,10 +175,13 @@ header {
 }
 
 header > button {
-  left: 24px;
-  height: 20px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  /* 이미지를 하얗게 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
