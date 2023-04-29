@@ -15,6 +15,7 @@ import trash from '../assets/icon/trash.svg';
 import pen from '../assets/icon/pen.svg';
 import check from '../assets/icon/check.svg';
 import undo from '../assets/icon/undo.svg';
+import close from '../assets/icon/close.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -32,5 +33,6 @@ export const Icon = {
   trash,
   pen,
   check,
-  undo
+  undo,
+  close
 };
