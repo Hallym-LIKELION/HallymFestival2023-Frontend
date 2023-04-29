@@ -8,7 +8,14 @@
         <button class="close">창 닫기</button>
       </div>
     </div>
-    <h1>프로그램 목록</h1>
+    <div class ="title-wrap">
+      <div class="title-image">
+        <img src="@/assets/overlay/Oprogram.png" alt=""/>
+        </div>
+        <div class="title-text">
+          프로그램 목록
+        </div>
+    </div>
     <div class="program-list" @click="openModal == true">
       <template v-for="item in list" :key="item.id">
         <ProgramCard
@@ -107,6 +114,31 @@ export default {
 </script>
 
 <style scoped>
+.title-wrap{
+  width:30%;
+  margin:10px auto;
+  position:relative;
+}
+.title-wrap img {
+  width:100%;
+  vertical-align: middle;
+}
+.title-text{
+  position: absolute;
+  top:40%;
+  left:50%;
+  width:50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 .black-bg {
   width: 100%;
   height: 100%;

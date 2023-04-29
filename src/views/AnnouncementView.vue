@@ -7,7 +7,12 @@
       @complete="completeNoticeModal"
       @close="closeNoticeModal"
     />
-    <h1 ref="title">공지사항</h1>
+    <div class="title-wrap">
+      <div class="title-image">
+        <img src="@/assets/overlay/Onotice.png" alt="" />
+      </div>
+      <div class="title-text">공지사항</div>
+    </div>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
       <template v-for="item in displayList" :key="item.id">
@@ -251,6 +256,31 @@ export default {
 </script>
 
 <style scoped>
+.title-wrap{
+  width:30%;
+  margin:10px auto;
+  position:relative;
+}
+.title-wrap img {
+  width:100%;
+  vertical-align: middle;
+}
+.title-text{
+  position: absolute;
+  top:40%;
+  left:50%;
+  width:50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 h1 {
   font-size: 20pt;
   text-align: center;

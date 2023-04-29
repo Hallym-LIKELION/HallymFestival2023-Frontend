@@ -1,6 +1,13 @@
 <template>
   <main>
-    <div class="title">About US</div>
+    <div class ="title-wrap">
+      <div class="title-image">
+        <img src="@/assets/overlay/Oaboutus.png" alt=""/>
+        </div>
+        <div class="title-text">
+          만든이들
+        </div>
+    </div>
     <TitleContainer>
       <Logo className="introduce" text-align: center>
         <h3>
@@ -119,7 +126,9 @@
 </template>
 
 <script>
+import Image from '../components/Image.vue';
 export default {
+  components: { Image },
   methods: {
     opengithubsohyun() {
       window.open('https://github.com/osohyun0224', '_blank');
@@ -141,6 +150,31 @@ export default {
 </script>
 
 <style scoped>
+.title-wrap{
+  width:30%;
+  margin:10px auto;
+  position:relative;
+}
+.title-wrap img {
+  width:100%;
+  vertical-align: middle;
+}
+.title-text{
+  position: absolute;
+  top:40%;
+  left:50%;
+  width:50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 h1,
 h2,
 h3 {
@@ -194,17 +228,6 @@ p {
   text-decoration: none;
   text-align: center;
   color: black;
-}
-.title {
-  font-family: 'Nanum Gothic', sans-serif;
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 30px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
 }
 .introment {
   font-family: 'Nanum Gothic', sans-serif;
