@@ -65,23 +65,18 @@ div {
 }
 
 button {
-  height: 42px;
+  height: 36px;
+  margin: 4px;
   padding: 4px 8px;
+  border-radius: 8px;
   font-size: 11pt;
+  font-weight: 600;
   text-align: left;
   transition: background-color 0.25s;
 }
 
-button:nth-child(1) {
-  border-radius: 8px 8px 0 0;
-}
-button:nth-child(2) {
-  border-radius: 0 0 8px 8px;
-}
-
 button:hover {
-  background-color: #CA434C;
-  opacity: 0.3;
+  background-color: #ca434c20;
 }
 
 .hidden {
