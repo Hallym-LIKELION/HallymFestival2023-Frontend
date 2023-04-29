@@ -390,7 +390,8 @@ h1 {
 
 .delete-container {
   top: 0px;
-  right: 24px;
+  right: 50%;
+  margin-right: -400px;
   height: 56px;
   position: fixed;
   z-index: 999;
@@ -398,6 +399,14 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 824px) {
+  .delete-container {
+    margin-right: 0;
+    right: 12px;
+  }
+}
+
 .delete-button {
   width: 36px;
   height: 36px;

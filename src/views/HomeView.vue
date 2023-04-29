@@ -1,12 +1,12 @@
 <template>
   <main>
-    <div class="introment">
+    <div class="introment" ref="introPhrase">
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
-    <div class="logo">
+    <div class="logo" ref="logo">
       <img src="@/assets/logo.png" alt="" />
     </div>
-    <div class="title">
+    <div class="title" ref="title">
       <h3>한림대학교 비봉축전</h3>
       <br />
       <p>2023.05.16 ~ 05.18</p>
@@ -17,27 +17,27 @@
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
     </div>
-    <div class="test-group">
+    <div class="test-group" ref="boothTest">
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
     </div>
-    <div class="DownBtn">
+    <div class="DownBtn" ref="scroll">
       <p>Scroll</p>
       <img src="@/assets/downscroll.png" alt="" />
     </div>
 
-    <div class ="sponsor">
+    <div class="sponsor" ref="sponsor">
       <p>이 웹사이트는</p>
-      <br><br>
+      <br /><br />
       <img src="@/assets/naverlogo.png" alt="" />
-      <br><br>
+      <br /><br />
       <p>의 서버 후원을 받아 제작되었습니다.</p>
-      <br><br>
+      <br /><br />
     </div>
   </main>
 </template>
 
 <script>
-import { gsap } from 'gsap';
+import { gsap, Power4 } from 'gsap';
 import { RouterLink } from 'vue-router';
 import festivalImage from '@/assets/poster.jpg';
 
@@ -54,31 +54,53 @@ export default {
     }
   },
   mounted() {
-    // 포스터 애니메이션
-    gsap.fromTo(
-      this.$refs.poster,
-      {
-        opacity: 0,
-        transform: 'scale(0.7)'
-      },
-      {
-        delay: 0.25,
-        duration: 0.5,
-        opacity: 1,
-        transform: 'none'
-      }
-    );
+    let delay = 0;
 
     // 슬로건 애니메이션
     gsap.fromTo(
-      this.$refs.slogan,
+      this.$refs.introPhrase,
       {
+        transform: 'translateY(-20%)',
         opacity: 0
       },
       {
-        delay: 0.75,
+        delay: 0.25,
         duration: 1,
-        opacity: 1
+        transform: 'none',
+        opacity: 1,
+        ease: 'Expo.easeOut'
+      }
+    );
+
+    // 포스터 애니메이션
+    gsap.fromTo(
+      this.$refs.logo,
+      {
+        opacity: 0,
+        transform: 'scale(0.5)'
+      },
+      {
+        delay: 0.75,
+        duration: 1.5,
+        transform: 'none',
+        opacity: 1,
+        ease: 'Expo.easeOut'
+      }
+    );
+
+    // 타이틀 애니메이션
+    gsap.fromTo(
+      this.$refs.title,
+      {
+        opacity: 0,
+        transform: 'translateY(100%)'
+      },
+      {
+        delay: 0.75,
+        duration: 2,
+        transform: 'none',
+        opacity: 1,
+        ease: 'Expo.easeOut'
       }
     );
 
@@ -92,7 +114,7 @@ export default {
           pointerEvents: 'none'
         },
         {
-          delay: 1.25 + i * 0.25,
+          delay: 1.75 + i * 0.25,
           duration: 0.5,
           transform: 'none',
           opacity: 1,
@@ -100,11 +122,59 @@ export default {
         }
       );
     }
+
+    // 부스 유형 애니메이션
+    gsap.fromTo(
+      this.$refs.boothTest,
+      {
+        transform: 'translateX(-10%)',
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      {
+        delay: 2.75,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1,
+        pointerEvents: 'auto'
+      }
+    );
+
+    // 스크롤 모양 애니메이션
+    gsap.fromTo(
+      this.$refs.scroll,
+      {
+        transform: 'translateY(-20%)',
+        opacity: 0
+      },
+      {
+        delay: 3.25,
+        duration: 0.5,
+        transform: 'none',
+        opacity: 1
+      }
+    );
+
+    // 스폰서 애니메이션
+    gsap.fromTo(
+      this.$refs.sponsor,
+      {
+        opacity: 0,
+        transform: 'scale(0.5)'
+      },
+      {
+        delay: 3.75,
+        duration: 1.5,
+        transform: 'none',
+        opacity: 1,
+        ease: 'Expo.easeOut'
+      }
+    );
   }
 };
 </script>
 <style scoped>
-.sponsor{
+.sponsor {
   text-align: center;
   color: white;
   text-align: center;
