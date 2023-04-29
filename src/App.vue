@@ -49,8 +49,8 @@
           </RouterView>
         </div>
       </div>
+      <Footer></Footer>
     </div>
-    <Footer></Footer>
   </main>
 </template>
 
@@ -131,13 +131,27 @@ export default {
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 80px);
   overflow: auto;
   margin: 0;
   background: rgb(2, 16, 41);
-  background: linear-gradient(0deg, rgb(8, 17, 31) 0%, rgb(12, 26, 49) 100%);
   background-position: center;
-  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+}
+
+.background {
+  width: 824px;
+  height: 100vh;
+  left: 50%;
+  margin-left: -412px;
+  position: fixed;
+
+  z-index: -1;
+  background-image: url('./assets/back-test.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
 }
 
 header {
@@ -150,12 +164,6 @@ header {
   align-items: center;
   justify-content: center;
   z-index: 99;
-
-  background-image: url('./assets/back-test.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-attachment: fixed;
 }
 
 @media screen and (max-width: 824px) {
@@ -252,16 +260,10 @@ nav :hover {
 
 .router-view {
   max-width: 768px;
-  min-height: calc(100vh - 56px - 80px);
+  min-height: calc(100vh - 56px - 70px);
   margin: auto;
   padding: 0 28px;
   padding-top: 56px;
-
-  background-image: url('./assets/back-test.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-attachment: fixed;
 }
 
 /* 트랜지션 기능 테스트 */

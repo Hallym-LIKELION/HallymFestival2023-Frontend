@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { gsap, Power4 } from 'gsap';
+import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
 import festivalImage from '@/assets/poster.jpg';
 
