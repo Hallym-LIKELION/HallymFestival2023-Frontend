@@ -1,38 +1,53 @@
 <template>
   <main>
-    <div class="background">
+    <div class="container">
+      <div class="background"></div>
+
       <Transition name="fade">
         <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
       </Transition>
 
-      <header>
-        <button @click="showMenu = !showMenu">
-          <img :src="menuButtonImage" width="24" />
-        </button>
-        <RouterLink class="title" to="/"><img src="@/assets/logo2.png" alt="" /></RouterLink>
-      </header>
+      <div class="header">
+        <header>
+          <button @click="showMenu = !showMenu">
+            <img :src="menuButtonImage" width="24" />
+          </button>
+          <RouterLink class="title" to="/" @click="showMenu = false"
+            ><img src="@/assets/logo2.png" alt=""
+          /></RouterLink>
+        </header>
+      </div>
 
       <div class="wrapper">
         <Transition name="slide">
-          <nav v-if="showMenu">
-            <div class="top-menu">
-              <template v-for="{ url, name, callback = () => (showMenu = false) } in navList">
-                <RouterLink :to="'/' + url" v-text="name" @click="callback" />
-              </template>
-            </div>
-            <div class="bottom-menu">
-              <template v-for="{ url, name, callback = () => (showMenu = false) } in navBottomList">
-                <RouterLink :to="'/' + url" v-text="name" @click="callback" />
-              </template>
-            </div>
-          </nav>
+          <div v-show="showMenu" class="nav-menu">
+            <nav>
+              <div class="top-menu">
+                <template v-for="{ url, name, callback = () => (showMenu = false) } in navList">
+                  <RouterLink :to="'/' + url" v-text="name" @click="callback" />
+                </template>
+              </div>
+              <div class="bottom-menu">
+                <template
+                  v-for="{ url, name, callback = () => (showMenu = false) } in navBottomList"
+                >
+                  <RouterLink :to="'/' + url" v-text="name" @click="callback" />
+                </template>
+              </div>
+            </nav>
+            <button class="close" @click="showMenu = false">
+              <img :src="Icon.close" />
+            </button>
+          </div>
         </Transition>
 
-        <RouterView v-slot="{ Component }" class="router-view">
-          <Transition name="fade" mode="out-in">
-            <component :is="Component" />
-          </Transition>
-        </RouterView>
+        <div class="router-view">
+          <RouterView v-slot="{ Component }">
+            <Transition name="fade" mode="out-in">
+              <component :is="Component" />
+            </Transition>
+          </RouterView>
+        </div>
       </div>
     </div>
     <Footer></Footer>
@@ -42,6 +57,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router';
 import AOS from 'aos';
+import { Icon } from './library/icon';
 import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
 
@@ -74,7 +90,8 @@ export default {
         { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
         { name: '(테)관리자방명록', url: 'ownercomment' }
       ],
-      navBottomList: [{ name: '로그인', url: 'login' }]
+      navBottomList: [{ name: '로그인', url: 'login' }],
+      Icon
     };
   },
   created() {
@@ -113,25 +130,42 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  min-height: calc(100vh - 80px);
+.container {
+  min-height: calc(100vh - 70px);
   overflow: auto;
   margin: 0;
-  background-image: url('./assets/mainbackg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: rgb(2, 16, 41);
+  background: linear-gradient(0deg, rgb(8, 17, 31) 0%, rgb(12, 26, 49) 100%);
   background-position: center;
+  background-attachment: fixed;
 }
+
 header {
-  width: 100%;
+  width: 824px;
   height: 56px;
-  /* margin-top: -56px; */
+  left: 50%;
+  margin-left: -412px;
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 99;
+
+  background-image: url('./assets/back-test.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
 }
+
+@media screen and (max-width: 824px) {
+  header {
+    left: 0;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 header > button {
   left: 24px;
   height: 20px;
@@ -160,7 +194,7 @@ header > .title {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 999;
   background-color: #00000077;
   opacity: 1;
   transition: opacity 0.25s;
@@ -170,17 +204,23 @@ header > .title {
   opacity: 0;
 }
 
-nav {
-  height: calc(100% - 56px - 16px);
-  margin-top: 56px;
-  padding: 8px;
-  background-color: #ffffff;
-  display: flex;
+.nav-menu {
+  height: 100%;
   position: fixed;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+
+nav {
+  height: 100%;
+  padding: 24px 8px;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: auto;
-  z-index: 99;
 }
 
 nav > div {
@@ -190,7 +230,7 @@ nav > div {
 }
 
 nav > div > * {
-  width: 180px;
+  width: 240px;
   padding: 12px 0;
   padding-left: 24px;
   font-size: 13pt;
@@ -201,12 +241,27 @@ nav :hover {
   color: #ca434c;
 }
 
+.nav-menu > .close {
+  width: 36px;
+  height: 36px;
+  margin-top: 24px;
+  margin-left: 24px;
+  color: white;
+  font-size: 24pt;
+}
+
 .router-view {
   max-width: 768px;
   min-height: calc(100vh - 56px - 80px);
   margin: auto;
   padding: 0 28px;
   padding-top: 56px;
+
+  background-image: url('./assets/back-test.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
 }
 
 /* 트랜지션 기능 테스트 */
