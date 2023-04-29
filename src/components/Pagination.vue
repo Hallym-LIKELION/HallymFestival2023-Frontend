@@ -42,6 +42,10 @@ export default {
     itemsPerPage: {
       type: Number,
       default: 10
+    },
+    currentPage: {
+      type: Number,
+      default: 1
     }
   },
 
@@ -49,10 +53,22 @@ export default {
     onClickHandler(page) {
       this.$emit('change', page);
     }
+  },
+
+  watch: {
+    currentPage(value) {
+      this.page = value;
+    }
   }
 };
 </script>
 <style scoped>
+.paginate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 :deep(.pagination-container) {
   display: flex;
   column-gap: 5px;

@@ -12,31 +12,42 @@
       <p class="item-label">가격</p>
       <p class="item-label">품절</p>
 
-      <template v-for="item in items" :key="item.id">
-        <button class="item-remove" @click="() => deleteItem(item)">
-          <img class="close-image" :src="CloseImage" alt="닫기" />
+      <template v-for="item in displayItems" :key="item.id">
+        <button class="item-remove" @click="() => deleteItem(item.id)">
+          <img class="close-image" :src="item._deleted ? Icon.undo : CloseImage" alt="닫기" />
         </button>
-        <input
-          class="item-name"
-          placeholder="메뉴명..."
-          :disabled="item._deleted"
-          type="text"
-          v-model="item.name"
-        />
+        <input class="item-name" :disabled="item._deleted" type="text" v-model="item.name" />
         <input
           class="item-price"
-          placeholder="가격..."
           :disabled="item._deleted"
           type="text"
           maxlength="6"
           @input="(evt) => checkNumber(evt, item)"
           v-model="item.price"
         />
-        <input class="item-soldout" type="checkbox" :disabled="item._deleted" />
+        <div>
+          <input
+            class="item-soldout"
+            type="checkbox"
+            :disabled="item._deleted"
+            :id="'check_' + item.id"
+          />
+          <label :for="'check_' + item.id"></label>
+        </div>
+
         <!-- v-model="item.isSoldout"  -->
       </template>
     </div>
     <div class="modal-footer">
+      <div>
+        <Pagination
+          @change="changePage"
+          :totalItems="items.length"
+          :itemsPerPage="itemsPerPage"
+          :currentPage="page"
+        ></Pagination>
+      </div>
+      <p ref="error" :class="['error', { hidden: !error }]">{{ errorMsg }}</p>
       <div><button class="modal-button add" @click="addItem">항목 추가하기</button></div>
       <div>
         <button class="modal-button back" @click="close">돌아가기</button>
@@ -47,22 +58,31 @@
 </template>
 
 <script>
+import { Icon } from '../../library/icon';
+import { gsap, Elastic } from 'gsap';
 import Modal from '../Modal.vue';
+import Pagination from '../Pagination.vue';
 import CloseImage from '../../assets/close.png';
 import { CreateBoothMenu, ModifyBoothMenu, DeleteBoothMenu } from '../../api/api-client';
 
-const ERROR_MESSAGE = {
-  empty_title: '메뉴명은 공란으로 둘 수 없습니다.',
-  max_item: '항목은 최대 15개까지 만들 수 있습니다'
-};
+let id = -1;
 
 export default {
   components: {
-    Modal
+    Modal,
+    Pagination
   },
   data() {
     return {
       CloseImage,
+      page: 1,
+
+      Icon,
+
+      error: false,
+      errorMsg: '.',
+
+      itemsPerPage: 10,
 
       items: []
     };
@@ -92,7 +112,12 @@ export default {
         }
       }
 
+      this.error = false;
+      this.page = 1;
       this.$emit('close');
+    },
+    changePage(page) {
+      this.page = page;
     },
     checkNumber(event, item) {
       event.target.value = event.target.value.replaceAll(/[^0-9]/g, '');
@@ -105,31 +130,60 @@ export default {
       this.$emit('update:modelValue', event.target.value);
     },
     addItem() {
+      if (this.items.length >= 30) {
+        this.showError('메뉴는 최대 30개까지 생성 가능합니다.');
+        return;
+      }
       this.items.push({
+        id: id--,
         name: '',
         price: 1000,
         _created: true
       });
+      this.page = parseInt((this.items.length - 1) / this.itemsPerPage) + 1;
     },
-    deleteItem(item) {
-      if (item._deleted) {
-        item._deleted = false;
+    deleteItem(id) {
+      const item = this.items.filter((item) => item.id === id)[0];
+      if (item._created) {
+        this.items = this.items.filter((item) => item.id !== id);
       } else {
-        item._deleted = true;
+        item._deleted = !item._deleted;
       }
+
+      const maxPage = parseInt((this.items.length - 1) / this.itemsPerPage) + 1;
+      if (this.page > maxPage) {
+        this.page = maxPage;
+      }
+    },
+    showError(msg) {
+      this.error = true;
+      this.errorMsg = msg;
+      gsap.fromTo(
+        this.$refs.error,
+        {
+          marginLeft: '-24px'
+        },
+        {
+          duration: 0.5,
+          marginLeft: '0',
+          ease: Elastic.easeOut.config(2, 0)
+        }
+      );
     },
     async applyMenu() {
       const boothId = parseInt(this.$route.params.id);
-      const isEmptyMenu = this.items.some((item) => !item._deleted && item.name === '');
+      const isEmptyMenu = this.items.some((item) => !item._deleted && item.name.trim() === '');
       const isEmptyPrice = this.items.some((item) => !item._deleted && item.price === '');
 
+      console.log(1);
+
       if (isEmptyMenu) {
-        alert(ERROR_MESSAGE.empty_title);
+        this.showError('메뉴명은 공란으로 둘 수 없습니다.');
         return;
       }
 
       if (isEmptyPrice) {
-        alert('가격은 비워둘 수 없습니다.');
+        this.showError('가격은 비워둘 수 없습니다.');
         return;
       }
 
@@ -185,6 +239,7 @@ export default {
         return;
       }
 
+      this.error = false;
       this.$emit('complete');
     }
   },
@@ -193,6 +248,11 @@ export default {
       if (value === true) {
         this.updateData();
       }
+    }
+  },
+  computed: {
+    displayItems() {
+      return this.items.slice(this.itemsPerPage * (this.page - 1), this.itemsPerPage * this.page);
     }
   },
   created() {}
@@ -213,14 +273,14 @@ export default {
 }
 
 .modal-body {
-  margin: 10px 0;
+  margin-top: 10px;
   width: 100%;
-  min-height: 500px;
+  min-height: 390px;
   display: grid;
-  grid-template-columns: 18px 5fr 2fr 24px;
+  grid-template-columns: 18px 5fr 3fr 42px;
   grid-auto-rows: max(24px);
-  row-gap: 16px;
-  column-gap: 10px;
+  row-gap: 12px;
+  column-gap: 9px;
 }
 
 .modal-footer {
@@ -231,7 +291,6 @@ export default {
 .modal-button {
   height: 24px;
   border-radius: 24px;
-  background-color: #466efe;
   color: white;
 }
 
@@ -240,25 +299,27 @@ export default {
   height: 36px;
   border-radius: 8px;
   margin-bottom: 10px;
+  color: black;
+  background-color: #dddddd;
 }
 .modal-button.back {
   width: calc(50% - 5px);
   margin-right: 10px;
+  color: black;
+  background-color: #dddddd;
 }
 .modal-button.apply {
   width: calc(50% - 5px);
+  background-color: #ca434c;
 }
 
 .item-label {
-  font-size: 9pt;
+  margin-top: 4px;
+  font-size: 13pt;
 }
 .item-label:nth-child(1),
 .item-label:nth-child(4) {
   text-align: center;
-}
-
-.item-label:nth-child(3) {
-  text-align: right;
 }
 
 .item-remove {
@@ -277,24 +338,71 @@ export default {
   width: calc(100% - 20px);
   padding: 0 10px;
   border-radius: 4px;
-  font-size: 13pt;
+  font-size: 11pt;
 }
 .item-price {
   width: calc(100% - 20px);
   padding: 0 10px;
   border-radius: 4px;
-  font-size: 13pt;
-  text-align: right;
+  font-size: 11pt;
 }
 .item-soldout {
-  width: 100%;
-  height: 100%;
+  display: none;
   margin: 0;
+}
+
+.item-soldout + label:before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: auto;
+  background-color: #dddddd;
+  border-radius: 4px;
+}
+
+.item-soldout:checked + label:before {
+  content: '';
+  background-color: #f47c7c;
+  border-color: #f47c7c;
+  background-image: url('@/assets/icon/check.svg');
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
 
 input:disabled {
   background-color: #ffb6b4;
   color: #c04846;
   text-decoration: line-through;
+}
+
+:deep(.paginate-buttons) {
+  color: black;
+}
+
+:deep(.paginate-buttons > span > img) {
+  filter: invert(1);
+}
+
+:deep(.paginate-buttons:hover) {
+  background-color: #0000001f;
+}
+:deep(.active-page) {
+  background-color: #5c859b;
+  color: white;
+}
+:deep(.active-page:hover) {
+  background-color: #2f434e;
+}
+
+.error {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 9pt;
+  color: red;
+}
+
+.hidden {
+  visibility: hidden;
 }
 </style>

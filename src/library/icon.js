@@ -13,6 +13,8 @@ import comment from '../assets/icon/comment.svg';
 import heart from '../assets/icon/heart.svg';
 import trash from '../assets/icon/trash.svg';
 import pen from '../assets/icon/pen.svg';
+import check from '../assets/icon/check.svg';
+import undo from '../assets/icon/undo.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -28,5 +30,7 @@ export const Icon = {
   comment,
   heart,
   trash,
-  pen
+  pen,
+  check,
+  undo
 };
