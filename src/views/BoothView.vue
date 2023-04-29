@@ -30,9 +30,20 @@
       @complete="deleteBooth"
     />
 
+    <div class="delete-container">
+      <button class="delete-button" @click="openDeleteModal">
+        <img :src="Icon.trash" alt="" />
+      </button>
+    </div>
+
     <div class="header">
       <div class="header-title">
-        <h1 class="header-name" v-text="boothData.booth_title || 'Loading...'"></h1>
+        <h1 class="header-name">
+          {{ boothData.booth_title || 'Loading...' }}
+          <button class="edit-button" @click="openEditModal">
+            <img :src="Icon.pen" alt="" />
+          </button>
+        </h1>
         <div class="header-like">
           <p class="header-like-count" v-text="like_display.toFixed(0)"></p>
           <button class="header-like-button" @click="likeHandler">
@@ -58,14 +69,8 @@
         <div class="section-header">
           <h1>부스 소개</h1>
           <div class="section-header-button-group">
-            <button class="delete-button" @click="openDeleteModal">
-              <img :src="CloseImage" alt="" />
-            </button>
             <button class="edit-button" @click="openEditDescriptionModal">
-              <img :src="EditImage" alt="" />
-            </button>
-            <button class="edit-button" @click="openEditModal">
-              <img :src="EditImage" alt="" />
+              <img :src="Icon.pen" alt="" />
             </button>
           </div>
         </div>
@@ -77,7 +82,7 @@
         <div class="section-header">
           <h1>부스 메뉴</h1>
           <button class="edit-button" @click="openEditMenuModal">
-            <img :src="EditImage" alt="" />
+            <img :src="Icon.pen" alt="" />
           </button>
         </div>
         <hr />
@@ -105,6 +110,7 @@
 <script>
 import { gsap } from 'gsap';
 import { get, set } from 'idb-keyval';
+import { Icon } from '../library/icon';
 import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
@@ -143,6 +149,7 @@ export default {
       EditImage,
       CloseImage,
 
+      Icon,
       id: -1,
 
       boothData: {},
@@ -381,11 +388,35 @@ h1 {
   text-align: left;
 }
 
+.delete-container {
+  top: 0px;
+  right: 24px;
+  height: 56px;
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button > img {
+  width: 24px;
+  height: 24px;
+}
+
 .header,
 .content,
 .section {
   max-width: 400px;
   margin: auto;
+  color: white;
 }
 
 .header {
@@ -437,27 +468,19 @@ h1 {
   align-items: center;
 }
 
+.edit-button {
+  vertical-align: middle;
+}
+
 .edit-button > img {
   width: 28px;
   height: 28px;
   vertical-align: middle;
 }
 
-.delete-button {
-  width: 28px;
-  height: 28px;
-  margin-right: 8px;
-  border-radius: 28px;
-  background-color: #d9d9d9;
-}
-.delete-button > img {
-  width: 12px;
-  height: 12px;
-}
-
 hr {
   border: 0px;
-  border-top: 2px solid #333333;
+  border-top: 2px solid #7f7f7f;
 }
 
 .section {
@@ -466,6 +489,13 @@ hr {
 .section-header {
   display: flex;
   justify-content: space-between;
+}
+
+.section-header > h1 {
+  padding: 5px 20px;
+  font-size: 14pt;
+  border-radius: 36px;
+  background-color: #5c859b;
 }
 
 .section-header > h1 > span {

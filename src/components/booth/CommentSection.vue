@@ -179,6 +179,7 @@ export default {
 .comment {
   display: flex;
   flex-direction: column;
+  color: black;
 }
 
 .comment-container > * {

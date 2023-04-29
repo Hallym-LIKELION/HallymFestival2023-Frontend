@@ -98,6 +98,9 @@ export default {
   margin-right: 8px;
   border-radius: 100%;
 }
+.nickname {
+  color: white;
+}
 .body {
   width: calc(100% - 20px);
   margin-top: 8px;
