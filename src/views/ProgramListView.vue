@@ -13,13 +13,14 @@
         <img src="@/assets/overlay/Oprogram.png" alt=""/>
         </div>
         <div class="title-text">
-          프로그램 목록
+          프로그램
         </div>
     </div>
     <div class="program-list" @click="openModal == true">
       <template v-for="item in list" :key="item.id">
         <ProgramCard
           :id="item.id"
+          :image="item.image"
           :title="item.title"
           :description="item.description"
           @click="
@@ -34,7 +35,10 @@
 
 <script>
 import ProgramCard from '../components/ProgramCard.vue';
-import festivalImage from '@/assets/poster.jpg';
+import P_dance from '@/assets/programlist/P_dance.png';
+import P_mung from '@/assets/programlist/P_mung.png';
+import P_ppung from '@/assets/programlist/P_ppung.png';
+import P_sing from '@/assets/programlist/P_sing.png';
 
 export default {
   name: 'ProgramListView',
@@ -47,23 +51,27 @@ export default {
       list: [
         {
           id: 1,
-          title: '2023 대동제 가요제',
+          image: P_dance,
+          title: '2023 대동제 댄스경연대회',
           description: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)'
         },
         {
           id: 2,
-          title: '2023 대동제 댄스 경연대회',
-          description: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:).'
+          image: P_mung,
+          title: '2023 대동제 멍때리기 대회, 어멍!',
+          description: '1시간 동안 앉은 자세로 멍을 때리는 학우분들의 멍때리는 솜씨를 확인해볼까요?'
         },
         {
           id: 3,
-          title: '제목제목제목 제목제목 제목',
-          description: '프로그램 설명 설명 설명..'
+          image: P_ppung,
+          title: '2023 대동제 천하제일 뻥쟁이대회 ',
+          description: '하나의 주제로 거짓말을 하는 패널을 찾는 대회입니다!'
         },
         {
           id: 4,
-          title: '제목제목제목 제목제목 제목',
-          description: '프로그램 설명 설명 설명..'
+          image: P_sing,
+          title: '2023 대동제 가요제 ',
+          description: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)'
         },
         {
           id: 5,
