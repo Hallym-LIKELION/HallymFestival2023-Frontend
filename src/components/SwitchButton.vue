@@ -1,12 +1,13 @@
 <template>
   <button :class="['switch-button', { active }]" @click="onClickHandler">
     <div class="button">
-      <img :src="active ? Icon.sun : Icon.moon" />
+      <img :src="active ? Icon.sun : Icon.moon" ref="image" />
     </div>
   </button>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import { Icon } from '../library/icon';
 
 export default {
@@ -20,6 +21,18 @@ export default {
   methods: {
     onClickHandler(evt) {
       this.active = !this.active;
+
+      gsap.fromTo(
+        this.$refs.image,
+        {
+          opacity: 0
+        },
+        {
+          duration: 0.1,
+          opacity: 1
+        }
+      );
+
       this.$emit('change', this.active);
     }
   }
