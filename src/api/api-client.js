@@ -1,7 +1,76 @@
 'use strict';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const HOST = 'https://dev-api.prisism.io';
+
+// =========================
+// 임시: JWT Login API
+// =========================
+
+// HttpOnly cookie 또는 메모리 방법이 가장 안전함.
+// accessToken을 Set-Cookie로 전달하지 않는다고하면 이 방법으로 토큰을 저장
+let token = Cookies.get('access_token') || null;
+let role = parseInt(Cookies.get('role')) ?? 0;
+
+const period = new Date(Date.now() + 10000);
+
+export function GetAuthority() {
+  // 0: 권한 없음
+  // 1: 일반
+  // 2: 어드민
+
+  if (token) {
+    return role;
+  } else {
+    return 0;
+  }
+}
+
+export function DeleteToken() {
+  token = null;
+  role = 0;
+  Cookies.remove('access_token');
+  Cookies.remove('role');
+}
+
+export async function GetAccessToken(id, password, r = 1) {
+  const HOST = 'https://api.escuelajs.co'; // Fake API URL
+  const data = {
+    email: id,
+    password: password
+  };
+
+  let res;
+
+  try {
+    res = await axios.post(HOST + '/api/v1/auth/login', data);
+  } catch (e) {
+    return false;
+  }
+
+  const success = res.status >= 200 && res.status < 400;
+
+  if (success) {
+    Cookies.set('access_token', res.data.access_token);
+    Cookies.set('role', r);
+    token = res.data.access_token;
+    role = r;
+  }
+
+  // 나중에 백엔드 구현되면 res에서 받아오도록 수정
+  role = r;
+
+  return success;
+}
+
+export async function GetAccessTokenUser() {
+  const HOST = 'https://api.escuelajs.co'; // Fake API URL
+  const res = await axios.get(HOST + '/api/v1/auth/profile', {
+    headers: { Authorization: 'Bearer ' + Cookies.get('access_token') }
+  });
+  return res.data;
+}
 
 // =========================
 // IP API
