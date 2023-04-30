@@ -85,12 +85,13 @@ export default {
         { name: '굿즈', url: 'goods' },
         { name: '방명록', url: 'comment' },
         { name: '만든이들', url: 'aboutus' },
-        { name: '나의 부스', url: '', callback: this.openMyBooth },
-        { name: '(테)관리자홈', url: 'ownerhome' },
-        { name: '(테)관리자부스댓글', url: 'ownerbcomment' },
-        { name: '(테)관리자방명록', url: 'ownercomment' }
+        { name: '나의 부스', url: '', callback: this.openMyBooth }
       ],
-      navBottomList: [{ name: '로그인', url: 'login' }],
+      navBottomList: [
+        { name: '관리자 페이지', url: 'admin' },
+        { name: '로그아웃', url: 'logout' },
+        { name: '로그인', url: 'login' }
+      ],
       Icon
     };
   },
