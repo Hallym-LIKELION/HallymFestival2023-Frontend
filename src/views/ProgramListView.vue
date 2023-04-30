@@ -75,6 +75,7 @@ export default {
         },
         {
           id: 5,
+          image: P_sing,
           title: '제목제목제목 제목제목 제목',
           description: '프로그램 설명 설명 설명..'
         }
