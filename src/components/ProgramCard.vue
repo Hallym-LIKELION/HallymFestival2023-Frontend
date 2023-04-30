@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
-    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" />
-    <p class="title" v-text="title"></p>
-    <p class="description" v-text="description"></p>
+    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" /><br>
+    <p class="title" v-text="title"></p><br>
+    <p class="description" v-text="description"></p><br>
+    <hr style="border: solid 2px white " class ="line" />
   </div>
 </template>
 
@@ -40,6 +41,9 @@ p {
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
+}
+.wrapper> .line {
+  opacity : 0.3;
 }
 
 :deep(.image) {

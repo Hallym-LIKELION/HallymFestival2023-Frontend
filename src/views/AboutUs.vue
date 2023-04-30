@@ -12,6 +12,7 @@
     <TitleContainer>
       <Logo className="introduce" text-align: center>
         <h3>
+          <br><br>
           한림대학교 멋쟁이사자처럼 <br /><br /><br /><br />
           Builder Team
         </h3>
@@ -46,7 +47,6 @@
 
       <!-- 프론트엔드 -->
       <TeamText className="team" text-align: center><h3> Front-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
 
       <div class="grid">
         <div class="card">
@@ -70,7 +70,6 @@
 
       <!-- 백엔드 -->
       <TeamText className="team" text-align: center><h3> Back-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
 
       <div class="grid">
         <div class="card">
@@ -103,7 +102,6 @@
 
       <!-- 기획/디자인 -->
       <TeamText className="team" text-align: center><h3> PM / DESGIN TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
 
       <div class="grid">
         <div class="card">
@@ -258,12 +256,14 @@ p {
   padding: 50px 0;
 }
 .team {
+  font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
-  line-height: 13px;
+  line-height: 17px;
   letter-spacing: 0.1em;
   width: 45%;
   margin: 0;
   padding: 36px 0;
+  color:#20556C;
 }
 
 .inform {
