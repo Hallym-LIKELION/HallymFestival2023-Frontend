@@ -1,9 +1,18 @@
 <template>
   <main>
-    <div class="title">About US</div>
+    <div class ="title-wrap">
+      <div class="title-image">
+        <img src="@/assets/overlay/Oaboutus.png" alt=""/>
+        </div>
+        <div class="title-text">
+          만든이들
+        </div>
+    </div>
+    <div class="about-text">
     <TitleContainer>
       <Logo className="introduce" text-align: center>
         <h3>
+          <br><br>
           한림대학교 멋쟁이사자처럼 <br /><br /><br /><br />
           Builder Team
         </h3>
@@ -37,8 +46,7 @@
       <SubTitle className="group"><h2>Developer</h2></SubTitle>
 
       <!-- 프론트엔드 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/vuelogo.png"/> Front-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
+      <TeamText className="team" text-align: center><h3> Front-End TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -61,8 +69,7 @@
       </div>
 
       <!-- 백엔드 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/springbootlogo.png"/>  Back-End TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
+      <TeamText className="team" text-align: center><h3> Back-End TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -94,8 +101,7 @@
       </div>
 
       <!-- 기획/디자인 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/figmalogo.png"/> PM / DESGIN TEAM</h3></TeamText>
-      <hr style="border: solid 1px black" />
+      <TeamText className="team" text-align: center><h3> PM / DESGIN TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -115,11 +121,14 @@
         </div>
       </div>
     </TitleContainer>
+  </div>
   </main>
 </template>
 
 <script>
+import Image from '../components/Image.vue';
 export default {
+  components: { Image },
   methods: {
     opengithubsohyun() {
       window.open('https://github.com/osohyun0224', '_blank');
@@ -141,16 +150,45 @@ export default {
 </script>
 
 <style scoped>
+.about-text{
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius:100px 100px 0px 0px;
+}
+.title-wrap{
+  width:30%;
+  margin:10px auto;
+  position:relative;
+}
+.title-wrap img {
+  width:100%;
+  vertical-align: middle;
+}
+.title-text{
+  position: absolute;
+  top:40%;
+  left:50%;
+  width:50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 h1,
 h2,
 h3 {
   margin: 8px 0;
-  font-size: 2vw;
+  font-size: 1vw;
   text-size-adjust: auto;
 }
 h4 {
   margin: 20px 0;
-  font-size: 2vw;
+  font-size: 1vw;
 }
 h5,
 h6 {
@@ -186,7 +224,8 @@ p {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255, 0.5) 0%, rgba(255,255,255, 0.24) 100%);
+  box-shadow: 20px 20px 20px grey;
   border-radius: 10px;
   width: 80%;
   padding: 10px;
@@ -194,17 +233,6 @@ p {
   text-decoration: none;
   text-align: center;
   color: black;
-}
-.title {
-  font-family: 'Nanum Gothic', sans-serif;
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 30px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
 }
 .introment {
   font-family: 'Nanum Gothic', sans-serif;
@@ -228,12 +256,14 @@ p {
   padding: 50px 0;
 }
 .team {
+  font-family: 'Nanum Gothic', sans-serif;
   text-align: center;
-  line-height: 13px;
+  line-height: 17px;
   letter-spacing: 0.1em;
   width: 45%;
   margin: 0;
   padding: 36px 0;
+  color:#20556C;
 }
 
 .inform {
