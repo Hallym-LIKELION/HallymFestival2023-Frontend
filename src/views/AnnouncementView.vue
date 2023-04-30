@@ -325,7 +325,7 @@ h1 {
   padding: 8px 24px;
   border: none;
   border-radius: 24px;
-  background-color: #509bf8;
+  background-color: #CA434C;
   color: white;
   font-size: 10pt;
   cursor: pointer;

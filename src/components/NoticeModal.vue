@@ -136,7 +136,7 @@ export default {
 .modal-button {
   height: 24px;
   border-radius: 24px;
-  background-color: #466efe;
+  background-color: #CA434C;
   color: white;
 }
 
