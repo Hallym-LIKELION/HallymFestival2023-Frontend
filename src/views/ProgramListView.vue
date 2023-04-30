@@ -35,10 +35,10 @@
 
 <script>
 import ProgramCard from '../components/ProgramCard.vue';
-import P_dance from '@/assets/programlist/P_dance.png';
-import P_mung from '@/assets/programlist/P_mung.png';
-import P_ppung from '@/assets/programlist/P_ppung.png';
-import P_sing from '@/assets/programlist/P_sing.png';
+import P_dance from '@/assets/programlist/P_dance.jpg';
+import P_mung from '@/assets/programlist/P_mung.jpg';
+import P_ppung from '@/assets/programlist/P_ppung.jpg';
+import P_sing from '@/assets/programlist/P_sing.jpg';
 
 export default {
   name: 'ProgramListView',
