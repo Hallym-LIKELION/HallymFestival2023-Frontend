@@ -25,7 +25,14 @@
 
     <FloatButton @click="openCommentModal" />
 
-    <h1>방명록</h1>
+    <div class ="title-wrap">
+      <div class="title-image">
+        <img src="@/assets/overlay/Oletter.png" alt=""/>
+        </div>
+        <div class="title-text">
+          방명록
+        </div>
+      </div>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
         <Comment
@@ -197,6 +204,31 @@ export default {
 </script>
 
 <style scoped>
+.title-wrap{
+  width:30%;
+  margin:10px auto;
+  position:relative;
+}
+.title-wrap img {
+  width:100%;
+  vertical-align: middle;
+}
+.title-text{
+  position: absolute;
+  top:40%;
+  left:50%;
+  width:50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
+  margin: 0;
+  padding: 36px 0;
+  color: #FFFFFF;
+}
 .header {
   margin-top: 24px;
 }
