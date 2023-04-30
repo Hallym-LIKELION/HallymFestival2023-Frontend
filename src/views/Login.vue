@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { GetAccessToken } from '../api/api-client';
 import userImage from '@/assets/user.png';
 import lockImage from '@/assets/lock.png';
 
@@ -31,12 +32,12 @@ export default {
     return {
       userImage,
       lockImage,
-      id: '',
-      password: ''
+      id: 'maria@mail.com',
+      password: '12345'
     };
   },
   methods: {
-    fnLogin() {
+    async fnLogin() {
       if (this.id === '') {
         alert('지정 아이디를 입력하세요.');
         return;
@@ -47,9 +48,20 @@ export default {
         return;
       }
 
-      alert(`id: ${this.id}\npass: ${this.password}\n\n정상적으로 로그인 되었습니다.`);
+      let role = 1;
 
-      this.$router.push('/');
+      if (this.id === 'maria@mail.com') {
+        role = 2;
+      }
+
+      const result = await GetAccessToken(this.id, this.password, role);
+
+      if (!result) {
+        alert('아이디 혹은 비밀번호가 잘못되었습니다.\nid = maria@mail.com / pw = 12345');
+        return;
+      }
+
+      this.$router.push('/admin');
     }
   }
 };
