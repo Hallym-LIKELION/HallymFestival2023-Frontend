@@ -8,6 +8,7 @@
           만든이들
         </div>
     </div>
+    <div class="about-text">
     <TitleContainer>
       <Logo className="introduce" text-align: center>
         <h3>
@@ -44,7 +45,7 @@
       <SubTitle className="group"><h2>Developer</h2></SubTitle>
 
       <!-- 프론트엔드 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/vuelogo.png"/> Front-End TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3> Front-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
@@ -68,7 +69,7 @@
       </div>
 
       <!-- 백엔드 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/springbootlogo.png"/>  Back-End TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3> Back-End TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
@@ -101,7 +102,7 @@
       </div>
 
       <!-- 기획/디자인 -->
-      <TeamText className="team" text-align: center><h3><img src="@/assets/figmalogo.png"/> PM / DESGIN TEAM</h3></TeamText>
+      <TeamText className="team" text-align: center><h3> PM / DESGIN TEAM</h3></TeamText>
       <hr style="border: solid 1px black" />
 
       <div class="grid">
@@ -122,6 +123,7 @@
         </div>
       </div>
     </TitleContainer>
+  </div>
   </main>
 </template>
 
@@ -150,6 +152,10 @@ export default {
 </script>
 
 <style scoped>
+.about-text{
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius:100px 100px 0px 0px;
+}
 .title-wrap{
   width:30%;
   margin:10px auto;
@@ -179,12 +185,12 @@ h1,
 h2,
 h3 {
   margin: 8px 0;
-  font-size: 2vw;
+  font-size: 1vw;
   text-size-adjust: auto;
 }
 h4 {
   margin: 20px 0;
-  font-size: 2vw;
+  font-size: 1vw;
 }
 h5,
 h6 {
@@ -220,7 +226,8 @@ p {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255, 0.5) 0%, rgba(255,255,255, 0.24) 100%);
+  box-shadow: 20px 20px 20px grey;
   border-radius: 10px;
   width: 80%;
   padding: 10px;

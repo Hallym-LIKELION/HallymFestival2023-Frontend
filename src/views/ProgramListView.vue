@@ -26,7 +26,7 @@
           @click="
             openModal = true;
             clickedProgram = i;
-          "
+          " 
         />
       </template>
     </div>
@@ -123,6 +123,7 @@ export default {
 </script>
 
 <style scoped>
+
 .title-wrap{
   width:30%;
   margin:10px auto;
