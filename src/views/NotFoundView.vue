@@ -20,17 +20,20 @@ h1 {
   font-size: 20pt;
   text-align: center;
   padding: 36px 0;
+  color: white;
 }
 
 p {
   text-align: center;
   font-size: 16pt;
+  color: white;
 }
 
 div {
   width: 100%;
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .button {
