@@ -42,19 +42,22 @@
         </Transition>
 
         <div class="router-view">
-          <RouterView v-slot="{ Component }">
+          <RouterView v-slot="{ Component }" @reload="reload">
             <Transition name="fade" mode="out-in">
-              <component :is="Component" />
+              <component :is="Component" :key="update" />
             </Transition>
           </RouterView>
         </div>
+        <div ref="footer">
+          <Footer></Footer>
+        </div>
       </div>
-      <Footer></Footer>
     </div>
   </main>
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import { RouterLink, RouterView } from 'vue-router';
 import AOS from 'aos';
 import { Icon } from './library/icon';
@@ -76,6 +79,7 @@ export default {
       showMenu: false,
       menuButtonImage,
       scroll: 0,
+      update: true,
       scrollTarget: null,
       navList: [
         { name: '공지사항', url: 'announcement' },
@@ -98,6 +102,11 @@ export default {
   created() {
     // 애니메이션 라이브러리 init
     AOS.init();
+
+    this.$router.beforeEach((to, from, next) => {
+      this.footerAnimation();
+      next();
+    });
   },
   mounted() {},
   methods: {
@@ -125,6 +134,33 @@ export default {
       }
 
       return res;
+    },
+    footerAnimation() {
+      gsap.fromTo(
+        this.$refs.footer,
+        {
+          transform: 'none'
+        },
+        {
+          duration: 0.2,
+          transform: 'translateY(100%)'
+        }
+      );
+      gsap.fromTo(
+        this.$refs.footer,
+        {
+          transform: 'translateY(100%)'
+        },
+        {
+          delay: 0.5,
+          duration: 0.5,
+          transform: 'none'
+        }
+      );
+    },
+    reload() {
+      this.update = !this.update;
+      this.footerAnimation();
     }
   }
 };
@@ -132,7 +168,7 @@ export default {
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 70px);
   overflow: auto;
   margin: 0;
   background: rgb(2, 16, 41);
@@ -197,6 +233,7 @@ header > .title {
 }
 .wrapper {
   min-height: 100%;
+  overflow: hidden;
 }
 
 /* 사이드 메뉴 열었을때 배경 흐리게 */
@@ -263,8 +300,9 @@ nav :hover {
 }
 
 .router-view {
-  max-width: 768px;
-  min-height: calc(100vh - 56px - 70px);
+  max-width: 824px;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
   margin: auto;
   padding: 0 28px;
   padding-top: 56px;
