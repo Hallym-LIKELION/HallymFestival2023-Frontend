@@ -14,7 +14,9 @@
       <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">수요일</button>
       <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
     </div>
+    <br/><br/>
     <hr style="border: solid 2px white " class ="line" />
+    
     <div class="table">
       <template v-for="item in filltered_list">
         <div class="table-col-1">

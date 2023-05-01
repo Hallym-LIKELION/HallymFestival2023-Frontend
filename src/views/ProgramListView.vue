@@ -5,6 +5,13 @@
         <img :src="detail_program[0].image" class="detail_program" />
         <h4>{{ detail_program[0].title }}</h4>
         <p>{{ detail_program[0].content }}</p>
+        <hr style="border: solid 2px " class ="line" />
+        <button class ="date">날짜</button> 
+        <p>{{ detail_program[0].date }}</p>
+        <br/>
+        <button class ="space">장소</button>
+        <p>{{ detail_program[0].space }}</p>
+        <br/>
         <button class="close">창 닫기</button>
       </div>
     </div>
@@ -85,27 +92,41 @@ export default {
           id: 1,
           image: P_dance,
           title: '2023 대동제 댄스경연대회',
-          content: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)'
+          content: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)',
+          date:'16일 화요일',
+          space: '한림대 운동장'
         },
         {
           id: 2,
-          title: '빨리먹기 대회',
-          content: '빨리먹기 대회에서 우승할 사람은 누구?!'
+          image: P_mung,
+          title: '2023 대동제 멍때리기 대회, 어멍!',
+          content: '1시간 동안 앉은 자세로 멍을 때리는 학우분들의 멍때리는 솜씨를 확인해볼까요?',
+          date:'16일 화요일',
+          space: '한림대 운동장'
         },
         {
           id: 3,
-          title: '코딩하기 대회',
-          content: '코딩하기 대회에서 우승할 사람은 누구?!'
+          image: P_ppung,
+          title: '2023 대동제 천하제일 뻥쟁이대회 ',
+          content: '하나의 주제로 거짓말을 하는 패널을 찾는 대회입니다!',
+          date:'16일 화요일',
+          space: '한림대 운동장'
         },
         {
           id: 4,
-          title: '키크기 대회',
-          content: '제일 키 큰 사람은 누구?!'
+          image: P_sing,
+          title: '2023 대동제 가요제 ',
+          content: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)',
+          date:'16일 화요일',
+          space: '한림대 운동장'
         },
         {
           id: 5,
-          title: '키작기 대회',
-          content: '제일 키 작은 사람은  누구?!'
+          image: P_sing,
+          title: '2023 대동제 가요제 ',
+          content: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)',
+          date:'16일 화요일',
+          space: '한림대 운동장'
         }
       ],
       search: ''
@@ -125,6 +146,10 @@ export default {
 
 <style scoped>
 
+.line{
+  color: #FFFFFF;
+  opacity : 0.5;
+}
 .title-wrap{
   width:30%;
   margin:10px auto;
@@ -160,11 +185,35 @@ export default {
   z-index: 999;
 }
 .white-bg {
+  text-align: center;
   width: 90%;
   margin: 80px auto;
-  background: white;
+  background: #363636;
+  opacity: 0.7;
   border-radius: 5px;
   padding: 20px 0;
+}
+.space{
+  border: none;
+  width:81px;
+  height: 32px;
+  background: #5C859B;
+  opacity: 0.88;
+  color: white;
+  font-weight: bold;
+  border-radius: 26.25px;
+  padding: 5px 15px;
+}
+.date{
+  border: none;
+  width:81px;
+  height: 32px;
+  background: #5C859B;
+  opacity: 0.88;
+  color: white;
+  font-weight: bold;
+  border-radius: 26.25px;
+  padding: 5px 15px;
 }
 .close {
   cursor: pointer;
