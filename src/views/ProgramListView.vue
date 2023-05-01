@@ -2,7 +2,7 @@
   <main>
     <div class="black-bg" v-if="openModal == true" @click="close($event)">
       <div class="white-bg">
-        <img :src="festivalImage" class="detail_program" />
+        <img :src="detail_program[0].image" class="detail_program" />
         <h4>{{ detail_program[0].title }}</h4>
         <p>{{ detail_program[0].content }}</p>
         <button class="close">창 닫기</button>
