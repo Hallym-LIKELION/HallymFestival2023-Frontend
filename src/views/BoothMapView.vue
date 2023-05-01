@@ -218,7 +218,7 @@ h1 {
 }
 
 .button-group > button.selected {
-  background-color: #509bf8;
+  background-color: #CA434C;
   color: white;
 }
 
@@ -235,8 +235,8 @@ h1 {
   height: 40px;
   margin-top: 16px;
   border-radius: 10px;
-  border: 1px solid #509bf8;
-  color: #509bf8;
+  border: 1px solid #CA434C;
+  color: #CA434C;
   font-size: 13pt;
 }
 

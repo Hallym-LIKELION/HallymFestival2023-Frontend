@@ -161,8 +161,7 @@ h1 {
 
 .table {
   max-width: 500px;
-  background-color: white;
-  opacity: 0.3;
+  background-color:rgba(255, 255, 255, 0.7);
   border: none;
   border-radius: 16px;
 
@@ -188,7 +187,6 @@ h1 {
 .schedule-line {
   width: 3px;
   height: calc(100% + 16px);
-  opacity: 0.3;
   margin-top: 16px;
   margin-bottom: -16px;
 
@@ -205,7 +203,7 @@ h1 {
   margin: 12px 0;
   padding: 8px 8px;
   font-size: 11pt;
-
+  width: 260px;
   border-radius: 4px;
 
   display: flex;
@@ -215,7 +213,7 @@ h1 {
   white-space: pre-wrap;
 
   color: #333333;
-  background-color: #f8f9fd;
+  background-color:rgba(255, 255, 255, 0.6);
 }
 
 .schedule-text {
