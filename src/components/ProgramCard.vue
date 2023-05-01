@@ -41,6 +41,7 @@ p {
   justify-content: center;
   align-items: flex-start;
   overflow: hidden;
+  color:black;
 }
 .wrapper> .line {
   opacity : 0.3;
@@ -54,6 +55,7 @@ p {
 .wrapper > .title {
   font-size: 18pt;
   font-weight: 600;
+  color:black;
 }
 
 .wrapper p {
@@ -62,5 +64,6 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color:black;
 }
 </style>
