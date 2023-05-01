@@ -30,7 +30,7 @@
             <h4>10000원</h4>
           </div>
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 
         <div class="dcard">
           <img src="@/assets/goodspicture.png" alt="" />
@@ -49,7 +49,7 @@
             <h4>10000원</h4>
           </div>
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
         <div class="dcard">
           <img src="@/assets/goodspicture.png" alt="" />
           <div class="inform">
@@ -58,7 +58,7 @@
             <h4>10000원</h4>
           </div>
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
         <div class="DownBtn">
           <img src="@/assets/goodsscroll.png" alt="" />
         </div>
