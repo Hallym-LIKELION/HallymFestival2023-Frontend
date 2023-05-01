@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { GetAuthority } from '../api/api-client';
 import HomeView from '../views/HomeView.vue';
 
 const router = createRouter({
@@ -50,24 +51,77 @@ const router = createRouter({
       component: () => import('../views/AboutUs.vue')
     },
     {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: (to, from, next) => {
+        API.DeleteToken();
+        return next({ name: 'home' });
+      }
+    },
+    {
       path: '/login',
       name: 'login',
-      component: () => import('../views/Login.vue')
+      component: () => import('../views/Login.vue'),
+      beforeEnter: (to, from, next) => {
+        switch (GetAuthority()) {
+          case 2:
+            return next({ name: 'admin' });
+          case 1:
+            return next({ name: 'home' });
+          default:
+            return next();
+        }
+      }
     },
     {
-      path: '/ownerhome',
-      name: 'ownerhome',
-      component: () => import('../views/OwnerDashBoard.vue')
+      path: '/admin',
+      name: 'adminDashboard',
+      component: () => import('../views/Dashboard.vue'),
+      beforeEnter: (to, from, next) => {
+        switch (GetAuthority()) {
+          case 2:
+            return next();
+          case 1:
+            return next({ name: 'unauthorized' });
+          default:
+            return next({ name: 'login' });
+        }
+      }
     },
     {
-      path: '/ownerbcomment',
-      name: 'ownerbcomment',
-      component: () => import('../views/OwnerBoothComment.vue')
+      path: '/admin/comment',
+      name: 'adminComment',
+      component: () => import('../views/OwnerBoothComment.vue'),
+      beforeEnter: (to, from, next) => {
+        switch (GetAuthority()) {
+          case 2:
+            return next();
+          case 1:
+            return next({ name: 'unauthorized' });
+          default:
+            return next({ name: 'login' });
+        }
+      }
     },
     {
-      path: '/ownercomment',
-      name: 'ownercomment',
-      component: () => import('../views/OwnerComment.vue')
+      path: '/admin/boothcomment',
+      name: 'adminBoothcomment',
+      component: () => import('../views/OwnerComment.vue'),
+      beforeEnter: (to, from, next) => {
+        switch (GetAuthority()) {
+          case 2:
+            return next();
+          case 1:
+            return next({ name: 'unauthorized' });
+          default:
+            return next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/401',
+      name: 'unauthorized',
+      component: () => import('../views/UnauthorizedView.vue')
     },
     {
       path: '/:pathMatch(.*)*',

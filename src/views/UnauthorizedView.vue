@@ -1,7 +1,7 @@
 <template>
   <main>
-    <h1>404 Not Found</h1>
-    <p>지금 접속하신 페이지는 없는 페이지입니다.</p>
+    <h1>401 Unauthorized</h1>
+    <p>해당 페이지에 접속하려면 최고 관리자 권한이 필요합니다.</p>
     <div><RouterLink class="button" to="/">HOME으로 돌아가기</RouterLink></div>
   </main>
 </template>

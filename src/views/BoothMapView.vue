@@ -14,12 +14,6 @@
       <SwitchButton v-if="!admin" @change="switchDayNight" />
     </div>
 
-    <div class="banner-group">
-      <button @click="admin = !admin" class="toggle-admin">
-        임시: 관리자 모드 {{ admin ? '끄기' : '켜기' }}
-      </button>
-    </div>
-
     <div class="search-bar"><SearchBar v-model="search" /></div>
 
     <div class="button-group">
@@ -54,7 +48,7 @@ import BoothCarousel from '../components/BoothCarousel.vue';
 import SwitchButton from '../components/SwitchButton.vue';
 import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
-import { GetBoothList, CreateBooth } from '../api/api-client';
+import { GetAuthority, GetBoothList, CreateBooth } from '../api/api-client';
 
 export default {
   components: {
@@ -71,7 +65,7 @@ export default {
       search: '',
       day: 0,
 
-      admin: false,
+      admin: GetAuthority(),
 
       slide: 0,
 
@@ -222,6 +216,7 @@ h1 {
   color: white;
 }
 
+<<<<<<< HEAD
 .banner-group {
   max-width: 400px;
   margin: auto;
@@ -240,6 +235,8 @@ h1 {
   font-size: 13pt;
 }
 
+=======
+>>>>>>> ff2e30bab0b30ab8ab9e1e81154b24d4131af76d
 .booth-list {
   display: flex;
   flex-direction: column;
