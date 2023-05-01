@@ -43,7 +43,6 @@ import { RouterLink } from 'vue-router';
 export default {
   data() {
     return {
-      festivalImage,
       storytelling: ''
     };
   },
