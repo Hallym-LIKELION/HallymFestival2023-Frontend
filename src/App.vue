@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <div class="background"></div>
+      <div class="background" :style="{ backgroundPositionY: `${10 + 20 * scroll}%` }"></div>
 
       <Transition name="fade">
         <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
@@ -107,6 +107,8 @@ export default {
       this.footerAnimation();
       next();
     });
+
+    window.addEventListener('scroll', this.handleScroll);
   },
   mounted() {},
   methods: {
@@ -134,6 +136,18 @@ export default {
       }
 
       return res;
+    },
+    handleScroll(evt) {
+      const elementTop = document.documentElement.scrollTop;
+      const elementHeight = document.documentElement.scrollHeight;
+      const bodyTop = document.body.scrollTop;
+      const bodyHeight = document.body.scrollHeight;
+
+      const percentage =
+        (elementTop || bodyTop) /
+        ((elementHeight || bodyHeight) - document.documentElement.clientHeight);
+
+      this.scroll = percentage;
     },
     footerAnimation() {
       gsap.fromTo(
@@ -185,10 +199,9 @@ export default {
   position: fixed;
 
   z-index: -1;
-  background-image: url('./assets/back-test.jpg');
+  background-image: url('./assets/back.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
 }
 
 header {
