@@ -30,6 +30,7 @@
             <h4>10000원</h4>
           </div>
         </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
         <div class="dcard">
           <img src="@/assets/goodspicture.png" alt="" />
@@ -48,7 +49,7 @@
             <h4>10000원</h4>
           </div>
         </div>
-
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <div class="dcard">
           <img src="@/assets/goodspicture.png" alt="" />
           <div class="inform">
@@ -57,11 +58,11 @@
             <h4>10000원</h4>
           </div>
         </div>
-
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <div class="DownBtn">
           <img src="@/assets/goodsscroll.png" alt="" />
         </div>
-
+        <br /><br />
         <button>
           <div class="button"><b>구매하러가기</b></div>
             </button>
@@ -124,6 +125,10 @@ h4{
   text-align: center;
   color: black;
   float: left;
+  position: center;
+  top: 50%; 
+  left: 50%; 
+
 }
 .inform {
   font-size: 20px;

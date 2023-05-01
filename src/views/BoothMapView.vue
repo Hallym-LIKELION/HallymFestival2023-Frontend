@@ -212,10 +212,31 @@ h1 {
 }
 
 .button-group > button.selected {
-  background-color: #509bf8;
+  background-color: #CA434C;
   color: white;
 }
 
+<<<<<<< HEAD
+.banner-group {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.banner-group > button {
+  width: 100%;
+  height: 40px;
+  margin-top: 16px;
+  border-radius: 10px;
+  border: 1px solid #CA434C;
+  color: #CA434C;
+  font-size: 13pt;
+}
+
+=======
+>>>>>>> ff2e30bab0b30ab8ab9e1e81154b24d4131af76d
 .booth-list {
   display: flex;
   flex-direction: column;

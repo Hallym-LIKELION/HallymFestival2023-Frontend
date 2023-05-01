@@ -13,19 +13,18 @@
       <Logo className="introduce" text-align: center>
         <h3>
           <br><br>
-          한림대학교 멋쟁이사자처럼 <br /><br /><br /><br />
+          한림대학교 멋쟁이사자처럼 <br />
           Builder Team
         </h3>
-        <br />
-        <h4>X</h4>
-        <br />
+
+        <h4><b>X</b></h4>
         <h3>
-          2023 한림대학교 <br /><br /><br /><br />
+          2023 한림대학교 <br />
           축제준비위원회
         </h3>
       </Logo>
       <br /><br />
-      <hr style="border: solid 0.5px black" />
+      <hr style="border: solid 2px " class ="line" />
 
       <div class="introment">
         <p>2023년도 한림대학교 대동제를 위하여</p>
@@ -34,16 +33,16 @@
           학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이
           <br /><br />축제 웹사이트를 개발하였습니다.
         </p>
-        <br /><br /><br /><br />
+        <br /><br />
         <p>
           이번 2023 한림대학교 대동제가 <br /><br />
           여느때보다 즐겁고 행복한 축제가 되시기를 진심으로 소망합니다.
         </p>
         <p>학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!</p>
       </div>
-      <hr style="border: solid 0.5px black" />
+      <hr style="border: solid 2px " class ="line" />
 
-      <SubTitle className="group"><h2>Developer</h2></SubTitle>
+      <SubTitle className="group"><h2><b>Developer</b></h2></SubTitle>
 
       <!-- 프론트엔드 -->
       <TeamText className="team" text-align: center><h3> Front-End TEAM</h3></TeamText>
@@ -150,6 +149,10 @@ export default {
 </script>
 
 <style scoped>
+.line{
+  color: #1D3552;
+  opacity : 0.14;
+}
 .about-text{
   background-color: rgba(255, 255, 255, 0.8);
   border-radius:100px 100px 0px 0px;
@@ -180,15 +183,20 @@ export default {
   color: #FFFFFF;
 }
 h1,
-h2,
+h2{
+  font-family: 'NanumGothic', sans-serif;
+  font-size: 16px;
+}
 h3 {
+  font-family: 'NanumGothic', sans-serif;
   margin: 8px 0;
-  font-size: 1vw;
+  font-size: 12px;
   text-size-adjust: auto;
 }
 h4 {
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 20px 0;
-  font-size: 1vw;
+  font-size: 33px;
 }
 h5,
 h6 {
@@ -201,6 +209,7 @@ p {
   font-size: 1vw;
 }
 .git-button {
+  font-family: 'Noto Sans KR', sans-serif;
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 5px;
@@ -257,6 +266,7 @@ p {
 }
 .team {
   font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
   text-align: center;
   line-height: 17px;
   letter-spacing: 0.1em;

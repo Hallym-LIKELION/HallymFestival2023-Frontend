@@ -83,8 +83,9 @@ export default {
       detail_program: [
         {
           id: 1,
-          title: '멍때리기 대회',
-          content: '멍때리기 대회에서 우승할 사람은 누구?!'
+          image: P_dance,
+          title: '2023 대동제 댄스경연대회',
+          content: '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요:)'
         },
         {
           id: 2,
