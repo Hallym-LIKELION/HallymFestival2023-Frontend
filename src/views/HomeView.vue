@@ -39,7 +39,6 @@
 <script>
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
-import festivalImage from '@/assets/poster.jpg';
 
 export default {
   data() {
