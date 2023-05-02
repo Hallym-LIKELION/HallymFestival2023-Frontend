@@ -45,7 +45,7 @@
       <SubTitle className="group"><h2><b>Developer</b></h2></SubTitle>
 
       <!-- 프론트엔드 -->
-      <TeamText className="team" text-align: center><h3> Front-End TEAM</h3></TeamText>
+      <TeamText className="team" text-size:15px text-align: center><h3> Front-End TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -68,7 +68,7 @@
       </div>
 
       <!-- 백엔드 -->
-      <TeamText className="team" text-align: center><h3> Back-End TEAM</h3></TeamText>
+      <TeamText className="team" text-size:15px  text-align: center><h3> Back-End TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -100,7 +100,7 @@
       </div>
 
       <!-- 기획/디자인 -->
-      <TeamText className="team" text-align: center><h3> PM / DESGIN TEAM</h3></TeamText>
+      <TeamText className="team" text-size:15px text-align: center><h3> PM / DESGIN TEAM</h3></TeamText>
 
       <div class="grid">
         <div class="card">
@@ -198,7 +198,10 @@ h4 {
   margin: 20px 0;
   font-size: 33px;
 }
-h5,
+h5{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+}
 h6 {
   margin: 16px 0;
 }
@@ -211,11 +214,14 @@ p {
 .git-button {
   font-family: 'Noto Sans KR', sans-serif;
   margin-top: 15px;
-  padding: 6px 10px;
+  padding: 2px 10px;
   border-radius: 5px;
   background-color: #5c859b;
   font-size: 12pt;
   color: white;
+  width:120px;
+  height: 27px;
+
 }
 .git-button > button {
   margin-top: 15px;
@@ -236,7 +242,8 @@ p {
   background: linear-gradient(180deg, rgba(255,255,255, 0.5) 0%, rgba(255,255,255, 0.24) 100%);
   box-shadow: 20px 20px 20px grey;
   border-radius: 10px;
-  width: 80%;
+  width: 150px;
+  height: 160px;
   padding: 10px;
   margin: 10px auto;
   text-decoration: none;
