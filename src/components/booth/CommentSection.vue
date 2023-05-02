@@ -25,7 +25,6 @@
           :id="item.cno"
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
-          picture="https://placehold.co/60x60"
           @clickMenu="toggleMenu"
           color="#f1f1f1"
         />
