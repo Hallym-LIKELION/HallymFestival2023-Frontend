@@ -10,7 +10,7 @@
     <transition name="expand" @enter="expandEnter" @leave="expandLeave">
       <div class="article" v-if="showContent">
         <p class="content" v-text="content"></p>
-        <div class="footer">
+        <div class="footer" v-if="role == 2">
           <button class="edit" @click="clickEdit">수정</button>
           <button class="delete" @click="clickDelete">삭제</button>
         </div>
@@ -22,11 +22,13 @@
 <script>
 import { gsap } from 'gsap';
 import arrowImage from '@/assets/down.png';
+import { GetAuthority } from '../api/api-client';
 
 export default {
   data() {
     return {
-      arrowImage
+      arrowImage,
+      role: GetAuthority()
     };
   },
   props: {

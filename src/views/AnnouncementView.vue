@@ -15,7 +15,7 @@
     </div>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
-      <div class="button-group" ref="buttonGroup">
+      <div class="button-group" ref="buttonGroup" v-if="role == 2">
         <button @click="clickCreate">글쓰기</button>
       </div>
       <template v-for="item in displayList" :key="item.nno">
@@ -42,6 +42,7 @@ import Pagination from '../components/Pagination.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
 
 import {
+  GetAuthority,
   GetNoticeList,
   CreateNotice,
   ModifyNotice,
@@ -63,6 +64,8 @@ export default {
       list: [],
       search: '',
       showingContent: null,
+
+      role: GetAuthority(),
 
       showNoticeModal: false,
       noticeModalID: -1,
