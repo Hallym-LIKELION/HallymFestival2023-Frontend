@@ -2,7 +2,9 @@
   <div class="container">
     <div class="header">
       <!-- <img class="profile" src="https://placehold.co/48x48" alt="" /> -->
-      <p class="nickname">{{ myIP ? GetRandomNickName(myIP) : '' }}</p>
+      <p class="nickname">
+        {{ GetRandomNickName(myIP) }}
+      </p>
     </div>
     <div class="body">
       <textarea
@@ -16,7 +18,7 @@
           class="footer-password"
           v-model="commentPassword"
           type="password"
-          placeholder="비밀번호를 입력..."
+          placeholder="비밀번호..."
           maxlength="32"
           @keypress.enter="send"
           @input="userId = $event.target.value"
@@ -126,6 +128,7 @@ export default {
 .footer-password {
   font-size: 11pt;
   margin-right: 12px;
+  font-family: 'NanumGothic', Arial, Helvetica, sans-serif;
 }
 
 .footer-button {

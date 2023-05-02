@@ -51,14 +51,6 @@ const router = createRouter({
       component: () => import('../views/AboutUs.vue')
     },
     {
-      path: '/logout',
-      name: 'logout',
-      beforeEnter: (to, from, next) => {
-        API.DeleteToken();
-        return next({ name: 'home' });
-      }
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue'),

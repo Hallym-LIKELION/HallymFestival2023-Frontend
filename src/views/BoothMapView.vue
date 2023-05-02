@@ -1,13 +1,11 @@
 <template>
   <main>
-    <div class ="title-wrap">
+    <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Obooth.png" alt=""/>
-        </div>
-        <div class="title-text">
-          부스 배치도
-        </div>
+        <img src="@/assets/overlay/Obooth.png" alt="" />
       </div>
+      <div class="title-text">부스 배치도</div>
+    </div>
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin" />
@@ -134,21 +132,21 @@ export default {
 </script>
 
 <style scoped>
-.title-wrap{
-  width:30%;
-  margin:10px auto;
-  position:relative;
+.title-wrap {
+  width: 30%;
+  margin: 10px auto;
+  position: relative;
 }
 .title-wrap img {
-  width:100%;
+  width: 100%;
   vertical-align: middle;
 }
-.title-text{
+.title-text {
   position: absolute;
-  top:40%;
-  left:50%;
-  width:50%;
-  transform: translate(-50%,-50%);
+  top: 40%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-style: normal;
@@ -157,7 +155,7 @@ export default {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 h1 {
   font-size: 20pt;
@@ -212,31 +210,10 @@ h1 {
 }
 
 .button-group > button.selected {
-  background-color: #CA434C;
+  background-color: #ca434c;
   color: white;
 }
 
-<<<<<<< HEAD
-.banner-group {
-  max-width: 400px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.banner-group > button {
-  width: 100%;
-  height: 40px;
-  margin-top: 16px;
-  border-radius: 10px;
-  border: 1px solid #CA434C;
-  color: #CA434C;
-  font-size: 13pt;
-}
-
-=======
->>>>>>> ff2e30bab0b30ab8ab9e1e81154b24d4131af76d
 .booth-list {
   display: flex;
   flex-direction: column;

@@ -4,12 +4,14 @@
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
     <div class="logo">
-      <img src="@/assets/logo.png" alt="" />
+      <img src="@/assets/logo.png" />
     </div>
     <div class="totalvisitor">
       <h3>Today</h3>
-      <h1>123123</h1>
-      <img src="@/assets/emptybox.png" alt="" />
+      <h1>86,972</h1>
+      <div class="chart">
+        <Chart :options="chart"></Chart>
+      </div>
     </div>
     <div class="ownermenu" ref="ownermenu">
       <RouterLink to="/announcement">공지사항</RouterLink>
@@ -21,10 +23,58 @@
 </template>
 
 <script>
-export default {};
+import { Chart } from 'highcharts-vue';
+
+export default {
+  components: {
+    Chart
+  },
+
+  data() {
+    return {
+      chart: {
+        chart: {
+          backgroundColor: '#333333',
+          style: { fontFamily: 'NanumGothic, Helvetica, Arial, sans-serif' },
+          spacing: [0, 20, 20, 20],
+          height: 300
+        },
+        credits: {
+          enabled: false
+        },
+        xAxis: {
+          categories: Array.from(Array(11)).map((e, i) => i + 8),
+          labels: {
+            style: { fontSize: '9pt', color: '#ffffff' }
+          }
+        },
+        yAxis: {
+          visible: false
+        },
+        legend: {
+          enabled: false
+        },
+        series: [
+          {
+            name: '방문자',
+            data: [15, 14, 13, 12, 17, 16, 20, 28, 35, 36, 32]
+          }
+        ]
+      }
+    };
+  },
+
+  props: {},
+
+  created() {}
+};
 </script>
 
 <style scoped>
+main {
+  margin-bottom: 80px;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -45,6 +95,14 @@ export default {};
   margin: 0;
   padding: 10px 0;
   color: #ffffff;
+}
+
+.chart {
+  margin: auto;
+  margin-top: 16px;
+  max-width: 400px;
+  height: 300px;
+  overflow: hidden;
 }
 .ownermenu {
   font-family: 'Nanum Gothic', sans-serif;

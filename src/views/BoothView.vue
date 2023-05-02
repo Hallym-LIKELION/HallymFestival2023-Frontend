@@ -30,7 +30,7 @@
       @complete="deleteBooth"
     />
 
-    <div class="delete-container">
+    <div class="delete-container" v-if="admin">
       <button class="delete-button" @click="openDeleteModal">
         <img :src="Icon.trash" alt="" />
       </button>
@@ -40,7 +40,7 @@
       <div class="header-title">
         <h1 class="header-name">
           {{ boothData.booth_title || 'Loading...' }}
-          <button class="edit-button" @click="openEditModal">
+          <button class="edit-button" v-if="admin" @click="openEditModal">
             <img :src="Icon.pen" alt="" />
           </button>
         </h1>
@@ -61,6 +61,17 @@
           spinner-size="200"
           :alt="boothData.booth_title || ''"
         />
+        <input
+          ref="upload"
+          type="file"
+          accept=".png, .jpg, .jpeg, .gif, .webp, .svg"
+          v-show="false"
+          @change="uploadImage"
+        />
+        <button class="image-upload" v-if="admin" @click="showFileSelector">
+          <p class="title">이미지 교체하기</p>
+          <p class="subtitle">권장 크기: 400px x 400px / 3MB 이하 / jpg, png, gif</p>
+        </button>
       </div>
     </div>
 
@@ -69,7 +80,7 @@
         <div class="section-header">
           <h1>부스 소개</h1>
           <div class="section-header-button-group">
-            <button class="edit-button" @click="openEditDescriptionModal">
+            <button class="edit-button" v-if="admin" @click="openEditDescriptionModal">
               <img :src="Icon.pen" alt="" />
             </button>
           </div>
@@ -81,7 +92,7 @@
       <div class="section">
         <div class="section-header">
           <h1>부스 메뉴</h1>
-          <button class="edit-button" @click="openEditMenuModal">
+          <button class="edit-button" v-if="admin" @click="openEditMenuModal">
             <img :src="Icon.pen" alt="" />
           </button>
         </div>
@@ -121,7 +132,8 @@ import {
   GetBoothLike,
   PostBoothLike,
   ModifyBooth,
-  DeleteBooth
+  DeleteBooth,
+  GetAuthority
 } from '../api/api-client';
 
 import Image from '../components/Image.vue';
@@ -151,6 +163,8 @@ export default {
 
       Icon,
       id: -1,
+
+      admin: GetAuthority(),
 
       boothData: {},
       menuData: [],
@@ -250,6 +264,38 @@ export default {
     },
     loadCommentCount(count) {
       this.commentCount = count;
+    },
+    showFileSelector() {
+      this.$refs.upload.click();
+    },
+    async uploadImage(event) {
+      const file = this.$refs.upload.files[0];
+      const ACCEPT_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp'];
+
+      if (!ACCEPT_TYPES.includes(file.type)) {
+        alert('지원하지 않는 파일');
+        return;
+      }
+
+      if (file.size > 5242880) {
+        // 5242880 = 5MB
+        alert('크기가 너무 큽니다.');
+        return;
+      }
+
+      let image;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        image = reader.result;
+      };
+      reader.readAsDataURL(file);
+
+      const form = new FormData();
+      form.append('image', image);
+
+      // await UploadImage(form);
+      // this.$emit("reload");
     },
     async likeHandler(evt) {
       // 딜레이 중이면 종료
@@ -440,7 +486,7 @@ h1 {
 
 .header-name {
   width: 100%;
-  font-size: 24pt;
+  font-size: 18pt;
 }
 
 .header-like {
@@ -466,12 +512,21 @@ h1 {
   align-items: center;
 }
 
-.header-image {
-  max-height: 200px;
+:deep(.header-image) {
+  width: 100%;
+  max-height: 300px;
   margin: auto;
   object-fit: contain;
-  display: block;
 }
+
+.image-upload {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #5c859b;
+  color: white;
+}
+
 .section-header-button-group {
   display: flex;
   align-items: center;

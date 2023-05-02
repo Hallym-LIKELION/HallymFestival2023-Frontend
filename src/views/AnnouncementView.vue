@@ -16,22 +16,21 @@
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
       <div class="button-group" ref="buttonGroup">
-      <button @click="clickCreate">글쓰기</button>
-    </div>
-      <template v-for="item in displayList" :key="item.id">
+        <button @click="clickCreate">글쓰기</button>
+      </div>
+      <template v-for="item in displayList" :key="item.nno">
         <FoldingArticle
-          :id="item.id"
+          :id="item.nno"
           :title="item.title"
           :content="item.content"
-          :showContent="item.id === showingContent"
-          @click="() => showAnnouncement(item.id)"
+          :showContent="item.nno === showingContent"
+          @click="() => showAnnouncement(item.nno)"
           @clickEdit="clickEdit"
           @clickDelete="clickDelete"
         />
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
-
   </main>
 </template>
 
@@ -72,6 +71,8 @@ export default {
         content: ''
       },
 
+      total: 0,
+
       totalItems: 1,
       itemsPerPage: 1
     };
@@ -102,29 +103,26 @@ export default {
     },
 
     async sendNotice(title, content) {
-      const res = await CreateNotice(title, content);
-
-      if (!res.result.includes('success')) {
-        alert('공지사항을 게시하는데 오류가 발생했습니다.\n', res.result);
+      try {
+        const res = await CreateNotice(title, content);
+      } catch (e) {
+        alert('공지사항을 게시하는데 오류가 발생했습니다.');
+        return;
       }
 
-      const data = await GetNoticeList();
-      this.list = data.dtoList.filter((item) => !item.is_deleted);
-
       this.closeNoticeModal();
+      this.$emit('reload');
     },
 
     async modifyNotice(title, content) {
-      const res = await ModifyNotice(this.noticeModalID, title, content);
-
-      if (!res.result.includes('success')) {
-        alert('공지사항을 수정하는데 오류가 발생했습니다.\n', res.result);
+      try {
+        const res = await ModifyNotice(this.noticeModalID, title, content);
+      } catch (e) {
+        alert('공지사항을 수정하는데 오류가 발생했습니다.');
       }
 
-      const data = await GetNoticeList();
-      this.list = data.dtoList.filter((item) => !item.is_deleted);
-
       this.closeNoticeModal();
+      this.$emit('reload');
     },
 
     clickEdit(id, title, content) {
@@ -173,9 +171,9 @@ export default {
     async changePage(page) {
       console.log(`페이지를 ${page} 페이지로 이동`);
       const data = await GetNoticeList(page);
-      this.list = data.dtoList;
+      this.list = data.dtoList || [];
       this.totalItems = data.total;
-      this.itemsPerPage = data.size;
+      this.itemsPerPage = data.size || 1;
     }
   },
   mounted() {
@@ -249,29 +247,29 @@ export default {
   async created() {
     // 공지사항 불러와서 data에 넣어주기.
     const data = await GetNoticeList();
-    this.list = data.dtoList;
+    this.list = data.dtoList || [];
     this.totalItems = data.total;
-    this.itemsPerPage = data.size;
+    this.itemsPerPage = data.size || 1;
   }
 };
 </script>
 
 <style scoped>
-.title-wrap{
-  width:30%;
-  margin:10px auto;
-  position:relative;
+.title-wrap {
+  width: 30%;
+  margin: 10px auto;
+  position: relative;
 }
 .title-wrap img {
-  width:100%;
+  width: 100%;
   vertical-align: middle;
 }
-.title-text{
+.title-text {
   position: absolute;
-  top:40%;
-  left:50%;
-  width:50%;
-  transform: translate(-50%,-50%);
+  top: 40%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-style: normal;
@@ -280,7 +278,7 @@ export default {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 h1 {
   font-size: 20pt;
@@ -297,7 +295,7 @@ h1 {
 }
 
 .announcement-list {
-  background-color:rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -326,7 +324,7 @@ h1 {
   padding: 8px 24px;
   border: none;
   border-radius: 24px;
-  background-color: #CA434C;
+  background-color: #ca434c;
   color: white;
   font-size: 10pt;
   cursor: pointer;
