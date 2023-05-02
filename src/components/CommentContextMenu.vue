@@ -5,16 +5,19 @@
     v-click-outside="clickOutside"
   >
     <button class="delete-button" @click="clickDeleteButton">삭제하기</button>
-    <button class="report-button" @click="clickReportButton">신고하기</button>
+    <button class="report-button" @click="clickReportButton" v-if="role == 0">신고하기</button>
   </div>
 </template>
 
 <script>
 import vClickOutside from 'click-outside-vue3';
+import { GetAuthority } from '../api/api-client';
 
 export default {
   data() {
-    return {};
+    return {
+      role: GetAuthority()
+    };
   },
   directives: {
     clickOutside: vClickOutside.directive
