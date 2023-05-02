@@ -15,6 +15,9 @@
     </div>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
+      <div class="button-group" ref="buttonGroup">
+      <button @click="clickCreate">글쓰기</button>
+    </div>
       <template v-for="item in displayList" :key="item.id">
         <FoldingArticle
           :id="item.id"
@@ -28,9 +31,7 @@
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
-    <div class="button-group" ref="buttonGroup">
-      <button @click="clickCreate">글쓰기</button>
-    </div>
+
   </main>
 </template>
 
@@ -296,7 +297,7 @@ h1 {
 }
 
 .announcement-list {
-  background-color:rgba(255, 255, 255, 0.3);
+  background-color:rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
