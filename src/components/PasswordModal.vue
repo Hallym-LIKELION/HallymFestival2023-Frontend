@@ -2,7 +2,7 @@
   <Modal class="modal" :visible="visible" @dispose="close" width="500px">
     <div class="modal-header">
       <p class="normal">댓글을 삭제하려면 비밀번호를 입력하세요</p>
-      <p class="error" v-if="!status">비밀번호가 일치하지 않습니다. 다시 입력하세요</p>
+      <p class="error" v-if="!status">비밀번호가 일치하지 않습니다. 다시 입력하세요.</p>
       <!-- <button class="close-button" @click="close">
         <img :src="CloseImage" alt="닫기" />
       </button> -->
