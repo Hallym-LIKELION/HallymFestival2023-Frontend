@@ -25,14 +25,12 @@
 
     <FloatButton @click="openCommentModal" />
 
-    <div class ="title-wrap">
+    <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oletter.png" alt=""/>
-        </div>
-        <div class="title-text">
-          방명록
-        </div>
+        <img src="@/assets/overlay/Oletter.png" alt="" />
       </div>
+      <div class="title-text">방명록</div>
+    </div>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
         <Comment
@@ -56,7 +54,7 @@ import Comment from '../components/Comment.vue';
 import FloatButton from '../components/FloatButton.vue';
 import Pagination from '../components/Pagination.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import { GetVisitComment, PostBadVisitComment } from '../api/api-client';
+import { GetVisitComment, DeleteVisitComment, PostBadVisitComment } from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -82,7 +80,7 @@ export default {
       commentStatus: false,
 
       passwordModal: false,
-      passwordStatus: false,
+      passwordStatus: true,
 
       totalItems: 1,
       itemsPerPage: 1
@@ -96,9 +94,8 @@ export default {
       this.commentModal = false;
     },
     sendComment(data) {
-      this.list.unshift(data);
-
       this.closeCommentModal();
+      setTimeout(() => this.$emit('reload'), 100);
     },
     closePasswordModal() {
       this.passwordStatus = true;
@@ -108,10 +105,8 @@ export default {
       let data;
       try {
         data = await DeleteVisitComment(this.contextMenuTargetID, password);
-        // data = { result: 'success' };
       } catch (e) {
         // 알 수 없는 오류
-
         this.passwordStatus = false;
         return;
       }
@@ -126,8 +121,8 @@ export default {
         return;
       }
 
-      this.passwordModal = false;
-      this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
+      this.closePasswordModal();
+      setTimeout(() => this.$emit('reload'), 100);
     },
     //방명록 신고
     async postbadComment(comment_id) {
@@ -204,21 +199,21 @@ export default {
 </script>
 
 <style scoped>
-.title-wrap{
-  width:30%;
-  margin:10px auto;
-  position:relative;
+.title-wrap {
+  width: 30%;
+  margin: 10px auto;
+  position: relative;
 }
 .title-wrap img {
-  width:100%;
+  width: 100%;
   vertical-align: middle;
 }
-.title-text{
+.title-text {
   position: absolute;
-  top:40%;
-  left:50%;
-  width:50%;
-  transform: translate(-50%,-50%);
+  top: 40%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-style: normal;
@@ -227,7 +222,7 @@ export default {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .header {
   margin-top: 24px;

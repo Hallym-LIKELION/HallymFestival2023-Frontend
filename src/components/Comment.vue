@@ -3,24 +3,39 @@
     <div class="header">
       <img class="picture" :src="picture" v-if="picture !== ''" />
 
-      <h3 class="name" v-text="name"></h3> 
+      <p class="name">
+        <span>{{ name }}</span> {{ booth }}
+      </p>
+
       <button class="menu-button" @click="clickMenuButton">
         <img :src="arrowImage" alt="" srcset="" />
       </button>
     </div>
-    <p class="comment" v-text="comment"></p>
-    <p class="booth" v-text="booth"></p>
-    <p class="warn" v-text="warn" ></p> 
-    <p class="time" v-text="time"></p>
+    <p
+      v-text="comment"
+      :class="['comment', { expand, eclipse }]"
+      ref="comment"
+      @click="viewMore"
+    ></p>
+    <div class="read-more" v-if="eclipse && !expand" @click="viewMore">펼치기</div>
+    <div class="footer" v-if="role == 2">
+      <p class="warn" v-text="warn"></p>
+      <p class="time">{{ timeDisplay }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import { GetAuthority } from '../api/api-client';
 import arrowImage from '@/assets/menu.png';
+import dayjs from 'dayjs';
 export default {
   data() {
     return {
-      arrowImage
+      arrowImage,
+      eclipse: false,
+      expand: false,
+      role: GetAuthority()
     };
   },
   props: {
@@ -46,34 +61,61 @@ export default {
     },
     booth: {
       type: String,
-      default: '부스명'
+      default: ''
     },
     time: {
       type: String,
-      default: '2023-00-00 00:00'
+      default: '2023-01-01T00:00:00+09:00'
     },
     warn: {
       type: String,
       default: '신고 0회'
-    },
+    }
   },
   methods: {
     clickMenuButton(evt) {
       this.$emit('clickMenu', evt, this.id);
       evt.stopPropagation();
+    },
+    viewMore() {
+      if (this.eclipse) {
+        this.expand = !this.expand;
+      }
+    },
+    calculateHeight() {
+      const comment = this.$refs.comment;
+
+      this.eclipse = false;
+      this.expand = false;
+
+      if (comment.offsetHeight !== comment.scrollHeight) {
+        this.eclipse = true;
+      }
     }
+  },
+  computed: {
+    timeDisplay() {
+      return dayjs(this.time).format('YYYY년 M월 D일 HH:mm:ss');
+    }
+  },
+  watch: {
+    comment() {
+      this.calculateHeight();
+    }
+  },
+  mounted() {
+    this.calculateHeight();
   }
 };
 </script>
 <style scoped>
-
 .wrapper {
   padding: 10px;
-  padding-bottom: 20px;
   border-radius: 8px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .header {
@@ -106,11 +148,49 @@ export default {
 
 .name {
   width: 100%;
+  font-size: 11pt;
+  color: black;
+}
+
+.name > span {
+  font-size: 14pt;
   font-weight: 600;
 }
 
 .comment {
   width: 100%;
+  height: 60px;
+  word-break: break-all;
+  overflow: hidden;
 }
 
+.comment.eclipse {
+  -webkit-mask-image: linear-gradient(0deg, transparent 25%, black 60%);
+  mask-image: linear-gradient(0deg, transparent 25%, black 60%);
+  cursor: pointer;
+}
+
+.comment.expand {
+  min-height: 40px;
+  height: auto;
+  max-height: 170px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.read-more {
+  margin-top: -10px;
+  margin-bottom: 8px;
+  color: #ca434c;
+  font-size: 10pt;
+  cursor: pointer;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9pt;
+}
 </style>

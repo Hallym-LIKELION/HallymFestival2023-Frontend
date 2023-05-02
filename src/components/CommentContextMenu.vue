@@ -55,6 +55,7 @@ div {
   margin-left: -110px;
   margin-top: 24px;
   position: absolute;
+  z-index: 1;
 
   display: flex;
   flex-direction: column;

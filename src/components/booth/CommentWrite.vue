@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <img class="profile" src="https://placehold.co/48x48" alt="" />
+      <!-- <img class="profile" src="https://placehold.co/48x48" alt="" /> -->
       <p class="nickname">{{ myIP ? GetRandomNickName(myIP) : '' }}</p>
     </div>
     <div class="body">
@@ -9,7 +9,7 @@
         class="body-input"
         v-model="commentContent"
         @keydown.enter.prevent="send"
-        placeholder="부스에 대한 감상평을 자유롭게 나눠보세요"
+        placeholder="타인을 비방하거나, 모욕을 주는 방명록은 삭제될 수 있습니다."
       ></textarea>
       <div class="footer">
         <input
