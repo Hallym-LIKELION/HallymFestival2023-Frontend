@@ -24,14 +24,14 @@
             <nav>
               <div class="top-menu">
                 <template v-for="{ url, name, callback = () => (showMenu = false) } in navList">
-                  <RouterLink :to="'/' + url" v-text="name" @click="callback" />
+                  <RouterLink :to="url" v-text="name" @click="callback" />
                 </template>
               </div>
               <div class="bottom-menu">
                 <template
                   v-for="{ url, name, callback = () => (showMenu = false) } in navBottomList"
                 >
-                  <RouterLink :to="'/' + url" v-text="name" @click="callback" />
+                  <RouterLink :to="url" v-text="name" @click="callback" />
                 </template>
               </div>
             </nav>
@@ -82,19 +82,19 @@ export default {
       update: true,
       scrollTarget: null,
       navList: [
-        { name: '공지사항', url: 'announcement' },
-        { name: '부스', url: 'boothmap' },
-        { name: '시간표', url: 'timetable' },
-        { name: '프로그램', url: 'program' },
-        { name: '굿즈', url: 'goods' },
-        { name: '방명록', url: 'comment' },
-        { name: '만든이들', url: 'aboutus' },
+        { name: '공지사항', url: '/announcement' },
+        { name: '부스', url: '/boothmap' },
+        { name: '시간표', url: '/timetable' },
+        { name: '프로그램', url: '/program' },
+        { name: '굿즈', url: '/goods' },
+        { name: '방명록', url: '/comment' },
+        { name: '만든이들', url: '/aboutus' },
         { name: '나의 부스', url: '', callback: this.openMyBooth }
       ],
       navBottomList: [
-        { name: '관리자 페이지', url: 'admin' },
-        { name: '로그아웃', url: 'logout' },
-        { name: '로그인', url: 'login' }
+        { name: '관리자 페이지', url: '/admin' },
+        { name: '로그아웃', url: '', callback: this.logout },
+        { name: '로그인', url: '/login' }
       ],
       Icon
     };
@@ -171,6 +171,19 @@ export default {
           transform: 'none'
         }
       );
+    },
+    logout(evt) {
+      evt.stopPropagation();
+      API.DeleteToken();
+      const adminOnlyList = ['/admin', '/admin/comment', '/admin/boothComment'];
+      const currentPath = this.$router.currentRoute.value.path;
+      console.log(currentPath, adminOnlyList.includes(currentPath));
+      if (adminOnlyList.includes(currentPath)) {
+        console.log('go home');
+        this.$router.push('/');
+      } else {
+        this.reload();
+      }
     },
     reload() {
       this.update = !this.update;
