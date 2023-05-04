@@ -13,7 +13,7 @@
             <img :src="menuButtonImage" width="24" />
           </button>
           <RouterLink class="title" to="/" @click="showMenu = false"
-            ><img src="@/assets/logo2.png" alt=""
+            ><img src="@/assets/smalllogo.png" alt=""
           /></RouterLink>
         </header>
       </div>

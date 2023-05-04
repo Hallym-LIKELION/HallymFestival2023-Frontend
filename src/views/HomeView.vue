@@ -1,11 +1,13 @@
 <template>
   <main>
     <div class="introment" ref="introPhrase">
-      <p>"과거에서 일어나는 우리의 설레는 이야기"</p>
+      <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
+    
     <div class="logo" ref="logo">
       <img src="@/assets/logo.png" alt="" />
     </div>
+
     <div class="title" ref="title">
       <h3>한림대학교 비봉축전</h3>
       <br />
@@ -224,7 +226,7 @@ h1 {
   margin: 4px;
   padding: 10px 0;
   border-radius: 46.25px;
-  font-size: 13pt;
+  font-size: 1.4rem ;
   text-align: center;
   text-decoration: none;
   color: black;
@@ -249,7 +251,7 @@ h1 {
   background-color: #ca434c;
   opacity: 0.7;
   color: white;
-  font-size: 13pt;
+  font-size:1.4rem;
   text-align: center;
   text-decoration: none;
 }
