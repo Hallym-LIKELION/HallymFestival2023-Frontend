@@ -15,6 +15,7 @@
     </div>
     <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
     <div class="announcement-list" ref="announcementList">
+      <br /><br />
       <div class="button-group" ref="buttonGroup" v-if="role == 2">
         <button @click="clickCreate">글쓰기</button>
       </div>
@@ -300,6 +301,7 @@ h1 {
 .announcement-list {
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
+  border-radius: 5px;
   flex-direction: column;
   align-items: center;
   margin: 0 10px;

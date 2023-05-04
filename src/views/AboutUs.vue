@@ -6,6 +6,7 @@
       </div>
       <div class="title-text">만든이들</div>
     </div>
+    <br /><br />
     <div class="about-text">
       <TitleContainer>
         <Logo className="introduce" text-align: center>
@@ -199,7 +200,8 @@ export default {
   text-align: center;
   font-style: normal;
   font-weight: 550;
-  font-size: 20px;
+  font-size: 50 10rem;  
+
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
