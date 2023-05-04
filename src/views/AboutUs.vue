@@ -46,7 +46,7 @@
 
         <!-- 프론트엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3>Front-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/vuelogo.png" alt="" width:30px/>Front-End TEAM</h3></TeamText
         >
 
         <div class="grid">
@@ -75,7 +75,7 @@
 
         <!-- 백엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3>Back-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/springbootlogo.png" alt=""/>Back-End TEAM</h3></TeamText
         >
 
         <div class="grid">
@@ -165,6 +165,13 @@ export default {
 </script>
 
 <style scoped>
+.team h3{
+  font-size: 18px
+}
+.team img{
+  width:20px;
+  height:20px
+}
 .line {
   color: #1d3552;
   opacity: 0.14;
@@ -235,7 +242,8 @@ p {
   background-color: #5c859b;
   font-size: 14px;
   color: white;
-  width: 100%;
+  width: 75px 100%;
+  margin: auto;
   height: auto;
 }
 .git-button > button {
@@ -243,7 +251,7 @@ p {
   padding: 6px 10px;
   border-radius: 5px;
   background-color: #5c859b;
-  width: 100%;
+  width: 75px 100%;
   margin: auto;
   font-size: 12px;
   color: white;
@@ -253,19 +261,6 @@ p {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-
-.card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.24) 100%);
-  box-shadow: 20px 20px 20px grey;
-  border-radius: 10px;
-  width: 150px 100%;
-  height: 160px auto;
-  padding: 10px;
-  margin: 10px auto;
-  text-decoration: none;
-  text-align: center;
-  color: black;
 }
 .introment {
   font-family: 'Nanum Gothic', sans-serif;
@@ -338,6 +333,7 @@ p {
   margin-bottom: 50px;
 }
 .dcard {
+  font-family: 'Noto Sans KR', sans-serif;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.24) 100%);
   border-radius: 16px;
   width: 151px 100%;
@@ -355,7 +351,7 @@ p {
   box-shadow: 0px 0px 5px 5px rgba(77, 74, 74, 0.5);
 }
 .dcard h7 {
-  font-family: 'NanumGothic', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 20px;
 }
 .dcard h4 {
