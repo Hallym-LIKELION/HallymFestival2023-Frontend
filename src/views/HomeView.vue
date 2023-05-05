@@ -226,7 +226,7 @@ h1 {
   margin: 4px;
   padding: 10px 0;
   border-radius: 46.25px;
-  font-size: 1.4rem ;
+  font-size: 1rem ;
   text-align: center;
   text-decoration: none;
   color: black;
@@ -251,7 +251,7 @@ h1 {
   background-color: #ca434c;
   opacity: 0.7;
   color: white;
-  font-size:1.4rem;
+  font-size:1rem;
   text-align: center;
   text-decoration: none;
 }
