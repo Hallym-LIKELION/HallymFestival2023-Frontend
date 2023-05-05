@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     addComment(data) {
-      this.list.unshift(data);
+      this.$emit('reload');
     },
     closePasswordModal() {
       this.passwordStatus = true;
@@ -94,7 +94,6 @@ export default {
       let data;
       try {
         data = await DeleteBoothComment(this.contextMenuTargetID, password);
-        // data = { result: 'success' };
       } catch (e) {
         // 알 수 없는 오류
 
@@ -113,7 +112,7 @@ export default {
       }
 
       this.passwordModal = false;
-      this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
+      this.$emit('reload');
     },
     closeMenu() {
       this.contextMenuTargetID = -1;
