@@ -42,16 +42,15 @@
         <hr style="border: solid 2px" class="line" />
 
         <SubTitle className="group"
-          ><h2><b>Developer</b></h2></SubTitle
+          ><h2><b>💻Developer</b></h2></SubTitle
         >
 
         <!-- 프론트엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3><img src="@/assets/vuelogo.png" alt="" width:30px/>Front-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/vuelogo.png" alt="" width:30px />Front-End TEAM</h3></TeamText
         >
 
         <div class="grid">
-
           <div class="dcard">
             <img src="@/assets/developer/osohyun.png" alt="" class="card-img-top" />
             <div class="inform">
@@ -71,12 +70,11 @@
               <button @click="opengithubkungjae" class="git-button">경재's Github</button>
             </div>
           </div>
-
         </div>
 
         <!-- 백엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3><img src="@/assets/springbootlogo.png" alt=""/>Back-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/springbootlogo.png" alt="" />Back-End TEAM</h3></TeamText
         >
 
         <div class="grid">
@@ -109,12 +107,11 @@
               <button @click="opengithubmijin" class="git-button">미진's Github</button>
             </div>
           </div>
-
         </div>
 
         <!-- 기획/디자인 -->
-        <TeamText className="team" text-size:15px text-align: center
-          ><h3>PM / DESGIN TEAM</h3></TeamText
+        <SubTitle className="group"
+          ><h2><b>🎨 PM / DESGIN</b></h2></SubTitle
         >
 
         <div class="grid">
@@ -136,74 +133,77 @@
             </div>
           </div>
 
-          <TeamText className="team" text-size:15px text-align: center
-          ><h3>2023 축제준비위원회</h3></TeamText
-        ><br />
+        </div>
+<br/><br/>
+        <hr style="border: solid 2px" class="cline" />
+        <br/>
+          <SubTitle className="cgroup"
+            ><h2><b>2023 한림대 축제준비위원회</b></h2></SubTitle
+          >
 
           <div class="chuk">
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐회장단⭐</b></p>
-              <p>위원장 윤토아</p>
-              <p>부위원장 안영중</p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐회장단⭐</b></p>
+                <p>위원장 윤토아</p>
+                <p>부위원장 안영중</p>
+              </div>
             </div>
-          </div>
 
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐홍보팀⭐</b></p>
-              <p>팀장 김강수</p>
-              <p>부팀장 김채현</p>
-              <p>안태현 조아현</p>
-              <p>이윤정 성윤서</p>
-              <p>이형민</p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐홍보팀⭐</b></p>
+                <p>팀장 김강수</p>
+                <p>부팀장 김채현</p>
+                <p>안태현 조아현</p>
+                <p>이윤정 성윤서</p>
+                <p>이형민</p>
+              </div>
             </div>
-          </div>
 
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐무대팀⭐</b></p>
-              <p>팀장 김수인</p>
-              <p>부팀장 유진영</p>
-              <p>유채연 윤혜원 서승권</p>
-              <p>양경민 김주은 성보겸</p>
-              <p>이주영 조건호 김규민</p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐무대팀⭐</b></p>
+                <p>팀장 김수인</p>
+                <p>부팀장 유진영</p>
+                <p>유채연 윤혜원 서승권</p>
+                <p>양경민 김주은 성보겸</p>
+                <p>이주영 조건호 김규민</p>
+              </div>
             </div>
-          </div>
 
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐행사팀⭐</b></p>
-              <p>팀장 성예진</p>
-              <p>부팀장 박시언</p>
-              <p>홍여경 장현우 임현수 박시온</p>
-              <p>전성은 권예원 장수진 김소연</p>
-              <p>주경은 심혜련 이한성</p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐행사팀⭐</b></p>
+                <p>팀장 성예진</p>
+                <p>부팀장 박시언</p>
+                <p>홍여경 장현우 임현수 박시온</p>
+                <p>전성은 권예원 장수진 김소연</p>
+                <p>주경은 심혜련 이한성</p>
+              </div>
             </div>
-          </div>
 
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐밤부스팀⭐</b></p>
-              <p>팀장 서채린</p>
-              <p>부팀장 유정근 이수현</p>
-              <p>강지은 송영재 정예빈 김시현</p>
-              <p>경규원 박준하 김성주 </p>
-              <p>고윤주 이재원 이지은 </p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐밤부스팀⭐</b></p>
+                <p>팀장 서채린</p>
+                <p>부팀장 유정근 이수현</p>
+                <p>강지은 송영재 정예빈 김시현</p>
+                <p>경규원 박준하 김성주</p>
+                <p>고윤주 이재원 이지은</p>
+              </div>
             </div>
-          </div>
 
-          <div class="dcard">
-            <div class="inform">
-              <p><b>⭐관리팀⭐</b></p>
-              <p>팀장 박지훈</p>
-              <p>부팀장 김규현 송수연</p>
-              <p>유지원 임연오 윤준혁</p>
-              <p>김린 정호윤</p>
+            <div class="ccard">
+              <div class="inform">
+                <p><b>⭐관리팀⭐</b></p>
+                <p>팀장 박지훈</p>
+                <p>부팀장 김규현 송수연</p>
+                <p>유지원 임연오 윤준혁</p>
+                <p>김린 정호윤</p>
+              </div>
             </div>
           </div>
-        </div>
-        </div>
       </TitleContainer>
     </div>
   </main>
@@ -234,14 +234,18 @@ export default {
 </script>
 
 <style scoped>
-.team h3{
-  font-size: 18px
+.team h3 {
+  font-size: 18px;
 }
-.team img{
-  width:20px;
-  height:20px
+.team img {
+  width: 20px;
+  height: 20px;
 }
 .line {
+  color: #1d3552;
+  opacity: 0.14;
+}
+.cline {
   color: #1d3552;
   opacity: 0.14;
 }
@@ -264,11 +268,11 @@ export default {
   left: 50%;
   width: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   text-align: center;
   font-style: normal;
   font-weight: 550;
-  font-size: 50 10rem;  
+  font-size: 50 10rem;
 
   line-height: 13px;
   margin: 0;
@@ -277,22 +281,22 @@ export default {
 }
 h1,
 h2 {
-  font-family: 'NanumGothic', sans-serif;
+  font-family: 'NanumGothic';
   font-size: 16px;
 }
 h3 {
-  font-family: 'NanumGothic', sans-serif;
+  font-family: 'NanumGothic';
   margin: 8px 0;
   font-size: 12px;
   text-size-adjust: auto;
 }
 h4 {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   margin: 20px 0;
   font-size: 33px;
 }
 h5 {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   font-size: 10px;
 }
 h6 {
@@ -305,7 +309,7 @@ p {
   font-size: 1vw;
 }
 .git-button {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   margin-top: 20px;
   padding: 2px 10px;
   border-radius: 5px;
@@ -333,7 +337,7 @@ p {
   grid-template-columns: 1fr 1fr;
 }
 .introment {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Nanum Gothic';
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
@@ -353,8 +357,19 @@ p {
   margin: 100px;
   padding: 50px 0;
 }
+.cgroup{
+  text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 13px;
+  letter-spacing: 0.2em;
+  float: center;
+  width: 45%;
+  margin: 100px;
+  padding: 50px 0;
+}
 .team {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Nanum Gothic';
   font-size: 16px;
   text-align: center;
   line-height: 17px;
@@ -403,7 +418,7 @@ p {
   margin-bottom: 50px;
 }
 .dcard {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.24) 100%);
   border-radius: 16px;
   width: 151px 100%;
@@ -417,15 +432,40 @@ p {
   position: center;
   top: 50%;
   left: 50%;
-  right:70%;
+  right: 70%;
   box-shadow: 0px 0px 5px 5px rgba(77, 74, 74, 0.5);
 }
 .dcard h7 {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   font-size: 20px;
 }
 .dcard h4 {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   font-size: 14px;
+}
+.chuk {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ccard {
+  font-family: 'NanumGothicOTF';
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.24) 100%);
+  border-radius: 16px;
+  width: 200px;
+  height: 200px auto;
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  float: left;
+  position: center;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  box-shadow: 0px 0px 5px 5px rgba(77, 74, 74, 0.5);
 }
 </style>
