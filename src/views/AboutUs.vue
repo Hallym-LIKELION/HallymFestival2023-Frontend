@@ -29,7 +29,7 @@
           <p>2023년도 한림대학교 대동제를 위하여</p>
           <p>한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고</p>
           <p>
-            학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 프로젝트 빌더팀이
+            학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 빌더팀이
             <br /><br />축제 웹사이트를 개발하였습니다.
           </p>
           <br /><br />
@@ -339,7 +339,7 @@ p {
 .introment {
   font-family: 'Nanum Gothic';
   font-style: normal;
-  font-size: 15px;
+  font-size: 1.0rem;
   line-height: 13px;
   text-align: center;
   letter-spacing: 0.15em;
@@ -454,7 +454,7 @@ p {
   font-family: 'NanumGothicOTF';
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.24) 100%);
   border-radius: 16px;
-  width: 200px;
+  width: 200px 100%;
   height: 200px auto;
   padding: 10px;
   margin: 10px;
