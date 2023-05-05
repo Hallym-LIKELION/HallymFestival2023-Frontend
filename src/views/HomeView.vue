@@ -3,7 +3,7 @@
     <div class="introment" ref="introPhrase">
       <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
-    
+
     <div class="logo" ref="logo">
       <img src="@/assets/logo.png" alt="" />
     </div>
@@ -21,10 +21,6 @@
     </div>
     <div class="test-group" ref="boothTest">
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
-    </div>
-    <div class="DownBtn" ref="scroll">
-      <p>Scroll</p>
-      <img src="@/assets/downscroll.png" alt="" />
     </div>
 
     <div class="sponsor" ref="sponsor">
@@ -140,21 +136,6 @@ export default {
       }
     );
 
-    // 스크롤 모양 애니메이션
-    gsap.fromTo(
-      this.$refs.scroll,
-      {
-        transform: 'translateY(-20%)',
-        opacity: 0
-      },
-      {
-        delay: 3.25,
-        duration: 0.5,
-        transform: 'none',
-        opacity: 1
-      }
-    );
-
     // 스폰서 애니메이션
     gsap.fromTo(
       this.$refs.sponsor,
@@ -163,7 +144,7 @@ export default {
         transform: 'scale(0.5)'
       },
       {
-        delay: 3.75,
+        delay: 3.25,
         duration: 1.5,
         transform: 'none',
         opacity: 1,
@@ -175,9 +156,9 @@ export default {
 </script>
 <style scoped>
 .sponsor {
+  margin-top: 32px;
   text-align: center;
   color: white;
-  text-align: center;
 }
 p {
   text-align: center;
@@ -226,7 +207,7 @@ h1 {
   margin: 4px;
   padding: 10px 0;
   border-radius: 46.25px;
-  font-size: 1rem ;
+  font-size: 1rem;
   text-align: center;
   text-decoration: none;
   color: black;
@@ -251,18 +232,8 @@ h1 {
   background-color: #ca434c;
   opacity: 0.7;
   color: white;
-  font-size:1rem;
+  font-size: 1rem;
   text-align: center;
   text-decoration: none;
-}
-.DownBtn {
-  margin: 0;
-  padding: 36px 0;
-  display: flex;
-  justify-content: center;
-  font-family: 'Nanum Gothic', sans-serif;
-  text-align: center;
-  color: white;
-  opacity: 0.7;
 }
 </style>
