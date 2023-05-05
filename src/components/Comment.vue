@@ -153,7 +153,7 @@ export default {
 }
 
 .name > span {
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: 600;
 }
 
