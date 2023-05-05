@@ -135,6 +135,74 @@
               <h4>광고홍보학과 19</h4>
             </div>
           </div>
+
+          <TeamText className="team" text-size:15px text-align: center
+          ><h3>2023 축제준비위원회</h3></TeamText
+        ><br />
+
+          <div class="chuk">
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐회장단⭐</b></p>
+              <p>위원장 윤토아</p>
+              <p>부위원장 안영중</p>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐홍보팀⭐</b></p>
+              <p>팀장 김강수</p>
+              <p>부팀장 김채현</p>
+              <p>안태현 조아현</p>
+              <p>이윤정 성윤서</p>
+              <p>이형민</p>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐무대팀⭐</b></p>
+              <p>팀장 김수인</p>
+              <p>부팀장 유진영</p>
+              <p>유채연 윤혜원 서승권</p>
+              <p>양경민 김주은 성보겸</p>
+              <p>이주영 조건호 김규민</p>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐행사팀⭐</b></p>
+              <p>팀장 성예진</p>
+              <p>부팀장 박시언</p>
+              <p>홍여경 장현우 임현수 박시온</p>
+              <p>전성은 권예원 장수진 김소연</p>
+              <p>주경은 심혜련 이한성</p>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐밤부스팀⭐</b></p>
+              <p>팀장 서채린</p>
+              <p>부팀장 유정근 이수현</p>
+              <p>강지은 송영재 정예빈 김시현</p>
+              <p>경규원 박준하 김성주 </p>
+              <p>고윤주 이재원 이지은 </p>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="inform">
+              <p><b>⭐관리팀⭐</b></p>
+              <p>팀장 박지훈</p>
+              <p>부팀장 김규현 송수연</p>
+              <p>유지원 임연오 윤준혁</p>
+              <p>김린 정호윤</p>
+            </div>
+          </div>
+        </div>
         </div>
       </TitleContainer>
     </div>
