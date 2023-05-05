@@ -42,7 +42,7 @@ import CommentContextMenu from '../CommentContextMenu.vue';
 import Pagination from '../Pagination.vue';
 import SendImage from '../../assets/send.png';
 import { GetRandomNickName } from '../../library/name-generator';
-import { GetBoothComment, DeleteBoothComment } from '../../api/api-client';
+import { GetBoothComment, DeleteBoothComment, ReportBoothComment } from '../../api/api-client';
 
 export default {
   components: {
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     addComment(data) {
-      this.list.unshift(data);
+      this.$emit('reload');
     },
     closePasswordModal() {
       this.passwordStatus = true;
@@ -94,7 +94,6 @@ export default {
       let data;
       try {
         data = await DeleteBoothComment(this.contextMenuTargetID, password);
-        // data = { result: 'success' };
       } catch (e) {
         // 알 수 없는 오류
 
@@ -113,7 +112,7 @@ export default {
       }
 
       this.passwordModal = false;
-      this.list = this.list.filter((item) => item.cno !== this.contextMenuTargetID);
+      this.$emit('reload');
     },
     closeMenu() {
       this.contextMenuTargetID = -1;
@@ -134,23 +133,13 @@ export default {
       this.showContextMenu = false;
       this.passwordModal = true;
     },
-    reportComment(comment_id) {
+    async reportComment() {
+      const res = await ReportBoothComment(this.contextMenuTargetID);
       this.showContextMenu = false;
-      /* 방명록 신고 */
-      // PostBadVisitComment(comment_id)
-      //   .then((data) => {
-      //     this.postData = {
-      //       result: data.result
-      //     };
-      //     if (data.result.includes('success')) {
-      //       console.log('report success');
-      //     } else {
-      //       console.log('already reported');
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.error('does not exist visit comment', err);
-      //   });
+
+      if (res.result === 'already reported') {
+      } else if (res.result === 'does not exist comment') {
+      }
     },
 
     async changePage(page) {

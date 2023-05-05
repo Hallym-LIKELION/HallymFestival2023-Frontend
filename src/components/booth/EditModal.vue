@@ -16,23 +16,6 @@
           </p>
         </div>
 
-        <!-- <p class="label">사진</p>
-        <div class="input image">
-          <img :src="image" alt="" />
-          <p class="error">파일이 이미지가 아닙니다. 다른 파일로 다시 시도하세요.</p>
-          <input ref="upload" type="file" accept="image/*" v-show="false" @change="uploadImage" />
-          <button class="button" @click="showFileSelector">
-            <p class="title">이미지 업로드</p>
-            <p class="subtitle">권장 크기: 000px x 000px, 0MB 이하의 jpg, png, gif만 가능</p>
-          </button>
-        </div> -->
-
-        <!-- <p class="label">설명</p>
-        <div class="input description">
-          <textarea class="" v-model="description"></textarea>
-          <p class="error">설명은 공란으로 둘 수 없습니다.</p>
-        </div> -->
-
         <div>
           <p class="label">요일</p>
           <p class="label small">중복 선택 가능</p>

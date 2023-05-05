@@ -112,7 +112,11 @@
           <h1>댓글 <span v-text="commentDisplayCount.toFixed(0)"></span></h1>
         </div>
         <hr />
-        <BoothCommentSection :id="parseInt($route.params.id)" @update="loadCommentCount" />
+        <BoothCommentSection
+          :id="parseInt($route.params.id)"
+          @update="loadCommentCount"
+          @reload="reload"
+        />
       </div>
     </div>
   </main>
@@ -194,6 +198,9 @@ export default {
     };
   },
   methods: {
+    reload() {
+      this.$emit('reload');
+    },
     openEditModal() {
       this.editModal = true;
     },

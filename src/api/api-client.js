@@ -76,6 +76,13 @@ export async function GetAccessTokenUser() {
 // IP API
 // =========================
 
+// 접속자수 통계 전용
+export async function GetAPI() {
+  const res = await axios.get(HOST);
+  const data = res.data;
+  return data;
+}
+
 export async function GetMyIP() {
   const res = await axios.get(HOST + '/ip');
   const data = res.data;
@@ -156,6 +163,13 @@ export async function DeleteBoothComment(comment_id, password) {
     password
   };
   const res = await axios.delete(HOST + '/comment/' + comment_id, { data });
+  return res.data;
+}
+
+export async function ReportBoothComment(comment_id) {
+  const res = await axios.post(HOST + '/report/comment/' + comment_id, null, {
+    withCredentials: true
+  });
   return res.data;
 }
 
@@ -280,9 +294,9 @@ export async function GetVisitComment(page = 0) {
   return res.data;
 }
 
-export async function PostBadVisitComment(comment_id) {
+export async function ReportVisitComment(comment_id) {
   const res = await axios.post(HOST + '/report/visitcomment/' + comment_id, null, {
-    // withCredentials: true
+    withCredentials: true
   });
   return res.data;
 }
