@@ -166,6 +166,13 @@ export async function DeleteBoothComment(comment_id, password) {
   return res.data;
 }
 
+export async function ReportBoothComment(comment_id) {
+  const res = await axios.post(HOST + '/report/comment/' + comment_id, null, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
 // =========================
 // 부스 좋아요 API
 // =========================
@@ -287,9 +294,9 @@ export async function GetVisitComment(page = 0) {
   return res.data;
 }
 
-export async function PostBadVisitComment(comment_id) {
+export async function ReportVisitComment(comment_id) {
   const res = await axios.post(HOST + '/report/visitcomment/' + comment_id, null, {
-    // withCredentials: true
+    withCredentials: true
   });
   return res.data;
 }

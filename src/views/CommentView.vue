@@ -54,7 +54,7 @@ import Comment from '../components/Comment.vue';
 import FloatButton from '../components/FloatButton.vue';
 import Pagination from '../components/Pagination.vue';
 import { GetRandomNickName } from '../library/name-generator';
-import { GetVisitComment, DeleteVisitComment, PostBadVisitComment } from '../api/api-client';
+import { GetVisitComment, DeleteVisitComment, ReportVisitComment } from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -158,23 +158,13 @@ export default {
       this.showContextMenu = false;
       this.passwordModal = true;
     },
-    reportComment(comment_id) {
+    async reportComment() {
+      const res = await ReportVisitComment(this.contextMenuTargetID);
       this.showContextMenu = false;
-      /* 방명록 신고 */
-      // PostBadVisitComment(comment_id)
-      //   .then((data) => {
-      //     this.postData = {
-      //       result: data.result
-      //     };
-      //     if (data.result.includes('success')) {
-      //       console.log('report success');
-      //     } else {
-      //       console.log('already reported');
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.error('does not exist visit comment', err);
-      //   });
+
+      if (res.result === 'already reported') {
+      } else if (res.result === 'does not exist comment') {
+      }
     },
 
     async changePage(page) {
