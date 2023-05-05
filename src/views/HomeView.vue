@@ -169,21 +169,24 @@ h1 {
   text-align: center;
 }
 .logo {
-  margin: 0;
-  padding: 36px 0;
+  max-width: 320px;
+  margin: -18px auto;
   display: flex;
   justify-content: center;
   color: white;
 }
+
+.logo > img {
+  width: 100%;
+}
 .introment {
+  margin-top: 64px;
   font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
-  font-size: 15px;
-  line-height: 13px;
+  font-size: 12pt;
   text-align: center;
-  letter-spacing: 0.15em;
-  margin: 0;
-  padding: 36px 0;
+  word-break: keep-all;
+  letter-spacing: 4px;
   color: white;
 }
 
