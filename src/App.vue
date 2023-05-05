@@ -13,7 +13,7 @@
             <img :src="menuButtonImage" width="24" />
           </button>
           <RouterLink class="title" to="/" @click="showMenu = false"
-            ><img src="@/assets/smalllogo.png" alt=""
+            ><img src="@/assets/logo.png" alt=""
           /></RouterLink>
         </header>
       </div>
@@ -224,11 +224,13 @@ header {
   height: 56px;
   left: 50%;
   margin-left: -412px;
+  background-color: #00000077;
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: center;
   z-index: 99;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 824px) {
@@ -258,6 +260,10 @@ header > .title {
   text-decoration: none;
   font-size: 16pt;
   font-weight: 600;
+}
+
+header > .title > img {
+  height: 80px;
 }
 .wrapper {
   min-height: 100%;
