@@ -76,6 +76,13 @@ export async function GetAccessTokenUser() {
 // IP API
 // =========================
 
+// 접속자수 통계 전용
+export async function GetAPI() {
+  const res = await axios.get(HOST);
+  const data = res.data;
+  return data;
+}
+
 export async function GetMyIP() {
   const res = await axios.get(HOST + '/ip');
   const data = res.data;

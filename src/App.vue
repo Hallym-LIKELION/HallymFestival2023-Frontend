@@ -109,6 +109,8 @@ export default {
     });
 
     window.addEventListener('scroll', this.handleScroll);
+
+    API.GetAPI();
   },
   mounted() {},
   methods: {
