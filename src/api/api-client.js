@@ -321,6 +321,61 @@ export async function GetVisitorCount() {
   return res.data;
 }
 
+export async function GetBoothListWithLike(page = 0) {
+  let url = '/like/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetBoothListWithComment(page = 0) {
+  let url = '/comment/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetBoothListWithReport(page = 0) {
+  let url = '/comment/report-top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetCommentListWithReport(page = 0) {
+  let url = '/comment/reported';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetVisitCommentListWithReport(page = 0) {
+  let url = '/visitcomment/reported';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
 // =========================
 // 이미지 업로드 API
 // =========================
