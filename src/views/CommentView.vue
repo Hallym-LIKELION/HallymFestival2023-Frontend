@@ -24,6 +24,7 @@
     />
 
     <FloatButton @click="openCommentModal" />
+    <br/><br/><br/><br/>
 
     <div class="title-wrap">
       <div class="title-image">
