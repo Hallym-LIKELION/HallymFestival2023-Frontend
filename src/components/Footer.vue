@@ -18,7 +18,7 @@
 
 .footer > p.title {
   margin-top: 6px;
-  font-size: 10pt;
+  font-size: 1.0rem;
   color: #ffffff;
 }
 .footer > p.sponser {
