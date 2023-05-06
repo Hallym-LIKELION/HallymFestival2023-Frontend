@@ -349,12 +349,14 @@ p {
   grid-template-columns: 1fr 1fr;
 }
 .introment {
-  font-family: 'Nanum Gothic';
-  font-size: 1.4rem;
+  font-family: 'NanumGothic';
+  font-size: 10px;
   text-align: center;
   letter-spacing: 0.1em;
   margin: 0;
   padding: 36px 0;
+  margin: 8px 0;
+  text-size-adjust: auto;
 }
 .group {
   text-align: center;

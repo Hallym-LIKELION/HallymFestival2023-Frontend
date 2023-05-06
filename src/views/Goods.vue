@@ -15,24 +15,27 @@
       <br />
       <p>많은 관심 바랍니다.</p>
 
-      <div class="dcard">
-        <img src="@/assets/goods/그립톡.png" alt="" width="100" height="100" />
-        <div class="inform">
-          <h7>그립톡</h7>
-          <br />
-          <h4>10000원</h4>
+      <div class="first">
+        <div class="dcard">
+          <img src="@/assets/goods/그립톡.png" alt="" width="100" height="100" />
+          <div class="inform">
+            <h7>그립톡</h7>
+            <br />
+            <h4>10000원</h4>
+          </div>
+        </div>
+
+        <div class="dcard">
+          <img src="@/assets/goods/소주잔.png" alt="" width="100" height="100" />
+          <div class="inform">
+            <h7>소주잔</h7>
+            <br />
+            <h4>10000원</h4>
+          </div>
         </div>
       </div>
 
-      <div class="dcard">
-        <img src="@/assets/goods/소주잔.png" alt="" width="100" height="100" />
-        <div class="inform">
-          <h7>소주잔</h7>
-          <br />
-          <h4>10000원</h4>
-        </div>
-      </div>
-
+      <div class="first">
       <div class="dcard">
         <img src="@/assets/goods/맥주잔.png" alt="" width="100" height="100" />
         <div class="inform">
@@ -50,7 +53,8 @@
           <h4>10000원</h4>
         </div>
       </div>
-
+    </div>
+    <div class="first">
       <div class="dcard">
         <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
         <div class="inform">
@@ -59,19 +63,23 @@
           <h4>10000원</h4>
         </div>
       </div>
-
+    </div>
       <button>
         <div class="button"><b>구매하러가기</b></div>
       </button>
-    
     </div>
-
   </main>
 </template>
 
 <script></script>
 
 <style scoped>
+.first {
+  width: 60%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .title-wrap {
   width: 30%;
   margin: 10px auto;
@@ -137,10 +145,13 @@ h4 {
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 18px;
+  position: center;
+  float: left;
   text-align: center;
   background-color: #ca434c;
   font-size: 17pt;
   color: white;
+  
 }
 h1 {
   color: #ffffff;
