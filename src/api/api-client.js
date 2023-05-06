@@ -214,6 +214,11 @@ export async function ModifyBoothMenu(menu_id, name, price) {
   return res.data;
 }
 
+export async function SoldBoothMenu(menu_id) {
+  const res = await axios.put(HOST + '/menu/sell/' + menu_id);
+  return res.data;
+}
+
 export async function DeleteBoothMenu(menu_id) {
   const res = await axios.delete(HOST + '/menu/' + menu_id);
   return res.data;

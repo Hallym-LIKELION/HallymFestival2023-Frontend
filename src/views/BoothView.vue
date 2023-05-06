@@ -414,6 +414,9 @@ export default {
       this.boothData = data;
 
       data = await GetBoothMenu(this.id);
+      data.forEach((item) => {
+        item.sell = item.menuSell === 'SOLD';
+      });
       this.menuData = data;
 
       console.log(this.menuData);
