@@ -11,11 +11,15 @@
         </div>
       </div>
       <div class="info">
-        <div v-if="isAdmin" class="comment">
+        <div v-if="isAdmin && mode == 1" class="comment">
           <img :src="Icon.comment" />
           <p>{{ numberToString(comment) }}</p>
         </div>
-        <div class="like">
+        <div v-if="isAdmin && mode == 3" class="report">
+          <img :src="Icon.report" />
+          <p>{{ numberToString(report) }}</p>
+        </div>
+        <div v-if="!isAdmin || mode == 2" class="like">
           <img :src="Icon.heart" />
           <p>{{ numberToString(like) }}</p>
         </div>
@@ -61,6 +65,14 @@ export default {
       default: 0
     },
     comment: {
+      type: Number,
+      default: 0
+    },
+    report: {
+      type: Number,
+      default: 0
+    },
+    mode: {
       type: Number,
       default: 0
     },

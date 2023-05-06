@@ -24,7 +24,7 @@
     />
 
     <FloatButton @click="openCommentModal" />
-    <br/><br/><br/><br/>
+    <br /><br /><br /><br />
 
     <div class="title-wrap">
       <div class="title-image">
@@ -38,6 +38,7 @@
           :id="item.vno"
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
+          :color="item.color ?? 'YELLOW'"
           @clickMenu="toggleMenu"
         />
       </template>

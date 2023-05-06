@@ -259,8 +259,12 @@ export async function DeleteNotice(id) {
   return res.data;
 }
 
-export async function SearchNotice(keyword) {
-  const res = await axios.get(HOST + '/notice/search?keyword=' + keyword);
+export async function SearchNotice(keyword, page = 0) {
+  let url = '/notice/search?keyword=' + keyword;
+  if (page !== 0) {
+    url += '&page=' + page;
+  }
+  const res = await axios.get(HOST + url);
   return res.data;
 }
 
@@ -273,10 +277,11 @@ export async function RemoveNotice(id) {
 // 방명록 API
 // =========================
 
-export async function CreateVisitComment(content, password) {
+export async function CreateVisitComment(content, password, color) {
   const data = {
     content,
-    password
+    password,
+    color
   };
   const res = await axios.post(HOST + '/visitcomment', data);
   return res.data;
@@ -316,6 +321,61 @@ export async function ReportVisitComment(comment_id) {
 
 export async function GetVisitorCount() {
   const res = await axios.get(HOST + '/visit-list', {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetBoothListWithLike(page = 0) {
+  let url = '/like/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetBoothListWithComment(page = 0) {
+  let url = '/comment/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetBoothListWithReport(page = 0) {
+  let url = '/comment/report-top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetCommentListWithReport(page = 0) {
+  let url = '/comment/reported';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
+    withCredentials: true
+  });
+  return res.data;
+}
+
+export async function GetVisitCommentListWithReport(page = 0) {
+  let url = '/visitcomment/reported';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url, {
     withCredentials: true
   });
   return res.data;

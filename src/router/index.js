@@ -96,8 +96,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/admin/boothcomment',
-      name: 'adminBoothcomment',
+      path: '/admin/visitcomment',
+      name: 'adminVisitcomment',
       component: () => import('../views/OwnerComment.vue'),
       beforeEnter: (to, from, next) => {
         switch (GetAuthority()) {

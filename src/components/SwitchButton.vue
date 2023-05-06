@@ -18,6 +18,21 @@ export default {
     };
   },
 
+  props: {
+    status: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  watch: {
+    status(value) {
+      if (value === 0) {
+        this.active = false;
+      }
+    }
+  },
+
   methods: {
     onClickHandler(evt) {
       this.active = !this.active;

@@ -7,6 +7,7 @@
       id=""
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      @change="change"
     />
   </div>
 </template>
@@ -21,7 +22,12 @@ export default {
     };
   },
   props: ['modelValue'],
-  emits: ['update:modelValue']
+  emits: ['update:modelValue'],
+  methods: {
+    change(evt) {
+      this.$emit('change', evt);
+    }
+  }
 };
 </script>
 
