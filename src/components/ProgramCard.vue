@@ -40,6 +40,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  font-family: 'Nanum Gothic';
   overflow: hidden;
   color:black;
 }
@@ -53,12 +54,14 @@ p {
 }
 
 .wrapper > .title {
-  font-size: 18pt;
+  font-family: 'Nanum Gothic';
+  font-size: 20pt;
   font-weight: 600;
   color:black;
 }
 
 .wrapper p {
+  font-family:  'Nanum Gothic';
   width: 100%;
   /* 텍스트 오버플로우를 ... 으로 숨기기 */
   overflow: hidden;

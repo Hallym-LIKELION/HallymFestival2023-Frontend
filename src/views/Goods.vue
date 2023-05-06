@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <div class ="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/OGoods.png" alt=""/>
@@ -9,65 +10,64 @@
         </div>
     </div>
     <br><br>
+
+    <div class="goods-text">
+    <br><br>
     <p>저희가 어떻게 어떻게 하기로 했습니다 </p>
     <br>
     <p>많은 관심 바랍니다.</p>
   
         <div class="dcard">
-          <img src="@/assets/goodspicture.png" alt="" />
+          <img src="@/assets/goods/그립톡.png" alt="" width="100" height="100"/>
           <div class="inform">
-            <h7>굿즈명</h7>
+            <h7>그립톡</h7>
             <br>
             <h4>10000원</h4>
           </div>
         </div>
 
         <div class="dcard">
-          <img src="@/assets/goodspicture.png" alt="" />
+          <img src="@/assets/goods/소주잔.png" alt="" width="100" height="100"/>
           <div class="inform">
-            <h7>굿즈명</h7>
-            <br>
-            <h4>10000원</h4>
-          </div>
-        </div>
-
-
-        <div class="dcard">
-          <img src="@/assets/goodspicture.png" alt="" />
-          <div class="inform">
-            <h7>굿즈명</h7>
+            <h7>소주잔</h7>
             <br>
             <h4>10000원</h4>
           </div>
         </div>
 
         <div class="dcard">
-          <img src="@/assets/goodspicture.png" alt="" />
+          <img src="@/assets/goods/맥주잔.png" alt="" width="100" height="100"/>
           <div class="inform">
-            <h7>굿즈명</h7>
+            <h7>맥주잔</h7>
             <br>
             <h4>10000원</h4>
           </div>
         </div>
 
         <div class="dcard">
-          <img src="@/assets/goodspicture.png" alt="" />
+          <img src="@/assets/goods/스티커.png" alt="" width="100" height="100"/>
           <div class="inform">
-            <h7>굿즈명</h7>
+            <h7>스티커</h7>
             <br>
             <h4>10000원</h4>
           </div>
         </div>
 
-        <div class="DownBtn">
-          <img src="@/assets/goodsscroll.png" alt="" />
+        <div class="dcard">
+          <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100"/>
+          <div class="inform">
+            <h7>떡메모지</h7>
+            <br>
+            <h4>10000원</h4>
+          </div>
         </div>
+
         <br /><br />
         <button>
           <div class="button"><b>구매하러가기</b></div>
             </button>
     
-    
+          </div>
   </main>
 </template>
 
@@ -106,7 +106,7 @@ h1 {
 p {
   font-size: 15pt;
   text-align: center;
-  color: white;
+  color: black; 
 }
 h7{
   color: black; 
@@ -115,7 +115,7 @@ h4{
   color: black;
 }
 .dcard {
-  background: linear-gradient(180deg, rgba(208, 208, 208, 0.5) 0%, rgba(208, 208, 208, 0.24) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255,100) 0%, rgba(255, 255, 255,100) 100%);
   border-radius: 16px;
   width: 151px;
   height: 160px;
@@ -128,18 +128,21 @@ h4{
   position: center;
   top: 50%; 
   left: 50%; 
-
 }
 .inform {
   font-size: 20px;
   color: #FFFFFF;
 }
 .button {
-  width:328px;
+  width:328px ;
   height: 30px;
   margin-top: 15px;
+  top: 50%;
+  left:50%;
+  right:50%;
   padding: 6px 10px;
   border-radius: 18px;
+  position: relative;
   text-align: center;
   background-color: #CA434C;
   font-size: 17pt;
@@ -148,9 +151,11 @@ h4{
 h1{
   color: #FFFFFF;
 }
+.goods-text {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100px 100px 0px 0px;
+  text-size:1.0rem;
 
-.DownBtn{
-  padding: 10px;
-  margin: 10px;
 }
+
 </style>

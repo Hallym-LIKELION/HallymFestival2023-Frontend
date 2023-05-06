@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <NoticeModal
       :visible="showNoticeModal"
       :title="noticeModalData.title"
@@ -298,6 +299,7 @@ h1 {
 }
 
 .announcement-list {
+  font-family: 'Nanum Gothic', sans-serif;
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   border-radius: 5px;

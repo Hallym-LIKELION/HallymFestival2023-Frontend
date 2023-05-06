@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Oaboutus.png" alt="" />
@@ -52,7 +53,7 @@
 
         <div class="grid">
           <div class="dcard">
-            <img src="@/assets/developer/osohyun.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/osohyun.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>오소현</b></h7>
               <br />
@@ -62,7 +63,7 @@
           </div>
 
           <div class="dcard">
-            <img src="@/assets/developer/kimkyungjae.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/kimkyungjae.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>김경재</b></h7>
               <br />
@@ -79,7 +80,7 @@
 
         <div class="grid">
           <div class="dcard">
-            <img src="@/assets/developer/leedongheon.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/leedongheon.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>이동헌</b></h7>
               <br />
@@ -89,7 +90,7 @@
           </div>
 
           <div class="dcard">
-            <img src="@/assets/developer/parkjuyoung.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/parkjuyoung.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>박주영</b></h7>
               <br />
@@ -99,7 +100,7 @@
           </div>
 
           <div class="dcard">
-            <img src="@/assets/developer/kimmijin.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/kimmijin.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>김미진</b></h7>
               <br />
@@ -116,7 +117,7 @@
 
         <div class="grid">
           <div class="dcard">
-            <img src="@/assets/developer/choiari.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/choiari.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>최아리</b></h7>
               <br />
@@ -125,7 +126,7 @@
           </div>
 
           <div class="dcard">
-            <img src="@/assets/developer/oyujin.png" alt="" class="card-img-top" />
+            <img src="@/assets/developer/oyujin.png" alt="" class="card-img-top" width=100 height=100 />
             <div class="inform">
               <h7><b>오유진</b></h7>
               <br />
@@ -138,12 +139,12 @@
         <hr style="border: solid 2px" class="cline" />
         <br/>
           <SubTitle className="cgroup"
-            ><h2><b>2023 한림대 축제준비위원회</b></h2></SubTitle
+            ><h2><b>2023 한림대학교 축제준비위원회</b></h2></SubTitle
           >
 
           <div class="chuk">
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐회장단⭐</b></p>
                 <p>위원장 윤토아</p>
                 <p>부위원장 안영중</p>
@@ -151,7 +152,7 @@
             </div>
 
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐홍보팀⭐</b></p>
                 <p>팀장 김강수</p>
                 <p>부팀장 김채현</p>
@@ -162,7 +163,7 @@
             </div>
 
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐무대팀⭐</b></p>
                 <p>팀장 김수인</p>
                 <p>부팀장 유진영</p>
@@ -173,7 +174,7 @@
             </div>
 
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐행사팀⭐</b></p>
                 <p>팀장 성예진</p>
                 <p>부팀장 박시언</p>
@@ -184,7 +185,7 @@
             </div>
 
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐밤부스팀⭐</b></p>
                 <p>팀장 서채린</p>
                 <p>부팀장 유정근 이수현</p>
@@ -195,7 +196,7 @@
             </div>
 
             <div class="ccard">
-              <div class="inform">
+              <div class="ccinfo">
                 <p><b>⭐관리팀⭐</b></p>
                 <p>팀장 박지훈</p>
                 <p>부팀장 김규현 송수연</p>
@@ -234,6 +235,17 @@ export default {
 </script>
 
 <style scoped>
+.ccinfo{
+  font-family: 'Nanum Gothic';
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  margin: 0;
+  padding: 36px 0;
+}
+.ccinfo p{
+  font-size:1.0rem;
+}
 .team h3 {
   font-size: 18px;
 }
@@ -338,11 +350,9 @@ p {
 }
 .introment {
   font-family: 'Nanum Gothic';
-  font-style: normal;
-  font-size: 1.0rem;
-  line-height: 13px;
+  font-size: 1.4rem;
   text-align: center;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   margin: 0;
   padding: 36px 0;
 }

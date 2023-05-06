@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Obooth.png" alt="" />
