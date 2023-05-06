@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HOST = 'https://dev-api.prisism.io';
+const HOST = 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
