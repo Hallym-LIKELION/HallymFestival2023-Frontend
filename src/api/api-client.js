@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HOST = 'https://dev-api.prisism.io';
+const HOST = 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
@@ -214,6 +214,11 @@ export async function ModifyBoothMenu(menu_id, name, price) {
   return res.data;
 }
 
+export async function SoldBoothMenu(menu_id) {
+  const res = await axios.put(HOST + '/menu/sell/' + menu_id);
+  return res.data;
+}
+
 export async function DeleteBoothMenu(menu_id) {
   const res = await axios.delete(HOST + '/menu/' + menu_id);
   return res.data;
@@ -308,6 +313,13 @@ export async function ReportVisitComment(comment_id) {
 // =========================
 // 백오피스 API
 // =========================
+
+export async function GetVisitorCount() {
+  const res = await axios.get(HOST + '/visit-list', {
+    withCredentials: true
+  });
+  return res.data;
+}
 
 // =========================
 // 이미지 업로드 API
