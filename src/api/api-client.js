@@ -259,8 +259,12 @@ export async function DeleteNotice(id) {
   return res.data;
 }
 
-export async function SearchNotice(keyword) {
-  const res = await axios.get(HOST + '/notice/search?keyword=' + keyword);
+export async function SearchNotice(keyword, page = 0) {
+  let url = '/notice/search?keyword=' + keyword;
+  if (page !== 0) {
+    url += '&page=' + page;
+  }
+  const res = await axios.get(HOST + url);
   return res.data;
 }
 
