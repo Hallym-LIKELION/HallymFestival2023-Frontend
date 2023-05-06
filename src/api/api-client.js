@@ -273,10 +273,11 @@ export async function RemoveNotice(id) {
 // 방명록 API
 // =========================
 
-export async function CreateVisitComment(content, password) {
+export async function CreateVisitComment(content, password, color) {
   const data = {
     content,
-    password
+    password,
+    color
   };
   const res = await axios.post(HOST + '/visitcomment', data);
   return res.data;
