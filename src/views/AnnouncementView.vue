@@ -148,8 +148,7 @@ export default {
 
       const res = await RemoveNotice(id);
       if (res.result.includes('success')) {
-        alert('게시글이 삭제되었습니다.');
-        this.list = this.list.filter((item) => item.id != id);
+        this.$emit('reload');
       } else {
         alert('게시글을 삭제하는데 오류가 발생했습니다.\n' + res.result);
       }
