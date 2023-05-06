@@ -18,7 +18,7 @@
     </div>
     <div class ="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oprogram.png" alt=""/>
+        <img src="@/assets/overlay/Oprogram.png" alt="" width="70" height="40" />
         </div>
         <div class="title-text">
           프로그램
@@ -203,6 +203,7 @@ export default {
   font-weight: bold;
   border-radius: 26.25px;
   padding: 5px 15px;
+
 }
 .date{
   border: none;
@@ -214,6 +215,7 @@ export default {
   font-weight: bold;
   border-radius: 26.25px;
   padding: 5px 15px;
+
 }
 .close {
   cursor: pointer;
@@ -267,5 +269,6 @@ h1 {
 .program-list > *:last-child {
   font-family: 'Nanum Gothic', sans-serif;
   border-bottom: none;
+
 }
 </style>

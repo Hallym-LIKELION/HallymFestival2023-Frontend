@@ -2,7 +2,7 @@
   <main>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Otimetable.png" alt="" />
+        <img src="@/assets/overlay/Otimetable.png" alt="" width="70" height="30" />
       </div>
       <div class="title-text">타임 테이블</div>
     </div>

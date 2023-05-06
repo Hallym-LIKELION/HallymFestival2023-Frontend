@@ -9,8 +9,9 @@
     />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Onotice.png" alt="" />
+        <img src="@/assets/overlay/Onotice.png" alt="" width="70" height="40" />
       </div>
+      <br/>
       <div class="title-text">공지사항</div>
     </div>
     <div class="search-bar" ref="searchBar">

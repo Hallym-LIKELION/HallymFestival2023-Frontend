@@ -3,7 +3,7 @@
     <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/OGoods.png" alt="" />
+        <img src="@/assets/overlay/OGoods.png" alt="" width="70" height="40" />
       </div>
       <div class="title-text">굿즈</div>
     </div>
@@ -11,37 +11,41 @@
 
     <div class="goods-text">
       <br /><br />
-      <p>저희가 어떻게 어떻게 하기로 했습니다</p>
+      <p>2023 대동제 축제 굿즈입니다! </p>
       <br />
-      <p>많은 관심 바랍니다.</p>
+      <p>원활한 부스 진행을 위해 굿즈 사전 예약 판매를 진행하오니 </p>
+      <br />
+      <p>구매를 희망하시는 학우분들은 아래의 버튼으로 접속해주세요:)</p>
 
       <div class="first">
         <div class="dcard">
           <img src="@/assets/goods/그립톡.png" alt="" width="100" height="100" />
           <div class="inform">
-            <h7>그립톡</h7>
+            <h7>그립톡(덕림톡)</h7>
             <br />
-            <h4>10000원</h4>
+            <h4>학생회비 납부 : 4,000원<br/> 학생회비 미납 : 5,000원</h4>
           </div>
         </div>
 
         <div class="dcard">
-          <img src="@/assets/goods/소주잔.png" alt="" width="100" height="100" />
+          <img src="@/assets/goods/소주잔.png" alt="" width="100" height="80" />
           <div class="inform">
-            <h7>소주잔</h7>
+            <h7>취덕이 소주잔</h7>
             <br />
-            <h4>10000원</h4>
+            <h4>학생회비 납부 : 3,000원<br/> 학생회비 미납 :  4,000원</h4>
+            <p>글라스 소주잔/2EA 세트판매</p>
           </div>
         </div>
       </div>
 
       <div class="first">
       <div class="dcard">
-        <img src="@/assets/goods/맥주잔.png" alt="" width="100" height="100" />
+        <img src="@/assets/goods/맥주잔.png" alt="" width="100" height="80" />
         <div class="inform">
-          <h7>맥주잔</h7>
+          <h7>고백 맥주잔</h7>
           <br />
-          <h4>10000원</h4>
+          <h4>학생회비 납부 : 5,000원<br/> 학생회비 미납 :  6,000원</h4>
+          <p>글라스 맥주잔 380ml</p>
         </div>
       </div>
 
@@ -50,28 +54,47 @@
         <div class="inform">
           <h7>스티커</h7>
           <br />
-          <h4>10000원</h4>
+          <h4>학생회비 납부 : 2,000원<br/> 학생회비 미납 : 3,000원</h4>
         </div>
       </div>
     </div>
+
     <div class="first">
       <div class="dcard">
         <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
         <div class="inform">
           <h7>떡메모지</h7>
           <br />
-          <h4>10000원</h4>
+          <h4>1EA: 1,500원 <br/>SET: 4,000원</h4>
+        </div>
+      </div>
+
+      <div class="dcard">
+        <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
+        <div class="inform">
+          <h7>땀림이 손잡이 부채</h7>
+          <br />
+          <h4>무료</h4>
+          <p>하루 당 330개 총 1000개</p>
         </div>
       </div>
     </div>
       <button>
-        <div class="button"><b>구매하러가기</b></div>
+        <button @click="openform" class="button"><b>구매하러가기</b></button>
       </button>
     </div>
   </main>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    openform() {
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLScVG8DCqrh_KajzWoqSAFRHG84VF4L5FDE5oMoJvqxG7OPhwQ/viewform', '_blank');
+    }
+  }
+};
+</script>
 
 <style scoped>
 .first {
@@ -110,7 +133,7 @@ h1 {
   text-align: center;
 }
 p {
-  font-size: 15pt;
+  font-size: 10pt;
   text-align: center;
   color: black;
 }
@@ -136,8 +159,19 @@ h4 {
   left: 50%;
 }
 .inform {
-  font-size: 20px;
+  font-size: 16px;
   color: #ffffff;
+}
+.inform h7{
+  font-size: 18px;
+  margin: 10px auto;
+}
+.inform h4{
+  font-size: 12px;
+  margin: 6px auto;
+}
+.inform p{
+  font-size: 10px;
 }
 .button {
   width: 328px;
