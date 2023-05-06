@@ -99,7 +99,7 @@
         <hr />
         <div class="booth-menu">
           <template v-for="(item, index) in menuData" :key="index">
-            <div class="menu-group">
+            <div :class="['menu-group', { sold: item.sell }]">
               <p class="menu-title" v-text="item.name"></p>
               <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
             </div>
@@ -594,6 +594,12 @@ hr {
 .menu-group {
   display: flex;
   justify-content: space-between;
+}
+
+.menu-group.sold {
+  color: #ca434c;
+  font-style: italic;
+  text-decoration: line-through;
 }
 
 .menu-title {
