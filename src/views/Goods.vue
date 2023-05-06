@@ -153,6 +153,7 @@ h1{
 .goods-text {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 100px 100px 0px 0px;
+  text-size:1.0rem;
 
 }
 
