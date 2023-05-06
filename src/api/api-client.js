@@ -314,6 +314,13 @@ export async function ReportVisitComment(comment_id) {
 // 백오피스 API
 // =========================
 
+export async function GetVisitorCount() {
+  const res = await axios.get(HOST + '/visit-list', {
+    withCredentials: true
+  });
+  return res.data;
+}
+
 // =========================
 // 이미지 업로드 API
 // =========================

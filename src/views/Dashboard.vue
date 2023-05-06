@@ -8,7 +8,7 @@
     </div>
     <div class="totalvisitor">
       <h3>Today</h3>
-      <h1>86,972</h1>
+      <h1>{{ today.toLocaleString() }}</h1>
       <div class="chart">
         <Chart :options="chart"></Chart>
       </div>
@@ -24,6 +24,7 @@
 
 <script>
 import { Chart } from 'highcharts-vue';
+import { GetVisitorCount } from '../api/api-client';
 
 export default {
   components: {
@@ -32,6 +33,7 @@ export default {
 
   data() {
     return {
+      today: 0,
       chart: {
         chart: {
           backgroundColor: '#333333',
@@ -43,7 +45,7 @@ export default {
           enabled: false
         },
         xAxis: {
-          categories: Array.from(Array(11)).map((e, i) => i + 8),
+          categories: [],
           labels: {
             style: { fontSize: '9pt', color: '#ffffff' }
           }
@@ -57,7 +59,7 @@ export default {
         series: [
           {
             name: '방문자',
-            data: [15, 14, 13, 12, 17, 16, 20, 28, 35, 36, 32]
+            data: []
           }
         ]
       }
@@ -66,7 +68,26 @@ export default {
 
   props: {},
 
-  created() {}
+  async created() {
+    const data = await GetVisitorCount();
+
+    this.today = data[0].count;
+
+    data.forEach((item) => (item.visitDate = parseInt(item.visitDate.split('-').pop()) + '일'));
+
+    for (let i = 0; i < 4; i++) {
+      data.push({
+        visitDate: '-',
+        count: 0
+      });
+    }
+
+    this.chart.xAxis.categories = data
+      .reverse()
+      .slice(0, 10)
+      .map((item) => item.visitDate);
+    this.chart.series[0].data = data.slice(0, 10).map((item) => item.count);
+  }
 };
 </script>
 
