@@ -313,19 +313,18 @@ export default {
       // 딜레이 ON
       this.isLikeDelayed = true;
 
-      // 서버에 좋아요 보내고 결과 받기
-      const data = await PostBoothLike(this.id);
+      let data;
 
-      if (data.result === 'like create success') {
-        this.isLikedData = true;
-      } else if (data.result === 'like delete success') {
-        this.isLikedData = false;
-      } else {
-        alert('좋아요을 전송하는데 오류가 발생했습니다.\n' + data.result);
-        console.error(data);
+      // 서버에 좋아요 보내고 결과 받기
+      try {
+        data = await PostBoothLike(this.id);
+      } catch (e) {
+        alert('좋아요을 전송하는데 오류가 발생했습니다.\n' + e);
         this.isLikeDelayed = false;
         return;
       }
+
+      this.isLikedData = !this.isLikedData;
 
       // 표면적인 값 바꾸기
       if (this.isLikedData === true) {
@@ -336,10 +335,11 @@ export default {
 
       // 좋아요 눌렀는지를 idb에 저장
       const idb = await get('like-data');
+
       if (idb === undefined) {
         await set('like-data', [this.id]);
       } else {
-        if (!this.isLikedData) {
+        if (idb.includes(this.id)) {
           await set(
             'like-data',
             idb.filter((item) => item !== this.id)
@@ -429,6 +429,7 @@ export default {
         await set('like-data', []);
         data = [];
       }
+
       this.isLikedData = data.includes(this.id);
     } catch (e) {
       alert('알 수 없는 오류가 발생했습니다.');
