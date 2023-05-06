@@ -1,6 +1,6 @@
 <template>
   <main>
-    <br/><br/><br/><br/>
+    <br /><br /><br /><br />
     <NoticeModal
       :visible="showNoticeModal"
       :title="noticeModalData.title"
@@ -14,13 +14,15 @@
       </div>
       <div class="title-text">공지사항</div>
     </div>
-    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
+    <div class="search-bar" ref="searchBar">
+      <SearchBar v-model="search" @change="searchNotice" />
+    </div>
     <div class="announcement-list" ref="announcementList">
       <br /><br />
       <div class="button-group" ref="buttonGroup" v-if="role == 2">
         <button @click="clickCreate">글쓰기</button>
       </div>
-      <template v-for="item in displayList" :key="item.nno">
+      <template v-for="item in list" :key="item.nno">
         <FoldingArticle
           :id="item.nno"
           :title="item.title"
@@ -81,14 +83,6 @@ export default {
       totalItems: 1,
       itemsPerPage: 1
     };
-  },
-  computed: {
-    displayList() {
-      const search = this.search;
-      return this.list.filter(
-        (item) => search === '' || item.title.includes(search) || item.content.includes(search)
-      );
-    }
   },
   methods: {
     showAnnouncement(id) {
@@ -164,6 +158,14 @@ export default {
       this.noticeModalID = -1;
     },
 
+    async searchNotice() {
+      const data = await SearchNotice(this.search);
+
+      this.list = data.dtoList || [];
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size || 1;
+    },
+
     openNoticeModal() {
       this.showNoticeModal = true;
     },
@@ -173,8 +175,14 @@ export default {
     },
 
     async changePage(page) {
-      console.log(`페이지를 ${page} 페이지로 이동`);
-      const data = await GetNoticeList(page);
+      let data;
+
+      if (this.search !== '') {
+        data = await SearchNotice(this.search, page);
+      } else {
+        data = await GetNoticeList(page);
+      }
+
       this.list = data.dtoList || [];
       this.totalItems = data.total;
       this.itemsPerPage = data.size || 1;

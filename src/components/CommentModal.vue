@@ -114,7 +114,7 @@ export default {
       let data;
 
       try {
-        data = await CreateVisitComment(this.content, this.password);
+        data = await CreateVisitComment(this.content, this.password, this.color.toUpperCase());
       } catch (e) {
         alert('방명록 전송에 오류가 발생했습니다.\n' + e);
         return;

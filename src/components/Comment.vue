@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="'background-color: ' + color">
+  <div :class="['wrapper', { pink: color === 'PINK', yellow: color === 'YELLOW' }]">
     <div class="header">
       <img class="picture" :src="picture" v-if="picture !== ''" />
 
@@ -19,7 +19,7 @@
     ></p>
     <div class="read-more" v-if="eclipse && !expand" @click="viewMore">펼치기</div>
     <div class="footer" v-if="role == 2">
-      <p class="warn" v-text="warn"></p>
+      <p class="warn">신고 {{ warn }}회</p>
       <p class="time">{{ timeDisplay }}</p>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#D9D9D9'
+      default: 'gray'
     },
     booth: {
       type: String,
@@ -69,7 +69,7 @@ export default {
     },
     warn: {
       type: String,
-      default: '신고 0회'
+      default: '-'
     }
   },
   methods: {
@@ -116,6 +116,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-color: #d9d9d9;
+}
+
+.wrapper.yellow {
+  background-color: #fff4ce;
+}
+.wrapper.pink {
+  background-color: #fce3f3;
 }
 
 .header {
