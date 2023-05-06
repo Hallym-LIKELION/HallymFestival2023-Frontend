@@ -3,7 +3,7 @@
     <br/><br/><br/><br/>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oaboutus.png" alt="" />
+        <img src="@/assets/overlay/Oaboutus.png" alt="" width="70" height="40" />
       </div>
       <div class="title-text">만든이들</div>
     </div>
