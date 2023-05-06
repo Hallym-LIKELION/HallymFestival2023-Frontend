@@ -16,6 +16,7 @@ import pen from '../assets/icon/pen.svg';
 import check from '../assets/icon/check.svg';
 import undo from '../assets/icon/undo.svg';
 import close from '../assets/icon/close.svg';
+import report from '../assets/icon/report.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -34,5 +35,6 @@ export const Icon = {
   pen,
   check,
   undo,
-  close
+  close,
+  report
 };

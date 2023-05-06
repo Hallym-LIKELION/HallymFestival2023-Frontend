@@ -16,9 +16,15 @@
     <div class="search-bar"><SearchBar v-model="search" /></div>
 
     <div class="button-group">
-      <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">화요일</button>
-      <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">수요일</button>
-      <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
+      <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
+        {{ admin === 2 ? '댓글순' : '화요일' }}
+      </button>
+      <button @click="() => selectType(2)" :class="{ selected: day === 2 }">
+        {{ admin === 2 ? '좋아요순' : '수요일' }}
+      </button>
+      <button @click="() => selectType(3)" :class="{ selected: day === 3 }">
+        {{ admin === 2 ? '신고순' : '목요일' }}
+      </button>
     </div>
 
     <div class="booth-list">
@@ -32,6 +38,8 @@
           :date="item.regDate"
           :like="item.like_cnt"
           :comment="item.comment_cnt"
+          :report="item.report_cnt"
+          :mode="day"
           :isAdmin="admin"
         />
       </template>
@@ -47,7 +55,14 @@ import BoothCarousel from '../components/BoothCarousel.vue';
 import SwitchButton from '../components/SwitchButton.vue';
 import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
-import { GetAuthority, GetBoothList, CreateBooth } from '../api/api-client';
+import {
+  GetAuthority,
+  GetBoothList,
+  CreateBooth,
+  GetBoothListWithComment,
+  GetBoothListWithLike,
+  GetBoothListWithReport
+} from '../api/api-client';
 
 export default {
   components: {
@@ -62,7 +77,7 @@ export default {
     return {
       list: [],
       search: '',
-      day: 0,
+      day: GetAuthority() === 2 ? 1 : 0,
 
       admin: GetAuthority(),
 
@@ -92,20 +107,38 @@ export default {
     showBooth(id) {
       this.$router.push('/booth/' + id);
     },
+    selectType(value) {
+      if (this.admin === 2) {
+        this.day = value;
+        this.selectSort(value);
+      } else {
+        this.selectDay(value);
+      }
+      this.slide = value - 1;
+    },
     selectDay(day) {
       if (this.day === day) {
         this.day = 0;
       } else {
-        if (!this.admin) {
-          this.slide = day - 1;
-        }
         this.day = day;
+      }
+    },
+    async selectSort(value) {
+      if (value == 1) {
+        this.applyData(await GetBoothListWithComment(1));
+      } else if (value == 2) {
+        this.applyData(await GetBoothListWithLike(1));
+      } else if (value == 3) {
+        this.applyData(await GetBoothListWithReport(1));
+      } else {
+        this.applyData(await GetBoothListWithComment(1));
       }
     },
     switchDayNight(isDay) {
       if (isDay) {
         this.slide = 0;
       } else {
+        this.selectType(this.day);
         this.slide = 3;
       }
     },
@@ -115,7 +148,10 @@ export default {
     },
 
     async changePage(page) {
-      const data = await GetBoothList(page);
+      this.applyData(await GetBoothList(page));
+    },
+
+    applyData(data) {
       this.list = data.dtoList;
       this.totalItems = data.total;
       this.itemsPerPage = data.size;
@@ -124,7 +160,15 @@ export default {
 
   async created() {
     // 데이터 가져오기
-    const data = await GetBoothList();
+
+    let data;
+
+    if (this.admin === 2) {
+      data = await GetBoothListWithComment();
+    } else {
+      data = await GetBoothList();
+    }
+
     this.list = data.dtoList;
     this.totalItems = data.total;
     this.itemsPerPage = data.size;
