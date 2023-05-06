@@ -20,13 +20,15 @@
     <div class="table">
       <template v-for="item in filltered_list">
         <div class="table-col-1">
-          <div class="schedule-pin"></div>
+          <div class="schedule-pin"><img src="@/assets/ttletter.png" alt=""/> </div>
           <div class="schedule-line" v-if="!item.hideLine"></div>
         </div>
         <div class="table-col-2">
           <div class="schedule-time" v-text="item.time"></div>
-          <div class="schedule-text" v-text="item.content.join('\n')"></div>
-          <div class="schedule-space" v-text="item.space"></div>
+
+          <div class="schedule-text" v-text="item.content.join('\n')" ></div>
+     
+          <div class="schedule-space" v-text="item.space">  </div>
         </div>
       </template>
     </div>
@@ -39,34 +41,70 @@ export default {
     return {
       list: [
         {
-          time: '09:00 ~ 10:00',
-          content: ['테스트 11', '테스트 22'],
-          space: '한림대 운동장',
-          day: [2, 3]
+          time: '13:10 ~ 16:40',
+          content: ['동아리 공연 리허설'],
+          space: '🚩 한림대 운동장',
+          day: [1]
         },
         {
-          time: '11:00 ~ 12:00',
-          content: ['테스트 AAA', '테스트 B'],
-          space: '한림대 운동장',
-          day: [1, 3]
+          time: '16:55 ~ 20:55',
+          content: ['동아리 공연'],
+          space: '🚩 한림대 운동장',
+          day: [1]
         },
         {
-          time: '13:00 ~ 14:00',
-          content: ['테스트 CC', '테스트 DD'],
-          space: '한림대 운동장',
+          time: '21:00 ~ 21:30',
+          content: ['선포식'],
+          space: '🚩 한림대 운동장',
+          day: [1]
+        },
+        {
+          time: '15:00 ~ 16:30',
+          content: ['가요제 리허설'],
+          space: '🚩 한림대 운동장',
           day: [2]
         },
         {
-          time: '14:00 ~ 15:00',
-          content: ['테스트 33', '테스트 4'],
-          space: '한림대 운동장',
-          day: [1, 2, 3]
+          time: '16:30 ~ 18:00',
+          content: ['천하제일 뻥쟁이 대회'],
+          space: '🚩 한림대 운동장',
+          day: [2]
         },
         {
-          time: '16:00 ~ 17:00',
-          content: ['테스트 EE', '테스트 FF', '테스트 GG', '테스트 HH'],
-          space: '한림대 운동장',
-          day: [1, 3]
+          time: '18:00 ~ 20:00',
+          content: ['가요제'],
+          space: '🚩 한림대 운동장',
+          day: [2]
+        },
+        {
+          time: '20:00 ~ ',
+          content: ['연예인 공연'],
+          space: '🚩 한림대 운동장',
+          day: [2]
+        },
+        {
+          time: '15:00 ~ 17:00',
+          content: ['댄스 경연대회 리허설'],
+          space: '🚩 한림대 운동장',
+          day: [3]
+        },
+        {
+          time: '17:00 ~ 19:00',
+          content: ['멍 때리기 대회'],
+          space: '🚩 한림대 운동장',
+          day: [3]
+        },
+        {
+          time: '19:00 ~ 20:50',
+          content: ['댄스 경연 대회'],
+          space: '🚩 한림대 운동장',
+          day: [3]
+        },
+        {
+          time: '21:00 ~ ',
+          content: ['연예인 공연'],
+          space: '🚩 한림대 운동장',
+          day: [3]
         }
       ],
       day: 0
@@ -117,7 +155,7 @@ export default {
   left:50%;
   width:50%;
   transform: translate(-50%,-50%);
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumGothicOTF';
   text-align: center;
   font-style: normal;
   font-weight: 550;
@@ -180,19 +218,16 @@ h1 {
   position: absolute;
 
   margin-top: 20px;
-  border-radius: 12px;
 
-  background-color: #CA434C; /* 중심 흰색원 */
-  border: 6px solid #CA434C; /* 파란색 원 */
 }
 
 .schedule-line {
   width: 3px;
   height: calc(100% + 16px);
-  margin-top: 16px;
-  margin-bottom: -16px;
+  margin-top: 23px;
+  margin-bottom: -18px;
 
-  background-color: #FFFFFF;
+  background-color: #AAAAAA;
 }
 
 .table-col-1 {
@@ -204,8 +239,9 @@ h1 {
 .table-col-2 {
   margin: 12px 0;
   padding: 8px 8px;
-  font-size: 11pt;
-  width: 260px;
+  font-size: 10pt;
+  width: 260px 100%;
+  height: auto;
   border-radius: 4px;
 
   display: flex;
@@ -217,8 +253,25 @@ h1 {
   color: #333333;
   background-color:rgba(255, 255, 255, 0.6);
 }
+.schedule-time{
+  font-family:  'Nanum Gothic';
+  font-weight: bold;
+  font-size: 1.0rem;
+  word-break:break-all;
+
+}
 
 .schedule-text {
+  font-family:  'Nanum Gothic';
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-left: 12px;
+  word-break:break-all;
+}
+.schedule-space{
+  font-family: 'Nanum Gothic';
+  font-weight: bold;
+  font-size: 0.8rem;
   margin-left: 12px;
 }
 </style>

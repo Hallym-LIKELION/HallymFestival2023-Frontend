@@ -161,11 +161,11 @@ export default {
 }
 .title-text{
   position: absolute;
+  font-family:  'Nanum Gothic';
   top:40%;
   left:50%;
   width:50%;
   transform: translate(-50%,-50%);
-  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
   font-style: normal;
   font-weight: 550;
@@ -188,8 +188,7 @@ export default {
   text-align: center;
   width: 90%;
   margin: 80px auto;
-  background: #363636;
-  opacity: 0.7;
+  background: #ffffff;
   border-radius: 5px;
   padding: 20px 0;
 }
@@ -230,6 +229,7 @@ export default {
   transform: scale(1.1);
   transition: all 0.5s;
 }
+
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -243,6 +243,7 @@ h1 {
 }
 
 .program-list {
+  font-family: 'Nanum Gothic', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -253,6 +254,7 @@ h1 {
 }
 
 .program-list > * {
+  font-family: 'Nanum Gothic', sans-serif;
   max-width: 400px;
   margin-top: 12px;
   padding: 12px 0;
@@ -262,6 +264,7 @@ h1 {
 }
 
 .program-list > *:last-child {
+  font-family: 'Nanum Gothic', sans-serif;
   border-bottom: none;
 }
 </style>
