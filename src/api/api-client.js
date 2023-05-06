@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HOST = 'https://dev-api.prisism.io';
+const HOST = 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
@@ -211,6 +211,11 @@ export async function ModifyBoothMenu(menu_id, name, price) {
     price
   };
   const res = await axios.put(HOST + '/menu/' + menu_id, data);
+  return res.data;
+}
+
+export async function SoldBoothMenu(menu_id) {
+  const res = await axios.put(HOST + '/menu/sell/' + menu_id);
   return res.data;
 }
 

@@ -12,8 +12,8 @@
       <p class="item-label">가격</p>
       <p class="item-label">품절</p>
 
-      <template v-for="item in displayItems" :key="item.id">
-        <button class="item-remove" @click="() => deleteItem(item.id)">
+      <template v-for="item in displayItems" :key="item.mno">
+        <button class="item-remove" @click="() => deleteItem(item.mno)">
           <img class="close-image" :src="item._deleted ? Icon.undo : CloseImage" alt="닫기" />
         </button>
         <input class="item-name" :disabled="item._deleted" type="text" v-model="item.name" />
@@ -29,10 +29,11 @@
           <input
             class="item-soldout"
             type="checkbox"
+            v-model="item.sell"
             :disabled="item._deleted"
-            :id="'check_' + item.id"
+            :id="'check_' + item.mno"
           />
-          <label :for="'check_' + item.id"></label>
+          <label :for="'check_' + item.mno"></label>
         </div>
 
         <!-- v-model="item.isSoldout"  -->
@@ -63,7 +64,12 @@ import { gsap, Elastic } from 'gsap';
 import Modal from '../Modal.vue';
 import Pagination from '../Pagination.vue';
 import CloseImage from '../../assets/close.png';
-import { CreateBoothMenu, ModifyBoothMenu, DeleteBoothMenu } from '../../api/api-client';
+import {
+  CreateBoothMenu,
+  ModifyBoothMenu,
+  DeleteBoothMenu,
+  SoldBoothMenu
+} from '../../api/api-client';
 
 let id = -1;
 
@@ -106,8 +112,6 @@ export default {
     close() {
       if (JSON.stringify(this.data) !== JSON.stringify(this.items)) {
         if (confirm('저장되지 않은 내용이 있습니다. 정말 닫으시겠어요?') === false) {
-          // TODO: choose를 modal로 빼거나 다른 방법을 찾아볼 것
-          // 아니면 기획팀과 협의 후 그냥 안 물어보고 끄도록 할 것
           return;
         }
       }
@@ -135,7 +139,7 @@ export default {
         return;
       }
       this.items.push({
-        id: id--,
+        mno: id--,
         name: '',
         price: 1000,
         _created: true
@@ -143,9 +147,9 @@ export default {
       this.page = parseInt((this.items.length - 1) / this.itemsPerPage) + 1;
     },
     deleteItem(id) {
-      const item = this.items.filter((item) => item.id === id)[0];
+      const item = this.items.filter((item) => item.mno === id)[0];
       if (item._created) {
-        this.items = this.items.filter((item) => item.id !== id);
+        this.items = this.items.filter((item) => item.mno !== id);
       } else {
         item._deleted = !item._deleted;
       }
@@ -209,7 +213,7 @@ export default {
         if (item._created || item._deleted) {
           return false;
         }
-        const original = this.data.filter((oItem) => item.id === oItem.id)[0];
+        const original = this.data.filter((oItem) => item.mno === oItem.mno)[0];
 
         if (!original) {
           return false;
@@ -220,15 +224,35 @@ export default {
       console.log('Modified', modifiedList);
 
       for (const item of modifiedList) {
-        promiseList.push(ModifyBoothMenu(item.id, item.name, item.price));
+        promiseList.push(ModifyBoothMenu(item.mno, item.name, item.price));
+      }
+
+      // Modify -- Soldout Operation
+      const modifiedSoldoutList = this.items.filter((item) => {
+        if (item._created || item._deleted) {
+          return false;
+        }
+
+        const original = this.data.filter((oItem) => item.mno === oItem.mno)[0];
+
+        if (!original) {
+          return false;
+        }
+
+        return original.sell !== item.sell;
+      });
+      console.log('Modified2', modifiedSoldoutList);
+
+      for (const item of modifiedSoldoutList) {
+        promiseList.push(SoldBoothMenu(item.mno));
       }
 
       // Delete Operation
-      const deletedList = this.items.filter((item) => item.id && item._deleted);
+      const deletedList = this.items.filter((item) => item.mno && item._deleted);
       console.log('Deleted', deletedList);
 
       for (const item of deletedList) {
-        promiseList.push(DeleteBoothMenu(item.id));
+        promiseList.push(DeleteBoothMenu(item.mno));
       }
 
       try {
