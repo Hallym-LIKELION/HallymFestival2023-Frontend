@@ -118,6 +118,7 @@
           @reload="reload"
         />
       </div>
+
     </div>
   </main>
 </template>
@@ -601,5 +602,9 @@ hr {
 .menu-price {
   text-align: right;
   font-size: 13pt;
+}
+.bg{
+  background-color: #FBFBFB;
+  opacity: 0.9;
 }
 </style>
