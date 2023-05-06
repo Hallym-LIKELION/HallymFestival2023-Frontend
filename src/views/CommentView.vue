@@ -28,7 +28,7 @@
 
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oletter.png" alt="" />
+        <img src="@/assets/overlay/Oletter.png" alt="" width="70" height="40" />
       </div>
       <div class="title-text">방명록</div>
     </div>

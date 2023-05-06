@@ -3,7 +3,7 @@
     <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/OGoods.png" alt="" />
+        <img src="@/assets/overlay/OGoods.png" alt="" width="70" height="40" />
       </div>
       <div class="title-text">굿즈</div>
     </div>
