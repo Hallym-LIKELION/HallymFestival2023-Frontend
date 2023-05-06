@@ -25,6 +25,8 @@
           :id="item.cno"
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
+          :time="item.regDate"
+          :warn="item.report_cnt"
           @clickMenu="toggleMenu"
           color="#f1f1f1"
         />

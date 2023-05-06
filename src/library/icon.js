@@ -17,6 +17,7 @@ import check from '../assets/icon/check.svg';
 import undo from '../assets/icon/undo.svg';
 import close from '../assets/icon/close.svg';
 import report from '../assets/icon/report.svg';
+import space from '../assets/icon/space.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -36,5 +37,6 @@ export const Icon = {
   check,
   undo,
   close,
-  report
+  report,
+  space
 };

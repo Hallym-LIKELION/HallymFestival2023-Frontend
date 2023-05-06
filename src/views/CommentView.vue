@@ -39,6 +39,8 @@
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
           :color="item.color ?? 'YELLOW'"
+          :time="item.regDate"
+          :warn="item.report_cnt"
           @clickMenu="toggleMenu"
         />
       </template>
