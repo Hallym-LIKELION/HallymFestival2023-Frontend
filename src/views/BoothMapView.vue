@@ -29,8 +29,8 @@
           :type="item.booth_type"
           :writer="item.writer"
           :date="item.regDate"
-          :like="randomNumber(10, 16000)"
-          :comment="randomNumber(10, 16000)"
+          :like="item.like_cnt"
+          :comment="item.comment_cnt"
           :isAdmin="admin"
         />
       </template>
