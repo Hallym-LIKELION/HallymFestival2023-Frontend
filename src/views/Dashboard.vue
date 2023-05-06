@@ -15,9 +15,9 @@
     </div>
     <div class="ownermenu" ref="ownermenu">
       <RouterLink to="/announcement">공지사항</RouterLink>
-      <RouterLink to="/boothmap">부스 현황 분석</RouterLink>
-      <RouterLink to="/admin/comment">신고 댓글 분석</RouterLink>
-      <RouterLink to="/admin/boothcomment">신고 방명록 분석</RouterLink>
+      <RouterLink to="/boothmap">부스 목록</RouterLink>
+      <RouterLink to="/admin/comment">신고받은 댓글 목록</RouterLink>
+      <RouterLink to="/admin/visitcomment">신고받은 방명록 목록</RouterLink>
     </div>
   </main>
 </template>
