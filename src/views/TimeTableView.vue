@@ -108,7 +108,7 @@ export default {
           day: [3]
         }
       ],
-      day: 0
+      day: 1
     };
   },
   computed: {
@@ -130,11 +130,7 @@ export default {
   },
   methods: {
     selectDay(day) {
-      if (this.day === day) {
-        this.day = 0;
-      } else {
-        this.day = day;
-      }
+      this.day = day;
     }
   }
 };
@@ -246,6 +242,8 @@ h1 {
   border-radius: 4px;
 
   display: flex;
+
+  flex-direction: column;
 
   overflow: hidden;
   text-overflow: ellipsis;

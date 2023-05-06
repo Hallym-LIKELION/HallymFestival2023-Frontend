@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/>
     <div class="introment">
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
