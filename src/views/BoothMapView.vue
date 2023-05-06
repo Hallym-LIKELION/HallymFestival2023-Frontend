@@ -1,6 +1,6 @@
 <template>
   <main>
-    <br/><br/><br/><br/>
+    <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Obooth.png" alt="" />
@@ -10,7 +10,7 @@
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin" />
-      <SwitchButton v-if="!admin" @change="switchDayNight" />
+      <SwitchButton v-if="!admin" :status="day" @change="switchDayNight" />
     </div>
 
     <div class="search-bar"><SearchBar v-model="search" /></div>
@@ -77,7 +77,7 @@ export default {
     return {
       list: [],
       search: '',
-      day: GetAuthority() === 2 ? 1 : 0,
+      day: 1,
 
       admin: GetAuthority(),
 
@@ -117,11 +117,7 @@ export default {
       this.slide = value - 1;
     },
     selectDay(day) {
-      if (this.day === day) {
-        this.day = 0;
-      } else {
-        this.day = day;
-      }
+      this.day = day;
     },
     async selectSort(value) {
       if (value == 1) {
@@ -138,7 +134,7 @@ export default {
       if (isDay) {
         this.slide = 0;
       } else {
-        this.selectType(this.day);
+        this.day = 0;
         this.slide = 3;
       }
     },
