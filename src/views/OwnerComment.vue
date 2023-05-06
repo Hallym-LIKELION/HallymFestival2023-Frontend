@@ -1,13 +1,5 @@
 <template>
   <main>
-    <div class="intro">
-      <h1>신고 받은 방명록</h1>
-      <br /><br />
-      <p>지금까지 신고된 들어온 방명록 목록</p>
-    </div>
-
-    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
-
     <CommentContextMenu
       :show="showContextMenu"
       :x="contextMenuX"
@@ -17,22 +9,29 @@
       @clickOutside="closeMenu"
     />
 
+    <div class="intro">
+      <h1>신고받은 방명록</h1>
+    </div>
+
+    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
+
     <div class="button-group">
-      <button @click="() => selectFilter(1)" :class="{ selected: fil === 1 }">최신순</button>
-      <button @click="() => selectFilter(2)" :class="{ selected: fil === 2 }">신고순</button>
+      <button @click="() => selectFilter(1)" :class="{ selected: sort === 1 }">최신순</button>
+      <button @click="() => selectFilter(2)" :class="{ selected: sort === 2 }">신고순</button>
     </div>
 
     <div class="comment-list">
       <template v-for="(item, index) in list">
         <Comment
-          :id="item.id"
-          :name="item.name"
-          :comment="item.comment"
-          :time="item.time"
-          :warn="item.warn"
+          :id="item.vno"
+          :name="GetRandomNickName(item.ip)"
+          :comment="item.content"
+          :time="item.regDate"
+          :warn="item.report_cnt"
           @clickMenu="toggleMenu"
         />
       </template>
+      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
   </main>
 </template>
@@ -40,46 +39,35 @@
 import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
+import Pagination from '../components/Pagination.vue';
+import { GetVisitCommentListWithReport } from '../api/api-client';
+import { GetRandomNickName } from '../library/name-generator';
 
 export default {
   components: {
     SearchBar,
     Comment,
-    CommentContextMenu
+    CommentContextMenu,
+    Pagination
   },
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          name: '집가고싶은 사자',
-          comment: '그냥 집에 가고 싶어요...',
-          time: '2023-04-08 18:20',
-          warn: '신고 3회'
-        },
-        {
-          id: 2,
-          name: '밥먹는 사자',
-          comment: '그냥 밥먹고 싶은데요...',
-          time: '2023-04-08 18:20',
-          warn: '신고 3회'
-        }
-    ],
-    context: -1,
-    showContextMenu: false,
-    contextMenuTargetID: -1,
-    contextMenuX: 0,
-    contextMenuY: 0
+      list: [],
+
+      sort: 1,
+
+      showContextMenu: false,
+      contextMenuTargetID: -1,
+      contextMenuX: 0,
+      contextMenuY: 0,
+
+      totalItems: 1,
+      itemsPerPage: 1
     };
-    
   },
   methods: {
-    selectFilter(fil) {
-      if (this.fil === fil) {
-        this.fil = 0;
-      } else {
-        this.fil = fil;
-      }
+    selectFilter(value) {
+      this.sort = value;
     },
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
@@ -95,7 +83,24 @@ export default {
     closeMenu() {
       this.contextMenuTargetID = -1;
       this.showContextMenu = false;
-    }
+    },
+
+    async changePage(page) {
+      console.log(`페이지를 ${page} 페이지로 이동`);
+      const data = await GetVisitCommentListWithReport(page);
+
+      this.list = data.dtoList;
+      this.totalItems = data.total;
+      this.itemsPerPage = data.size;
+    },
+    GetRandomNickName
+  },
+  async created() {
+    const data = await GetVisitCommentListWithReport();
+
+    this.list = data.dtoList;
+    this.totalItems = data.total;
+    this.itemsPerPage = data.size;
   }
 };
 </script>
@@ -129,11 +134,14 @@ export default {
   padding: 6px 16px;
   border: none;
   border-radius: 24px;
-  background-color: #ca434c;
   font-size: 13pt;
   color: #f8f9fd;
   font-family: 'Nanum Gothic', sans-serif;
   transition: background-color 0.25s, color 0.25s;
+}
+
+.button-group > button.selected {
+  background-color: #ca434c;
 }
 
 .comment {

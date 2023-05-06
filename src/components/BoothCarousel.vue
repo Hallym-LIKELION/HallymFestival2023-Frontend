@@ -19,15 +19,13 @@
 import { Chart } from 'highcharts-vue';
 import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import Image from '../components/Image.vue';
+import {
+  GetBoothListWithComment,
+  GetBoothListWithLike,
+  GetBoothListWithReport
+} from '../api/api-client';
 
-function CreateChart(title, item) {
-  let series = [];
-  let sum = 800;
-  for (let i = 0; i < 5; i++) {
-    sum += Math.floor(Math.random() * 300);
-    series.push(sum);
-  }
-  series.reverse();
+function CreateChart(title, item, list) {
   return JSON.parse(
     JSON.stringify({
       chart: {
@@ -45,14 +43,13 @@ function CreateChart(title, item) {
         enabled: false
       },
       xAxis: {
-        categories: ['항목이', '가장', '많은 부스', 'TOP 5', '아무거나 긴 부스명'],
+        categories: list.map((item) => item[0]),
         labels: {
           style: { color: '#ffffff' }
         }
       },
       yAxis: {
         visible: false,
-        min: 0,
         title: {
           text: item,
           align: 'high'
@@ -86,7 +83,7 @@ function CreateChart(title, item) {
       },
       series: [
         {
-          data: series
+          data: list.map((item) => item[1])
         }
       ]
     })
@@ -106,11 +103,7 @@ export default {
     return {
       _slide: 0,
 
-      charts: [
-        CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요'),
-        CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글'),
-        CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글')
-      ],
+      charts: [],
 
       image: [
         'https://placehold.co/500x400/aa2222/FFFFFF/png?text=Tuesday',
@@ -142,7 +135,25 @@ export default {
     }
   },
 
-  created() {}
+  async created() {
+    const commentList = (await GetBoothListWithComment()).dtoList;
+    const likeList = (await GetBoothListWithLike()).dtoList;
+    const reportList = (await GetBoothListWithReport()).dtoList;
+
+    let data;
+
+    data = commentList.map((item) => [item.booth_title, item.comment_cnt]);
+
+    this.charts.push(CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요', data));
+
+    data = likeList.map((item) => [item.booth_title, item.like_cnt]);
+
+    this.charts.push(CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글', data));
+
+    data = reportList.map((item) => [item.booth_title, item.report_cnt]);
+
+    this.charts.push(CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글', data));
+  }
 };
 </script>
 <style scoped>
