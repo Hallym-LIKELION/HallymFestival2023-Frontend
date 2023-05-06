@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <div class="black-bg" v-if="openModal == true" @click="close($event)">
       <div class="white-bg">
         <img :src="detail_program[0].image" class="detail_program" />

@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <div class ="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/OGoods.png" alt=""/>
@@ -153,6 +154,7 @@ h1{
 .goods-text {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 100px 100px 0px 0px;
+  text-size:1.0rem;
 
 }
 

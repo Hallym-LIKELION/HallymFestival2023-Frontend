@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <BoothEditModal
       :visible="editModal"
       :data="editData"

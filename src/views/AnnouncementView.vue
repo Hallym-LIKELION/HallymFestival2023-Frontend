@@ -1,5 +1,6 @@
 <template>
   <main>
+    <br/><br/><br/><br/>
     <NoticeModal
       :visible="showNoticeModal"
       :title="noticeModalData.title"
