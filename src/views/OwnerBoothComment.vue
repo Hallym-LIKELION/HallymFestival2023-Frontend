@@ -13,12 +13,12 @@
       <h1>신고받은 댓글</h1>
     </div>
 
-    <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
+    <!-- <div class="search-bar" ref="searchBar"><SearchBar v-model="search" /></div>
 
     <div class="button-group">
       <button @click="() => selectFilter(1)" :class="{ selected: sort === 1 }">최신순</button>
       <button @click="() => selectFilter(2)" :class="{ selected: sort === 2 }">누적순</button>
-    </div>
+    </div> -->
 
     <div class="comment-list">
       <template v-for="(item, index) in list">
@@ -37,7 +37,7 @@
   </main>
 </template>
 <script>
-import SearchBar from '../components/SearchBar.vue';
+// import SearchBar from '../components/SearchBar.vue';
 import Comment from '../components/Comment.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Pagination from '../components/Pagination.vue';
@@ -46,7 +46,7 @@ import { GetRandomNickName } from '../library/name-generator';
 
 export default {
   components: {
-    SearchBar,
+    // SearchBar,
     Comment,
     CommentContextMenu,
     Pagination
@@ -55,7 +55,7 @@ export default {
     return {
       list: [],
 
-      sort: 1,
+      // sort: 1,
 
       showContextMenu: false,
       contextMenuTargetID: -1,
@@ -67,9 +67,9 @@ export default {
     };
   },
   methods: {
-    selectFilter(value) {
-      this.sort = value;
-    },
+    // selectFilter(value) {
+    //   this.sort = value;
+    // },
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
         this.contextMenuTargetID = -1;
