@@ -1,6 +1,5 @@
 <template>
   <main>
-    <br /><br /><br /><br />
     <NoticeModal
       :visible="showNoticeModal"
       :title="noticeModalData.title"
@@ -17,22 +16,24 @@
     <div class="search-bar" ref="searchBar">
       <SearchBar v-model="search" @change="searchNotice" />
     </div>
-    <div class="announcement-list" ref="announcementList">
-      <br /><br />
+    <div class="content" ref="announcementList">
       <div class="button-group" ref="buttonGroup" v-if="role == 2">
         <button @click="clickCreate">글쓰기</button>
       </div>
-      <template v-for="item in list" :key="item.nno">
-        <FoldingArticle
-          :id="item.nno"
-          :title="item.title"
-          :content="item.content"
-          :showContent="item.nno === showingContent"
-          @click="() => showAnnouncement(item.nno)"
-          @clickEdit="clickEdit"
-          @clickDelete="clickDelete"
-        />
-      </template>
+      <div class="announcement-list">
+        <template v-for="item in list" :key="item.nno">
+          <FoldingArticle
+            :id="item.nno"
+            :title="item.title"
+            :content="item.content"
+            :showContent="item.nno === showingContent"
+            @click="() => showAnnouncement(item.nno)"
+            @clickEdit="clickEdit"
+            @clickDelete="clickDelete"
+          />
+        </template>
+      </div>
+
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
     </div>
   </main>
@@ -306,14 +307,19 @@ h1 {
   justify-content: center;
 }
 
-.announcement-list {
+.content {
+  margin: 0 -28px;
+  padding: 0 24px;
   font-family: 'Nanum Gothic', sans-serif;
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.announcement-list {
   display: flex;
-  border-radius: 5px;
   flex-direction: column;
+  justify-content: center;
+
   align-items: center;
-  margin: 0 10px;
 }
 
 .announcement-list > * {
@@ -324,6 +330,14 @@ h1 {
 
 .announcement-list > *:last-child {
   border-bottom: 1px solid #00000052;
+}
+
+:deep(.paginate-buttons) {
+  color: #444444;
+}
+
+:deep(.paginate-buttons.active-page) {
+  color: white;
 }
 
 .button-group {

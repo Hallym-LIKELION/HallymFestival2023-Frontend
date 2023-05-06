@@ -13,7 +13,7 @@
       <SwitchButton v-if="!admin" :status="day" @change="switchDayNight" />
     </div>
 
-    <div class="search-bar"><SearchBar v-model="search" /></div>
+    <div class="search-bar" v-if="!admin"><SearchBar v-model="search" /></div>
 
     <div class="button-group">
       <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
