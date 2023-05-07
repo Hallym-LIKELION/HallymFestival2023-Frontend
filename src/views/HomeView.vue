@@ -160,6 +160,9 @@ export default {
   text-align: center;
   color: white;
 }
+.sponsor img{
+  width: 50%
+}
 p {
   text-align: center;
   color: white;

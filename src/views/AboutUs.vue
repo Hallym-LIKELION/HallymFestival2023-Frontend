@@ -409,11 +409,12 @@ p {
   left: 87px;
 }
 .introduce {
+  font-family: 'Nanum Gothic';
   text-align: center;
   font-style: normal;
   font-weight: 550;
   font-size: 20px;
-  line-height: 13px;
+  line-height: 15px;
   letter-spacing: 0.2em;
   float: center;
   width: 45%;
