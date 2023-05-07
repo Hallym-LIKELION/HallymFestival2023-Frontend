@@ -8,17 +8,23 @@
     </div>
     <div class="wrapper">
       <div class="header">
-        <p>한림대학교 멋쟁이사자처럼 Builder Team</p>
-        <p class="collab">X</p>
-        <p>2023 한림대학교 축제준비위원회</p>
+        <p><b>한림대학교 멋쟁이사자처럼<br/> Builder Team</b></p><br/> 
+        <p class="collab"><b>X</b></p><br/> 
+        <p><b>2023 한림대학교<br/>축제준비위원회</b></p>
       </div>
       <div class="phrase">
         <p v-for="item in phrase">{{ item }}</p>
       </div>
       <div class="dev">
-        <p class="title">Developer</p>
+        <p class="title"><b>💻 Developer</b></p>
         <template v-for="item in devTeam">
-          <p class="team">{{ item.name }}</p>
+          <p class="team"> 
+            <Image
+                  :src="item.image"
+                  alt=""
+                  v-if="item.image"
+                />
+                {{item.name }}</p>
           <div class="list" v-for="list in item.list">
             <template v-for="person in list">
               <div :class="['card', { hidden: person.empty }]">
@@ -64,7 +70,8 @@
 
 <script>
 import Image from '../components/Image.vue';
-
+import Vuelogo from '@/assets/vuelogo.png';
+import Springlogo from '@/assets/springbootlogo.png';
 import SoHyunImage from '@/assets/developer/osohyun.png';
 import KyungJaeImage from '@/assets/developer/kimkyungjae.png';
 import DongHeongImage from '@/assets/developer/leedongheon.png';
@@ -77,12 +84,18 @@ export default {
   data() {
     return {
       phrase: [
-        '2023년도 한림대학교 대동제를 위하여 한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고 학우분들의 편의를 위하여 한림대 멋쟁이사자처럼 빌더팀이 축제 웹사이트를 개발하였습니다.',
-        '이번 2023 한림대학교 대동제가 여느때보다 즐겁고 행복한 축제가 되시기를 진심으로 소망합니다. 학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!'
+        '2023년도 한림대학교 대동제를 위하여 ',
+        '한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고 ',
+        '학우분들의 편의를 위하여 멋쟁이사자처럼 <프로젝트 빌더팀>이',
+        '축제 웹사이트를 개발하였습니다.',
+        '이번 2023 한림대학교 대동제가 ',
+        '여느때보다 즐겁고 행복한 축제가 되시기를 진심으로 소망합니다.',
+        '학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!'
       ],
       devTeam: [
         {
-          name: 'Frontend',
+          image: Vuelogo,
+          name: 'Front-End TEAM',
           list: [
             [
               {
@@ -101,7 +114,8 @@ export default {
           ]
         },
         {
-          name: 'Backend',
+          image: Springlogo,
+          name: 'Back-End TEAM',
           list: [
             [
               {
@@ -129,7 +143,7 @@ export default {
           ]
         },
         {
-          name: 'PM / Design',
+          name: '🎨 PM / Design',
           list: [
             [
               {
@@ -259,11 +273,11 @@ export default {
 }
 
 .phrase {
-  padding: 12px 0;
+  padding: 5px 0;
 }
 
 .phrase > p {
-  margin: 24px auto;
+  margin: 5px auto;
   max-width: 540px;
   word-break: keep-all;
   line-height: 16pt;
@@ -272,14 +286,15 @@ export default {
 .dev {
   padding: 24px 0;
 }
-
 .dev > .title {
   font-size: 22pt;
 }
 
 .dev > .team {
+  font-weight:bolder;
   margin-top: 64px;
-  font-size: 18pt;
+  font-size: 17pt;
+  color:#20556C;
 }
 .dev > .team:nth-of-type(2) {
   margin-top: 12px;
@@ -310,6 +325,7 @@ export default {
 
 .card > .card-info > .name {
   font-size: 14pt;
+  font-weight:bolder;
 }
 .card > .card-info > .dept {
   margin-top: 4px;
@@ -365,6 +381,10 @@ export default {
 
 .staff-card > p {
   margin-top: 8px;
+}
+
+.staff-card > p:nth-child(1) {
+  font-weight: 600;
 }
 
 @media screen and (max-width: 400px) {
