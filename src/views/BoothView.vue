@@ -1,5 +1,7 @@
 <template>
   <main>
+    <div class="wallpaper"></div>
+
     <BoothEditModal
       :visible="editModal"
       :data="editData"
@@ -78,30 +80,29 @@
     <div class="content">
       <div class="section">
         <div class="section-header">
-          <h1>부스 소개</h1>
-          <div class="section-header-button-group">
-            <button class="edit-button" v-if="admin" @click="openEditDescriptionModal">
-              <img :src="Icon.pen" alt="" />
-            </button>
-          </div>
+          <h1 class="section-title">부스 소개</h1>
+          <div class="section-line"></div>
+          <button class="edit-button section-button" v-if="admin" @click="openEditDescriptionModal">
+            <img :src="Icon.penGray" alt="" />
+          </button>
         </div>
-        <hr />
         <p class="section-text" v-text="boothData.booth_content || 'Loading...'"></p>
       </div>
 
       <div class="section">
         <div class="section-header">
-          <h1>부스 메뉴</h1>
-          <button class="edit-button" v-if="admin" @click="openEditMenuModal">
-            <img :src="Icon.pen" alt="" />
+          <h1 class="section-title">부스 메뉴</h1>
+          <div class="section-line"></div>
+          <button class="edit-button section-button" v-if="admin" @click="openEditMenuModal">
+            <img :src="Icon.penGray" alt="" />
           </button>
         </div>
-        <hr />
         <div class="booth-menu">
           <template v-for="(item, index) in menuData" :key="index">
             <div :class="['menu-group', { sold: item.sell }]">
-              <p class="menu-title" v-text="item.name"></p>
-              <p class="menu-price" v-text="item.price.toLocaleString() + '원'"></p>
+              <p class="menu-title">{{ item.name }} {{ item.sell ? '(품절)' : '' }}</p>
+              <div class="menu-line"></div>
+              <p class="menu-price">{{ item.price.toLocaleString() }}원</p>
             </div>
           </template>
         </div>
@@ -109,16 +110,15 @@
 
       <div class="section">
         <div class="section-header">
-          <h1>댓글 <span v-text="commentDisplayCount.toFixed(0)"></span></h1>
+          <h1 class="section-title">댓글 <span v-text="commentDisplayCount.toFixed(0)"></span></h1>
+          <div class="section-line"></div>
         </div>
-        <hr />
         <BoothCommentSection
           :id="parseInt($route.params.id)"
           @update="loadCommentCount"
           @reload="reload"
         />
       </div>
-
     </div>
   </main>
 </template>
@@ -446,6 +446,24 @@ h1 {
   text-align: left;
 }
 
+.wallpaper {
+  position: absolute;
+  z-index: -1;
+  width: 824px;
+  margin-top: 120px;
+  margin-left: -28px;
+  min-height: calc(100% - 56px - 150px);
+  border-radius: 72px 72px 0 0;
+  background-color: #fbfbfbe3;
+  /* top: 10%; */
+}
+
+@media screen and (max-width: 824px) {
+  .wallpaper {
+    width: 100%;
+  }
+}
+
 .delete-container {
   top: 0px;
   right: 50%;
@@ -483,10 +501,10 @@ h1 {
 .section {
   max-width: 400px;
   margin: auto;
-  color: white;
 }
 
 .header {
+  color: white;
   margin-top: 24px;
 }
 
@@ -539,11 +557,6 @@ h1 {
   color: white;
 }
 
-.section-header-button-group {
-  display: flex;
-  align-items: center;
-}
-
 .edit-button {
   vertical-align: middle;
 }
@@ -554,17 +567,14 @@ h1 {
   vertical-align: middle;
 }
 
-hr {
-  border: 0px;
-  border-top: 2px solid #7f7f7f;
-}
-
 .section {
   margin: 16px 0;
 }
 .section-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .section-header > h1 {
@@ -572,11 +582,23 @@ hr {
   font-size: 14pt;
   border-radius: 36px;
   background-color: #5c859b;
+  color: white;
 }
 
 .section-header > h1 > span {
   font-size: 11pt;
   font-weight: 500;
+}
+
+.section-line {
+  flex-grow: 1;
+  height: 2px;
+  margin-left: 12px;
+  background-color: #5c859b;
+}
+
+.section-button {
+  margin-left: 12px;
 }
 
 .section-text {
@@ -592,10 +614,13 @@ hr {
 
 .booth-menu {
   min-height: 80px;
+  margin-top: 16px;
 }
 .menu-group {
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .menu-group.sold {
@@ -609,12 +634,62 @@ hr {
   font-size: 13pt;
 }
 
+.menu-line {
+  margin: 0 24px;
+  flex-grow: 1;
+  height: 0;
+  border-bottom: 2px dashed #5c859b;
+}
+
+.menu-group.sold > .menu-line {
+  border-bottom: 2px dashed #ca434c;
+}
+
 .menu-price {
   text-align: right;
   font-size: 13pt;
 }
-.bg{
-  background-color: #FBFBFB;
+.bg {
+  background-color: #fbfbfb;
   opacity: 0.9;
+}
+
+@media screen and (max-width: 400px) {
+  .header-name {
+    font-size: 16pt;
+  }
+  .section-header > h1 {
+    font-size: 10pt;
+  }
+
+  .image-upload {
+    font-size: 8pt;
+  }
+
+  .section-text {
+    font-size: 10pt;
+  }
+
+  .menu-title {
+    font-size: 10pt;
+  }
+
+  .menu-price {
+    font-size: 10pt;
+  }
+
+  .header-like-count {
+    font-size: 12pt;
+  }
+
+  .header-like-button > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .edit-button > img {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>

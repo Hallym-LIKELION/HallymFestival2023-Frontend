@@ -101,14 +101,16 @@ export default {
   border-radius: 100%;
 }
 .nickname {
-  color: white;
+  color: #363636;
+  font-weight: 600;
 }
 .body {
   width: calc(100% - 20px);
   margin-top: 8px;
   padding: 10px;
   border-radius: 8px;
-  background-color: #f1f1f1;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 8px #00000033;
 }
 
 .body-input {
@@ -137,5 +139,15 @@ export default {
 .footer-button > img {
   width: 18px;
   height: 18px;
+}
+
+@media screen and (max-width: 400px) {
+  .nickname {
+    font-size: 10pt;
+  }
+
+  .body-input {
+    font-size: 10pt;
+  }
 }
 </style>

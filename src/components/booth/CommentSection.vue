@@ -28,7 +28,6 @@
           :time="item.regDate"
           :warn="item.report_cnt"
           @clickMenu="toggleMenu"
-          color="#f1f1f1"
         />
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
@@ -186,5 +185,13 @@ export default {
 
 .comment-list > *:last-child {
   width: auto;
+}
+
+:deep(.paginate-buttons) {
+  color: #444444;
+}
+
+:deep(.paginate-buttons.active-page) {
+  color: white;
 }
 </style>

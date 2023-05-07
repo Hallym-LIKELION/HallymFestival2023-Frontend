@@ -180,6 +180,7 @@ export default {
 
 :deep(.image-content > .image) {
   object-fit: cover;
+  width: 32px;
 }
 .info {
   display: flex;
@@ -217,5 +218,37 @@ export default {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    height: 70px;
+    padding: 2px 8px;
+  }
+
+  .container.large {
+    height: 90px;
+  }
+
+  .image-content {
+    width: 36px;
+    height: 36px;
+  }
+  :deep(.image-content > .image) {
+    object-fit: cover;
+    width: 24px;
+  }
+
+  .text-content > h3 {
+    font-size: 11pt;
+  }
+  .text-content > p {
+    font-size: 9pt;
+  }
+
+  .info > div > img {
+    width: 16px;
+    height: 16px;
+  }
 }
 </style>

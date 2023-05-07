@@ -3,7 +3,7 @@
     <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Obooth.png" alt=""/>
+        <img src="@/assets/overlay/Obooth.png" alt="" />
       </div>
       <div class="title-text">부스 배치도</div>
     </div>
@@ -173,8 +173,8 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:50%;
+.title-image {
+  width: 50%;
   margin: 10px auto;
 }
 .title-wrap {
@@ -269,5 +269,13 @@ h1 {
   max-width: 420px;
   margin: 10px 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .button-group > button {
+    margin: 8px;
+    padding: 4px 8px;
+    font-size: 10pt;
+  }
 }
 </style>

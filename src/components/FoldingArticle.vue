@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div  :class="['header', { selected: showContent  }]">
-      <p class="id" v-text="id"      ></p>
+    <div :class="['header', { selected: showContent }]">
+      <p class="id" v-text="id"></p>
       <p class="title" v-text="title"></p>
       <div class="icon">
         <img :src="arrowImage" />
@@ -116,10 +116,9 @@ export default {
 
 .header.selected > .title {
   font-weight: 600;
-  color:black;
 }
 .header.selected > .id {
-  color: #f74242;
+  font-weight: 600;
 }
 .icon {
   width: 24px;
@@ -150,21 +149,42 @@ export default {
 }
 
 .footer > button {
-  padding: 2px 16px;
+  border-radius: 4px;
+  padding: 4px 16px;
+  font-size: 11pt;
 }
 .footer > button.edit {
-  border-radius: 24px 0 0 24px;
-  border: 1px solid #4079ff;
-  border-right: none;
-  color: #4079ff;
+  margin-right: 8px;
+  color: white;
+  background-color: #4079ff;
 }
 .footer > button.delete {
-  border-radius: 0 24px 24px 0;
-  border: 1px solid #f74242;
-  color: #f74242;
+  color: white;
+  background-color: #f74242;
 }
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    margin: 4px 0;
+  }
+  .header > .id {
+    font-size: 11pt;
+  }
+  .header > .title {
+    font-size: 11pt;
+    margin: 0 8px;
+  }
+
+  .wrapper {
+    padding: 0 8px;
+  }
+
+  .content {
+    font-size: 10pt;
+  }
 }
 </style>
