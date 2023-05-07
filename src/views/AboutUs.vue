@@ -3,7 +3,7 @@
     <br/><br/><br/><br/>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oaboutus.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/Oaboutus.png" alt=""  />
       </div>
       <div class="title-text">만든이들</div>
     </div>
@@ -216,7 +216,7 @@ export default {
   components: { Image },
   methods: {
     opengithubsohyun() {
-      D
+      window.open('https://github.com/osohyun0224', '_blank');
     },
     opengithubkungjae() {
       window.open('https://github.com/PortalCube', '_blank');
@@ -235,6 +235,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:50%;
+  margin: 8px auto;
+}
 .ccinfo{
   font-family: 'Nanum Gothic';
   font-size: 10px;

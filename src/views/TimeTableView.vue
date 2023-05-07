@@ -4,8 +4,8 @@
 
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Otimetable.png" alt="" width="70" height="30" />
-      </div>
+        <img src="@/assets/overlay/Otimetable.png" alt="" />
+      </div><br/>
       <div class="title-text">타임 테이블</div>
     </div>
 
@@ -201,6 +201,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:50%;
+  margin: 10px auto;
+}
 main {
   overflow: hidden;
   min-height: calc(100vh - 136px);

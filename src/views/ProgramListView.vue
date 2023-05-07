@@ -11,7 +11,7 @@
     ></ProgramModal>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oprogram.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/Oprogram.png" alt="" />
       </div>
       <div class="title-text">프로그램</div>
     </div>
@@ -146,6 +146,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:60%;
+  margin: 8px auto;
+}
 .line {
   color: #ffffff;
   opacity: 0.5;

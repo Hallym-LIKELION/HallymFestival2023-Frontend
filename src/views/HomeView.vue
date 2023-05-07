@@ -5,7 +5,7 @@
     </div>
 
     <div class="logo" ref="logo">
-      <img src="@/assets/logo.png" alt=""/>
+      <img src="@/assets/로고.png" alt=""/>
     </div>
 
     <div class="title" ref="title">
@@ -159,7 +159,6 @@ h1 {
   margin: -18px auto;
   display: flex;
   justify-content: center;
-  color: white;
 }
 
 .logo > img {

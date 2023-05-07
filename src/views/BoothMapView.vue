@@ -3,7 +3,7 @@
     <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Obooth.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/Obooth.png" alt=""/>
       </div>
       <div class="title-text">부스 배치도</div>
     </div>
@@ -173,6 +173,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:50%;
+  margin: 10px auto;
+}
 .title-wrap {
   width: 30%;
   margin: 10px auto;
