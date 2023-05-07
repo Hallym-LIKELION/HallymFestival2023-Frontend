@@ -1,5 +1,7 @@
 <template>
   <main>
+    <div class="background"></div>
+
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Otimetable.png" alt="" width="70" height="30" />
@@ -8,13 +10,21 @@
     </div>
 
     <div class="button-group">
-      <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">화요일</button>
-      <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">수요일</button>
-      <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">목요일</button>
+      <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">
+        <p>16일</p>
+        <div>화요일</div>
+      </button>
+      <button @click="() => selectDay(2)" :class="{ selected: day === 2 }">
+        <p>17일</p>
+        <div>수요일</div>
+      </button>
+      <button @click="() => selectDay(3)" :class="{ selected: day === 3 }">
+        <p>18일</p>
+        <div>목요일</div>
+      </button>
     </div>
-    <hr style="border: solid 2px white" class="line" />
 
-    <div class="table">
+    <div ref="table" :class="['table', { hidden: tableHidden }]">
       <template v-for="item in filltered_list">
         <div class="table-col-1">
           <div class="schedule-pin"><img src="@/assets/ttletter.png" alt="" /></div>
@@ -37,6 +47,10 @@
 
 <script>
 import { Icon } from '../library/icon';
+import { gsap } from 'gsap';
+
+let animationList = [];
+
 export default {
   data() {
     return {
@@ -85,6 +99,7 @@ export default {
         }
       ],
       day: 1,
+      tableHidden: true,
       Icon
     };
   },
@@ -107,15 +122,105 @@ export default {
   },
   methods: {
     selectDay(day) {
-      this.day = day;
+      if (this.day !== day) {
+        this.day = day;
+
+        this.tableHidden = true;
+
+        setTimeout(this.animation, 100);
+      }
+    },
+    animation() {
+      // pin이랑 table-col-2 띄우고
+      // line 띄우고
+      // pin이랑 table-col-2 띄우고
+      // line 띄우고
+      // ....
+
+      animationList.forEach((item) => item.pause());
+      animationList = [];
+
+      this.tableHidden = false;
+
+      for (let i = 0; i < this.filltered_list.length; i++) {
+        const pin = this.$refs.table.children[i * 2].querySelector('.schedule-pin');
+        const content = this.$refs.table.children[i * 2 + 1];
+        const line = this.$refs.table.children[i * 2].querySelector('.schedule-line');
+
+        console.log(i);
+
+        animationList.push(
+          gsap.fromTo(
+            pin,
+            {
+              transform: 'translateY(-40%)',
+              opacity: 0
+            },
+            {
+              delay: 0.1 + i * 0.6,
+              duration: 0.5,
+              transform: 'none',
+              opacity: 1
+            }
+          ),
+          gsap.fromTo(
+            content,
+            {
+              transform: 'translateY(-10%)',
+              opacity: 0
+            },
+            {
+              delay: 0.1 + i * 0.6,
+              duration: 0.5,
+              transform: 'none',
+              opacity: 1
+            }
+          ),
+          gsap.fromTo(
+            line,
+            {
+              transform: 'translateY(-4%)',
+              maxHeight: '0%'
+            },
+            {
+              delay: 0.3 + i * 0.6,
+              duration: 1,
+              maxHeight: 'calc(100% - 36px)',
+              transform: 'none',
+              ease: 'Expo.easeOut'
+            }
+          )
+        );
+      }
     }
+  },
+  mounted() {
+    this.animation();
   }
 };
 </script>
 
 <style scoped>
 main {
+  overflow: hidden;
   min-height: calc(100vh - 136px);
+}
+
+.background {
+  position: absolute;
+  z-index: -1;
+  width: 824px;
+  margin-top: 130px;
+  margin-left: -28px;
+  height: calc(100% - 56px - 130px);
+  background-color: #fbfbfbe3;
+  /* top: 10%; */
+}
+
+@media screen and (max-width: 824px) {
+  .background {
+    width: 100%;
+  }
 }
 
 .title-wrap {
@@ -160,21 +265,42 @@ h1 {
 }
 
 .button-group > button {
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.button-group > button > div {
   width: 70px;
   height: 28px;
-  margin: 0 10px;
-  padding: 5px 18px;
-  border: none;
-  border-radius: 16px;
+  margin: 4px 10px;
+  padding: 2px 8px;
+  border-radius: 28px;
+
+  font-size: 12pt;
+  font-weight: 600;
+
+  color: #ffffff66;
+  background-color: #ffffff1e;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s, color 0.25s;
+}
+.button-group > button.selected > div {
   color: #ffffff;
-  cursor: pointer;
-  font-size: 9pt;
+  background-color: #ca434c;
+}
+
+.button-group > button > p {
+  color: #ffffff66;
+  font-size: 12pt;
   transition: background-color 0.25s, color 0.25s;
 }
 
-.button-group > button.selected {
-  background-color: #ca434c;
-  color: white;
+.button-group > button.selected > p {
+  color: #ffffff;
 }
 
 .table {
@@ -196,7 +322,7 @@ h1 {
 }
 
 .schedule-line {
-  width: 3px;
+  width: 2px;
   height: calc(100% - 36px);
   margin-top: 54px;
   margin-bottom: -10px;
@@ -232,7 +358,13 @@ h1 {
 
   color: #333333;
   background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 19px rgba(135, 134, 134, 0.25);
 }
+
+.hidden {
+  visibility: hidden;
+}
+
 .schedule-time {
   font-weight: 600;
   font-size: 13pt;
