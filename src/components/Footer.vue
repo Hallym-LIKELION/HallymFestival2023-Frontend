@@ -10,7 +10,7 @@
 </template>
 <style scoped>
 .footer {
-  padding: 8px;
+  padding: 10px;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
@@ -41,7 +41,7 @@ br {
 }
 @media screen and (max-width: 400px) {
   .footer > p.sponser {
-    font-size: 6pt;
+    font-size: 9pt;
   }
   .footer > p.subtitle {
     font-size: 6pt;
