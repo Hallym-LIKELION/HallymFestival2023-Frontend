@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Header :image="HeaderImage" text="부스 목록" content="다양한 부스를 만나보세요" />
+    <Header :image="HeaderImage" text="부스 목록" content="" />
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin" />

@@ -7,7 +7,7 @@
       @complete="completeNoticeModal"
       @close="closeNoticeModal"
     />
-    <Header :image="HeaderImage" text="공지사항" content="이번 축제의 안내사항입니다." />
+    <Header :image="HeaderImage" text="공지사항" content="" />
 
     <div class="search-bar">
       <ASearchBar v-model="search" @change="searchNotice" />
