@@ -12,6 +12,7 @@ const HOST = 'https://www.hallymfestival.com/api';
 // accessToken을 Set-Cookie로 전달하지 않는다고하면 이 방법으로 토큰을 저장
 let token = Cookies.get('access_token') || null;
 let role = parseInt(Cookies.get('role')) ?? 0;
+let id = Cookies.get('id');
 
 const period = new Date(Date.now() + 10000);
 
@@ -31,20 +32,21 @@ export function DeleteToken() {
   token = null;
   role = 0;
   Cookies.remove('access_token');
+  Cookies.remove('refresh_token');
   Cookies.remove('role');
+  Cookies.remove('id');
 }
 
-export async function GetAccessToken(id, password, r = 1) {
-  const HOST = 'https://api.escuelajs.co'; // Fake API URL
+export async function GetAccessToken(id, password) {
   const data = {
-    email: id,
+    mid: id,
     password: password
   };
 
   let res;
 
   try {
-    res = await axios.post(HOST + '/api/v1/auth/login', data);
+    res = await axios.post('https://www.hallymfestival.com/login', data);
   } catch (e) {
     return false;
   }
@@ -52,24 +54,54 @@ export async function GetAccessToken(id, password, r = 1) {
   const success = res.status >= 200 && res.status < 400;
 
   if (success) {
-    Cookies.set('access_token', res.data.access_token);
-    Cookies.set('role', r);
-    token = res.data.access_token;
-    role = r;
-  }
+    Cookies.set('access_token', res.data.accessToken);
+    Cookies.set('refresh_token', res.data.refreshToken);
 
-  // 나중에 백엔드 구현되면 res에서 받아오도록 수정
-  role = r;
+    let data = JSON.parse(atob(res.data.accessToken.split('.')[1]));
+
+    console.log(data);
+
+    token = res.data.accessToken;
+    role = data.role || 2;
+    id = data.mid;
+    Cookies.set('id', id);
+    Cookies.set('role', role);
+  }
 
   return success;
 }
 
 export async function GetAccessTokenUser() {
-  const HOST = 'https://api.escuelajs.co'; // Fake API URL
-  const res = await axios.get(HOST + '/api/v1/auth/profile', {
-    headers: { Authorization: 'Bearer ' + Cookies.get('access_token') }
-  });
-  return res.data;
+  let res;
+
+  try {
+    res = await axios.post('https://www.hallymfestival.com/refreshToken', {
+      accessToken: Cookies.get('access_token', token),
+      refreshToken: Cookies.get('refresh_token')
+    });
+  } catch (e) {
+    return false;
+  }
+
+  console.log(res);
+  const success = res.status >= 200 && res.status < 400;
+
+  if (success) {
+    Cookies.set('access_token', res.data.accessToken);
+    Cookies.set('refresh_token', res.data.refreshToken);
+
+    let data = JSON.parse(atob(res.data.accessToken.split('.')[1]));
+
+    console.log(data);
+
+    token = res.data.accessToken;
+    role = data.role || 2;
+    id = data.mid;
+    Cookies.set('id', id);
+    Cookies.set('role', role);
+  }
+
+  return success;
 }
 
 // =========================
@@ -112,27 +144,59 @@ export async function CreateBooth(title, content, writer, type) {
     booth_title: title,
     booth_content: content,
     writer,
-    booth_type: type
+    dayNight: 'DAY',
+    openDay: '[1,2,3]',
+    booth_type: type,
+    fileNames: []
   };
-  const res = await axios.post(HOST + '/booth/register', data);
+  const res = await axios.post(HOST + '/booth/register', data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
-export async function ModifyBooth(booth_id, title, content, writer, type, active) {
+export async function ModifyBooth(
+  booth_id,
+  title,
+  content,
+  writer,
+  type,
+  dayNight,
+  openDay,
+  fileNames
+) {
   const data = {
     bno: booth_id,
     booth_title: title,
     booth_content: content,
     writer,
     booth_type: type,
-    active
+    dayNight,
+    openDay,
+    fileNames
   };
-  const res = await axios.put(HOST + '/booth/modify/' + booth_id, data);
+  const res = await axios.put(HOST + '/booth/auth/modify/' + booth_id, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
-export async function DeleteBooth(booth_id) {
-  const res = await axios.delete(HOST + '/booth/' + booth_id);
+export async function DeleteBooth(booth_id, writer) {
+  const res = await axios.post(
+    HOST + '/booth/auth/' + booth_id,
+    {
+      writer
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
   return res.data;
 }
 
@@ -201,7 +265,11 @@ export async function CreateBoothMenu(booth_id, name, price) {
     name,
     price
   };
-  const res = await axios.post(HOST + '/menu/' + booth_id, data);
+  const res = await axios.post(HOST + '/menu/' + booth_id, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
@@ -210,17 +278,29 @@ export async function ModifyBoothMenu(menu_id, name, price) {
     name,
     price
   };
-  const res = await axios.put(HOST + '/menu/' + menu_id, data);
+  const res = await axios.put(HOST + '/menu/' + menu_id, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
 export async function SoldBoothMenu(menu_id) {
-  const res = await axios.put(HOST + '/menu/sell/' + menu_id);
+  const res = await axios.put(HOST + '/menu/sell/' + menu_id, null, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
 export async function DeleteBoothMenu(menu_id) {
-  const res = await axios.delete(HOST + '/menu/' + menu_id);
+  const res = await axios.delete(HOST + '/menu/' + menu_id, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
@@ -230,13 +310,21 @@ export async function DeleteBoothMenu(menu_id) {
 
 export async function CreateNotice(title, content) {
   const data = { title, content };
-  const res = await axios.post(HOST + '/notice', data);
+  const res = await axios.post(HOST + '/notice/auth/create', data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
 export async function ModifyNotice(id, title, content) {
   const data = { title, content };
-  const res = await axios.put(HOST + '/notice/' + id, data);
+  const res = await axios.put(HOST + '/notice/auth/' + id, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
@@ -254,8 +342,12 @@ export async function GetNotice(id) {
   return res.data;
 }
 
-export async function DeleteNotice(id) {
-  const res = await axios.delete(HOST + '/notice/' + id);
+export async function RemoveNotice(id) {
+  const res = await axios.delete(HOST + '/notice/auth/' + id, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return res.data;
 }
 
@@ -265,11 +357,6 @@ export async function SearchNotice(keyword, page = 0) {
     url += '&page=' + page;
   }
   const res = await axios.get(HOST + url);
-  return res.data;
-}
-
-export async function RemoveNotice(id) {
-  const res = await axios.delete(HOST + '/notice/' + id);
   return res.data;
 }
 
@@ -320,52 +407,62 @@ export async function ReportVisitComment(comment_id) {
 // =========================
 
 export async function GetVisitorCount() {
-  const res = await axios.get(HOST + '/visit-list', {
-    withCredentials: true
+  const res = await axios.get(HOST + '/auth/visit-list', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
 
 export async function GetBoothListWithLike(page = 0) {
-  let url = '/like/top-count-list';
+  let url = '/like/auth/top-count-list';
   if (page !== 0) {
     url += '?page=' + page;
   }
   const res = await axios.get(HOST + url, {
-    withCredentials: true
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
 
 export async function GetBoothListWithComment(page = 0) {
-  let url = '/comment/top-count-list';
+  let url = '/comment/auth/top-count-list';
   if (page !== 0) {
     url += '?page=' + page;
   }
   const res = await axios.get(HOST + url, {
-    withCredentials: true
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
 
 export async function GetBoothListWithReport(page = 0) {
-  let url = '/comment/report-top-count-list';
+  let url = '/comment/auth/report-top-count-list';
   if (page !== 0) {
     url += '?page=' + page;
   }
   const res = await axios.get(HOST + url, {
-    withCredentials: true
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
 
 export async function GetCommentListWithReport(page = 0) {
-  let url = '/comment/reported';
+  let url = '/comment/auth/reported';
   if (page !== 0) {
     url += '?page=' + page;
   }
   const res = await axios.get(HOST + url, {
-    withCredentials: true
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
@@ -376,7 +473,9 @@ export async function GetVisitCommentListWithReport(page = 0) {
     url += '?page=' + page;
   }
   const res = await axios.get(HOST + url, {
-    withCredentials: true
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
   return res.data;
 }
