@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     openModal(id) {
-      this.data = this.list[id];
+      this.modalData = this.list[id];
       this.modal = true;
     },
     closeModal() {
