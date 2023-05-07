@@ -158,7 +158,7 @@ export default {
     if (this.admin === 2) {
       data = await GetBoothListWithComment();
     } else {
-      data = await GetBoothList();
+      data = await SearchBoothList('', this.day, this.dayNight);
     }
 
     this.list = data.dtoList;
