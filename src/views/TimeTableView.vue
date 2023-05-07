@@ -342,6 +342,7 @@ h1 {
 
 .table-col-2 {
   margin: 12px 0;
+  margin-right: 16px;
   padding: 12px 16px;
   font-size: 10pt;
   width: 260px 100%;
