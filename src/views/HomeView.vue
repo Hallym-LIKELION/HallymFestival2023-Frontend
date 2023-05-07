@@ -5,7 +5,7 @@
     </div>
 
     <div class="logo" ref="logo">
-      <img src="@/assets/logo.png" alt="" />
+      <img src="@/assets/logo.png" alt=""/>
     </div>
 
     <div class="title" ref="title">
@@ -170,6 +170,7 @@ h1 {
   text-align: center;
 }
 .logo {
+  width: 70%;
   max-width: 320px;
   margin: -18px auto;
   display: flex;
