@@ -1,61 +1,63 @@
 <template>
-<<<<<<< HEAD
-  <main>
-    <br/><br/><br/><br/>
+  <div>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oaboutus.png" alt=""  />
+        <img src="@/assets/overlay/Oaboutus.png" alt="" />
       </div>
       <div class="title-text">만든이들</div>
-=======
-  <div class="wrapper">
-    <div class="header">
-      <p>한림대학교 멋쟁이사자처럼 Builder Team</p>
-      <p class="collab">X</p>
-      <p>2023 한림대학교 축제준비위원회</p>
->>>>>>> a17fc969d557205e504ce98e11a8645aac807b96
     </div>
-    <div class="phrase">
-      <p v-for="item in phrase">{{ item }}</p>
-    </div>
-    <div class="dev">
-      <p class="title">Developer</p>
-      <template v-for="item in devTeam">
-        <p class="team">{{ item.name }}</p>
-        <div class="list" v-for="list in item.list">
-          <template v-for="person in list">
-            <div :class="['card', { hidden: person.empty }]">
-              <Image
-                :src="person.image"
-                alt=""
-                class="card-image"
-                width="100"
-                height="100"
-                v-if="!person.empty"
-              />
-              <div class="card-info" v-if="!person.empty">
-                <p class="name">{{ person.name }}</p>
-                <p class="dept">{{ person.department }}</p>
-                <button @click="openGithub(person.github)" class="git-button" v-if="person.github">
-                  {{ person.name.slice(1, 3) }}'s Github
-                </button>
+    <div class="wrapper">
+      <div class="header">
+        <p>한림대학교 멋쟁이사자처럼 Builder Team</p>
+        <p class="collab">X</p>
+        <p>2023 한림대학교 축제준비위원회</p>
+      </div>
+      <div class="phrase">
+        <p v-for="item in phrase">{{ item }}</p>
+      </div>
+      <div class="dev">
+        <p class="title">Developer</p>
+        <template v-for="item in devTeam">
+          <p class="team">{{ item.name }}</p>
+          <div class="list" v-for="list in item.list">
+            <template v-for="person in list">
+              <div :class="['card', { hidden: person.empty }]">
+                <Image
+                  :src="person.image"
+                  alt=""
+                  class="card-image"
+                  width="100"
+                  height="100"
+                  v-if="!person.empty"
+                />
+                <div class="card-info" v-if="!person.empty">
+                  <p class="name">{{ person.name }}</p>
+                  <p class="dept">{{ person.department }}</p>
+                  <button
+                    @click="openGithub(person.github)"
+                    class="git-button"
+                    v-if="person.github"
+                  >
+                    {{ person.name.slice(1, 3) }}'s Github
+                  </button>
+                </div>
               </div>
-            </div>
-          </template>
-        </div>
-      </template>
-    </div>
-    <div class="staff">
-      <p class="title">2023 한림대학교 축제준비위원회</p>
-      <template v-for="item in staffList">
-        <div class="list" v-for="list in item">
-          <template v-for="anotherItem in list">
-            <div :class="['staff-card', { hidden: anotherItem === null }]">
-              <p class="credit" v-for="text in anotherItem">{{ text }}</p>
-            </div></template
-          >
-        </div>
-      </template>
+            </template>
+          </div>
+        </template>
+      </div>
+      <div class="staff">
+        <p class="title">2023 한림대학교 축제준비위원회</p>
+        <template v-for="item in staffList">
+          <div class="list" v-for="list in item">
+            <template v-for="anotherItem in list">
+              <div :class="['staff-card', { hidden: anotherItem === null }]">
+                <p class="credit" v-for="text in anotherItem">{{ text }}</p>
+              </div></template
+            >
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -202,47 +204,21 @@ export default {
   },
   components: { Image },
   methods: {
-<<<<<<< HEAD
-    opengithubsohyun() {
-      window.open('https://github.com/osohyun0224', '_blank');
-    },
-    opengithubkungjae() {
-      window.open('https://github.com/PortalCube', '_blank');
-    },
-    opengithubdongheon() {
-      window.open('https://github.com/Sirius506775', '_blank');
-    },
-    opengithubjuyoung() {
-      window.open('https://github.com/mythpoy', '_blank');
-    },
-    opengithubmijin() {
-      window.open('https://github.com/mijin0721', '_blank');
-=======
     openGithub(id) {
       window.open('https://github.com/' + id, '_blank');
->>>>>>> a17fc969d557205e504ce98e11a8645aac807b96
     }
   }
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .title-image{
   width:50%;
   margin: 8px auto;
 }
-.ccinfo{
-  font-family: 'Nanum Gothic';
-  font-size: 10px;
-  line-height: 13px;
-  text-align: center;
-  margin: 0;
-  padding: 36px 0;
-=======
+
 .hidden {
   visibility: hidden;
->>>>>>> a17fc969d557205e504ce98e11a8645aac807b96
 }
 
 .wrapper {
