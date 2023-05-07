@@ -3,11 +3,11 @@
     <Header :image="HeaderImage" text="부스 목록" content="" />
 
     <div class="poster">
-      <BoothCarousel :slide="slide" :isAdmin="admin" />
-      <SwitchButton v-if="!admin" :status="day" @change="switchDayNight" />
+      <BoothCarousel :slide="slide" :isAdmin="admin === 2" />
+      <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
     </div>
 
-    <div class="search-bar" v-if="!admin"><SearchBar v-model="search" /></div>
+    <div class="search-bar" v-if="admin !== 2"><SearchBar v-model="search" /></div>
 
     <div class="button-group">
       <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="item in filltered_list" :key="item.bno">
+      <template v-for="item in list" :key="item.bno">
         <ListItem
           @click="() => showBooth(item.bno)"
           :title="item.booth_title"
@@ -34,7 +34,7 @@
           :comment="item.comment_cnt"
           :report="item.report_cnt"
           :mode="day"
-          :isAdmin="admin"
+          :isAdmin="admin === 2"
         />
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
@@ -84,22 +84,7 @@ export default {
       itemsPerPage: 1
     };
   },
-  computed: {
-    filltered_list() {
-      return this.list.filter((item) => {
-        // 1. 요일에 따른 필터링
-        // const isChoosedDay = true || this.day === 0 || item.day.includes(this.day);
-
-        // 2. 검색에 따른 필터링
-        const isContainSearchString =
-          this.search === '' ||
-          item.booth_title.includes(this.search) ||
-          item.booth_content.includes(this.search);
-
-        return true && isContainSearchString;
-      });
-    }
-  },
+  computed: {},
   methods: {
     showBooth(id) {
       this.$router.push('/booth/' + id);
@@ -131,7 +116,6 @@ export default {
       if (isDay) {
         this.slide = 0;
       } else {
-        this.day = 0;
         this.slide = 3;
       }
     },
@@ -215,7 +199,8 @@ h1 {
   padding: 6px 16px;
   border: none;
   border-radius: 24px;
-  color: #ffffff;
+  color: #ffffff66;
+  background-color: #ffffff1e;
   font-size: 11pt;
   cursor: pointer;
   font-family: 'Nanum Gothic', sans-serif;
