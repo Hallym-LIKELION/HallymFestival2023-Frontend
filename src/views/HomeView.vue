@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import LogoImage from '@/assets/logo.png';
+import LogoImage from '@/assets/로고.png';
 import Image from '../components/Image.vue';
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
@@ -145,7 +145,6 @@ export default {
   margin: -18px auto;
   display: flex;
   justify-content: center;
-  color: white;
 }
 
 :deep(.image) {

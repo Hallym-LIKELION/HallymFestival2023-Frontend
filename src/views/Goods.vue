@@ -3,7 +3,7 @@
     <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/OGoods.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/OGoods.png" alt="" />
       </div>
       <div class="title-text">굿즈</div>
     </div>
@@ -11,11 +11,11 @@
 
     <div class="goods-text">
       <br /><br />
-      <p>2023 대동제 축제 굿즈입니다! </p>
+      <p>이번 축제를 맞이하여 축제준비위원회에서 준비한 굿즈! </p>
       <br />
-      <p>원활한 부스 진행을 위해 굿즈 사전 예약 판매를 진행하오니 </p>
+      <p>많은 관심 바랍니다! </p>
       <br />
-      <p>구매를 희망하시는 학우분들은 아래의 버튼으로 접속해주세요:)</p>
+      <p>구매를 희망하시는 학우분들은 '구매하러가기' 클릭!</p>
 
       <div class="first">
         <div class="dcard">
@@ -97,6 +97,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:60%;
+  margin: 8px auto;
+}
 .first {
   width: 60%;
   margin: auto;

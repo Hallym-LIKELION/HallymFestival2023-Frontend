@@ -27,9 +27,10 @@
 
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Oletter.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/Oletter.png" alt="" />
       </div>
-      <div class="title-text">방명록</div>
+      <div class="title-text">방명록</div><br/><br/>
+      <div class="title-context">하고 싶은 말을 자유롭게 남겨주세요!</div>
     </div>
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
@@ -187,6 +188,11 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:50%;
+  margin-top:10px auto;
+  margin: 8px auto;
+}
 .title-wrap {
   width: 30%;
   margin: 10px auto;
@@ -210,6 +216,13 @@ export default {
   line-height: 13px;
   margin: 0;
   padding: 36px 0;
+  color: #ffffff;
+}
+.title-context{
+  font-family: 'Nanum Gothic';
+  text-align: center;
+  text-size-adjust: none;
+  font-size: 0.4vw;
   color: #ffffff;
 }
 .header {
