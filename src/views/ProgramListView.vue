@@ -54,24 +54,24 @@ export default {
         description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
         content: [
           '댄스, 노래, 연극 등 다양한 분야의 공연들을 한 자리에!',
-          '중앙동아리분들의 환상적인 공연을 함께하세요!',
+          '중앙동아리분들의 환상적인 공연을 함께하세요!'
         ],
         date: '2023-05-16T 17:00:00+09:00',
         place: '한림대학교 운동장'
       },
 
       list: [
-      {
-        image: ImageDance,
-        title: '2023 대동제 동아리 공연',
-        description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
-        content: [
-          '댄스, 노래, 연극 등 다양한 분야의 공연들을 한 자리에!',
-          '중앙동아리분들의 환상적인 공연을 함께하세요!',
-        ],
-        date: '2023-05-16T17:00:00+09:00',
-        place: '한림대학교 운동장'
-      },
+        {
+          image: ImageDance,
+          title: '2023 대동제 동아리 공연',
+          description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
+          content: [
+            '댄스, 노래, 연극 등 다양한 분야의 공연들을 한 자리에!',
+            '중앙동아리분들의 환상적인 공연을 함께하세요!'
+          ],
+          date: '2023-05-16T17:00:00+09:00',
+          place: '한림대학교 운동장'
+        },
         {
           image: ImagePPung,
           title: '천하제일 뻥쟁이 대회',
@@ -86,11 +86,11 @@ export default {
         {
           image: ImageSing,
           title: 'ㄴr는 ㄱr끔 노㉣łı를 부른⊂ト...',
-          description:
-            '자신의 노래를 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
+          description: '자신의 노래를 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
           content: [
-            '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요!', 
-            '가요제 1등은 과연 누구?! 앵콜곡까지 함께하세요!'],
+            '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요!',
+            '가요제 1등은 과연 누구?! 앵콜곡까지 함께하세요!'
+          ],
           date: '2023-05-17T18:00:00+09:00',
           place: '한림대학교 운동장'
         },
@@ -99,8 +99,9 @@ export default {
           title: 'ㄴr는 슬플 ㄸĦㅁト⊂ト 춤을 추곤 ぁĦ',
           description: '자신의 춤 실력을 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
           content: [
-            '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요!', 
-            '상위 입상자에게는 다채로운 상품이 제공됩니다!'],
+            '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요!',
+            '상위 입상자에게는 다채로운 상품이 제공됩니다!'
+          ],
           date: '2023-05-18T19:00:00+09:00',
           place: '한림대학교 운동장'
         },
@@ -109,8 +110,9 @@ export default {
           title: '멍 때리기 대회, 어멍! ',
           description: '가장 오래오래 멍을 잘 때리는 학우는 누구?!',
           content: [
-            '멍을 때리는 사람/ 멍을 방해하는 사람들의 치열한 노력들!', 
-            '마지막 라운드까지 멍 때림을 유지하는 사람들은 과연 누구?!'],
+            '멍을 때리는 사람/ 멍을 방해하는 사람들의 치열한 노력들!',
+            '마지막 라운드까지 멍 때림을 유지하는 사람들은 과연 누구?!'
+          ],
           date: '2023-05-18T17:00:00+09:00',
           place: '한림대학교 운동장'
         },
@@ -120,7 +122,8 @@ export default {
           description: '더위를 피하고 싶은 낭만파 한림대 학우분들을 기다립니다!',
           content: [
             '시원한 여름, 물풍선과 함께 더위를 날려버리세요!',
-            '여러 이벤트들과 함께해서 더욱 재미있는 축제!'],
+            '여러 이벤트들과 함께해서 더욱 재미있는 축제!'
+          ],
           date: '2023-05-16T12:00:00+09:00',
           place: '한림대학교 운동장'
         },
@@ -130,7 +133,8 @@ export default {
           description: '무더운 여름 밤, 맥주를 가장 빨리 마시는 학우는 누구?!',
           content: [
             '주점으로 뜨거운 축제의 밤! 맥주마시기 대회에 참가세요!',
-            '1~3등에게는 상품까지 준비되어있습니다 !!'],
+            '1~3등에게는 상품까지 준비되어있습니다 !!'
+          ],
           date: '2023-05-17T15:00:00+09:00',
           place: '한림대학교 운동장'
         }
@@ -157,8 +161,8 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:60%;
+.title-image {
+  width: 60%;
   margin: 8px auto;
 }
 .line {
@@ -189,67 +193,6 @@ export default {
   margin: 0;
   padding: 36px 0;
   color: #ffffff;
-}
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 999;
-}
-.white-bg {
-  text-align: center;
-  width: 90%;
-  margin: 80px auto;
-  background: #ffffff;
-  border-radius: 5px;
-  padding: 20px 0;
-}
-.space {
-  border: none;
-  width: 81px;
-  height: 32px;
-  background: #5c859b;
-  opacity: 0.88;
-  color: white;
-  font-weight: bold;
-  border-radius: 26.25px;
-  padding: 5px 15px;
-}
-.date {
-  border: none;
-  width: 81px;
-  height: 32px;
-  background: #5c859b;
-  opacity: 0.88;
-  color: white;
-  font-weight: bold;
-  border-radius: 26.25px;
-  padding: 5px 15px;
-}
-.close {
-  cursor: pointer;
-  border: none;
-  background: black;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  padding: 5px 15px;
-}
-.close:hover {
-  color: white;
-  font-weight: bold;
-  transform: scale(1.1);
-  transition: all 0.5s;
-}
-
-h1 {
-  font-size: 20pt;
-  text-align: center;
-  padding: 36px 0;
-  color: black;
 }
 
 .program-list {
