@@ -356,7 +356,7 @@ h1 {
   padding: 8px 24px;
   border: none;
   border-radius: 24px;
-  background-color : rgba(255, 255, 255, 0.6);
+
   color: #5C859B;
   font-size: 10pt;
   cursor: pointer;
