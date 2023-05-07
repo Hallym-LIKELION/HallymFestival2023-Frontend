@@ -241,9 +241,9 @@ export default {
   position: absolute;
   z-index: -1;
   width: 824px;
-  margin-top: 140px;
+  margin-top: 150px;
   margin-left: -28px;
-  height: calc(100% - 56px - 150px);
+  height: calc(100% - 56px - 250px);
   background-color: #fbfbfbe3;
   /* top: 10%; */
 }
@@ -252,42 +252,6 @@ export default {
   .background {
     width: 100%;
   }
-}
-
-.title-wrap {
-  width: 30%;
-  margin: 10px auto;
-  position: relative;
-}
-.title-wrap img {
-  width: 100%;
-  vertical-align: middle;
-}
-.title-text {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 20px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
-}
-
-.line {
-  opacity: 0.3;
-}
-
-h1 {
-  font-size: 20pt;
-  text-align: center;
-  padding: 36px 0;
-  color: #ffffff;
 }
 
 .button-group {
@@ -422,8 +386,8 @@ h1 {
 
 @media screen and (max-width: 400px) {
   .background {
-    margin-top: 115px;
-    height: calc(100% - 56px - 135px);
+    margin-top: 130px;
+    height: calc(100% - 56px - 230px);
   }
 
   .button-group {
