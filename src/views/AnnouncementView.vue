@@ -11,14 +11,14 @@
       <div class="title-image">
         <img src="@/assets/overlay/Onotice.png" alt="" width="70" height="40" />
       </div>
-      <br/>
+      <br />
       <div class="title-text">공지사항</div>
     </div>
-    <div class="search-bar" ref="searchBar">
+    <div class="search-bar">
       <SearchBar v-model="search" @change="searchNotice" />
     </div>
-    <div class="content" ref="announcementList">
-      <div class="button-group" ref="buttonGroup" v-if="role == 2">
+    <div class="content">
+      <div class="button-group" v-if="role == 2">
         <button @click="clickCreate"><b>글쓰기</b></button>
       </div>
       <div class="announcement-list">
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { gsap } from 'gsap';
 import SearchBar from '../components/ASearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import Pagination from '../components/Pagination.vue';
@@ -190,74 +189,6 @@ export default {
       this.itemsPerPage = data.size || 1;
     }
   },
-  mounted() {
-    // this.pagingMethod(this.page);
-    // 타이틀 애니메이션
-    gsap.fromTo(
-      this.$refs.title,
-      {
-        opacity: 0,
-        transform: 'translateY(-10%)'
-      },
-      {
-        delay: 0,
-        duration: 0.5,
-        opacity: 1,
-        transform: 'none'
-      }
-    );
-
-    // 검색창 애니메이션
-    gsap.fromTo(
-      this.$refs.searchBar,
-      {
-        transform: 'translateX(-3%)',
-        opacity: 0,
-        pointerEvents: 'none'
-      },
-      {
-        delay: 0.5,
-        duration: 0.5,
-        transform: 'none',
-        opacity: 1,
-        pointerEvents: 'auto'
-      }
-    );
-
-    // 글 목록 애니메이션
-    gsap.fromTo(
-      this.$refs.announcementList,
-      {
-        transform: 'translateX(-10%)',
-        opacity: 0,
-        pointerEvents: 'none'
-      },
-      {
-        delay: 0.75,
-        duration: 0.5,
-        transform: 'none',
-        opacity: 1,
-        pointerEvents: 'auto'
-      }
-    );
-
-    // 글쓰기 버튼 애니메이션
-    gsap.fromTo(
-      this.$refs.buttonGroup,
-      {
-        transform: 'translateX(2%)',
-        opacity: 0,
-        pointerEvents: 'none'
-      },
-      {
-        delay: 1,
-        duration: 0.5,
-        transform: 'none',
-        opacity: 1,
-        pointerEvents: 'auto'
-      }
-    );
-  },
   async created() {
     // 공지사항 불러와서 data에 넣어주기.
     const data = await GetNoticeList();
@@ -357,7 +288,7 @@ h1 {
   border: none;
   border-radius: 24px;
 
-  color: #5C859B;
+  color: #5c859b;
   font-size: 10pt;
   cursor: pointer;
   font-family: 'Nanum Gothic', sans-serif;
