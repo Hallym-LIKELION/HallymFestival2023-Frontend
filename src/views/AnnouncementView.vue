@@ -322,6 +322,9 @@ h1 {
 
   align-items: center;
 }
+.announcement-list :hover {
+  color: #ca434c;
+}
 
 .announcement-list > * {
   max-width: 540px;

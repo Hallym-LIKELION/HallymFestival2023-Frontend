@@ -70,7 +70,7 @@
       </div>
 
       <div class="dcard">
-        <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
+        <img src="@/assets/goods/부채.png" alt="" width="100" height="100" />
         <div class="inform">
           <h7>땀림이 손잡이 부채</h7>
           <br />
@@ -174,18 +174,21 @@ h4 {
   font-size: 10px;
 }
 .button {
+  margin: 0 10px;
+  margin-bottom: 24px;
   width: 328px;
-  height: 30px;
+  height: 40px;
   margin-top: 15px;
   padding: 6px 10px;
   border-radius: 18px;
-  position: center;
-  float: left;
+  display: flex;
+  justify-content: center;
   text-align: center;
   background-color: #ca434c;
   font-size: 17pt;
-  color: white;
-  
+  color: white; 
+  top: 50%;
+  left: 50%;
 }
 h1 {
   color: #ffffff;
