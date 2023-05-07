@@ -59,7 +59,6 @@
 <script>
 import { gsap } from 'gsap';
 import { RouterLink, RouterView } from 'vue-router';
-import AOS from 'aos';
 import { Icon } from './library/icon';
 import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
@@ -100,9 +99,6 @@ export default {
     };
   },
   created() {
-    // 애니메이션 라이브러리 init
-    AOS.init();
-
     this.$router.beforeEach((to, from, next) => {
       this.footerAnimation();
       next();
@@ -177,11 +173,11 @@ export default {
     logout(evt) {
       evt.stopPropagation();
       API.DeleteToken();
+
       const adminOnlyList = ['/admin', '/admin/comment', '/admin/boothComment'];
       const currentPath = this.$router.currentRoute.value.path;
-      console.log(currentPath, adminOnlyList.includes(currentPath));
+
       if (adminOnlyList.includes(currentPath)) {
-        console.log('go home');
         this.$router.push('/');
       } else {
         this.reload();
