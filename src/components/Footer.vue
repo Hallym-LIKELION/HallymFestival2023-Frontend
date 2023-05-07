@@ -1,13 +1,18 @@
 <template>
   <div class="footer">
-    <p class="title">한림대학교 멋쟁이사자처럼 Builder Team<br /></p>
-    <p class="sponser">본 사이트는 Naver Cloud Platform 서버 지원으로 운영되고 있습니다.</p>
+    <p class="title">한림대학교 멋쟁이사자처럼 Builder Team</p>
+    <p class="sponser">
+      본 사이트는 Naver Cloud Platform의 <br />
+      지원을 받아 사용하고 있습니다.
+    </p>
     <p class="subtitle">Hallym Likelion</p>
   </div>
 </template>
 <style scoped>
 .footer {
+  padding: 10px;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -17,12 +22,12 @@
 }
 
 .footer > p.title {
-  margin-top: 6px;
-  font-size: 1.0rem;
+  font-size: 11pt;
   color: #ffffff;
 }
 .footer > p.sponser {
-  font-size: 10pt;
+  margin-top: 2px;
+  font-size: 8pt;
   color: #ffffff;
 }
 .footer > p.subtitle {
@@ -30,5 +35,20 @@
   font-size: 9pt;
   color: #ffffff;
   opacity: 0.6;
+}
+br {
+  display: none;
+}
+@media screen and (max-width: 400px) {
+  .footer > p.sponser {
+    font-size: 6pt;
+  }
+  .footer > p.subtitle {
+    font-size: 6pt;
+  }
+
+  br {
+    display: inline;
+  }
 }
 </style>

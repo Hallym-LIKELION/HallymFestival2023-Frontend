@@ -119,7 +119,10 @@ export default {
   },
   computed: {
     decoration() {
-      return ['/', '/admin', '/login'].includes(this.$router.currentRoute.value.path);
+      return (
+        this.$router.currentRoute.value.name !== undefined &&
+        ['/', '/admin', '/login'].includes(this.$router.currentRoute.value.path)
+      );
     }
   },
   created() {
