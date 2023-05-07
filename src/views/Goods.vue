@@ -70,7 +70,7 @@
       </div>
 
       <div class="dcard">
-        <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
+        <img src="@/assets/goods/부채.png" alt="" width="100" height="100" />
         <div class="inform">
           <h7>땀림이 손잡이 부채</h7>
           <br />

@@ -48,7 +48,7 @@
 
         <!-- 프론트엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3><img src="@/assets/vuelogo.png" alt="" width:30px />Front-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/vuelogo.png" alt="" width:30px />   Front-End TEAM</h3></TeamText
         >
 
         <div class="grid">
@@ -75,7 +75,7 @@
 
         <!-- 백엔드 -->
         <TeamText className="team" text-size:15px text-align: center
-          ><h3><img src="@/assets/springbootlogo.png" alt="" />Back-End TEAM</h3></TeamText
+          ><h3><img src="@/assets/springbootlogo.png" alt="" />    Back-End TEAM</h3></TeamText
         >
 
         <div class="grid">
@@ -349,14 +349,17 @@ p {
   grid-template-columns: 1fr 1fr;
 }
 .introment {
-  font-family: 'NanumGothic';
-  font-size: 10px;
   text-align: center;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 20px;
+  line-height: 13px;
   letter-spacing: 0.1em;
-  margin: 0;
-  padding: 36px 0;
-  margin: 8px 0;
-  text-size-adjust: auto;
+  float: center;
+  margin: 30px;
+  padding: 20px 0;
+  width: 80%;
+
 }
 .group {
   text-align: center;
