@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div class="introment" ref="introPhrase">
+    <div class="phrase" ref="introPhrase">
       <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
 
     <div class="logo" ref="logo">
-      <img src="@/assets/logo.png" alt="" />
+      <Image :src="LogoImage" class="image" alt="" />
     </div>
 
     <div class="title" ref="title">
@@ -29,13 +29,18 @@
 </template>
 
 <script>
+import LogoImage from '@/assets/logo.png';
+import Image from '../components/Image.vue';
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
 
 export default {
+  components: {
+    Image
+  },
   data() {
     return {
-      storytelling: ''
+      LogoImage
     };
   },
   methods: {
@@ -134,25 +139,6 @@ export default {
 };
 </script>
 <style scoped>
-main {
-}
-
-.sponsor {
-  margin-top: 32px;
-  text-align: center;
-  color: white;
-}
-.sponsor img {
-  width: 50%;
-}
-p {
-  text-align: center;
-  color: white;
-}
-h1 {
-  font-size: 20pt;
-  text-align: center;
-}
 .logo {
   max-width: 320px;
   margin: -18px auto;
@@ -161,10 +147,12 @@ h1 {
   color: white;
 }
 
-.logo > img {
-  width: 100%;
+:deep(.image) {
+  width: 260px;
+  max-width: 100%;
 }
-.introment {
+
+.phrase {
   margin-top: 64px;
   font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
@@ -180,6 +168,7 @@ h1 {
   text-align: center;
   color: white;
 }
+
 .menu {
   max-width: 320px;
   margin: auto;
@@ -194,14 +183,13 @@ h1 {
   width: 100%;
   margin: 8px;
   padding: 10px 0;
-  border-radius: 46.25px;
+  border-radius: 64px;
   font-size: 12pt;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
   color: #363636;
   background-color: #ffffffb3;
-  opacity: 0.7;
 }
 
 .menu > button {
@@ -214,6 +202,8 @@ h1 {
   padding: 12px 0;
   padding-bottom: 48px;
   margin-bottom: 0;
+  text-align: center;
+  color: white;
   font-size: 9pt;
 }
 
