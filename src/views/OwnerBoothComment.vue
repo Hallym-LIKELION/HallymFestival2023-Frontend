@@ -155,7 +155,7 @@ export default {
   margin-top: 12px;
 }
 .comment-list > * {
-  width: 100%;
-  margin: 10px 0;
+  max-width: 400px;
+  margin: 10px auto;
 }
 </style>
