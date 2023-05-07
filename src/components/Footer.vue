@@ -10,7 +10,7 @@
 </template>
 <style scoped>
 .footer {
-  padding: 10px;
+  padding: 8px;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
