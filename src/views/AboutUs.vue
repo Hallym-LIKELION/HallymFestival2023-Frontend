@@ -226,11 +226,6 @@ export default {
 </script>
 
 <style scoped>
-.title-image {
-  width: 50%;
-  margin: 9px auto;
-}
-
 .hidden {
   visibility: hidden;
 }

@@ -155,10 +155,12 @@ export default {
 
       const toast = useToast();
 
-      if (res.result === 'already reported') {
+      if (res.result === 'already repoted') {
         toast('이미 신고가 완료되었습니다.');
+        return;
       } else if (res.result === 'does not exist comment') {
         toast('해당 항목이 더 이상 존재하지 않습니다.');
+        return;
       }
 
       toast('신고가 완료되었습니다.');

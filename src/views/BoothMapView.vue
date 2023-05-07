@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Header :image="HeaderImage" text="부스 목록" content="다양한 부스를 만나보세요" />
+    <Header :image="HeaderImage" text="부스 목록" content="" />
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin" />
@@ -54,7 +54,6 @@ import Pagination from '../components/Pagination.vue';
 import {
   GetAuthority,
   GetBoothList,
-  CreateBooth,
   GetBoothListWithComment,
   GetBoothListWithLike,
   GetBoothListWithReport
@@ -171,35 +170,6 @@ export default {
 </script>
 
 <style scoped>
-.title-image {
-  width: 50%;
-  margin: 10px auto;
-}
-.title-wrap {
-  width: 30%;
-  margin: 10px auto;
-  position: relative;
-}
-.title-wrap img {
-  width: 100%;
-  vertical-align: middle;
-}
-.title-text {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 20px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
-}
 h1 {
   font-size: 20pt;
   text-align: center;

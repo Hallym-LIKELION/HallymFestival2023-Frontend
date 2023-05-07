@@ -104,42 +104,6 @@ export default {
 </script>
 
 <style scoped>
-.title-image {
-  width: 60%;
-  margin: 8px auto;
-}
-.first {
-  width: 60%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.title-wrap {
-  width: 30%;
-  margin: 10px auto;
-  position: relative;
-}
-.title-wrap img {
-  width: 100%;
-  vertical-align: middle;
-}
-.title-text {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 20px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
-}
-
 .content {
   margin: 0 -28px;
   padding: 0 12px;
