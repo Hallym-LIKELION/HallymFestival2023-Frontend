@@ -2,7 +2,7 @@
   <main>
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/OGoods.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/OGoods.png" alt="" />
       </div>
       <div class="title-text">굿즈</div>
     </div>
@@ -105,6 +105,16 @@ export default {
 </script>
 
 <style scoped>
+.title-image {
+  width: 60%;
+  margin: 8px auto;
+}
+.first {
+  width: 60%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .title-wrap {
   width: 30%;
   margin: 10px auto;

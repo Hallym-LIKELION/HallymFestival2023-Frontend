@@ -9,7 +9,7 @@
     />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Onotice.png" alt="" width="70" height="40" />
+        <img src="@/assets/overlay/Onotice.png" alt=""  />
       </div>
       <br />
       <div class="title-text">공지사항</div>
@@ -200,6 +200,10 @@ export default {
 </script>
 
 <style scoped>
+.title-image{
+  width:50%;
+  margin: 10px auto;
+}
 .title-wrap {
   width: 30%;
   margin: 10px auto;
