@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <!-- <img class="profile" src="https://placehold.co/48x48" alt="" /> -->
+      <img class="profile" :src="image" :style="{ backgroundColor: '#' + imageColor }" />
       <p class="nickname">
         {{ GetRandomNickName(myIP) }}
       </p>
@@ -33,8 +33,24 @@
 
 <script>
 import SendImage from '../../assets/send.png';
-import { GetRandomNickName } from '../../library/name-generator';
+import { GetRandomNickName, GetRandomImage } from '../../library/name-generator';
 import { GetMyIP, CreateBoothComment } from '../../api/api-client';
+
+import ProfileImage1 from '@/assets/profile/1.png';
+import ProfileImage2 from '@/assets/profile/2.png';
+import ProfileImage3 from '@/assets/profile/3.png';
+import ProfileImage4 from '@/assets/profile/4.png';
+import ProfileImage5 from '@/assets/profile/5.png';
+import ProfileImage6 from '@/assets/profile/6.png';
+
+const images = [
+  ProfileImage1,
+  ProfileImage2,
+  ProfileImage3,
+  ProfileImage4,
+  ProfileImage5,
+  ProfileImage6
+];
 
 export default {
   data() {
@@ -42,6 +58,9 @@ export default {
       SendImage,
 
       myIP: '',
+
+      image: '',
+      imageColor: 'ffffff',
 
       commentContent: '',
       commentPassword: ''
@@ -82,6 +101,9 @@ export default {
   },
   async created() {
     this.myIP = await GetMyIP();
+    let data = GetRandomImage(this.myIP);
+    this.image = images[data.image];
+    this.imageColor = data.color;
   }
 };
 </script>

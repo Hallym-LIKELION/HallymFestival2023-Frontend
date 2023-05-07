@@ -7,6 +7,9 @@
       @complete="completeNoticeModal"
       @close="closeNoticeModal"
     />
+
+    <div class="background"></div>
+
     <Header :image="HeaderImage" text="공지사항" content="" />
 
     <div class="search-bar">
@@ -205,6 +208,23 @@ h1 {
   color: #ffffff;
 }
 
+.background {
+  position: absolute;
+  z-index: -1;
+  width: 824px;
+  margin-top: 140px;
+  margin-left: -28px;
+  height: calc(100% - 56px - 240px);
+  background-color: #fbfbfbe6;
+  /* top: 10%; */
+}
+
+@media screen and (max-width: 824px) {
+  .background {
+    width: 100%;
+  }
+}
+
 .search-bar {
   margin: 0 10px;
   margin-bottom: 24px;
@@ -216,13 +236,12 @@ h1 {
   margin: 0 -28px;
   padding: 36px 24px;
   font-family: 'Nanum Gothic', sans-serif;
-  background-color: #fbfbfbe6;
 }
 
 .announcement-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 
   align-items: center;
 }

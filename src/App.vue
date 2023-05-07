@@ -102,7 +102,7 @@ export default {
       navList: [
         { name: '공지사항', url: '/announcement' },
         { name: '부스', url: '/boothmap' },
-        { name: '시간표', url: '/timetable' },
+        { name: '타임 테이블', url: '/timetable' },
         { name: '프로그램', url: '/program' },
         { name: '굿즈', url: '/goods' },
         { name: '방명록', url: '/comment' },
