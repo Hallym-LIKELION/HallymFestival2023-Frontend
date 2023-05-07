@@ -166,4 +166,25 @@ export default {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 400px) {
+  .header {
+    margin: 4px 0;
+  }
+  .header > .id {
+    font-size: 11pt;
+  }
+  .header > .title {
+    font-size: 11pt;
+    margin: 0 8px;
+  }
+
+  .wrapper {
+    padding: 0 8px;
+  }
+
+  .content {
+    font-size: 10pt;
+  }
+}
 </style>
