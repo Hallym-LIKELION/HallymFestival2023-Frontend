@@ -148,6 +148,15 @@ export async function GetBooth(booth_id) {
   return res.data;
 }
 
+export async function SearchBoothList(search, day, isDay, page = 0) {
+  let url = `${HOST}/booth/list?type=tod&keyword=${search},${day},${isDay ? 'd' : 'n'}`;
+  if (page !== 0) {
+    url += '&page=' + page;
+  }
+  const res = await axios.get(url);
+  return res.data;
+}
+
 export async function CreateBooth(title, content, writer, type) {
   const data = {
     booth_title: title,

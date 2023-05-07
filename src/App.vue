@@ -248,8 +248,8 @@ export default {
 .background .post {
   position: absolute;
   left: 50%;
-  bottom: -180px;
-  width: 300px;
+  bottom: -100px;
+  width: 220px;
   transform: translateX(-50%);
 }
 .background .letter {
@@ -260,7 +260,7 @@ export default {
   transform: translateX(-50%);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 400px) {
   .background .letter {
     width: 500px;
   }
