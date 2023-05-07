@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     openBoothRecommendation() {
-      alert('준비중');
+      window.open('https://hallym-booth.vercel.app/', '_blank');
     }
   },
   mounted() {
