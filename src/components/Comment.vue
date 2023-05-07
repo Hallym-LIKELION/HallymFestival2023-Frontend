@@ -116,14 +116,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #d9d9d9;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 8px #00000033;
 }
 
 .wrapper.yellow {
   background-color: #fff4ce;
+  box-shadow: none;
 }
 .wrapper.pink {
   background-color: #fce3f3;
+  box-shadow: none;
 }
 
 .header {
