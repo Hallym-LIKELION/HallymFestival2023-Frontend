@@ -12,7 +12,7 @@ const HOST = 'https://www.hallymfestival.com/api';
 // accessToken을 Set-Cookie로 전달하지 않는다고하면 이 방법으로 토큰을 저장
 let token = Cookies.get('access_token') || null;
 let role = parseInt(Cookies.get('role')) ?? 0;
-let id = Cookies.get('id');
+let id = Cookies.get('id') || null;
 
 const period = new Date(Date.now() + 10000);
 
@@ -26,6 +26,10 @@ export function GetAuthority() {
   } else {
     return 0;
   }
+}
+
+export function GetUserId() {
+  return id;
 }
 
 export function DeleteToken() {
@@ -191,7 +195,7 @@ export async function ModifyBooth(
 
 export async function DeleteBooth(booth_id, writer) {
   const res = await axios.post(
-    HOST + 'booth/auth/' + booth_id,
+    HOST + '/booth/auth/' + booth_id,
     {
       writer
     },
