@@ -75,7 +75,7 @@ export default {
       this.$emit('close');
     },
     dateFormat(date) {
-      return dayjs(date).format('YYYY년 MM월 DD일 HH시 mm분');
+      return dayjs(date).format('YYYY.MM.DD HH:mm');
     }
   },
   watch: {
@@ -178,5 +178,27 @@ export default {
   border-radius: 24px;
   background-color: #ca434c;
   color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .title {
+    font-size: 12pt;
+  }
+
+  .content {
+    font-size: 9pt;
+    min-height: 80px;
+  }
+
+  .date,
+  .place {
+    font-size: 8pt;
+  }
+
+  .date > div,
+  .place > div {
+    width: auto;
+    padding: 4px 12px;
+  }
 }
 </style>

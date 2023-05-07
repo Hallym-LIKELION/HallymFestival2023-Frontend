@@ -78,4 +78,15 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@media screen and (max-width: 400px) {
+  .title {
+    font-size: 11pt;
+  }
+
+  .description {
+    margin: 4px 0;
+    font-size: 9pt;
+  }
+}
 </style>
