@@ -102,7 +102,7 @@ export default {
     },
 
     dateToString(date) {
-      return dayjs(date).format('YYYY년 MM월 DD일 HH:mm:ss');
+      return dayjs(date).format('YYYY.MM.DD HH:mm');
     }
   },
 
@@ -227,7 +227,7 @@ export default {
   }
 
   .container.large {
-    height: 90px;
+    height: 76px;
   }
 
   .image-content {
@@ -246,9 +246,21 @@ export default {
     font-size: 9pt;
   }
 
+  .info > div {
+    font-size: 8pt;
+  }
+
   .info > div > img {
     width: 16px;
     height: 16px;
+  }
+
+  .footer {
+    margin-top: 8px;
+  }
+
+  .footer > p {
+    font-size: 5pt;
   }
 }
 </style>

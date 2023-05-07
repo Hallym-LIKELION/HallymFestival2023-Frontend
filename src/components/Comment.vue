@@ -206,6 +206,10 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .name {
+    font-size: 8pt;
+  }
+
   .name > span {
     font-size: 10pt;
   }

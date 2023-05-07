@@ -72,6 +72,7 @@ export default {
 .modal-header > p {
   font-size: 15pt;
   text-align: center;
+  word-break: keep-all;
 }
 
 .modal-header > p.error {
@@ -119,5 +120,25 @@ input {
 }
 .modal-button.back {
   background-color: #434343;
+}
+
+@media screen and (max-width: 400px) {
+  .modal-header > p {
+    font-size: 9pt;
+  }
+
+  input {
+    font-size: 14pt;
+  }
+
+  .modal-button {
+    width: 80px;
+    margin: 0 8px;
+    margin-top: 8px;
+    padding: 4px;
+    border-radius: 24px;
+    font-size: 10pt;
+    color: white;
+  }
 }
 </style>
