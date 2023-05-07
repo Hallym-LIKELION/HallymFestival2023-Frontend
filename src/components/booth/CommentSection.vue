@@ -201,6 +201,8 @@ export default {
     this.totalItems = data.total;
     this.itemsPerPage = data.size;
     this.$emit('update', data.total);
+
+    console.log(this.totalItems, this.itemsPerPage);
   }
 };
 </script>
