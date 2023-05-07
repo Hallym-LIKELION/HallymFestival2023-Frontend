@@ -61,8 +61,8 @@ export default {
   },
   props: {
     id: {
-      type: Number,
-      default: 0
+      type: String,
+      default: '0'
     },
     ip: {
       type: String,
@@ -207,6 +207,7 @@ export default {
 .comment {
   width: 100%;
   height: 60px;
+  margin-top: 6px;
   word-break: break-all;
   overflow: hidden;
 }

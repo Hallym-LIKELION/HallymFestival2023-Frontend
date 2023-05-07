@@ -4,7 +4,7 @@
       :show="showContextMenu"
       :x="contextMenuX"
       :y="contextMenuY"
-      @clickDelete="openPasswordModal"
+      @clickDelete="deleteComment"
       @clickReport="reportComment"
       @clickOutside="closeMenu"
     />
@@ -23,7 +23,7 @@
     <div class="comment-list">
       <template v-for="(item, index) in list">
         <Comment
-          :id="item.cno"
+          :id="item.bno + '_' + item.cno"
           :name="GetRandomNickName(item.ip)"
           :comment="item.content"
           :booth="item.booth_title"
@@ -41,7 +41,7 @@
 import Comment from '../components/Comment.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Pagination from '../components/Pagination.vue';
-import { GetCommentListWithReport } from '../api/api-client';
+import { GetCommentListWithReport, DeleteBoothCommentWithAdmin } from '../api/api-client';
 import { GetRandomNickName } from '../library/name-generator';
 
 export default {
@@ -84,6 +84,11 @@ export default {
     closeMenu() {
       this.contextMenuTargetID = -1;
       this.showContextMenu = false;
+    },
+
+    async deleteComment() {
+      console.log(this.contextMenuTargetID);
+      this.$router.push('/booth/' + this.contextMenuTargetID.split('_')[0]);
     },
 
     async changePage(page) {
