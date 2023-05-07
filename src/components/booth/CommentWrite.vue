@@ -151,7 +151,11 @@ export default {
 }
 .footer-password {
   font-size: 11pt;
+  padding: 2px 8px;
   margin-right: 12px;
+  width: 100%;
+  border: none;
+  background-color: #d3d3d3;
   font-family: 'NanumGothic', Arial, Helvetica, sans-serif;
 }
 
