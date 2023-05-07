@@ -21,9 +21,9 @@
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
     </div>
 
-    <div class="sponsor" ref="sponsor" @click="openNaverCloud">
-      <img src="@/assets/naverlogo.png" alt="" />
-      <p>본 웹사이트는 NAVER CLOUD PLATFORM의 서버를 협찬 받아 사용하고 있습니다.</p>
+    <div class="sponsor" ref="sponsor">
+      <img src="@/assets/naverlogo.png" alt="" @click="openNaverCloud" />
+      <p @click="openNaverCloud">본 웹사이트는 NAVER CLOUD PLATFORM의 협찬을 받았습니다.</p>
     </div>
   </main>
 </template>
@@ -120,13 +120,11 @@ export default {
       this.$refs.sponsor,
       {
         opacity: 0,
-        transform: 'scale(0.5)',
         pointerEvents: 'none'
       },
       {
         delay: 4.25,
         duration: 1.5,
-        transform: 'none',
         opacity: 1,
         pointerEvents: 'auto',
         ease: 'Expo.easeOut'
@@ -214,13 +212,18 @@ h1 {
 .sponsor {
   margin: 64px -28px;
   padding: 12px 0;
+  padding-bottom: 48px;
   margin-bottom: 0;
-  background-color: #00000088;
-  cursor: pointer;
+  font-size: 9pt;
 }
 
 .sponsor > img {
-  max-width: 180px;
+  max-width: 140px;
   margin: 18px 0;
+  cursor: pointer;
+}
+
+.sponsor > p {
+  cursor: pointer;
 }
 </style>

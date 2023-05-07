@@ -245,7 +245,7 @@ export default {
 .background .post {
   position: absolute;
   left: 50%;
-  bottom: -200px;
+  bottom: -180px;
   width: 300px;
   transform: translateX(-50%);
 }
@@ -257,16 +257,13 @@ export default {
   transform: translateX(-50%);
 }
 
-@media screen and (max-width: 824px) {
-}
-
-@media screen and (max-width: 400px) {
-  .background > .letter {
-    width: 400px;
+@media screen and (max-width: 500px) {
+  .background .letter {
+    width: 500px;
   }
-  .background > .post {
+  .background .post {
     width: 160px;
-    bottom: -20px;
+    bottom: -30px;
   }
 }
 
