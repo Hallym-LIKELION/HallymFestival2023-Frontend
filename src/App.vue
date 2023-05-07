@@ -340,6 +340,7 @@ nav :hover {
   margin: auto;
   padding: 0 28px;
   padding-top: 56px;
+  overflow: hidden;
 }
 
 /* 트랜지션 기능 테스트 */
