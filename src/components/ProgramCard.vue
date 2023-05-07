@@ -1,9 +1,8 @@
 <template>
   <div class="wrapper">
-    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" /><br>
-    <h4 class="title" v-text="title"></h4><br>
-    <p class="description" v-text="description"></p><br>
-    <hr style="border: solid 2px white " class ="line" />
+    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" />
+    <h4 class="title" v-text="title"></h4>
+    <p class="description" v-text="description"></p>
   </div>
 </template>
 
@@ -35,6 +34,7 @@ p {
 }
 .wrapper {
   width: 100%;
+  margin-bottom: 12px;
   padding: 0 8px;
   display: flex;
   flex-direction: column;
@@ -42,43 +42,39 @@ p {
   align-items: flex-start;
   font-family: 'Nanum Gothic';
   overflow: hidden;
-  color:black;
+  color: black;
   display: flex;
   flex-direction: column;
-}
-.wrapper h4{
-  font-family: 'Nanum Gothic';
-  font-size: 20pt;
-  display: flex;
-  flex-direction: column;
-}
-.wrapper> .line {
-  opacity : 0.3;
 }
 
 :deep(.image) {
   width: 100%;
+  border-radius: 8px;
   object-fit: contain;
 }
 
-.wrapper > .title {
+.title {
+  margin-top: 16px;
   font-family: 'Nanum Gothic';
   font-size: 20pt;
   font-weight: 600;
-  color:black;
+
   display: flex;
   flex-direction: column;
+
+  color: black;
 }
 
-.wrapper p {
-  font-family:  'Nanum Gothic';
+.description {
   width: 100%;
+  margin: 16px 0;
+  font-family: 'Nanum Gothic';
+
+  color: black;
+
   /* 텍스트 오버플로우를 ... 으로 숨기기 */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color:black;
-  display: flex;
-  flex-direction: column;
 }
 </style>
