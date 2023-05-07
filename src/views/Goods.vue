@@ -1,104 +1,112 @@
 <template>
   <main>
-    <br /><br /><br /><br />
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/OGoods.png" alt="" />
       </div>
       <div class="title-text">굿즈</div>
     </div>
-    <br /><br />
 
-    <div class="goods-text">
-      <br /><br />
-      <p>이번 축제를 맞이하여 축제준비위원회에서 준비한 굿즈! </p>
-      <br />
-      <p>많은 관심 바랍니다! </p>
-      <br />
-      <p>구매를 희망하시는 학우분들은 '구매하러가기' 클릭!</p>
+    <div class="content">
+      <p>
+        귀여운 덕림이가 가득한 2023 한림대학교 축제 굿즈가 출시되었습니다! 굿즈는 축제 기간동안 전용
+        부스에서 구매하시거나, 사전 구매 폼을 통해서 구매하실 수 있습니다!
+      </p>
 
-      <div class="first">
-        <div class="dcard">
-          <img src="@/assets/goods/그립톡.png" alt="" width="100" height="100" />
-          <div class="inform">
-            <h7>그립톡(덕림톡)</h7>
-            <br />
-            <h4>학생회비 납부 : 4,000원<br/> 학생회비 미납 : 5,000원</h4>
+      <template v-for="item in list">
+        <div class="list" v-for="anotherItem in item">
+          <div class="card" v-for="product in anotherItem">
+            <Image :src="product.image" class="card-image"></Image>
+            <div class="card-info">
+              <p class="name">{{ product.name }}</p>
+              <p class="desc" v-for="text in product.content">{{ text }}</p>
+              <p class="small" v-if="product.small">{{ product.small }}</p>
+            </div>
           </div>
         </div>
+      </template>
 
-        <div class="dcard">
-          <img src="@/assets/goods/소주잔.png" alt="" width="100" height="80" />
-          <div class="inform">
-            <h7>취덕이 소주잔</h7>
-            <br />
-            <h4>학생회비 납부 : 3,000원<br/> 학생회비 미납 :  4,000원</h4>
-            <p>글라스 소주잔/2EA 세트판매</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="first">
-      <div class="dcard">
-        <img src="@/assets/goods/맥주잔.png" alt="" width="100" height="80" />
-        <div class="inform">
-          <h7>고백 맥주잔</h7>
-          <br />
-          <h4>학생회비 납부 : 5,000원<br/> 학생회비 미납 :  6,000원</h4>
-          <p>글라스 맥주잔 380ml</p>
-        </div>
-      </div>
-
-      <div class="dcard">
-        <img src="@/assets/goods/스티커.png" alt="" width="100" height="100" />
-        <div class="inform">
-          <h7>스티커</h7>
-          <br />
-          <h4>학생회비 납부 : 2,000원<br/> 학생회비 미납 : 3,000원</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="first">
-      <div class="dcard">
-        <img src="@/assets/goods/떡메모지.png" alt="" width="100" height="100" />
-        <div class="inform">
-          <h7>떡메모지</h7>
-          <br />
-          <h4>1EA: 1,500원 <br/>SET: 4,000원</h4>
-        </div>
-      </div>
-
-      <div class="dcard">
-        <img src="@/assets/goods/부채.png" alt="" width="100" height="100" />
-        <div class="inform">
-          <h7>땀림이 손잡이 부채</h7>
-          <br />
-          <h4>무료</h4>
-          <p>하루 당 330개 총 1000개</p>
-        </div>
-      </div>
-    </div>
-      <button>
-        <button @click="openform" class="button"><b>구매하러가기</b></button>
-      </button>
+      <button @click="openform" class="buy">사전 구매하기 (구글 폼)</button>
     </div>
   </main>
 </template>
 
 <script>
+import GoodsOne from '@/assets/goods/그립톡.png';
+import GoodsTwo from '@/assets/goods/소주잔.png';
+import GoodsThree from '@/assets/goods/맥주잔.png';
+import GoodsFour from '@/assets/goods/스티커.png';
+import GoodsFive from '@/assets/goods/떡메모지.png';
+import GoodsSix from '@/assets/goods/부채.png';
+import Image from '../components/Image.vue';
+
 export default {
+  components: { Image },
+  data() {
+    return {
+      list: [
+        {
+          list: [
+            {
+              image: GoodsOne,
+              name: '그립톡 (덕림톡)',
+              content: ['학생회비 납부 : 4,000원', '학생회비 미납 : 5,000원']
+            },
+            {
+              image: GoodsTwo,
+              name: '취덕이 소주잔',
+              content: ['학생회비 납부 : 3,000원', '학생회비 미납 : 4,000원'],
+              small: '글라스 소주잔/2EA 세트판매'
+            }
+          ]
+        },
+        {
+          list: [
+            {
+              image: GoodsThree,
+              name: '고백 맥주잔',
+              content: ['학생회비 납부 : 4,000원', '학생회비 미납 : 5,000원'],
+              small: '글라스 맥주잔 380ml'
+            },
+            {
+              image: GoodsFour,
+              name: '스티커',
+              content: ['학생회비 납부 : 3,000원', '학생회비 미납 : 4,000원']
+            }
+          ]
+        },
+        {
+          list: [
+            {
+              image: GoodsFive,
+              name: '떡메모지',
+              content: ['1EA: 1,500원', 'SET: 4,000원']
+            },
+            {
+              image: GoodsSix,
+              name: '땀림이 손잡이 부채',
+              content: ['무료'],
+              small: '하루 당 330개 총 1000개'
+            }
+          ]
+        }
+      ]
+    };
+  },
   methods: {
     openform() {
-      window.open('https://docs.google.com/forms/d/e/1FAIpQLScVG8DCqrh_KajzWoqSAFRHG84VF4L5FDE5oMoJvqxG7OPhwQ/viewform', '_blank');
+      window.open(
+        'https://docs.google.com/forms/d/e/1FAIpQLScVG8DCqrh_KajzWoqSAFRHG84VF4L5FDE5oMoJvqxG7OPhwQ/viewform',
+        '_blank'
+      );
     }
   }
 };
 </script>
 
 <style scoped>
-.title-image{
-  width:60%;
+.title-image {
+  width: 60%;
   margin: 8px auto;
 }
 .first {
@@ -132,74 +140,100 @@ export default {
   padding: 36px 0;
   color: #ffffff;
 }
-h1 {
-  font-size: 30pt;
+
+.content {
+  margin: 0 -28px;
+  padding: 0 12px;
+  padding-top: 24px;
+  background-color: #fbfbfbe6;
+  border-radius: 72px 72px 0 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   text-align: center;
 }
-p {
-  font-size: 10pt;
-  text-align: center;
-  color: black;
+
+.content > p {
+  margin: 24px 8px;
+  font-size: 12pt;
+  max-width: 600px;
+  word-break: keep-all;
+  line-height: 16pt;
 }
-h7 {
-  color: black;
-}
-h4 {
-  color: black;
-}
-.dcard {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 100) 0%, rgba(255, 255, 255, 100) 100%);
-  border-radius: 16px;
-  width: 151px;
-  height: 160px;
-  padding: 10px;
-  margin: 10px;
-  text-decoration: none;
-  text-align: center;
-  color: black;
-  float: left;
-  position: center;
-  top: 50%;
-  left: 50%;
-}
-.inform {
-  font-size: 16px;
-  color: #ffffff;
-}
-.inform h7{
-  font-size: 18px;
-  margin: 10px auto;
-}
-.inform h4{
-  font-size: 12px;
-  margin: 6px auto;
-}
-.inform p{
-  font-size: 10px;
-}
-.button {
-  margin: 0 10px;
-  margin-bottom: 24px;
-  width: 328px;
-  height: 40px;
-  margin-top: 15px;
-  padding: 6px 10px;
-  border-radius: 18px;
+
+.content > .list {
+  width: 100%;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
-  text-align: center;
+  align-items: center;
+}
+
+.content > .list > .card:nth-child(1) {
+  margin-right: 16px;
+}
+.content > .list > .card:nth-child(2) {
+  margin-left: 16px;
+}
+
+.card {
+  width: 200px;
+  height: 240px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.card > .card-info > .name {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 14pt;
+}
+.card > .card-info > .desc {
+  font-size: 11pt;
+}
+.card > .card-info > .small {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 8pt;
+}
+
+:deep(.card-image) {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.buy {
+  margin: 24px 0;
+  max-width: 400px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 14pt;
+  color: white;
   background-color: #ca434c;
-  font-size: 17pt;
-  color: white; 
-  top: 50%;
-  left: 50%;
 }
-h1 {
-  color: #ffffff;
-}
-.goods-text {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 100px 100px 0px 0px;
-  font-size: 1rem;
+
+@media screen and (max-width: 400px) {
+  .content > .list {
+    margin: 0;
+    flex-direction: column;
+  }
+  .card {
+    margin-top: 16px;
+  }
+
+  .content > .list > .card:nth-child(1) {
+    margin-right: 0;
+  }
+  .content > .list > .card:nth-child(2) {
+    margin-left: 0;
+  }
 }
 </style>
