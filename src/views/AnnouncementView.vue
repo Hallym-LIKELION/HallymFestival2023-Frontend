@@ -15,7 +15,7 @@
       <div class="title-text">공지사항</div>
     </div>
     <div class="search-bar">
-      <SearchBar v-model="search" @change="searchNotice" />
+      <ASearchBar v-model="search" @change="searchNotice" />
     </div>
     <div class="content">
       <div class="button-group" v-if="role == 2">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import SearchBar from '../components/ASearchBar.vue';
+import ASearchBar from '../components/ASearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import Pagination from '../components/Pagination.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
@@ -59,7 +59,7 @@ import {
 export default {
   name: 'AnnouncementView',
   components: {
-    SearchBar,
+    ASearchBar,
     FoldingArticle,
     Pagination,
     NoticeModal

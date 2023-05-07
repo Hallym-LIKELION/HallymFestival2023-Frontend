@@ -1,27 +1,25 @@
 <template>
-  <div class="home">
+  <div class="wrapper">
     <input
       type="text"
-      name=""
-      id=""
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value) "
+      @input="$emit('update:modelValue', $event.target.value)"
       @change="change"
       placeholder="검색어를 입력하세요"
-    />  <div class ="search" >
-    <img :src="searchImage" alt="" />
+    />
+    <div class="button" @click="change">
+      <img :src="Icon.findWhite" alt="" />
+    </div>
   </div>
-  </div>
-
 </template>
 
 <script>
-import searchImage from '@/assets/Asearch.png';
+import { Icon } from '../library/icon';
 
 export default {
   data() {
     return {
-      searchImage
+      Icon
     };
   },
   props: ['modelValue'],
@@ -35,29 +33,36 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  padding: 8px 12px;
-  border: 1px solid white;
-  background-color: white;
-  border-radius: 15px;
+.wrapper {
+  border-radius: 12px;
   display: flex;
   align-items: center;
   width: 300px;
+  overflow: hidden;
 }
 
 img {
   width: 20px;
-  height:20px;
-  margin-right: 8px;
+  height: 20px;
 }
-.search{
 
+.button {
+  width: 56px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5c859b;
+
+  cursor: pointer;
 }
 
 input {
   width: 100%;
+  height: 36px;
+  padding: 8px 12px;
+  box-sizing: border-box;
   background-color: white;
-  border: none;
   outline: none;
   font-family: 'Nanum Gothic', sans-serif;
 }
