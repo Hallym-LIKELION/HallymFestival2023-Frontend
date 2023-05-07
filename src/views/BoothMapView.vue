@@ -7,7 +7,9 @@
       <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
     </div>
 
-    <div class="search-bar" v-if="admin !== 2"><SearchBar v-model="search" /></div>
+    <div class="search-bar" v-if="admin !== 2">
+      <SearchBar v-model="search" @change="updateValue" />
+    </div>
 
     <div class="button-group">
       <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
@@ -56,7 +58,8 @@ import {
   GetBoothList,
   GetBoothListWithComment,
   GetBoothListWithLike,
-  GetBoothListWithReport
+  GetBoothListWithReport,
+  SearchBoothList
 } from '../api/api-client';
 
 export default {
@@ -75,6 +78,8 @@ export default {
       list: [],
       search: '',
       day: 1,
+
+      dayNight: true,
 
       admin: GetAuthority(),
 
@@ -100,6 +105,10 @@ export default {
     },
     selectDay(day) {
       this.day = day;
+      this.updateValue();
+    },
+    updateValue() {
+      this.changePageWithSearch(1);
     },
     async selectSort(value) {
       if (value == 1) {
@@ -113,11 +122,13 @@ export default {
       }
     },
     switchDayNight(isDay) {
+      this.dayNight = isDay;
       if (isDay) {
         this.slide = 0;
       } else {
         this.slide = 3;
       }
+      this.updateValue();
     },
 
     randomNumber(a, b) {
@@ -126,6 +137,10 @@ export default {
 
     async changePage(page) {
       this.applyData(await GetBoothList(page));
+    },
+
+    async changePageWithSearch(page) {
+      this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
     },
 
     applyData(data) {
