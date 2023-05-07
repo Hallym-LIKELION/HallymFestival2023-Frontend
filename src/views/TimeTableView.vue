@@ -422,8 +422,8 @@ h1 {
 
 @media screen and (max-width: 400px) {
   .background {
-    margin-top: 110px;
-    height: calc(100% - 56px - 120px);
+    margin-top: 115px;
+    height: calc(100% - 56px - 135px);
   }
 
   .button-group {
