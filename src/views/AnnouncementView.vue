@@ -19,7 +19,7 @@
     </div>
     <div class="content" ref="announcementList">
       <div class="button-group" ref="buttonGroup" v-if="role == 2">
-        <button @click="clickCreate">글쓰기</button>
+        <button @click="clickCreate"><b>글쓰기</b></button>
       </div>
       <div class="announcement-list">
         <template v-for="item in list" :key="item.nno">
