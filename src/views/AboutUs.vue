@@ -214,7 +214,7 @@ export default {
 <style scoped>
 .title-image{
   width:50%;
-  margin: 8px auto;
+  margin: 9px auto;
 }
 
 .hidden {
