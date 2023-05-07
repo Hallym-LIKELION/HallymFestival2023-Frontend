@@ -25,7 +25,7 @@
 
     <FloatButton @click="openCommentModal" />
 
-    <div class="title-wrap" @click="useToast()('태스트')">
+    <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Oletter.png" alt="" width="70" height="40" />
       </div>
