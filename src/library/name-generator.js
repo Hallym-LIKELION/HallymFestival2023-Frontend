@@ -1,7 +1,7 @@
 'use strict';
 
 // name.json의 데이터는 임시로 ChatGPT를 통해 가져옴 -- 추후 기획에서 데이터 넘겨주면 그걸로 적용
-import { noun, adjective } from './name.json';
+import { noun, adjective, hexCode } from './name.json';
 
 /**
  * 특정한 시드를 이용하여 난수를 생성하는 함수를 만듭니다.
@@ -61,4 +61,30 @@ export function GetRandomNickName(ip) {
   const nounIndex = Math.floor(GetRandom() * noun.length);
   const adjIndex = Math.floor(GetRandom() * adjective.length);
   return `${adjective[adjIndex]} ${noun[nounIndex]}`;
+}
+
+/**
+ * 주어진 문자열을 시드로 사용하여 랜덤한 이미지를 만듭니다.
+ * @param {String} ip 랜덤 이미지를 만들 때 사용할 시드 ip 문자열입니다. (v4, v6 모두 지원)
+ * @returns {{ image: Number, color: String }} 랜덤하게 생성된 이미지(index)와 hex color code입니다.
+ */
+export function GetRandomImage(ip) {
+  let seed = 0;
+  const IPv4 = /\d{0,3}\.\d{0,3}\.\d{0,3}\.\d{0,3}/g;
+  const IPv6 =
+    /[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}/g;
+
+  if (IPv4.test(ip)) {
+    seed = Ipv4ToInt(ip);
+  } else if (IPv6.test(ip)) {
+    seed = Ipv6ToInt(ip);
+  }
+
+  const GetRandom = GetRandomFunction(seed);
+  const imageIndex = Math.floor(GetRandom() * 6);
+  const hexIndex = Math.floor(GetRandom() * hexCode.length);
+  return {
+    image: imageIndex,
+    color: hexCode[hexIndex]
+  };
 }

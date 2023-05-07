@@ -1,7 +1,7 @@
 <template>
   <div :class="['wrapper', { pink: color === 'PINK', yellow: color === 'YELLOW' }]">
     <div class="header">
-      <img class="picture" :src="picture" v-if="picture !== ''" />
+      <img class="picture" :src="image" :style="{ backgroundColor: '#' + imageColor }" />
 
       <p class="name">
         <span>{{ name }}</span> {{ booth }}
@@ -29,12 +29,33 @@
 import { GetAuthority } from '../api/api-client';
 import arrowImage from '@/assets/menu.png';
 import dayjs from 'dayjs';
+import { GetRandomImage, GetRandomNickName } from '../library/name-generator';
+
+import ProfileImage1 from '@/assets/profile/1.png';
+import ProfileImage2 from '@/assets/profile/2.png';
+import ProfileImage3 from '@/assets/profile/3.png';
+import ProfileImage4 from '@/assets/profile/4.png';
+import ProfileImage5 from '@/assets/profile/5.png';
+import ProfileImage6 from '@/assets/profile/6.png';
+
+const images = [
+  ProfileImage1,
+  ProfileImage2,
+  ProfileImage3,
+  ProfileImage4,
+  ProfileImage5,
+  ProfileImage6
+];
+
 export default {
   data() {
     return {
       arrowImage,
       eclipse: false,
       expand: false,
+      name: '',
+      image: 0,
+      imageColor: 'ffffff',
       role: GetAuthority()
     };
   },
@@ -43,13 +64,9 @@ export default {
       type: Number,
       default: 0
     },
-    picture: {
+    ip: {
       type: String,
-      default: ''
-    },
-    name: {
-      type: String,
-      default: '사용자'
+      default: '0.0.0.0'
     },
     comment: {
       type: String,
@@ -96,15 +113,33 @@ export default {
   computed: {
     timeDisplay() {
       return dayjs(this.time).format('YYYY년 M월 D일 HH:mm:ss');
+    },
+    picture() {
+      return GetRandomImage(this.ip);
     }
   },
   watch: {
     comment() {
       this.calculateHeight();
+    },
+    ip() {
+      let data = GetRandomImage(this.ip);
+      this.name = GetRandomNickName(this.ip);
+      this.image = images[data.image];
+      this.imageColor = data.color;
+
+      console.log(this.name, this.image, this.imageColor);
     }
   },
   mounted() {
     this.calculateHeight();
+
+    let data = GetRandomImage(this.ip);
+    this.name = GetRandomNickName(this.ip);
+    this.image = images[data.image];
+    this.imageColor = data.color;
+
+    console.log(this.name, this.image, this.imageColor);
   }
 };
 </script>
@@ -132,6 +167,7 @@ export default {
 .header {
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .menu-button {
@@ -206,6 +242,11 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .picture {
+    width: 16px;
+    height: 16px;
+  }
+
   .name {
     font-size: 8pt;
   }
