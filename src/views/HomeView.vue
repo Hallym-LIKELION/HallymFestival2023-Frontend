@@ -18,18 +18,12 @@
       <RouterLink to="/boothmap">부스 배치도</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
-    </div>
-    <div class="test-group" ref="boothTest">
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
     </div>
 
-    <div class="sponsor" ref="sponsor">
-      <p>이 웹사이트는</p>
-      <br /><br />
+    <div class="sponsor" ref="sponsor" @click="openNaverCloud">
       <img src="@/assets/naverlogo.png" alt="" />
-      <br /><br />
-      <p>의 서버 후원을 받아 제작되었습니다.</p>
-      <br /><br />
+      <p>본 웹사이트는 NAVER CLOUD PLATFORM의 서버를 협찬 받아 사용하고 있습니다.</p>
     </div>
   </main>
 </template>
@@ -47,6 +41,9 @@ export default {
   methods: {
     openBoothRecommendation() {
       window.open('https://hallym-booth.vercel.app/', '_blank');
+    },
+    openNaverCloud() {
+      window.open('https://www.ncloud.com/', '_blank');
     }
   },
   mounted() {
@@ -54,7 +51,8 @@ export default {
     gsap.fromTo(
       this.$refs.introPhrase,
       {
-        transform: 'translateY(-20%)',
+        top: '50%',
+        transform: 'translateY(-50%)',
         opacity: 0
       },
       {
@@ -90,7 +88,7 @@ export default {
         transform: 'translateY(100%)'
       },
       {
-        delay: 0.75,
+        delay: 1.5,
         duration: 2,
         transform: 'none',
         opacity: 1,
@@ -99,7 +97,7 @@ export default {
     );
 
     // 메뉴 애니메이션
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       gsap.fromTo(
         this.$refs.menu.childNodes[i],
         {
@@ -108,7 +106,7 @@ export default {
           pointerEvents: 'none'
         },
         {
-          delay: 1.75 + i * 0.25,
+          delay: 2.5 + i * 0.25,
           duration: 0.5,
           transform: 'none',
           opacity: 1,
@@ -117,35 +115,20 @@ export default {
       );
     }
 
-    // 부스 유형 애니메이션
-    gsap.fromTo(
-      this.$refs.boothTest,
-      {
-        transform: 'translateX(-10%)',
-        opacity: 0,
-        pointerEvents: 'none'
-      },
-      {
-        delay: 2.75,
-        duration: 0.5,
-        transform: 'none',
-        opacity: 1,
-        pointerEvents: 'auto'
-      }
-    );
-
     // 스폰서 애니메이션
     gsap.fromTo(
       this.$refs.sponsor,
       {
         opacity: 0,
-        transform: 'scale(0.5)'
+        transform: 'scale(0.5)',
+        pointerEvents: 'none'
       },
       {
-        delay: 3.25,
+        delay: 4.25,
         duration: 1.5,
         transform: 'none',
         opacity: 1,
+        pointerEvents: 'auto',
         ease: 'Expo.easeOut'
       }
     );
@@ -153,13 +136,16 @@ export default {
 };
 </script>
 <style scoped>
+main {
+}
+
 .sponsor {
   margin-top: 32px;
   text-align: center;
   color: white;
 }
-.sponsor img{
-  width: 50%
+.sponsor img {
+  width: 50%;
 }
 p {
   text-align: center;
@@ -208,36 +194,33 @@ h1 {
 
 .menu > * {
   width: 100%;
-  margin: 4px;
+  margin: 8px;
   padding: 10px 0;
   border-radius: 46.25px;
-  font-size: 1rem;
+  font-size: 12pt;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
-  color: black;
-  background-color: lightgray;
+  color: #363636;
+  background-color: #ffffffb3;
   opacity: 0.7;
-}
-.test-group {
-  max-width: 320px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 24px;
 }
 
-.test-group > button {
-  width: 100%;
-  margin: 4px 0;
-  padding: 10px 0;
-  border-radius: 46.25px;
-  background-color: #ca434c;
-  opacity: 0.7;
+.menu > button {
   color: white;
-  font-size: 1rem;
-  text-align: center;
-  text-decoration: none;
+  background-color: #ca434cb3;
+}
+
+.sponsor {
+  margin: 64px -28px;
+  padding: 12px 0;
+  margin-bottom: 0;
+  background-color: #00000088;
+  cursor: pointer;
+}
+
+.sponsor > img {
+  max-width: 180px;
+  margin: 18px 0;
 }
 </style>

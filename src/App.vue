@@ -1,7 +1,26 @@
 <template>
   <main>
     <div class="container">
-      <div class="background" :style="{ backgroundPositionY: `${10 + 20 * scroll}%` }"></div>
+      <div class="background" :style="{ backgroundPositionY: `${10 + 20 * scroll}%` }">
+        <Transition name="fade">
+          <div v-if="decoration">
+            <img
+              ref="post"
+              class="post"
+              src="@/assets/post.png"
+              alt=""
+              :style="{ marginBottom: `calc(${3 * scroll}% - 12px` }"
+            />
+            <img
+              ref="letter"
+              class="letter"
+              src="@/assets/letter.png"
+              alt=""
+              :style="{ marginBottom: `calc(${3 * scroll}% - 24px` }"
+            />
+          </div>
+        </Transition>
+      </div>
 
       <Transition name="fade">
         <div class="dimmer" v-if="showMenu" @click="() => (showMenu = false)"></div>
@@ -98,6 +117,11 @@ export default {
       Icon
     };
   },
+  computed: {
+    decoration() {
+      return ['/', '/admin', '/login'].includes(this.$router.currentRoute.value.path);
+    }
+  },
   created() {
     this.$router.beforeEach((to, from, next) => {
       this.footerAnimation();
@@ -108,7 +132,7 @@ export default {
 
     API.GetAPI();
   },
-  mounted() {},
+
   methods: {
     async openMyBooth(evt) {
       evt.stopPropagation();
@@ -187,7 +211,8 @@ export default {
       this.update = !this.update;
       this.footerAnimation();
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -209,10 +234,40 @@ export default {
   margin-left: -412px;
   position: fixed;
 
+  overflow: hidden;
+
   z-index: -1;
   background-image: url('./assets/back.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.background .post {
+  position: absolute;
+  left: 50%;
+  bottom: -200px;
+  width: 300px;
+  transform: translateX(-50%);
+}
+.background .letter {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+@media screen and (max-width: 824px) {
+}
+
+@media screen and (max-width: 400px) {
+  .background > .letter {
+    width: 400px;
+  }
+  .background > .post {
+    width: 160px;
+    bottom: -20px;
+  }
 }
 
 header {
