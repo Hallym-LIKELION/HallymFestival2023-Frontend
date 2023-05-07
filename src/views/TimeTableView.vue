@@ -109,6 +109,24 @@ export default {
           content: ['연예인 공연'],
           space: '한림대 대운동장',
           day: [3]
+        },
+        {
+          time: '21:00 ~ ',
+          content: ['연예인 공연'],
+          space: '한림대 대운동장',
+          day: [3]
+        },
+        {
+          time: '21:00 ~ ',
+          content: ['연예인 공연'],
+          space: '한림대 대운동장',
+          day: [3]
+        },
+        {
+          time: '21:00 ~ ',
+          content: ['연예인 공연'],
+          space: '한림대 대운동장',
+          day: [3]
         }
       ],
       day: 1,
@@ -218,18 +236,14 @@ export default {
   width: 50%;
   margin: 10px auto;
 }
-main {
-  overflow: hidden;
-  min-height: calc(100vh - 136px);
-}
 
 .background {
   position: absolute;
   z-index: -1;
   width: 824px;
-  margin-top: 160px;
+  margin-top: 140px;
   margin-left: -28px;
-  height: calc(100% - 56px - 160px);
+  height: calc(100% - 56px - 150px);
   background-color: #fbfbfbe3;
   /* top: 10%; */
 }
@@ -288,10 +302,8 @@ h1 {
 }
 
 .button-group > button > div {
-  width: 70px;
-  height: 28px;
   margin: 4px 10px;
-  padding: 2px 8px;
+  padding: 6px 24px;
   border-radius: 28px;
 
   font-size: 12pt;
@@ -406,5 +418,42 @@ h1 {
 
 .schedule-space > img {
   width: 14px;
+}
+
+@media screen and (max-width: 400px) {
+  .background {
+    margin-top: 110px;
+    height: calc(100% - 56px - 120px);
+  }
+
+  .button-group {
+    margin: 0 -28px;
+  }
+
+  .button-group > button > div {
+    margin: 4px 6px;
+    padding: 6px 16px;
+    font-size: 9pt;
+  }
+
+  .button-group > button > p {
+    font-size: 9pt;
+  }
+
+  .table {
+    margin: 0 -24px;
+    margin-top: 16px;
+  }
+
+  .schedule-time {
+    font-size: 10pt;
+  }
+
+  .schedule-text {
+    font-size: 9pt;
+  }
+  .schedule-space {
+    font-size: 8pt;
+  }
 }
 </style>
