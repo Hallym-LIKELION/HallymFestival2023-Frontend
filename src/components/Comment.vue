@@ -204,4 +204,18 @@ export default {
   justify-content: space-between;
   font-size: 9pt;
 }
+
+@media screen and (max-width: 400px) {
+  .name > span {
+    font-size: 10pt;
+  }
+
+  .comment {
+    font-size: 9pt;
+  }
+
+  .footer {
+    font-size: 7pt;
+  }
+}
 </style>

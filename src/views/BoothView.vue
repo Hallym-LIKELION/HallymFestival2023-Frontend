@@ -653,4 +653,43 @@ h1 {
   background-color: #fbfbfb;
   opacity: 0.9;
 }
+
+@media screen and (max-width: 400px) {
+  .header-name {
+    font-size: 16pt;
+  }
+  .section-header > h1 {
+    font-size: 10pt;
+  }
+
+  .image-upload {
+    font-size: 8pt;
+  }
+
+  .section-text {
+    font-size: 10pt;
+  }
+
+  .menu-title {
+    font-size: 10pt;
+  }
+
+  .menu-price {
+    font-size: 10pt;
+  }
+
+  .header-like-count {
+    font-size: 12pt;
+  }
+
+  .header-like-button > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .edit-button > img {
+    width: 20px;
+    height: 20px;
+  }
+}
 </style>

@@ -140,4 +140,14 @@ export default {
   width: 18px;
   height: 18px;
 }
+
+@media screen and (max-width: 400px) {
+  .nickname {
+    font-size: 10pt;
+  }
+
+  .body-input {
+    font-size: 10pt;
+  }
+}
 </style>
