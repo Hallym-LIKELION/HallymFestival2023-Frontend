@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import searchImage from '@/assets/ASearch.png';
+import searchImage from '@/assets/Asearch.png';
 
 export default {
   data() {
