@@ -216,4 +216,21 @@ export default {
 .sponsor > p {
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .logo {
+    margin-top: -28px;
+  }
+
+  .phrase {
+    font-size: 10pt;
+    margin-top: 36px;
+  }
+
+  .menu > * {
+    width: 100%;
+    margin: 4px;
+    font-size: 11pt;
+  }
+}
 </style>
