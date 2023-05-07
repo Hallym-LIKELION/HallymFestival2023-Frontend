@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Oaboutus.png" alt="" />
-      </div>
-      <div class="title-text">만든이들</div>
-    </div>
+    <Header :image="HeaderImage" text="만든이들" content="" />
+
     <div class="wrapper">
       <div class="header">
         <p>
@@ -69,6 +65,9 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Oaboutus.png';
+import Header from '../components/Header.vue';
+
 import Image from '../components/Image.vue';
 import Vuelogo from '@/assets/vuelogo.png';
 import Springlogo from '@/assets/springbootlogo.png';
@@ -83,6 +82,7 @@ import YuJinImage from '@/assets/developer/oyujin.png';
 export default {
   data() {
     return {
+      HeaderImage,
       phrase: [
         '2023년도 한림대학교 대동제를 위하여 ',
         '한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고 ',
@@ -216,7 +216,7 @@ export default {
       ]
     };
   },
-  components: { Image },
+  components: { Image, Header },
   methods: {
     openGithub(id) {
       window.open('https://github.com/' + id, '_blank');

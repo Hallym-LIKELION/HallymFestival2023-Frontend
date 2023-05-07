@@ -1,12 +1,6 @@
 <template>
   <main>
-    <br /><br /><br /><br />
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Obooth.png" alt="" />
-      </div>
-      <div class="title-text">부스 배치도</div>
-    </div>
+    <Header :image="HeaderImage" text="부스 목록" content="다양한 부스를 만나보세요" />
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin" />
@@ -49,6 +43,8 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Obooth.png';
+import Header from '../components/Header.vue';
 import SearchBar from '../components/SearchBar.vue';
 import ListItem from '../components/ListItem.vue';
 import BoothCarousel from '../components/BoothCarousel.vue';
@@ -71,10 +67,12 @@ export default {
     Pagination,
     SwitchButton,
     BoothCarousel,
-    Image
+    Image,
+    Header
   },
   data() {
     return {
+      HeaderImage,
       list: [],
       search: '',
       day: 1,

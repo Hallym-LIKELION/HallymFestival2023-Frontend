@@ -23,7 +23,7 @@
       <template v-for="item in list" :key="item.cno">
         <Comment
           :id="item.cno"
-          :name="GetRandomNickName(item.ip)"
+          :ip="item.ip"
           :comment="item.content"
           :time="item.regDate"
           :warn="item.report_cnt"

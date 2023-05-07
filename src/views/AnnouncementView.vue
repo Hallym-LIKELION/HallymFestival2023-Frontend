@@ -7,13 +7,8 @@
       @complete="completeNoticeModal"
       @close="closeNoticeModal"
     />
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Onotice.png" alt="" />
-      </div>
-      <br />
-      <div class="title-text">공지사항</div>
-    </div>
+    <Header :image="HeaderImage" text="공지사항" content="이번 축제의 안내사항입니다." />
+
     <div class="search-bar">
       <ASearchBar v-model="search" @change="searchNotice" />
     </div>
@@ -41,6 +36,8 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Onotice.png';
+import Header from '../components/Header.vue';
 import ASearchBar from '../components/ASearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import Pagination from '../components/Pagination.vue';
@@ -62,10 +59,12 @@ export default {
     ASearchBar,
     FoldingArticle,
     Pagination,
-    NoticeModal
+    NoticeModal,
+    Header
   },
   data() {
     return {
+      HeaderImage,
       list: [],
       search: '',
       showingContent: null,
