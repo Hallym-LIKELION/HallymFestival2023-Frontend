@@ -257,4 +257,36 @@ export default {
   background-color: #ca434c;
   color: white;
 }
+
+@media screen and (max-width: 400px) {
+  .color-picker > button {
+    font-size: 9pt;
+  }
+
+  .color-picker .color {
+    width: 14px;
+    height: 14px;
+  }
+  .write-content {
+    height: 200px;
+    font-size: 10pt;
+  }
+
+  .writer > div > p {
+    width: 70px;
+    font-size: 8pt;
+    margin-left: 4px;
+  }
+
+  .writer > div > input {
+    font-size: 7pt;
+  }
+  .writer > .password {
+    font-size: 7pt;
+  }
+
+  .modal-button {
+    height: 70px;
+  }
+}
 </style>
