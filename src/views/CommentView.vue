@@ -57,7 +57,13 @@ import FloatButton from '../components/FloatButton.vue';
 import Pagination from '../components/Pagination.vue';
 import { useToast } from 'vue-toastification';
 import { GetRandomNickName } from '../library/name-generator';
-import { GetVisitComment, DeleteVisitComment, ReportVisitComment } from '../api/api-client';
+import {
+  GetAuthority,
+  GetVisitComment,
+  DeleteVisitComment,
+  ReportVisitComment,
+  DeleteVisitCommentWithAdmin
+} from '../api/api-client';
 
 export default {
   name: 'CommentView',
@@ -80,6 +86,8 @@ export default {
       contextMenuTargetID: -1,
       contextMenuX: 0,
       contextMenuY: 0,
+
+      admin: GetAuthority(),
 
       commentModal: false,
       commentStatus: false,
@@ -108,6 +116,7 @@ export default {
     },
     async deleteComment(password) {
       let data;
+
       try {
         data = await DeleteVisitComment(this.contextMenuTargetID, password);
       } catch (e) {
@@ -129,6 +138,21 @@ export default {
       this.closePasswordModal();
       setTimeout(() => this.$emit('reload'), 100);
     },
+    async deleteCommentAdmin() {
+      let data;
+
+      try {
+        data = await DeleteVisitCommentWithAdmin(this.contextMenuTargetID);
+      } catch (e) {
+        return;
+      }
+
+      if (data.result.includes('null comment')) {
+        return;
+      }
+
+      setTimeout(() => this.$emit('reload'), 100);
+    },
 
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
@@ -147,7 +171,12 @@ export default {
     },
     openPasswordModal() {
       this.showContextMenu = false;
-      this.passwordModal = true;
+
+      if (this.admin > 0) {
+        this.deleteCommentAdmin();
+      } else {
+        this.passwordModal = true;
+      }
     },
     async reportComment() {
       const res = await ReportVisitComment(this.contextMenuTargetID);
