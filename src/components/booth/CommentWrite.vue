@@ -117,8 +117,8 @@ export default {
   align-items: center;
 }
 .profile {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   margin-right: 8px;
   border-radius: 100%;
 }

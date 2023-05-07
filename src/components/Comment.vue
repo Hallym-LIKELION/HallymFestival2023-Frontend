@@ -187,10 +187,10 @@ export default {
 }
 
 .picture {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   margin-right: 4px;
-  border-radius: 12px;
+  border-radius: 18px;
 }
 
 .name {
@@ -244,8 +244,8 @@ export default {
 
 @media screen and (max-width: 400px) {
   .picture {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
   }
 
   .name {
