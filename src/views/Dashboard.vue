@@ -1,6 +1,5 @@
 <template>
   <main>
-    <br/><br/>
     <div class="introment">
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
@@ -103,14 +102,15 @@ main {
   display: flex;
   justify-content: center;
 }
+
 .introment {
+  margin-top: 36px;
   font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 15px;
   line-height: 13px;
   text-align: center;
   letter-spacing: 0.15em;
-  margin: 0;
   padding: 36px 0;
   color: #ffffff;
 }

@@ -25,18 +25,13 @@
 
     <FloatButton @click="openCommentModal" />
 
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Oletter.png" alt="" />
-      </div>
-      <div class="title-text">방명록</div><br/><br/>
-      <div class="title-context">하고 싶은 말을 자유롭게 남겨주세요!</div>
-    </div>
+    <Header :image="HeaderImage" text="방명록" content="하고 싶은 말을 자유롭게 남겨주세요!" />
+
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">
         <Comment
           :id="item.vno"
-          :name="GetRandomNickName(item.ip)"
+          :ip="item.ip"
           :comment="item.content"
           :color="item.color ?? 'YELLOW'"
           :time="item.regDate"
@@ -50,6 +45,9 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Oletter.png';
+import Header from '../components/Header.vue';
+
 import CommentModal from '../components/CommentModal.vue';
 import PasswordModal from '../components/PasswordModal.vue';
 import SearchBar from '../components/SearchBar.vue';
@@ -70,10 +68,12 @@ export default {
     PasswordModal,
     CommentModal,
     FloatButton,
-    Pagination
+    Pagination,
+    Header
   },
   data() {
     return {
+      HeaderImage,
       list: [],
 
       showContextMenu: false,
@@ -188,43 +188,6 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:50%;
-  margin-top:10px auto;
-  margin: 8px auto;
-}
-.title-wrap {
-  width: 30%;
-  margin: 10px auto;
-  position: relative;
-}
-.title-wrap img {
-  width: 100%;
-  vertical-align: middle;
-}
-.title-text {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  font-style: normal;
-  font-weight: 550;
-  font-size: 20px;
-  line-height: 13px;
-  margin: 0;
-  padding: 36px 0;
-  color: #ffffff;
-}
-.title-context{
-  font-family: 'Nanum Gothic';
-  text-align: center;
-  text-size-adjust: none;
-  font-size: 0.4vw;
-  color: #ffffff;
-}
 .header {
   margin-top: 24px;
 }

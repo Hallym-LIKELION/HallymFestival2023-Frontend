@@ -1,11 +1,6 @@
 <template>
   <main>
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/OGoods.png" alt="" />
-      </div>
-      <div class="title-text">굿즈</div>
-    </div>
+    <Header :image="HeaderImage" text="굿즈" content="" />
 
     <div class="content">
       <p>
@@ -33,6 +28,8 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/OGoods.png';
+import Header from '../components/Header.vue';
 import GoodsOne from '@/assets/goods/그립톡.png';
 import GoodsTwo from '@/assets/goods/소주잔.png';
 import GoodsThree from '@/assets/goods/맥주잔.png';
@@ -42,9 +39,10 @@ import GoodsSix from '@/assets/goods/부채.png';
 import Image from '../components/Image.vue';
 
 export default {
-  components: { Image },
+  components: { Image, Header },
   data() {
     return {
+      HeaderImage,
       list: [
         {
           list: [

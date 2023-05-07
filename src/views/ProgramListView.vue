@@ -9,12 +9,9 @@
       :date="modalData.date"
       :place="modalData.place"
     ></ProgramModal>
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Oprogram.png" alt="" />
-      </div>
-      <div class="title-text">프로그램</div>
-    </div>
+
+    <Header :image="HeaderImage" text="프로그램" content="" />
+
     <div class="program-list">
       <template v-for="(item, index) in list" :key="index">
         <ProgramCard
@@ -30,6 +27,9 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Oprogram.png';
+import Header from '../components/Header.vue';
+
 import ProgramCard from '../components/ProgramCard.vue';
 import ProgramModal from '../components/ProgramModal.vue';
 
@@ -42,10 +42,12 @@ export default {
   name: 'ProgramListView',
   components: {
     ProgramCard,
-    ProgramModal
+    ProgramModal,
+    Header
   },
   data() {
     return {
+      HeaderImage,
       modal: false,
 
       modalData: {

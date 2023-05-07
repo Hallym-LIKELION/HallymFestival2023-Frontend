@@ -2,13 +2,7 @@
   <main>
     <div class="background"></div>
 
-    <div class="title-wrap">
-      <div class="title-image">
-        <img src="@/assets/overlay/Otimetable.png" alt="" />
-      </div>
-      <br />
-      <div class="title-text">타임 테이블</div>
-    </div>
+    <Header :image="HeaderImage" text="타임 테이블" content="" />
 
     <div class="button-group">
       <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">
@@ -47,14 +41,20 @@
 </template>
 
 <script>
+import HeaderImage from '@/assets/overlay/Otimetable.png';
+import Header from '../components/Header.vue';
 import { Icon } from '../library/icon';
 import { gsap } from 'gsap';
 
 let animationList = [];
 
 export default {
+  components: {
+    Header
+  },
   data() {
     return {
+      HeaderImage,
       list: [
         {
           time: '12:00 ~ 12:40 ',
