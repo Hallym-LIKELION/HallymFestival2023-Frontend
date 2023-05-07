@@ -43,6 +43,7 @@ import Comment from '../Comment.vue';
 import CommentContextMenu from '../CommentContextMenu.vue';
 import Pagination from '../Pagination.vue';
 import SendImage from '../../assets/send.png';
+import { useToast } from 'vue-toastification';
 import { GetRandomNickName } from '../../library/name-generator';
 import { GetBoothComment, DeleteBoothComment, ReportBoothComment } from '../../api/api-client';
 
@@ -138,10 +139,17 @@ export default {
     async reportComment() {
       const res = await ReportBoothComment(this.contextMenuTargetID);
       this.showContextMenu = false;
+      const toast = useToast();
 
       if (res.result === 'already reported') {
+        toast('이미 신고가 완료되었습니다.');
       } else if (res.result === 'does not exist comment') {
+        toast('해당 항목이 더 이상 존재하지 않습니다.');
       }
+
+      toast('신고가 완료되었습니다.');
+
+      this.$emit('reload');
     },
 
     async changePage(page) {

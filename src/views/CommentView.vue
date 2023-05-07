@@ -91,7 +91,6 @@ export default {
     };
   },
   methods: {
-    useToast,
     openCommentModal() {
       this.commentModal = true;
     },
@@ -158,7 +157,7 @@ export default {
       if (res.result === 'already reported') {
         toast('이미 신고가 완료되었습니다.');
       } else if (res.result === 'does not exist comment') {
-        this.$emit('reload');
+        toast('해당 항목이 더 이상 존재하지 않습니다.');
       }
 
       toast('신고가 완료되었습니다.');
