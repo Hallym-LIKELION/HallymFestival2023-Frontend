@@ -9,7 +9,7 @@
     />
     <div class="title-wrap">
       <div class="title-image">
-        <img src="@/assets/overlay/Onotice.png" alt=""  />
+        <img src="@/assets/overlay/Onotice.png" alt="" />
       </div>
       <br />
       <div class="title-text">공지사항</div>
@@ -200,19 +200,22 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:50%;
+.title-image {
+  width: 50%;
   margin: 10px auto;
 }
+
 .title-wrap {
   width: 30%;
   margin: 10px auto;
   position: relative;
 }
+
 .title-wrap img {
   width: 100%;
   vertical-align: middle;
 }
+
 .title-text {
   position: absolute;
   top: 40%;
@@ -229,6 +232,7 @@ export default {
   padding: 36px 0;
   color: #ffffff;
 }
+
 h1 {
   font-size: 20pt;
   text-align: center;
@@ -245,9 +249,9 @@ h1 {
 
 .content {
   margin: 0 -28px;
-  padding: 0 24px;
+  padding: 36px 24px;
   font-family: 'Nanum Gothic', sans-serif;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: #fbfbfbe6;
 }
 
 .announcement-list {
@@ -256,9 +260,6 @@ h1 {
   justify-content: center;
 
   align-items: center;
-}
-.announcement-list :hover {
-  color: #ca434c;
 }
 
 .announcement-list > * {

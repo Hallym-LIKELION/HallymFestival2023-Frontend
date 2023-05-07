@@ -5,7 +5,8 @@
     <div class="title-wrap">
       <div class="title-image">
         <img src="@/assets/overlay/Otimetable.png" alt="" />
-      </div><br/>
+      </div>
+      <br />
       <div class="title-text">타임 테이블</div>
     </div>
 
@@ -213,8 +214,8 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:50%;
+.title-image {
+  width: 50%;
   margin: 10px auto;
 }
 main {
@@ -226,9 +227,9 @@ main {
   position: absolute;
   z-index: -1;
   width: 824px;
-  margin-top: 130px;
+  margin-top: 160px;
   margin-left: -28px;
-  height: calc(100% - 56px - 130px);
+  height: calc(100% - 56px - 160px);
   background-color: #fbfbfbe3;
   /* top: 10%; */
 }
