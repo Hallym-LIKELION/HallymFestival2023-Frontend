@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <p class="id" v-text="id"></p>
+    <div  :class="['header', { selected: showContent  }]">
+      <p class="id" v-text="id"      ></p>
       <p class="title" v-text="title"></p>
       <div class="icon">
         <img :src="arrowImage" />
@@ -114,6 +114,13 @@ export default {
   white-space: nowrap;
 }
 
+.header.selected > .title {
+  font-weight: 600;
+  color:black;
+}
+.header.selected > .id {
+  color: #f74242;
+}
 .icon {
   width: 24px;
   line-height: 0; /* 이미지 수직 정렬 */

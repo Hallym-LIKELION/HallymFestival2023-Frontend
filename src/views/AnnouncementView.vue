@@ -19,7 +19,7 @@
     </div>
     <div class="content" ref="announcementList">
       <div class="button-group" ref="buttonGroup" v-if="role == 2">
-        <button @click="clickCreate">글쓰기</button>
+        <button @click="clickCreate"><b>글쓰기</b></button>
       </div>
       <div class="announcement-list">
         <template v-for="item in list" :key="item.nno">
@@ -42,7 +42,7 @@
 
 <script>
 import { gsap } from 'gsap';
-import SearchBar from '../components/SearchBar.vue';
+import SearchBar from '../components/ASearchBar.vue';
 import NoticeModal from '../components/NoticeModal.vue';
 import Pagination from '../components/Pagination.vue';
 import FoldingArticle from '../components/FoldingArticle.vue';
@@ -356,8 +356,8 @@ h1 {
   padding: 8px 24px;
   border: none;
   border-radius: 24px;
-  background-color: #ca434c;
-  color: white;
+
+  color: #5C859B;
   font-size: 10pt;
   cursor: pointer;
   font-family: 'Nanum Gothic', sans-serif;
