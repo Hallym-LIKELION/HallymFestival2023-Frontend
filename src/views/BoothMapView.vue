@@ -146,7 +146,7 @@ export default {
     applyData(data) {
       this.list = data.dtoList;
       this.totalItems = data.total;
-      this.itemsPerPage = data.size;
+      this.itemsPerPage = data.size || 1;
     }
   },
 

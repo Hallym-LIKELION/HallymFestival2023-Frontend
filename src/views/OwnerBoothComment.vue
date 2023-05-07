@@ -97,7 +97,7 @@ export default {
 
       this.list = data.dtoList;
       this.totalItems = data.total;
-      this.itemsPerPage = data.size;
+      this.itemsPerPage = data.size || 1;
     },
     GetRandomNickName
   },
@@ -107,7 +107,7 @@ export default {
 
     this.list = data.dtoList;
     this.totalItems = data.total;
-    this.itemsPerPage = data.size;
+    this.itemsPerPage = data.size || 1;
   }
 };
 </script>

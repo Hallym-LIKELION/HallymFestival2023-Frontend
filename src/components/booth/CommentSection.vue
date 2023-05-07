@@ -189,7 +189,7 @@ export default {
       const data = await GetBoothComment(this.id, page);
       this.list = data.dtoList;
       this.totalItems = data.total;
-      this.itemsPerPage = data.size;
+      this.itemsPerPage = data.size || 1;
       this.$emit('update', data.total);
     },
 
@@ -199,10 +199,8 @@ export default {
     const data = await GetBoothComment(this.id);
     this.list = data.dtoList || [];
     this.totalItems = data.total;
-    this.itemsPerPage = data.size;
+    this.itemsPerPage = data.size || 1;
     this.$emit('update', data.total);
-
-    console.log(this.totalItems, this.itemsPerPage);
   }
 };
 </script>
