@@ -57,9 +57,9 @@
       <div class="header-content">
         <Image
           :src="
-            boothData.fileNames
+            boothData.fileNames[0]
               ? 'https://www.hallymfestival.com/api/view/s_' + boothData.fileNames[0]
-              : ''
+              : SampleImage
           "
           class="header-image"
           width="400"
@@ -136,6 +136,7 @@ import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
 import CloseImage from '../assets/close.png';
+import SampleImage from '@/assets/default_booth.jpg';
 import {
   GetBooth,
   GetBoothMenu,
@@ -172,7 +173,7 @@ export default {
     return {
       EditImage,
       CloseImage,
-
+      SampleImage,
       Icon,
       id: -1,
 

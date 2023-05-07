@@ -196,9 +196,8 @@ export default {
     GetRandomNickName
   },
   async created() {
-    // TODO: API로 가져오기
     const data = await GetBoothComment(this.id);
-    this.list = data.dtoList;
+    this.list = data.dtoList || [];
     this.totalItems = data.total;
     this.itemsPerPage = data.size;
     this.$emit('update', data.total);
