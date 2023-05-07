@@ -98,7 +98,7 @@ main {
 }
 
 .logo {
-  width: 70%;
+  width: 50%;
   display: flex;
   justify-content: center;
 }
