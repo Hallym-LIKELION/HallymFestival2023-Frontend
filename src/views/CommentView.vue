@@ -24,7 +24,6 @@
     />
 
     <FloatButton @click="openCommentModal" />
-    <br /><br /><br /><br />
 
     <div class="title-wrap">
       <div class="title-image">
@@ -57,6 +56,7 @@ import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Comment from '../components/Comment.vue';
 import FloatButton from '../components/FloatButton.vue';
 import Pagination from '../components/Pagination.vue';
+import { useToast } from 'vue-toastification';
 import { GetRandomNickName } from '../library/name-generator';
 import { GetVisitComment, DeleteVisitComment, ReportVisitComment } from '../api/api-client';
 
@@ -128,20 +128,6 @@ export default {
       this.closePasswordModal();
       setTimeout(() => this.$emit('reload'), 100);
     },
-    //방명록 신고
-    async postbadComment(comment_id) {
-      let data;
-      try {
-        data = await PostBadVisitComment(comment_id);
-      } catch (err) {
-        return;
-      }
-      if (data.result.includes('already report')) {
-        alert('이미 신고했습니다.');
-      } else if (data.result.includes('null comment')) {
-        alert('존재하지 않는 댓글입니다.');
-      }
-    },
 
     toggleMenu(evt, id) {
       if (this.showContextMenu) {
@@ -166,9 +152,17 @@ export default {
       const res = await ReportVisitComment(this.contextMenuTargetID);
       this.showContextMenu = false;
 
+      const toast = useToast();
+
       if (res.result === 'already reported') {
+        toast('이미 신고가 완료되었습니다.');
       } else if (res.result === 'does not exist comment') {
+        toast('해당 항목이 더 이상 존재하지 않습니다.');
       }
+
+      toast('신고가 완료되었습니다.');
+
+      this.$emit('reload');
     },
 
     async changePage(page) {

@@ -46,6 +46,25 @@ body {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+.Vue-Toastification__toast--default.toast {
+  font-family: 'Nanum Gothic', sans-serif;
+  background-color: #dddddd;
+  color: black;
+
+  padding: 12px;
+}
+
+.Vue-Toastification__toast.toast {
+  min-height: 16px;
+}
+.Vue-Toastification__toast.toast > .Vue-Toastification__progress-bar {
+  background-color: #ca434ccc;
+}
+
+.Vue-Toastification__toast--default.toast > .Vue-Toastification__close-button {
+  color: black;
+}
+
 @font-face {
   font-family: 'Nanum Gothic';
   src: url(./font/NanumGothic.woff2), url(./font/NanumGothic.woff), url(./font/NanumGothic.otf);

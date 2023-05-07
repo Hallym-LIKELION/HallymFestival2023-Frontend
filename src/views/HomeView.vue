@@ -50,8 +50,6 @@ export default {
     }
   },
   mounted() {
-    let delay = 0;
-
     // 슬로건 애니메이션
     gsap.fromTo(
       this.$refs.introPhrase,
