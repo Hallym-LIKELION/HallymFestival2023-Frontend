@@ -23,7 +23,7 @@
 
     <div class="sponsor" ref="sponsor">
       <img src="@/assets/naverlogo.png" alt="" @click="openNaverCloud" />
-      <p @click="openNaverCloud">본 웹사이트는 NAVER CLOUD PLATFORM의 협찬을 받았습니다.</p>
+      <p @click="openNaverCloud">본 웹사이트는 Naver Cloud Platform의 협찬을 받았습니다.</p>
     </div>
   </main>
 </template>
