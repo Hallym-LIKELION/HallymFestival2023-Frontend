@@ -9,7 +9,9 @@
 
     <div class="content">
       <p>
-        이번 축제를 맞이하여 <br/>축제준비위원회에서 준비한 굿즈!<br/>  많은 관심 바랍니다! <br/>  더 자세한 부분은 '구매하러가기'를 참고해주세요
+        이번 축제를 맞이하여 <br />축제준비위원회에서 준비한 굿즈!<br />
+        많은 관심 바랍니다! <br />
+        더 자세한 부분은 '구매하러가기'를 참고해주세요
       </p>
 
       <template v-for="item in list">
@@ -220,6 +222,9 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .content > p {
+    font-size: 11pt;
+  }
   .content > .list {
     margin: 0;
     flex-direction: column;
