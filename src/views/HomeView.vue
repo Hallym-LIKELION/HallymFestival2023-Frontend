@@ -140,6 +140,7 @@ export default {
 </script>
 <style scoped>
 .logo {
+  width: 70%;
   max-width: 320px;
   margin: -18px auto;
   display: flex;

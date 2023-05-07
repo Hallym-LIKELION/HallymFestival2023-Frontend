@@ -216,7 +216,7 @@ export default {
   components: { Image },
   methods: {
     opengithubsohyun() {
-      window.open('https://github.com/osohyun0224', '_blank');
+      D
     },
     opengithubkungjae() {
       window.open('https://github.com/PortalCube', '_blank');
