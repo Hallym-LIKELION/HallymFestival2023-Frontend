@@ -9,8 +9,7 @@
 
     <div class="content">
       <p>
-        귀여운 덕림이가 가득한 2023 한림대학교 축제 굿즈가 출시되었습니다! 굿즈는 축제 기간동안 전용
-        부스에서 구매하시거나, 사전 구매 폼을 통해서 구매하실 수 있습니다!
+        이번 축제를 맞이하여 <br/>축제준비위원회에서 준비한 굿즈!<br/>  많은 관심 바랍니다! <br/>  더 자세한 부분은 '구매하러가기'를 참고해주세요
       </p>
 
       <template v-for="item in list">
@@ -26,7 +25,7 @@
         </div>
       </template>
 
-      <button @click="openform" class="buy">사전 구매하기 (구글 폼)</button>
+      <button @click="openform" class="buy"><b>구매하러가기</b></button>
     </div>
   </main>
 </template>

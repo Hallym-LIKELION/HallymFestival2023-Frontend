@@ -53,7 +53,7 @@
         </template>
       </div>
       <div class="staff">
-        <p class="title">2023 한림대학교 축제준비위원회</p>
+        <p class="title"><b>2023 한림대학교 축제준비위원회</b></p>
         <template v-for="item in staffList">
           <div class="list" v-for="list in item">
             <template v-for="anotherItem in list">
@@ -230,6 +230,7 @@ export default {
   width:50%;
   margin: 9px auto;
 }
+
 
 .hidden {
   visibility: hidden;
