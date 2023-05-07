@@ -5,7 +5,7 @@
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
     <div class="logo">
-      <img src="@/assets/로고.png" />
+      <img src="@/assets/로고.png" alt="" width="400" height="300" />
     </div>
     <div class="totalvisitor">
       <h3>Today</h3>
@@ -98,7 +98,8 @@ main {
 }
 
 .logo {
-  width: 50%;
+  width: 40%;
+  margin: -18px auto;
   display: flex;
   justify-content: center;
 }

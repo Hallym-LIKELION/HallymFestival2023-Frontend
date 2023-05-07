@@ -4,7 +4,7 @@
       <p>"우리의 모든 시간은 연결되어있어"</p>
     </div>
     <div class="logo">
-      <img src="@/assets/logo.png" alt="" />
+      <img src="@/assets/로고.png" alt="" width="400" height="300" />
     </div>
     <div class="form">
       <form @submit.prevent="fnLogin">
