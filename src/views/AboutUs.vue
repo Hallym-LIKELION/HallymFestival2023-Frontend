@@ -8,9 +8,12 @@
     </div>
     <div class="wrapper">
       <div class="header">
-        <p><b>한림대학교 멋쟁이사자처럼<br/> Builder Team</b></p><br/> 
-        <p class="collab"><b>X</b></p><br/> 
-        <p><b>2023 한림대학교<br/>축제준비위원회</b></p>
+        <p>
+          한림대학교 멋쟁이사자처럼<br />
+          Builder Team
+        </p>
+        <p class="collab">X</p>
+        <p>2023 한림대학교<br />축제준비위원회</p>
       </div>
       <div class="phrase">
         <p v-for="item in phrase">{{ item }}</p>
@@ -18,13 +21,10 @@
       <div class="dev">
         <p class="title"><b>💻 Developer</b></p>
         <template v-for="item in devTeam">
-          <p class="team"> 
-            <Image
-                  :src="item.image"
-                  alt=""
-                  v-if="item.image"
-                />
-                {{item.name }}</p>
+          <p class="team">
+            <Image :src="item.image" alt="" v-if="item.image" class="team-image" />
+            {{ item.name }}
+          </p>
           <div class="list" v-for="list in item.list">
             <template v-for="person in list">
               <div :class="['card', { hidden: person.empty }]">
@@ -226,11 +226,10 @@ export default {
 </script>
 
 <style scoped>
-.title-image{
-  width:50%;
+.title-image {
+  width: 50%;
   margin: 9px auto;
 }
-
 
 .hidden {
   visibility: hidden;
@@ -265,12 +264,13 @@ export default {
 
 .header > p {
   font-size: 12pt;
+  font-weight: 600;
 }
 
 .header > p.collab {
-  margin-top: 4px;
+  margin-top: 16px;
+  margin-bottom: 12px;
   font-size: 28pt;
-  font-weight: 600;
 }
 
 .phrase {
@@ -292,11 +292,19 @@ export default {
 }
 
 .dev > .team {
-  font-weight:bolder;
+  font-weight: bolder;
   margin-top: 64px;
   font-size: 17pt;
-  color:#20556C;
+  color: #20556c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+:deep(.team-image) {
+  margin-right: 8px;
+}
+
 .dev > .team:nth-of-type(2) {
   margin-top: 12px;
 }
@@ -326,7 +334,7 @@ export default {
 
 .card > .card-info > .name {
   font-size: 14pt;
-  font-weight:bolder;
+  font-weight: bolder;
 }
 .card > .card-info > .dept {
   margin-top: 4px;
@@ -389,6 +397,25 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .phrase > p {
+    margin: 5px auto;
+    max-width: 540px;
+    word-break: keep-all;
+    font-size: 10pt;
+    line-height: 12pt;
+  }
+
+  .dev > .title {
+    font-size: 16pt;
+  }
+  .dev > .team {
+    font-size: 12pt;
+  }
+
+  :deep(.team-image) {
+    width: 16px;
+  }
+
   .dev > .list {
     margin: 0;
     flex-direction: column;
@@ -404,6 +431,9 @@ export default {
     margin-left: 0;
   }
 
+  .staff > .title {
+    font-size: 12pt;
+  }
   .staff > .list {
     margin: 0;
     flex-direction: column;
