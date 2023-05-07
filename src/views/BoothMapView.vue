@@ -183,13 +183,13 @@ h1 {
 }
 
 .search-bar {
-  margin: 8px 0;
   margin-top: 16px;
   display: flex;
   justify-content: center;
 }
 
 .button-group {
+  margin-top: 16px;
   display: flex;
   justify-content: center;
 }
