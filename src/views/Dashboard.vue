@@ -74,8 +74,8 @@ export default {
     this.today = data[0].count;
 
     data.forEach((item) => (item.visitDate = parseInt(item.visitDate.split('-').pop()) + '일'));
-
-    for (let i = 0; i < 4; i++) {
+    let length = data.length;
+    for (let i = 0; i < 7 - length; i++) {
       data.push({
         visitDate: '-',
         count: 0
@@ -84,9 +84,9 @@ export default {
 
     this.chart.xAxis.categories = data
       .reverse()
-      .slice(0, 10)
+      .slice(0, 7)
       .map((item) => item.visitDate);
-    this.chart.series[0].data = data.slice(0, 10).map((item) => item.count);
+    this.chart.series[0].data = data.slice(0, 7).map((item) => item.count);
   }
 };
 </script>
