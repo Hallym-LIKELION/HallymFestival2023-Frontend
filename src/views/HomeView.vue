@@ -5,11 +5,7 @@
     </div>
 
     <div class="logo" ref="logo">
-<<<<<<< HEAD
-      <img src="@/assets/로고.png" alt=""/>
-=======
       <Image :src="LogoImage" class="image" alt="" />
->>>>>>> 15ab1c86726664f40ffbe0ce7d4ce275adb43522
     </div>
 
     <div class="title" ref="title">
@@ -33,7 +29,7 @@
 </template>
 
 <script>
-import LogoImage from '@/assets/logo.png';
+import LogoImage from '@/assets/로고.png';
 import Image from '../components/Image.vue';
 import { gsap } from 'gsap';
 import { RouterLink } from 'vue-router';
