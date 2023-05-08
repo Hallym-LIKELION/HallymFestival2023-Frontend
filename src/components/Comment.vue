@@ -217,7 +217,7 @@ export default {
 .comment.expand {
   min-height: 40px;
   height: auto;
-  max-height: 170px;
+  max-height: 200px;
   -webkit-mask-image: none;
   mask-image: none;
 }
