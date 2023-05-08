@@ -20,6 +20,7 @@ import report from '../assets/icon/report.svg';
 import space from '../assets/icon/space.svg';
 import findWhite from '../assets/icon/find-white.svg';
 import penGray from '../assets/icon/pen-gray.svg';
+import hamburger from '../assets/icon/hamburger.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -42,5 +43,6 @@ export const Icon = {
   report,
   space,
   findWhite,
-  penGray
+  penGray,
+  hamburger
 };
