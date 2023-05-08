@@ -11,7 +11,7 @@
 
       <template v-for="item in list">
         <div class="list" v-for="anotherItem in item">
-          <div class="card" v-for="product in anotherItem">
+          <div class="card" v-for="product in anotherItem" ref="card">
             <Image :src="product.image" class="card-image"></Image>
             <div class="card-info">
               <p class="name">{{ product.name }}</p>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import HeaderImage from '@/assets/overlay/OGoods.png';
 import Header from '../components/Header.vue';
 import GoodsOne from '@/assets/goods/그립톡.png';
@@ -99,6 +100,25 @@ export default {
         '_blank'
       );
     }
+  },
+  mounted() {
+    const list = this.$refs.card;
+
+    list.forEach((item, i) =>
+      gsap.fromTo(
+        item,
+        {
+          opacity: 0,
+          transform: 'translateY(10%)'
+        },
+        {
+          delay: 0.5 + i * 0.1,
+          duration: 0.5,
+          opacity: 1,
+          transform: 'none'
+        }
+      )
+    );
   }
 };
 </script>
