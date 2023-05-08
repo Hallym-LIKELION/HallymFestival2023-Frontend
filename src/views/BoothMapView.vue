@@ -8,7 +8,7 @@
     </div>
 
     <div class="search-bar" v-if="admin !== 2">
-      <SearchBar v-model="search" @change="updateValue" />
+      <SearchBar v-model="search" @change="changePage(1)" />
     </div>
 
     <div class="button-group">
@@ -39,7 +39,12 @@
           :isAdmin="admin === 2"
         />
       </template>
-      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
+      <Pagination
+        @change="changePage"
+        :totalItems="totalItems"
+        :itemsPerPage="itemsPerPage"
+        :currentPage="currentPage"
+      />
     </div>
   </main>
 </template>
@@ -86,7 +91,8 @@ export default {
       slide: 0,
 
       totalItems: 1,
-      itemsPerPage: 1
+      itemsPerPage: 1,
+      currentPage: 1
     };
   },
   computed: {},
@@ -97,7 +103,7 @@ export default {
     selectType(value) {
       if (this.admin === 2) {
         this.day = value;
-        this.selectSort(value);
+        this.changePage(1);
       } else {
         this.selectDay(value);
       }
@@ -105,21 +111,7 @@ export default {
     },
     selectDay(day) {
       this.day = day;
-      this.updateValue();
-    },
-    updateValue() {
-      this.changePageWithSearch(1);
-    },
-    async selectSort(value) {
-      if (value == 1) {
-        this.applyData(await GetBoothListWithComment(1));
-      } else if (value == 2) {
-        this.applyData(await GetBoothListWithLike(1));
-      } else if (value == 3) {
-        this.applyData(await GetBoothListWithReport(1));
-      } else {
-        this.applyData(await GetBoothListWithComment(1));
-      }
+      this.changePage(1);
     },
     switchDayNight(isDay) {
       this.dayNight = isDay;
@@ -128,7 +120,7 @@ export default {
       } else {
         this.slide = 3;
       }
-      this.updateValue();
+      this.changePage(1);
     },
 
     randomNumber(a, b) {
@@ -136,11 +128,18 @@ export default {
     },
 
     async changePage(page) {
-      this.applyData(await GetBoothList(page));
-    },
-
-    async changePageWithSearch(page) {
-      this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
+      this.currentPage = page;
+      if (this.admin === 2) {
+        if (this.day == 2) {
+          this.applyData(await GetBoothListWithLike(page));
+        } else if (this.day == 3) {
+          this.applyData(await GetBoothListWithReport(page));
+        } else {
+          this.applyData(await GetBoothListWithComment(page));
+        }
+      } else {
+        this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
+      }
     },
 
     applyData(data) {
@@ -151,8 +150,6 @@ export default {
   },
 
   async created() {
-    // 데이터 가져오기
-
     let data;
 
     if (this.admin === 2) {
@@ -163,7 +160,7 @@ export default {
 
     this.list = data.dtoList;
     this.totalItems = data.total;
-    this.itemsPerPage = data.size;
+    this.itemsPerPage = data.size || 1;
   }
 };
 </script>

@@ -171,7 +171,7 @@ export default {
 
 .image-content {
   border-radius: 4px;
-  width: 60px;
+  min-width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -231,7 +231,7 @@ export default {
   }
 
   .image-content {
-    width: 36px;
+    min-width: 36px;
     height: 36px;
   }
   :deep(.image-content > .image) {

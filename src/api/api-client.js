@@ -35,6 +35,7 @@ export function GetUserId() {
 export function DeleteToken() {
   token = null;
   role = 0;
+  id = null;
   Cookies.remove('access_token');
   Cookies.remove('refresh_token');
   Cookies.remove('role');
@@ -71,6 +72,7 @@ export async function GetAccessToken(id, password) {
     }
 
     id = data.mid;
+
     Cookies.set('id', id, { expires: 0.5 });
     Cookies.set('role', role, { expires: 0.5 });
   }
@@ -126,6 +128,22 @@ export async function GetAPI() {
 
 export async function GetMyIP() {
   const res = await axios.get(HOST + '/ip');
+  const data = res.data;
+  return data;
+}
+
+export async function GetMyBooth() {
+  const res = await axios.post(
+    HOST + '/booth/auth/mybooth',
+    {
+      writer: id
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
   const data = res.data;
   return data;
 }

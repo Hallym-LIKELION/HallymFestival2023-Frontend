@@ -42,16 +42,41 @@
           <div v-show="showMenu" class="nav-menu">
             <nav>
               <div class="top-menu">
-                <template v-for="{ url, name, callback = () => (showMenu = false) } in navList">
-                  <RouterLink :to="url" v-text="name" @click="callback" />
+                <template
+                  v-for="{
+                    url,
+                    name,
+                    roleList = [0, 1, 2],
+                    callback = () => (showMenu = false)
+                  } in navList"
+                >
+                  <RouterLink
+                    :to="url"
+                    v-text="name"
+                    @click="callback"
+                    v-if="roleList.includes(role)"
+                  />
                 </template>
               </div>
               <div class="bottom-menu">
                 <template
-                  v-for="{ url, name, callback = () => (showMenu = false) } in navBottomList"
+                  v-for="{
+                    url,
+                    name,
+                    roleList = [0, 1, 2],
+                    callback = () => (showMenu = false)
+                  } in navBottomList"
                 >
-                  <RouterLink :to="url" v-text="name" @click="callback" />
+                  <RouterLink
+                    :to="url"
+                    v-text="name"
+                    @click="callback"
+                    v-if="roleList.includes(role)"
+                  />
                 </template>
+                <p v-if="role > 0" style="font-size: 11pt">
+                  ({{ ['부스운영', '관리자'][role - 1] }}) {{ id }}님
+                </p>
               </div>
             </nav>
             <button class="close" @click="showMenu = false">
@@ -97,6 +122,8 @@ export default {
       showMenu: false,
       menuButtonImage,
       scroll: 0,
+      role: API.GetAuthority(),
+      id: API.GetUserId(),
       update: true,
       scrollTarget: null,
       navList: [
@@ -106,13 +133,13 @@ export default {
         { name: '프로그램', url: '/program' },
         { name: '굿즈', url: '/goods' },
         { name: '방명록', url: '/comment' },
-        { name: '만든이들', url: '/aboutus' },
-        { name: '나의 부스', url: '', callback: this.openMyBooth }
+        { name: '만든이들', url: '/aboutus' }
       ],
       navBottomList: [
-        { name: '관리자 페이지', url: '/admin' },
-        { name: '로그아웃', url: '', callback: this.logout },
-        { name: '로그인', url: '/login' }
+        { name: '나의 부스', url: '', callback: this.openMyBooth, roleList: [1] },
+        { name: '관리자 페이지', url: '/admin', roleList: [2] },
+        { name: '로그아웃', url: '', callback: this.logout, roleList: [1, 2] },
+        { name: '로그인', url: '/login', roleList: [0] }
       ],
       Icon
     };
@@ -125,9 +152,18 @@ export default {
       );
     }
   },
+  watch: {
+    showMenu(value) {
+      this.role = API.GetAuthority();
+      this.id = API.GetUserId();
+    }
+  },
   created() {
     this.$router.beforeEach((to, from, next) => {
       this.footerAnimation();
+      this.role = API.GetAuthority();
+      this.id = API.GetUserId();
+      console.log(API.GetUserId());
       next();
     });
 
@@ -140,11 +176,9 @@ export default {
     async openMyBooth(evt) {
       evt.stopPropagation();
 
-      // 부스 없으면 부스 만들기
-      // 추후 관련 API 스펙 확정후 제작.
-      // const result = await this.createBooth();
+      const id = await API.GetMyBooth();
 
-      this.$router.push('/booth/1');
+      this.$router.push('/booth/' + id);
       this.showMenu = false;
     },
     async createBooth() {
