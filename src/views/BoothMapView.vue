@@ -8,7 +8,7 @@
     </div>
 
     <div class="search-bar" v-if="admin !== 2">
-      <SearchBar v-model="search" @change="updateValue" />
+      <SearchBar v-model="search" @change="changePage(1)" />
     </div>
 
     <div class="button-group">
