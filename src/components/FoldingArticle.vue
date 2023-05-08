@@ -105,6 +105,10 @@ export default {
   cursor: pointer;
 }
 
+.header.selected {
+  height: 48px;
+}
+
 .header > .title {
   width: 100%;
   margin: 0 16px;
@@ -189,7 +193,12 @@ export default {
   }
 
   .content {
+    margin: 4px 8px;
     font-size: 10pt;
+  }
+
+  .footer {
+    margin-left: 8px;
   }
 }
 </style>
