@@ -33,12 +33,13 @@ import Header from '../components/Header.vue';
 import ProgramCard from '../components/ProgramCard.vue';
 import ProgramModal from '../components/ProgramModal.vue';
 
-import ImageDance from '@/assets/programlist/P_dance.jpg';
+import ImageDance from '@/assets/programlist/P_dance.png';
 import ImageMung from '@/assets/programlist/P_mung.jpg';
 import ImagePPung from '@/assets/programlist/P_ppung.jpg';
-import ImageSing from '@/assets/programlist/P_sing.jpg';
+import ImageSing from '@/assets/programlist/P_sing.png';
 import ImageMack from '@/assets/programlist/P_mack.png';
 import ImageMul from '@/assets/programlist/P_mul.png';
+import ImageDong from '@/assets/programlist/P_dong.png';
 
 export default {
   name: 'ProgramListView',
@@ -53,7 +54,7 @@ export default {
       modal: false,
 
       modalData: {
-        image: ImageDance,
+        image: ImageDong,
         title: '2023 대동제 동아리 공연',
         description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
         content: [
@@ -65,29 +66,7 @@ export default {
       },
 
       list: [
-        {
-          image: ImageDance,
-          title: '2023 대동제 동아리 공연',
-          description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
-          content: [
-            '댄스, 노래, 연극 등 다양한 분야의 공연들을 한 자리에!',
-            '중앙동아리분들의 환상적인 공연을 함께하세요!'
-          ],
-          date: '2023-05-16T17:00:00+09:00',
-          place: '한림대학교 운동장'
-        },
-        {
-          image: ImagePPung,
-          title: '천하제일 뻥쟁이 대회',
-          description: '하나의 주제로 거짓말을 하는 패널을 찾아라!',
-          content: [
-            '무대 밑 관객분들과 소통하며 진행되는 대회!',
-            '패널들 중 거짓말을 하는 사람은 누구?? 얼른 검거하러 가요!.'
-          ],
-          date: '2023-05-17T16:30:00+09:00',
-          place: '한림대학교 운동장'
-        },
-        {
+      {
           image: ImageSing,
           title: 'ㄴr는 ㄱr끔 노㉣łı를 부른⊂ト...',
           description: '자신의 노래를 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
@@ -107,17 +86,6 @@ export default {
             '상위 입상자에게는 다채로운 상품이 제공됩니다!'
           ],
           date: '2023-05-18T19:00:00+09:00',
-          place: '한림대학교 운동장'
-        },
-        {
-          image: ImageMung,
-          title: '멍 때리기 대회, 어멍! ',
-          description: '가장 오래오래 멍을 잘 때리는 학우는 누구?!',
-          content: [
-            '멍을 때리는 사람/ 멍을 방해하는 사람들의 치열한 노력들!',
-            '마지막 라운드까지 멍 때림을 유지하는 사람들은 과연 누구?!'
-          ],
-          date: '2023-05-18T17:00:00+09:00',
           place: '한림대학교 운동장'
         },
         {
@@ -141,7 +109,42 @@ export default {
           ],
           date: '2023-05-17T15:00:00+09:00',
           place: '한림대학교 운동장'
+        },
+        {
+          image: ImageDong,
+          title: '2023 대동제 동아리 공연',
+          description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
+          content: [
+            '댄스, 노래, 연극 등 다양한 분야의 공연들을 한 자리에!',
+            '중앙동아리분들의 환상적인 공연을 함께하세요!'
+          ],
+          date: '2023-05-16T17:00:00+09:00',
+          place: '한림대학교 운동장'
+        },
+        {
+          image: ImagePPung,
+          title: '천하제일 뻥쟁이 대회',
+          description: '하나의 주제로 거짓말을 하는 패널을 찾아라!',
+          content: [
+            '무대 밑 관객분들과 소통하며 진행되는 대회!',
+            '패널들 중 거짓말을 하는 사람은 누구?? 얼른 검거하러 가요!.'
+          ],
+          date: '2023-05-17T16:30:00+09:00',
+          place: '한림대학교 운동장'
+        },
+        
+        {
+          image: ImageMung,
+          title: '멍 때리기 대회, 어멍! ',
+          description: '가장 오래오래 멍을 잘 때리는 학우는 누구?!',
+          content: [
+            '멍을 때리는 사람/ 멍을 방해하는 사람들의 치열한 노력들!',
+            '마지막 라운드까지 멍 때림을 유지하는 사람들은 과연 누구?!'
+          ],
+          date: '2023-05-18T17:00:00+09:00',
+          place: '한림대학교 운동장'
         }
+      
       ]
     };
   },
