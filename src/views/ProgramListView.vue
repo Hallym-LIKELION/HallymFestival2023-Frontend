@@ -37,6 +37,8 @@ import ImageDance from '@/assets/programlist/P_dance.jpg';
 import ImageMung from '@/assets/programlist/P_mung.jpg';
 import ImagePPung from '@/assets/programlist/P_ppung.jpg';
 import ImageSing from '@/assets/programlist/P_sing.jpg';
+import ImageMack from '@/assets/programlist/P_mack.png';
+import ImageMul from '@/assets/programlist/P_mul.png';
 
 export default {
   name: 'ProgramListView',
@@ -98,7 +100,7 @@ export default {
         },
         {
           image: ImageDance,
-          title: 'ㄴr는 슬플 ㄸĦㅁト⊂ト 춤을 추곤 ぁĦ',
+          title: 'ㄴr는 슬플 ㄸĦㅁト⊂ト 춤을 추곤 ぁĦ...',
           description: '자신의 춤 실력을 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
           content: [
             '치열한 예선을 뚫고 본선에 진출한 학우들의 공연에 함께하세요!',
@@ -119,7 +121,7 @@ export default {
           place: '한림대학교 운동장'
         },
         {
-          image: ImageSing,
+          image: ImageMul,
           title: '나의 소녀시대 - 물풍선 타임',
           description: '더위를 피하고 싶은 낭만파 한림대 학우분들을 기다립니다!',
           content: [
@@ -130,7 +132,7 @@ export default {
           place: '한림대학교 운동장'
         },
         {
-          image: ImageSing,
+          image: ImageMack,
           title: '잔을 비어 밤, 맥주 빨리마시기 대회',
           description: '무더운 여름 밤, 맥주를 가장 빨리 마시는 학우는 누구?!',
           content: [
