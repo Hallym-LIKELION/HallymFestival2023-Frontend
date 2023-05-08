@@ -73,12 +73,10 @@ export default {
     },
 
     async deleteComment() {
-      console.log(this.contextMenuTargetID);
       this.$router.push('/booth/' + this.contextMenuTargetID.split('_')[0]);
     },
 
     async changePage(page) {
-      console.log(`페이지를 ${page} 페이지로 이동`);
       const data = await GetCommentListWithReport(page);
 
       this.list = data.dtoList;

@@ -198,7 +198,6 @@ export default {
     },
 
     async changePage(page) {
-      console.log(`페이지를 ${page} 페이지로 이동`);
       const data = await GetVisitComment(page);
       this.list = data.dtoList;
       this.totalItems = data.total;

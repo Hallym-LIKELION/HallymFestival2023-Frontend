@@ -38,8 +38,8 @@ export default {
       logoImage,
       userImage,
       lockImage,
-      id: 'admin',
-      password: '1111'
+      id: '',
+      password: ''
     };
   },
   methods: {

@@ -163,7 +163,6 @@ export default {
       this.footerAnimation();
       this.role = API.GetAuthority();
       this.id = API.GetUserId();
-      console.log(API.GetUserId());
       next();
     });
 

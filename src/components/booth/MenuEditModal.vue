@@ -179,8 +179,6 @@ export default {
       const isEmptyMenu = this.items.some((item) => !item._deleted && item.name.trim() === '');
       const isEmptyPrice = this.items.some((item) => !item._deleted && item.price === '');
 
-      console.log(1);
-
       if (isEmptyMenu) {
         this.showError('메뉴명은 공란으로 둘 수 없습니다.');
         return;
@@ -195,7 +193,6 @@ export default {
 
       // Create Operation
       const createdList = this.items.filter((item) => item._deleted !== true && item._created);
-      console.log('Created', createdList);
 
       // 생성할때는 순차적으로 생성하기 (promiseList 사용하면 순서가 꼬임)
       for (const item of createdList) {
@@ -203,7 +200,6 @@ export default {
           await CreateBoothMenu(boothId, item.name, item.price);
         } catch (e) {
           alert('메뉴를 수정하는데 오류가 발생했습니다.\n' + e);
-          console.error(e);
           return;
         }
       }
@@ -221,7 +217,6 @@ export default {
 
         return original.name !== item.name || original.price !== item.price;
       });
-      console.log('Modified', modifiedList);
 
       for (const item of modifiedList) {
         promiseList.push(ModifyBoothMenu(item.mno, item.name, item.price));
@@ -241,7 +236,6 @@ export default {
 
         return original.sell !== item.sell;
       });
-      console.log('Modified2', modifiedSoldoutList);
 
       for (const item of modifiedSoldoutList) {
         promiseList.push(SoldBoothMenu(item.mno));
@@ -249,7 +243,6 @@ export default {
 
       // Delete Operation
       const deletedList = this.items.filter((item) => item.mno && item._deleted);
-      console.log('Deleted', deletedList);
 
       for (const item of deletedList) {
         promiseList.push(DeleteBoothMenu(item.mno));
@@ -259,7 +252,6 @@ export default {
         await Promise.all(promiseList);
       } catch (e) {
         alert('메뉴를 수정하는데 오류가 발생했습니다.\n' + e);
-        console.error(e);
         return;
       }
 
