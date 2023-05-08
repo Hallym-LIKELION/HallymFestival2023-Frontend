@@ -5,6 +5,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @change="change"
+      maxlength="30"
       placeholder="검색어를 입력하세요"
     />
     <div class="button" @click="change">

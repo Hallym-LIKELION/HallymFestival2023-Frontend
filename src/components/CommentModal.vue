@@ -25,6 +25,7 @@
           }
         ]"
         v-model="content"
+        maxlength="255"
         @keydown.enter.prevent="send"
         placeholder="타인을 비방하거나, 모욕을 주는 방명록은 삭제될 수 있습니다."
       ></textarea>

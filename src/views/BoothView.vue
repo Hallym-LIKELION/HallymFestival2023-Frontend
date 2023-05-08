@@ -435,8 +435,6 @@ export default {
       data.booth_active = data.booth_active === 'OPEN' ? true : false;
       this.boothData = data;
 
-      console.log(data);
-
       this.admin = GetAuthority() == 2 || (GetAuthority() == 1 && GetUserId() == data.writer);
 
       data = await GetBoothMenu(this.id);
@@ -444,8 +442,6 @@ export default {
         item.sell = item.menuSell === 'SOLD';
       });
       this.menuData = data;
-
-      console.log(this.menuData);
 
       data = await GetBoothLike(this.id);
       this.likeValueData = data.result;
@@ -459,7 +455,6 @@ export default {
       this.isLikedData = data.includes(this.id);
     } catch (e) {
       alert('알 수 없는 오류가 발생했습니다.');
-      console.error(e);
     }
   }
 };

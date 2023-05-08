@@ -26,7 +26,7 @@
             :title="item.title"
             :content="item.content"
             :showContent="item.nno === showingContent"
-            @click="() => showAnnouncement(item.nno)"
+            @toogle="() => showAnnouncement(item.nno)"
             @clickEdit="clickEdit"
             @clickDelete="clickDelete"
           />
@@ -249,7 +249,6 @@ h1 {
 .announcement-list > * {
   max-width: 540px;
   border-top: 1px solid #00000052;
-  cursor: pointer;
 }
 
 .announcement-list > *:last-child {

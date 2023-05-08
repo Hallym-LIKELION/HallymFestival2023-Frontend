@@ -7,11 +7,18 @@
       </button>
     </div>
     <div class="modal-body">
-      <input class="write-title" v-model="data_title" type="text" placeholder="제목..." />
+      <input
+        class="write-title"
+        v-model="data_title"
+        type="text"
+        placeholder="제목..."
+        maxlength="30"
+      />
       <textarea
         class="write-content"
         v-model="data_content"
         placeholder="내용을 입력하세요"
+        maxlength="900"
       ></textarea>
     </div>
     <div class="modal-footer">
@@ -136,7 +143,7 @@ export default {
 .modal-button {
   height: 24px;
   border-radius: 24px;
-  background-color: #CA434C;
+  background-color: #ca434c;
   color: white;
 }
 

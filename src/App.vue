@@ -29,7 +29,7 @@
       <div class="header">
         <header>
           <button @click="showMenu = !showMenu">
-            <img :src="menuButtonImage" width="24" />
+            <img :src="Icon.hamburger" width="24" />
           </button>
           <RouterLink class="title" to="/" @click="showMenu = false"
             ><img src="@/assets/logo.png" alt=""
@@ -75,7 +75,7 @@
                   />
                 </template>
                 <p v-if="role > 0" style="font-size: 11pt">
-                  ({{ ['부스운영', '관리자'][role - 1] }}) {{ id }}님
+                  계정: {{ id }}님 ({{ ['부스운영자', '관리자'][role - 1] }})
                 </p>
               </div>
             </nav>
@@ -86,7 +86,7 @@
         </Transition>
 
         <div class="router-view">
-          <RouterView v-slot="{ Component }" @reload="reload">
+          <RouterView v-slot="{ Component }" @reload="reload" @login="login">
             <Transition name="fade" mode="out-in">
               <component :is="Component" :key="update" />
             </Transition>
@@ -104,7 +104,6 @@
 import { gsap } from 'gsap';
 import { RouterLink, RouterView } from 'vue-router';
 import { Icon } from './library/icon';
-import menuButtonImage from './assets/hamburger.png';
 import Footer from './components/Footer.vue';
 
 import * as API from './api/api-client.js';
@@ -120,7 +119,6 @@ export default {
   data() {
     return {
       showMenu: false,
-      menuButtonImage,
       scroll: 0,
       role: API.GetAuthority(),
       id: API.GetUserId(),
@@ -152,18 +150,9 @@ export default {
       );
     }
   },
-  watch: {
-    showMenu(value) {
-      this.role = API.GetAuthority();
-      this.id = API.GetUserId();
-    }
-  },
   created() {
     this.$router.beforeEach((to, from, next) => {
       this.footerAnimation();
-      this.role = API.GetAuthority();
-      this.id = API.GetUserId();
-      console.log(API.GetUserId());
       next();
     });
 
@@ -180,21 +169,6 @@ export default {
 
       this.$router.push('/booth/' + id);
       this.showMenu = false;
-    },
-    async createBooth() {
-      const res = await API.CreateBooth(
-        '이름 없는 부스',
-        '여러분들의 부스를 잘 나타내는 설명을 적어보세요!',
-        '테스트',
-        '부스'
-      );
-
-      if (!res.result.includes('success')) {
-        alert('오류: 부스를 생성하는데 실패했습니다.\n' + res.result);
-        return;
-      }
-
-      return res;
     },
     handleScroll(evt) {
       const elementTop = document.documentElement.scrollTop;
@@ -231,6 +205,10 @@ export default {
         }
       );
     },
+    login(result) {
+      this.role = result.role;
+      this.id = result.id;
+    },
     logout(evt) {
       evt.stopPropagation();
       API.DeleteToken();
@@ -238,11 +216,16 @@ export default {
       const adminOnlyList = ['/admin', '/admin/comment', '/admin/boothComment'];
       const currentPath = this.$router.currentRoute.value.path;
 
+      this.role = 0;
+      this.id = '';
+
       if (adminOnlyList.includes(currentPath)) {
         this.$router.push('/');
       } else {
         this.reload();
       }
+
+      this.showMenu = false;
     },
     reload() {
       this.update = !this.update;

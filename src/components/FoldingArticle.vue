@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div :class="['header', { selected: showContent }]">
+    <div :class="['header', { selected: showContent }]" @click="$emit('toogle')">
       <p class="id" v-text="id"></p>
       <p class="title" v-text="title"></p>
       <div class="icon">
@@ -101,6 +101,12 @@ export default {
   align-items: center;
   overflow: hidden;
   font-size: 14pt;
+
+  cursor: pointer;
+}
+
+.header.selected {
+  height: 48px;
 }
 
 .header > .title {
@@ -116,6 +122,9 @@ export default {
 
 .header.selected > .title {
   font-weight: 600;
+  overflow: visible;
+  word-break: break-all;
+  white-space: normal;
 }
 .header.selected > .id {
   font-weight: 600;
@@ -184,7 +193,12 @@ export default {
   }
 
   .content {
+    margin: 4px 8px;
     font-size: 10pt;
+  }
+
+  .footer {
+    margin-left: 8px;
   }
 }
 </style>

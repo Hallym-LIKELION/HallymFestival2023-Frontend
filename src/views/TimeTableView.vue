@@ -178,8 +178,6 @@ export default {
         const content = this.$refs.table.children[i * 2 + 1];
         const line = this.$refs.table.children[i * 2].querySelector('.schedule-line');
 
-        console.log(i);
-
         animationList.push(
           gsap.fromTo(
             pin,

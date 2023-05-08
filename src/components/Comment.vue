@@ -253,6 +253,7 @@ export default {
   }
 
   .comment {
+    height: 40px;
     font-size: 9pt;
   }
 
