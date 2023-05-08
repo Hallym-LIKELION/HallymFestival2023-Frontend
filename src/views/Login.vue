@@ -61,7 +61,9 @@ export default {
         return;
       }
 
-      if (GetAuthority() === 2) {
+      this.$emit('login', result);
+
+      if (result.role === 2) {
         this.$router.push('/admin');
       } else {
         this.$router.push('/');
