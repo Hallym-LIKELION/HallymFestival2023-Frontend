@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HOST = 'https://www.hallymfestival.com/api';
+const HOST = '/api';
 
 // =========================
 // 임시: JWT Login API
@@ -26,10 +26,6 @@ export function GetAuthority() {
   } else {
     return 0;
   }
-}
-
-export function GetUserId() {
-  return id;
 }
 
 export function DeleteToken() {
@@ -139,7 +135,7 @@ export async function GetMyBooth() {
   const res = await axios.post(
     HOST + '/booth/auth/mybooth',
     {
-      writer: id
+      writer: id || Cookies.get('id')
     },
     {
       headers: {
@@ -547,15 +543,5 @@ export async function UploadImage(formData) {
   const res = await axios.post(HOST + '/upload', formData, {
     'Content-Type': `multipart/form-data`
   });
-  return res.data;
-}
-
-export async function GetImage(name) {
-  const res = await axios.get(HOST + '/view/' + name);
-  return res.data;
-}
-
-export async function DeleteImage(name) {
-  const res = await axios.delete(HOST + '/remove/' + name);
   return res.data;
 }

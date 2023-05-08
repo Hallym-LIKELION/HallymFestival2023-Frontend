@@ -101,6 +101,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import { gsap } from 'gsap';
 import { RouterLink, RouterView } from 'vue-router';
 import { Icon } from './library/icon';
@@ -121,7 +122,7 @@ export default {
       showMenu: false,
       scroll: 0,
       role: API.GetAuthority(),
-      id: API.GetUserId(),
+      id: Cookies.get('id'),
       update: true,
       scrollTarget: null,
       navList: [

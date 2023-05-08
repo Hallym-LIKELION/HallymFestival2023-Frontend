@@ -61,12 +61,12 @@ export default {
         return;
       }
 
-      this.$emit('login', result);
+      // this.$emit('login', result);
 
       if (result.role === 2) {
-        this.$router.push('/admin');
+        this.$router.go('/admin');
       } else {
-        this.$router.push('/');
+        this.$router.go('/');
       }
     }
   }

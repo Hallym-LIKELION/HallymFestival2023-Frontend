@@ -145,10 +145,10 @@ import {
   ModifyBooth,
   DeleteBooth,
   UploadImage,
-  GetAuthority,
-  GetUserId
+  GetAuthority
 } from '../api/api-client';
 
+import Cookies from 'js-cookie';
 import Image from '../components/Image.vue';
 import BoothEditModal from '../components/booth/EditModal.vue';
 import BoothMenuEditModal from '../components/booth/MenuEditModal.vue';
@@ -435,7 +435,7 @@ export default {
       data.booth_active = data.booth_active === 'OPEN' ? true : false;
       this.boothData = data;
 
-      this.admin = GetAuthority() == 2 || (GetAuthority() == 1 && GetUserId() == data.writer);
+      this.admin = GetAuthority() == 2 || (GetAuthority() == 1 && Cookies.get('id') == data.writer);
 
       data = await GetBoothMenu(this.id);
       data.forEach((item) => {
