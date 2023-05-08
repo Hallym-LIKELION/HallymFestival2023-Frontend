@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 .modal-header {
-  padding: 8px 0;
+  padding: 4px 0;
   display: flex;
   justify-content: flex-end;
   font-size: 18pt;
@@ -126,6 +126,7 @@ export default {
 .content {
   min-height: 120px;
   padding-left: 16px;
+  font-size: 11pt;
 }
 
 .content > li {
@@ -149,6 +150,7 @@ export default {
   margin-top: 8px;
   display: flex;
   align-items: center;
+  font-size: 11pt;
 }
 
 .date > div,

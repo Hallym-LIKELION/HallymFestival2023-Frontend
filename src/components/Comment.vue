@@ -61,8 +61,8 @@ export default {
   },
   props: {
     id: {
-      type: Number,
-      default: 0
+      type: String,
+      default: '0'
     },
     ip: {
       type: String,
@@ -187,10 +187,10 @@ export default {
 }
 
 .picture {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   margin-right: 4px;
-  border-radius: 12px;
+  border-radius: 18px;
 }
 
 .name {
@@ -207,6 +207,7 @@ export default {
 .comment {
   width: 100%;
   height: 60px;
+  margin-top: 6px;
   word-break: break-all;
   overflow: hidden;
 }
@@ -243,8 +244,8 @@ export default {
 
 @media screen and (max-width: 400px) {
   .picture {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
   }
 
   .name {

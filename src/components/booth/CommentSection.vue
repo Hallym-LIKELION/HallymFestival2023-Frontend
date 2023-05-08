@@ -44,7 +44,13 @@ import Pagination from '../Pagination.vue';
 import SendImage from '../../assets/send.png';
 import { useToast } from 'vue-toastification';
 import { GetRandomNickName } from '../../library/name-generator';
-import { GetBoothComment, DeleteBoothComment, ReportBoothComment } from '../../api/api-client';
+import {
+  GetBoothComment,
+  DeleteBoothComment,
+  ReportBoothComment,
+  DeleteBoothCommentWithAdmin,
+  GetAuthority
+} from '../../api/api-client';
 
 export default {
   components: {
@@ -60,6 +66,8 @@ export default {
       list: [],
 
       myIP: '',
+
+      admin: GetAuthority(),
 
       showContextMenu: false,
       contextMenuTargetID: -1,
@@ -82,6 +90,10 @@ export default {
     id: {
       type: Number,
       default: -1
+    },
+    writer: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -116,6 +128,21 @@ export default {
       this.passwordModal = false;
       this.$emit('reload');
     },
+    async deleteCommentAdmin() {
+      let data;
+
+      try {
+        data = await DeleteBoothCommentWithAdmin(this.contextMenuTargetID, this.writer);
+      } catch (e) {
+        return;
+      }
+
+      if (data.result.includes('null comment')) {
+        return;
+      }
+
+      this.$emit('reload');
+    },
     closeMenu() {
       this.contextMenuTargetID = -1;
       this.showContextMenu = false;
@@ -133,7 +160,11 @@ export default {
     },
     openPasswordModal() {
       this.showContextMenu = false;
-      this.passwordModal = true;
+      if (this.admin > 0) {
+        this.deleteCommentAdmin();
+      } else {
+        this.passwordModal = true;
+      }
     },
     async reportComment() {
       const res = await ReportBoothComment(this.contextMenuTargetID);
@@ -165,9 +196,8 @@ export default {
     GetRandomNickName
   },
   async created() {
-    // TODO: API로 가져오기
     const data = await GetBoothComment(this.id);
-    this.list = data.dtoList;
+    this.list = data.dtoList || [];
     this.totalItems = data.total;
     this.itemsPerPage = data.size;
     this.$emit('update', data.total);

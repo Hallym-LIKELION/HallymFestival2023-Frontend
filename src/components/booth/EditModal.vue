@@ -10,7 +10,7 @@
       <div class="modal-body">
         <p class="label">부스명</p>
         <div class="input title">
-          <input class="input-title" type="text" v-model="title" />
+          <input class="input-title" type="text" v-model="title" maxlength="30" />
           <p ref="titleError" :class="['error', { hidden: !titleError }]">
             이름은 공란으로 둘 수 없습니다.
           </p>
@@ -37,10 +37,25 @@
         <div class="input type">
           <div class="flex-container">
             <template v-for="[item, image] in Object.entries(typeObject)" :key="item">
-              <button class="button" :class="{ active: type === item }" @click="setType(item)">
-                <img :src="image" :alt="item" />
-              </button>
+              <div class="item">
+                <button class="button" :class="{ active: type === item }" @click="setType(item)">
+                  <img :src="image" :alt="item" />
+                </button>
+                <p>{{ item }}</p>
+              </div>
             </template>
+          </div>
+        </div>
+
+        <p class="label">밤/낮</p>
+        <div class="input daynight">
+          <div class="flex-container">
+            <button class="button" :class="{ active: !isNight }" @click="setNight(false)">
+              낮부스
+            </button>
+            <button class="button" :class="{ active: isNight }" @click="setNight(true)">
+              밤부스
+            </button>
           </div>
         </div>
 
@@ -81,6 +96,7 @@ export default {
       // 사용자가 입력한 데이터들
       title: '',
       dayObject: { 화: false, 수: false, 목: false },
+      isNight: false,
       type: '주점'
     };
   },
@@ -92,7 +108,7 @@ export default {
     data: {
       type: Object,
       default() {
-        return { title: '', day: [], type: '주점' };
+        return { title: '', date: '[]', type: '주점', dayNight: 'DAY' };
       }
     }
   },
@@ -100,13 +116,24 @@ export default {
     updateData() {
       this.title = this.data.title;
       this.type = this.data.type;
+      this.isNight = this.data.dayNight === 'NIGHT';
+
+      const dayArray = [null, '화', '수', '목'];
+      const dayData = this.data.date;
+      console.log('data!!', dayData);
+
+      JSON.parse(dayData).forEach((item) => {
+        this.dayObject[dayArray[item]] = true;
+      });
     },
     toggleDay(day) {
       this.dayObject[day] = !this.dayObject[day];
-      console.log(this.day);
     },
     setType(type) {
       this.type = type;
+    },
+    setNight(value) {
+      this.isNight = value;
     },
     showTitleError() {
       this.titleError = true;
@@ -140,7 +167,8 @@ export default {
       const flags = [
         this.title === this.data.title,
         this.day === this.data.day,
-        this.type === this.data.type
+        this.type === this.data.type,
+        this.isNight === (this.data.dayNight === 'NIGHT')
       ];
 
       if (!flags.every((item) => item == true)) {
@@ -172,40 +200,19 @@ export default {
       this.$emit('complete', {
         title: this.title,
         day: this.day,
-        type: this.type
+        type: this.type,
+        isNight: this.isNight ? 'NIGHT' : 'DAY'
       });
     }
-    // showFileSelector() {
-    //   this.$refs.upload.click();
-    // },
-    // uploadImage(event) {
-    //   const file = this.$refs.upload.files[0];
-    //   const ACCEPT_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp'];
-
-    //   if (!ACCEPT_TYPES.includes(file.type)) {
-    //     alert('지원하지 않는 파일');
-    //     return;
-    //   }
-
-    //   if (file.size > 5242880) {
-    //     alert('크기가 너무 큽니다');
-    //     return;
-    //   }
-
-    //   const self = this;
-
-    //   const reader = new FileReader();
-    //   reader.onload = function () {
-    //     self.image = reader.result;
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   },
   computed: {
     day() {
-      return Object.entries(this.dayObject)
-        .filter(([key, value]) => value)
-        .map(([key, value]) => key);
+      const list = [null, '화', '수', '목'];
+      return JSON.stringify(
+        Object.entries(this.dayObject)
+          .filter(([key, value]) => value)
+          .map(([key, value]) => list.indexOf(key))
+      );
     }
   },
   watch: {
@@ -277,7 +284,20 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
+.input.type {
+  margin-bottom: 18px;
+}
 
+.input.type .item {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.input.type .item > p {
+  margin-top: 6px;
+  font-size: 9pt;
+  text-align: center;
+}
 .input .button {
   width: 48px;
   height: 48px;
@@ -290,6 +310,12 @@ export default {
   box-shadow: inset 0px 0px 6px rgba(92, 133, 155, 0.35);
   font-size: 16pt;
   font-weight: 600;
+}
+
+.input.daynight button {
+  width: 80px;
+  font-size: 12pt;
+  letter-spacing: 1px;
 }
 
 .input .button > img {

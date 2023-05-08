@@ -3,11 +3,13 @@
     <Header :image="HeaderImage" text="부스 목록" content="" />
 
     <div class="poster">
-      <BoothCarousel :slide="slide" :isAdmin="admin" />
-      <SwitchButton v-if="!admin" :status="day" @change="switchDayNight" />
+      <BoothCarousel :slide="slide" :isAdmin="admin === 2" />
+      <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
     </div>
 
-    <div class="search-bar" v-if="!admin"><SearchBar v-model="search" /></div>
+    <div class="search-bar" v-if="admin !== 2">
+      <SearchBar v-model="search" @change="updateValue" />
+    </div>
 
     <div class="button-group">
       <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
@@ -22,7 +24,7 @@
     </div>
 
     <div class="booth-list">
-      <template v-for="item in filltered_list" :key="item.bno">
+      <template v-for="item in list" :key="item.bno">
         <ListItem
           @click="() => showBooth(item.bno)"
           :title="item.booth_title"
@@ -34,7 +36,7 @@
           :comment="item.comment_cnt"
           :report="item.report_cnt"
           :mode="day"
-          :isAdmin="admin"
+          :isAdmin="admin === 2"
         />
       </template>
       <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
@@ -56,7 +58,8 @@ import {
   GetBoothList,
   GetBoothListWithComment,
   GetBoothListWithLike,
-  GetBoothListWithReport
+  GetBoothListWithReport,
+  SearchBoothList
 } from '../api/api-client';
 
 export default {
@@ -76,6 +79,8 @@ export default {
       search: '',
       day: 1,
 
+      dayNight: true,
+
       admin: GetAuthority(),
 
       slide: 0,
@@ -84,22 +89,7 @@ export default {
       itemsPerPage: 1
     };
   },
-  computed: {
-    filltered_list() {
-      return this.list.filter((item) => {
-        // 1. 요일에 따른 필터링
-        // const isChoosedDay = true || this.day === 0 || item.day.includes(this.day);
-
-        // 2. 검색에 따른 필터링
-        const isContainSearchString =
-          this.search === '' ||
-          item.booth_title.includes(this.search) ||
-          item.booth_content.includes(this.search);
-
-        return true && isContainSearchString;
-      });
-    }
-  },
+  computed: {},
   methods: {
     showBooth(id) {
       this.$router.push('/booth/' + id);
@@ -115,6 +105,10 @@ export default {
     },
     selectDay(day) {
       this.day = day;
+      this.updateValue();
+    },
+    updateValue() {
+      this.changePageWithSearch(1);
     },
     async selectSort(value) {
       if (value == 1) {
@@ -128,12 +122,13 @@ export default {
       }
     },
     switchDayNight(isDay) {
+      this.dayNight = isDay;
       if (isDay) {
         this.slide = 0;
       } else {
-        this.day = 0;
         this.slide = 3;
       }
+      this.updateValue();
     },
 
     randomNumber(a, b) {
@@ -142,6 +137,10 @@ export default {
 
     async changePage(page) {
       this.applyData(await GetBoothList(page));
+    },
+
+    async changePageWithSearch(page) {
+      this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
     },
 
     applyData(data) {
@@ -199,13 +198,13 @@ h1 {
 }
 
 .search-bar {
-  margin: 8px 0;
   margin-top: 16px;
   display: flex;
   justify-content: center;
 }
 
 .button-group {
+  margin-top: 16px;
   display: flex;
   justify-content: center;
 }
@@ -215,7 +214,8 @@ h1 {
   padding: 6px 16px;
   border: none;
   border-radius: 24px;
-  color: #ffffff;
+  color: #ffffff66;
+  background-color: #ffffff1e;
   font-size: 11pt;
   cursor: pointer;
   font-family: 'Nanum Gothic', sans-serif;

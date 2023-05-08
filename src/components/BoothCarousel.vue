@@ -136,23 +136,25 @@ export default {
   },
 
   async created() {
-    const commentList = (await GetBoothListWithComment()).dtoList;
-    const likeList = (await GetBoothListWithLike()).dtoList;
-    const reportList = (await GetBoothListWithReport()).dtoList;
+    if (this.isAdmin) {
+      const commentList = (await GetBoothListWithComment()).dtoList;
+      const likeList = (await GetBoothListWithLike()).dtoList;
+      const reportList = (await GetBoothListWithReport()).dtoList;
 
-    let data;
+      let data;
 
-    data = commentList.map((item) => [item.booth_title, item.comment_cnt]);
+      data = commentList.map((item) => [item.booth_title, item.comment_cnt]).slice(0, 5);
 
-    this.charts.push(CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요', data));
+      this.charts.push(CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글', data));
 
-    data = likeList.map((item) => [item.booth_title, item.like_cnt]);
+      data = likeList.map((item) => [item.booth_title, item.like_cnt]).slice(0, 5);
 
-    this.charts.push(CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글', data));
+      this.charts.push(CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요', data));
 
-    data = reportList.map((item) => [item.booth_title, item.report_cnt]);
+      data = reportList.map((item) => [item.booth_title, item.report_cnt]).slice(0, 5);
 
-    this.charts.push(CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글', data));
+      this.charts.push(CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글', data));
+    }
   }
 };
 </script>

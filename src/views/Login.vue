@@ -4,7 +4,7 @@
       <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
     <div class="logo">
-      <img src="@/assets/로고.png" alt="" width="400" height="300" />
+      <Image :src="logoImage" class="logo-image"></Image>
     </div>
     <div class="form">
       <form @submit.prevent="fnLogin">
@@ -23,17 +23,23 @@
 </template>
 
 <script>
-import { GetAccessToken } from '../api/api-client';
+import Image from '../components/Image.vue';
+import { GetAccessToken, GetAuthority } from '../api/api-client';
+import logoImage from '@/assets/로고.png';
 import userImage from '@/assets/user.png';
 import lockImage from '@/assets/lock.png';
 
 export default {
+  components: {
+    Image
+  },
   data() {
     return {
+      logoImage,
       userImage,
       lockImage,
-      id: 'maria@mail.com',
-      password: '12345'
+      id: 'admin',
+      password: '1111'
     };
   },
   methods: {
@@ -48,20 +54,18 @@ export default {
         return;
       }
 
-      let role = 1;
-
-      if (this.id === 'maria@mail.com') {
-        role = 2;
-      }
-
-      const result = await GetAccessToken(this.id, this.password, role);
+      const result = await GetAccessToken(this.id, this.password);
 
       if (!result) {
-        alert('아이디 혹은 비밀번호가 잘못되었습니다.\nid = maria@mail.com / pw = 12345');
+        alert('아이디 혹은 비밀번호가 잘못되었습니다.');
         return;
       }
 
-      this.$router.push('/admin');
+      if (GetAuthority() === 2) {
+        this.$router.push('/admin');
+      } else {
+        this.$router.push('/');
+      }
     }
   }
 };
@@ -71,6 +75,11 @@ export default {
 .logo {
   display: flex;
   justify-content: center;
+}
+
+:deep(.logo-image) {
+  width: 100%;
+  max-width: 300px;
 }
 .introment {
   font-family: 'Nanum Gothic', sans-serif;
@@ -127,6 +136,7 @@ p {
 .button > button {
   width: 100%;
   margin-top: 18px;
+  margin-bottom: 36px;
   padding: 8px 0;
   font-size: 15pt;
   border-radius: 12px;
@@ -137,5 +147,15 @@ p {
 
 .button > button:hover {
   background-color: #9c323e;
+}
+
+@media screen and (max-width: 400px) {
+  .input {
+    width: 200px;
+  }
+
+  .input > input {
+    font-size: 9pt;
+  }
 }
 </style>

@@ -93,7 +93,7 @@ export default {
         transform: 'translateY(100%)'
       },
       {
-        delay: 1.5,
+        delay: 1.25,
         duration: 2,
         transform: 'none',
         opacity: 1,
@@ -111,7 +111,7 @@ export default {
           pointerEvents: 'none'
         },
         {
-          delay: 2.5 + i * 0.25,
+          delay: 2 + i * 0.25,
           duration: 0.5,
           transform: 'none',
           opacity: 1,
@@ -215,5 +215,22 @@ export default {
 
 .sponsor > p {
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .logo {
+    margin-top: -28px;
+  }
+
+  .phrase {
+    font-size: 10pt;
+    margin-top: 36px;
+  }
+
+  .menu > * {
+    width: 100%;
+    margin: 4px;
+    font-size: 11pt;
+  }
 }
 </style>

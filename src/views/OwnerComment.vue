@@ -4,7 +4,7 @@
       :show="showContextMenu"
       :x="contextMenuX"
       :y="contextMenuY"
-      @clickDelete="openPasswordModal"
+      @clickDelete="deleteComment"
       @clickReport="reportComment"
       @clickOutside="closeMenu"
     />
@@ -40,7 +40,7 @@
 import Comment from '../components/Comment.vue';
 import CommentContextMenu from '../components/CommentContextMenu.vue';
 import Pagination from '../components/Pagination.vue';
-import { GetVisitCommentListWithReport } from '../api/api-client';
+import { GetVisitCommentListWithReport, DeleteVisitCommentWithAdmin } from '../api/api-client';
 import { GetRandomNickName } from '../library/name-generator';
 
 export default {
@@ -83,6 +83,22 @@ export default {
     closeMenu() {
       this.contextMenuTargetID = -1;
       this.showContextMenu = false;
+    },
+
+    async deleteComment() {
+      let data;
+
+      try {
+        data = await DeleteVisitCommentWithAdmin(this.contextMenuTargetID);
+      } catch (e) {
+        return;
+      }
+
+      if (data.result.includes('null comment')) {
+        return;
+      }
+
+      setTimeout(() => this.$emit('reload'), 100);
     },
 
     async changePage(page) {

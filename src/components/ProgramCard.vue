@@ -54,7 +54,7 @@ p {
 }
 
 .title {
-  margin-top: 16px;
+  margin-top: 18px;
   font-family: 'Nanum Gothic';
 
   font-size: 20pt;
@@ -68,7 +68,8 @@ p {
 
 .description {
   width: 100%;
-  margin: 16px 0;
+  margin-top: 6px;
+  margin-bottom: 18px;
   font-family: 'Nanum Gothic';
 
   color: black;

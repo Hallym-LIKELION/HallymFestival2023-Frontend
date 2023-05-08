@@ -56,7 +56,11 @@
 
       <div class="header-content">
         <Image
-          src="https://placehold.co/400x400"
+          :src="
+            boothData.fileNames[0]
+              ? 'https://www.hallymfestival.com/api/view/s_' + boothData.fileNames[0]
+              : SampleImage
+          "
           class="header-image"
           width="400"
           height="400"
@@ -115,6 +119,7 @@
         </div>
         <BoothCommentSection
           :id="parseInt($route.params.id)"
+          :writer="boothData.writer"
           @update="loadCommentCount"
           @reload="reload"
         />
@@ -131,6 +136,7 @@ import HeartImage from '../assets/heart.png';
 import HeartActiveImage from '../assets/heart-active.png';
 import EditImage from '../assets/edit_button.png';
 import CloseImage from '../assets/close.png';
+import SampleImage from '@/assets/default_booth.jpg';
 import {
   GetBooth,
   GetBoothMenu,
@@ -138,7 +144,9 @@ import {
   PostBoothLike,
   ModifyBooth,
   DeleteBooth,
-  GetAuthority
+  UploadImage,
+  GetAuthority,
+  GetUserId
 } from '../api/api-client';
 
 import Image from '../components/Image.vue';
@@ -165,11 +173,11 @@ export default {
     return {
       EditImage,
       CloseImage,
-
+      SampleImage,
       Icon,
       id: -1,
 
-      admin: GetAuthority(),
+      admin: 0,
 
       boothData: {},
       menuData: [],
@@ -219,12 +227,12 @@ export default {
         this.id,
         data.title,
         this.boothData.booth_content,
-        '테스1트',
+        this.boothData.writer,
         data.type,
-        true // unused
+        data.isNight,
+        data.day,
+        this.boothData.fileNames
       );
-
-      // data.day
 
       if (!res.result.includes('success')) {
         alert('부스를 수정하는데 실패했습니다.\n' + res.result);
@@ -232,7 +240,7 @@ export default {
       }
 
       // 페이지 새로고침
-      this.$router.go();
+      this.$emit('reload');
     },
     openEditDescriptionModal() {
       this.editDescriptionModal = true;
@@ -247,7 +255,9 @@ export default {
         description,
         this.boothData.writer,
         this.boothData.booth_type,
-        true // unused
+        this.boothData.dayNight,
+        this.boothData.openDay,
+        this.boothData.fileNames
       );
 
       if (!res.result.includes('success')) {
@@ -256,7 +266,7 @@ export default {
       }
 
       // 페이지 새로고침
-      this.$router.go();
+      this.$emit('reload');
     },
     openEditMenuModal() {
       this.editMenuModal = true;
@@ -268,7 +278,7 @@ export default {
       this.closeEditMenuModal();
 
       // 페이지 새로고침
-      this.$router.go();
+      this.$emit('reload');
     },
     loadCommentCount(count) {
       this.commentCount = count;
@@ -291,19 +301,29 @@ export default {
         return;
       }
 
-      let image;
-
-      const reader = new FileReader();
-      reader.onload = function () {
-        image = reader.result;
-      };
-      reader.readAsDataURL(file);
-
       const form = new FormData();
-      form.append('image', image);
+      form.append('files', file);
 
-      // await UploadImage(form);
-      // this.$emit("reload");
+      const res = await UploadImage(form);
+
+      const response = await ModifyBooth(
+        this.id,
+        this.boothData.booth_title,
+        this.boothData.booth_content,
+        this.boothData.writer,
+        this.boothData.booth_type,
+        this.boothData.dayNight,
+        this.boothData.openDay,
+        res.map((item) => item.uuid + '_' + item.fileName)
+      );
+
+      if (!response.result.includes('success')) {
+        alert('이미지 업로드에 실패했습니다.\n' + response.result);
+        return;
+      }
+
+      // 페이지 새로고침
+      this.$emit('reload');
     },
     async likeHandler(evt) {
       // 딜레이 중이면 종료
@@ -366,7 +386,7 @@ export default {
     },
     async deleteBooth() {
       this.closeDeleteModal();
-      const res = await DeleteBooth(this.boothData.bno);
+      const res = await DeleteBooth(this.boothData.bno, this.boothData.writer);
       this.$router.push('/boothmap');
     }
   },
@@ -381,9 +401,10 @@ export default {
       handler(data) {
         this.editData = {
           title: data.booth_title,
-          description: data.booth_content,
           type: data.booth_type,
-          status: data.booth_active
+          status: data.booth_active,
+          date: data.openDay,
+          dayNight: data.dayNight
         };
       }
     },
@@ -413,6 +434,10 @@ export default {
       data = await GetBooth(this.id);
       data.booth_active = data.booth_active === 'OPEN' ? true : false;
       this.boothData = data;
+
+      console.log(data);
+
+      this.admin = GetAuthority() == 2 || (GetAuthority() == 1 && GetUserId() == data.writer);
 
       data = await GetBoothMenu(this.id);
       data.forEach((item) => {

@@ -102,7 +102,7 @@ export default {
       navList: [
         { name: '공지사항', url: '/announcement' },
         { name: '부스', url: '/boothmap' },
-        { name: '시간표', url: '/timetable' },
+        { name: '타임 테이블', url: '/timetable' },
         { name: '프로그램', url: '/program' },
         { name: '굿즈', url: '/goods' },
         { name: '방명록', url: '/comment' },
@@ -248,8 +248,8 @@ export default {
 .background .post {
   position: absolute;
   left: 50%;
-  bottom: -180px;
-  width: 300px;
+  bottom: -100px;
+  width: 220px;
   transform: translateX(-50%);
 }
 .background .letter {
@@ -260,7 +260,7 @@ export default {
   transform: translateX(-50%);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 400px) {
   .background .letter {
     width: 500px;
   }
