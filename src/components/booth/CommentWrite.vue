@@ -11,6 +11,7 @@
         class="body-input"
         v-model="commentContent"
         @keydown.enter.prevent="send"
+        maxlength="255"
         placeholder="타인을 비방하거나, 모욕을 주는 댓글은 삭제될 수 있습니다."
       ></textarea>
       <div class="footer">

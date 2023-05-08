@@ -8,6 +8,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @change="change"
+      maxlength="30"
     />
   </div>
 </template>

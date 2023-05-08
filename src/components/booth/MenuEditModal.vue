@@ -16,7 +16,13 @@
         <button class="item-remove" @click="() => deleteItem(item.mno)">
           <img class="close-image" :src="item._deleted ? Icon.undo : CloseImage" alt="닫기" />
         </button>
-        <input class="item-name" :disabled="item._deleted" type="text" v-model="item.name" />
+        <input
+          class="item-name"
+          :disabled="item._deleted"
+          type="text"
+          v-model="item.name"
+          maxlength="15"
+        />
         <input
           class="item-price"
           :disabled="item._deleted"

@@ -12,6 +12,7 @@
         v-model="content"
         @keydown.enter.prevent="send"
         placeholder="부스 설명을 입력하세요"
+        maxlength="500"
       ></textarea>
       <p ref="error" :class="['error', { hidden: !error }]">부스 소개는 공란으로 둘 수 없습니다.</p>
     </div>

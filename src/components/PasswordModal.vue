@@ -8,7 +8,7 @@
       </button> -->
     </div>
     <div class="modal-body">
-      <input type="password" v-model="password" @keydown.enter="deleteComment" />
+      <input type="password" v-model="password" @keydown.enter="deleteComment" maxlength="32" />
     </div>
     <div class="modal-footer">
       <button class="modal-button back" @click="close">돌아가기</button>
