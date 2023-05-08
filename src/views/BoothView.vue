@@ -57,7 +57,7 @@
       <div class="header-content">
         <Image
           :src="
-            boothData.fileNames[0]
+            boothData.fileNames && boothData.fileNames.length > 0
               ? 'https://www.hallymfestival.com/api/view/s_' + boothData.fileNames[0]
               : SampleImage
           "

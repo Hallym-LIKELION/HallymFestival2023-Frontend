@@ -127,8 +127,6 @@ export default {
       this.name = GetRandomNickName(this.ip);
       this.image = images[data.image];
       this.imageColor = data.color;
-
-      console.log(this.name, this.image, this.imageColor);
     }
   },
   mounted() {
@@ -138,8 +136,6 @@ export default {
     this.name = GetRandomNickName(this.ip);
     this.image = images[data.image];
     this.imageColor = data.color;
-
-    console.log(this.name, this.image, this.imageColor);
   }
 };
 </script>

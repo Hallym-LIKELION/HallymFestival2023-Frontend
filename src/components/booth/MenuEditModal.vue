@@ -299,7 +299,7 @@ export default {
 .modal-body {
   margin-top: 10px;
   width: 100%;
-  min-height: 390px;
+  min-height: 240px;
   display: grid;
   grid-template-columns: 18px 5fr 3fr 42px;
   grid-auto-rows: max(24px);
@@ -428,5 +428,32 @@ input:disabled {
 
 .hidden {
   visibility: hidden;
+}
+
+@media screen and (max-width: 400px) {
+  .modal-header {
+    font-size: 12pt;
+  }
+
+  .close-image {
+    width: 12px;
+    height: 12px;
+  }
+
+  .item-label {
+    font-size: 11pt;
+  }
+
+  .item-name {
+    font-size: 9pt;
+  }
+  .item-price {
+    font-size: 9pt;
+  }
+
+  .item-soldout + label:before {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>
