@@ -145,22 +145,12 @@ export default {
     applyData(data) {
       this.list = data.dtoList;
       this.totalItems = data.total;
-      this.itemsPerPage = data.size;
+      this.itemsPerPage = data.size || 1;
     }
   },
 
   async created() {
-    let data;
-
-    if (this.admin === 2) {
-      data = await GetBoothListWithComment();
-    } else {
-      data = await GetBoothList();
-    }
-
-    this.list = data.dtoList;
-    this.totalItems = data.total;
-    this.itemsPerPage = data.size || 1;
+    this.changePage(1);
   }
 };
 </script>
