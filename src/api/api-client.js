@@ -58,26 +58,27 @@ export async function GetAccessToken(id, password) {
 
   const success = res.status >= 200 && res.status < 400;
 
-  if (success) {
-    Cookies.set('access_token', res.data.accessToken, { expires: 0.5 });
-    Cookies.set('refresh_token', res.data.refreshToken, { expires: 10 });
-
-    let data = JSON.parse(atob(res.data.accessToken.split('.')[1]));
-
-    token = res.data.accessToken;
-    if (data.role === 'ROLE_ADMIN') {
-      role = 2;
-    } else if (data.role === 'ROLE_USER') {
-      role = 1;
-    }
-
-    id = data.mid;
-
-    Cookies.set('id', id, { expires: 0.5 });
-    Cookies.set('role', role, { expires: 0.5 });
+  if (!success) {
+    return false;
   }
 
-  return success;
+  Cookies.set('access_token', res.data.accessToken, { expires: 0.5 });
+  Cookies.set('refresh_token', res.data.refreshToken, { expires: 10 });
+
+  let resData = JSON.parse(atob(res.data.accessToken.split('.')[1]));
+
+  token = res.data.accessToken;
+  if (resData.role === 'ROLE_ADMIN') {
+    role = 2;
+  } else if (resData.role === 'ROLE_USER') {
+    role = 1;
+  }
+
+  id = resData.mid;
+  Cookies.set('id', id, { expires: 0.5 });
+  Cookies.set('role', role, { expires: 0.5 });
+
+  return { id, role };
 }
 
 export async function GetAccessTokenUser() {
@@ -94,25 +95,27 @@ export async function GetAccessTokenUser() {
 
   const success = res.status >= 200 && res.status < 400;
 
-  if (success) {
-    Cookies.set('access_token', res.data.accessToken, { expires: 0.5 });
-    Cookies.set('refresh_token', res.data.refreshToken, { expires: 10 });
-
-    let data = JSON.parse(atob(res.data.accessToken.split('.')[1]));
-
-    token = res.data.accessToken;
-    if (data.role === 'ROLE_ADMIN') {
-      role = 2;
-    } else if (data.role === 'ROLE_USER') {
-      role = 1;
-    }
-
-    id = data.mid;
-    Cookies.set('id', id, { expires: 0.5 });
-    Cookies.set('role', role, { expires: 0.5 });
+  if (!success) {
+    return false;
   }
 
-  return success;
+  Cookies.set('access_token', res.data.accessToken, { expires: 0.5 });
+  Cookies.set('refresh_token', res.data.refreshToken, { expires: 10 });
+
+  let resData = JSON.parse(atob(res.data.accessToken.split('.')[1]));
+
+  token = res.data.accessToken;
+  if (resData.role === 'ROLE_ADMIN') {
+    role = 2;
+  } else if (resData.role === 'ROLE_USER') {
+    role = 1;
+  }
+
+  id = resData.mid;
+  Cookies.set('id', id, { expires: 0.5 });
+  Cookies.set('role', role, { expires: 0.5 });
+
+  return { id, role };
 }
 
 // =========================
