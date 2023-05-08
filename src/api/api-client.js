@@ -549,13 +549,3 @@ export async function UploadImage(formData) {
   });
   return res.data;
 }
-
-export async function GetImage(name) {
-  const res = await axios.get(HOST + '/view/' + name);
-  return res.data;
-}
-
-export async function DeleteImage(name) {
-  const res = await axios.delete(HOST + '/remove/' + name);
-  return res.data;
-}

@@ -29,7 +29,7 @@
           @click="() => showBooth(item.bno)"
           :title="item.booth_title"
           :content="item.booth_content"
-          :type="item.boothType"
+          :type="admin === 2 ? item.boothType : item.booth_type"
           :writer="item.writer"
           :date="item.regDate"
           :like="item.like_cnt"
