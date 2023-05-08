@@ -235,10 +235,9 @@ h1 {
 
 .booth-list > * {
   max-width: 420px;
-  margin: 10px 0;
+  margin: 10px 0px;
   cursor: pointer;
 }
-
 @media screen and (max-width: 400px) {
   .button-group > button {
     margin: 8px;

@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="introment">
-      <p>"우리의 모든 시간은 연결되어있어"</p>
+      <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
     <div class="logo">
       <img src="@/assets/로고.png" alt="" width="400" height="300" />

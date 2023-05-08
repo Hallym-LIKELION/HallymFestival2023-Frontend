@@ -11,7 +11,7 @@
         class="body-input"
         v-model="commentContent"
         @keydown.enter.prevent="send"
-        placeholder="타인을 비방하거나, 모욕을 주는 방명록은 삭제될 수 있습니다."
+        placeholder="타인을 비방하거나, 모욕을 주는 댓글은 삭제될 수 있습니다."
       ></textarea>
       <div class="footer">
         <input
@@ -108,7 +108,7 @@ export default {
   width: calc(100% - 20px);
   margin-top: 8px;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #f4f4f4;
   box-shadow: 0px 0px 8px #00000033;
 }
