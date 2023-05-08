@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <p class="label">밤/낮</p>
+        <p class="label">낮/밤</p>
         <div class="input daynight">
           <div class="flex-container">
             <button class="button" :class="{ active: !isNight }" @click="setNight(false)">
@@ -118,13 +118,11 @@ export default {
       this.type = this.data.type;
       this.isNight = this.data.dayNight === 'NIGHT';
 
-      const dayArray = [null, '화', '수', '목'];
-      const dayData = this.data.date;
-      console.log('data!!', dayData);
+      const dayData = JSON.parse(this.data.date);
 
-      JSON.parse(dayData).forEach((item) => {
-        this.dayObject[dayArray[item]] = true;
-      });
+      this.dayObject['화'] = dayData.includes(1);
+      this.dayObject['수'] = dayData.includes(2);
+      this.dayObject['목'] = dayData.includes(3);
     },
     toggleDay(day) {
       this.dayObject[day] = !this.dayObject[day];
@@ -166,7 +164,7 @@ export default {
     close() {
       const flags = [
         this.title === this.data.title,
-        this.day === this.data.day,
+        this.day === this.data.date,
         this.type === this.data.type,
         this.isNight === (this.data.dayNight === 'NIGHT')
       ];
@@ -189,7 +187,7 @@ export default {
       if (this.title.trim().length === 0) {
         this.showTitleError();
       }
-      if (this.day.length === 0) {
+      if (this.day.length === 2) {
         this.showDayError();
       }
 
@@ -273,9 +271,6 @@ export default {
   width: calc(100% - 20px);
   padding: 4px 10px;
   border-radius: 4px;
-}
-
-.input.title > input {
   font-size: 13pt;
   background-color: #ebebeb;
 }
@@ -370,5 +365,54 @@ export default {
 }
 .footer > .button:nth-child(4) {
   margin-left: 5px;
+}
+
+@media screen and (max-width: 375px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+
+  .input.title + div {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .modal-body .label {
+    font-size: 13pt;
+  }
+  .modal-body .label.small {
+    margin-left: 4px;
+    font-size: 9pt;
+  }
+
+  .input.title > input {
+    width: calc(100% - 20px);
+    font-size: 11pt;
+  }
+
+  .input.type .item > p {
+    font-size: 8pt;
+  }
+  .input .button {
+    width: 42px;
+    height: 42px;
+    font-size: 12pt;
+  }
+
+  .input.daynight button {
+    width: 70px;
+    font-size: 10pt;
+  }
+
+  .input .button > img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer > .button {
+    width: 70px;
+    padding: 6px 0;
+    font-size: 9pt;
+  }
 }
 </style>
