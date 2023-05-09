@@ -25,7 +25,11 @@
 
     <FloatButton @click="openCommentModal" />
 
-    <Header :image="HeaderImage" text="방명록" content="하고 싶은 말을 자유롭게 남겨주세요!" />
+    <Header
+      :image="HeaderImage"
+      text="방명록"
+      :content="'우측 하단의 버튼을 눌러서\n하고 싶은 말을 자유롭게 남겨주세요!'"
+    />
 
     <div class="comment-list">
       <template v-for="item in list" :key="item.vno">

@@ -2,7 +2,7 @@
   <main>
     <div class="background"></div>
 
-    <Header :image="HeaderImage" text="타임 테이블" content="" />
+    <Header :image="HeaderImage" text="타임 테이블" content="이번 축제의 운영 스케줄입니다!" />
 
     <div class="button-group">
       <button @click="() => selectDay(1)" :class="{ selected: day === 1 }">

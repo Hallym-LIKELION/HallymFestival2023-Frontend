@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Header :image="HeaderImage" text="만든이들" content="" />
+    <Header
+      :image="HeaderImage"
+      text="만든이들"
+      content="이번 축제 웹사이트 개발진 및 축제 운영진들입니다!"
+    />
 
     <div class="wrapper">
       <div class="header">

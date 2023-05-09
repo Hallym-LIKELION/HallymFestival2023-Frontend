@@ -10,7 +10,7 @@
 
     <div class="background"></div>
 
-    <Header :image="HeaderImage" text="공지사항" content="" />
+    <Header :image="HeaderImage" text="공지사항" content="축제 진행에 관한 공지사항입니다." />
 
     <div class="search-bar">
       <ASearchBar v-model="search" @change="searchNotice" />

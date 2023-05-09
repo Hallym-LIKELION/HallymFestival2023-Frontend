@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Header :image="HeaderImage" text="굿즈" content="" />
+    <Header :image="HeaderImage" text="굿즈" content="이번 축제를 주제로한 굿즈 상품입니다!" />
 
     <div class="content">
       <p>
