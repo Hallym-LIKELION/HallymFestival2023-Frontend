@@ -19,6 +19,7 @@
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
+      <button @click="openPopcat">연예인 공개 팝캣 링크 바로가기</button>
     </div>
 
     <div class="sponsor" ref="sponsor">
@@ -46,6 +47,9 @@ export default {
   methods: {
     openBoothRecommendation() {
       window.open('https://hallym-booth.vercel.app/', '_blank');
+    },
+    openPopcat() {
+      window.open('http://37catch.me/popduck/day1/', '_blank');
     },
     openNaverCloud() {
       window.open('https://www.ncloud.com/', '_blank');
@@ -102,7 +106,7 @@ export default {
     );
 
     // 메뉴 애니메이션
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       gsap.fromTo(
         this.$refs.menu.childNodes[i],
         {
