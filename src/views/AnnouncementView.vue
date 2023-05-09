@@ -236,7 +236,7 @@ h1 {
   margin: 0 -28px;
   padding: 36px 24px;
   position: relative;
-  z-index: 3;
+  z-index: 1;
   font-family: 'Nanum Gothic', sans-serif;
 }
 

@@ -237,7 +237,7 @@ export default {
 
 .background {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   width: 824px;
   margin-top: 150px;
   margin-left: -28px;
@@ -255,6 +255,8 @@ export default {
 .button-group {
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .button-group > button {
@@ -299,6 +301,9 @@ export default {
   height: 100%;
   border: none;
   border-radius: 16px;
+
+  position: relative;
+  z-index: 1;
 
   margin: 48px auto;
 
