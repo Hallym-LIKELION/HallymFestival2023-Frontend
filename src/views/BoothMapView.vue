@@ -2,9 +2,8 @@
   <main>
     <Header :image="HeaderImage" text="부스 목록" content="" />
 
-    <div class="poster">
-      <BoothCarousel :slide="slide" :isAdmin="admin === 2" />
-      <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
+    <div class="poster" v-if="admin === 2">
+      <BoothCarousel :slide="slide" />
     </div>
 
     <div class="search-bar" v-if="admin !== 2">
@@ -12,15 +11,30 @@
     </div>
 
     <div class="button-group">
-      <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
-        {{ admin === 2 ? '댓글순' : '화요일' }}
-      </button>
-      <button @click="() => selectType(2)" :class="{ selected: day === 2 }">
-        {{ admin === 2 ? '좋아요순' : '수요일' }}
-      </button>
-      <button @click="() => selectType(3)" :class="{ selected: day === 3 }">
-        {{ admin === 2 ? '신고순' : '목요일' }}
-      </button>
+      <div>
+        <button
+          @click="() => selectType(1)"
+          :class="['type', { selected: day === 1, alter: admin === 2 }]"
+        >
+          {{ admin === 2 ? '댓글순' : '화요일' }}
+        </button>
+        <button
+          @click="() => selectType(2)"
+          :class="['type', { selected: day === 2, alter: admin === 2 }]"
+        >
+          {{ admin === 2 ? '좋아요순' : '수요일' }}
+        </button>
+        <button
+          @click="() => selectType(3)"
+          :class="['type', { selected: day === 3, alter: admin === 2 }]"
+        >
+          {{ admin === 2 ? '신고순' : '목요일' }}
+        </button>
+      </div>
+
+      <div>
+        <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
+      </div>
     </div>
 
     <div class="booth-list">
@@ -194,9 +208,16 @@ h1 {
   margin-top: 16px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.button-group > button {
+.button-group > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-group > div > .type {
   margin: 8px 10px;
   padding: 6px 16px;
   border: none;
@@ -209,7 +230,7 @@ h1 {
   transition: background-color 0.25s, color 0.25s;
 }
 
-.button-group > button.selected {
+.button-group > div > .type.selected {
   background-color: #ca434c;
   color: white;
 }
@@ -226,10 +247,20 @@ h1 {
   cursor: pointer;
 }
 @media screen and (max-width: 400px) {
-  .button-group > button {
-    margin: 8px;
-    padding: 4px 8px;
-    font-size: 10pt;
+  .button-group > div > .type {
+    margin: 8px 8px;
+    padding: 4px 16px;
+    font-size: 6pt;
+  }
+
+  .button-group > div > .type:not(.alter):first-letter {
+    font-size: 12pt;
+  }
+
+  .button-group > div > .type.alter {
+    margin: 8px 4px;
+    padding: 4px 9px;
+    font-size: 9pt;
   }
 }
 </style>

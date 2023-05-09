@@ -257,6 +257,8 @@ export default {
 
   .footer {
     margin-top: 8px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .footer > p {
