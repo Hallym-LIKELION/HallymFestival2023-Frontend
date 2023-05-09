@@ -15,10 +15,10 @@
     </div>
     <div class="menu" ref="menu">
       <RouterLink to="/timetable">타임 테이블</RouterLink>
-      <RouterLink to="/boothmap">부스 배치도</RouterLink>
+      <RouterLink to="/boothmap">부스 목록</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
-      <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
+      <button @click="openBoothRecommendation">부스 유형 추천 테스트 하러가기</button>
       <button @click="openPopcat" class="popcat">연예인 공개 팝캣 링크 바로가기</button>
     </div>
 

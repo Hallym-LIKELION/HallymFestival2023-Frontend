@@ -33,7 +33,7 @@
           </p>
         </div>
 
-        <p class="label">유형</p>
+        <p class="label">아이콘</p>
         <div class="input type">
           <div class="flex-container">
             <template v-for="[item, image] in Object.entries(typeObject)" :key="item">
@@ -41,7 +41,7 @@
                 <button class="button" :class="{ active: type === item }" @click="setType(item)">
                   <img :src="image" :alt="item" />
                 </button>
-                <p>{{ item }}</p>
+                <p>{{ typeReplace[item] }}</p>
               </div>
             </template>
           </div>
@@ -84,10 +84,17 @@ export default {
       CloseImage,
 
       typeObject: {
-        주점: Icon.beer,
-        부스: Icon.gamepad,
         플리마켓: Icon.basket,
-        푸드트럭: Icon.food
+        푸드트럭: Icon.food,
+        주점: Icon.interest,
+        부스: Icon.store
+      },
+
+      typeReplace: {
+        플리마켓: '플리마켓',
+        푸드트럭: '먹거리',
+        주점: '오락',
+        부스: '기타'
       },
 
       titleError: false,
@@ -314,8 +321,8 @@ export default {
 }
 
 .input .button > img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .input .button.active {

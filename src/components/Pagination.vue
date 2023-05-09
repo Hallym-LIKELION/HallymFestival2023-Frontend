@@ -51,6 +51,7 @@ export default {
 
   methods: {
     onClickHandler(page) {
+      window.scrollTo(0, 0);
       this.$emit('change', page);
     }
   },
