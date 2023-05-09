@@ -29,7 +29,12 @@
           <div class="schedule-time" v-text="item.time"></div>
 
           <div class="schedule-text" v-text="item.content.join('\n')"></div>
-          <div class="club_lineup" v-text="item.club"></div>
+          <div class="schedule-content" v-if="item.subContent">
+            <p class="title">{{ item.subContent.name }}</p>
+            <ul>
+              <li class="list" v-for="text in item.subContent.list">{{ text }}</li>
+            </ul>
+          </div>
 
           <div class="schedule-space">
             <img :src="Icon.space" alt="" />
@@ -64,16 +69,28 @@ export default {
           day: [1]
         },
         {
-          time: '13:00 ~ 17:00 ',
+          time: '13:00 ~ 17:00',
           content: ['축제준비위원회 운영 부스'],
+          subContent: {
+            name: 'BOOTH',
+            list: [
+              '한림 공방 - 나만의 Y2K템 만들기',
+              '한림 공방 - 슈링클스 명찰 만들기',
+              '한림시그널 - 매칭 부스',
+              '한림고등학교',
+              '도전 한림 100곡! - 길거리 노래방'
+            ]
+          },
           space: 'CLC희망터',
-          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
           day: [1]
         },
         {
           time: '16:55 ~ 18:10 ',
           content: ['동아리 공연 1부'],
-          club: 'LINE UP: CODA, 수레바퀴, 엑스레이',
+          subContent: {
+            name: 'LINE UP',
+            list: ['CODA', '수레바퀴', '엑스레이']
+          },
           space: '한림대 대운동장',
           day: [1]
         },
@@ -86,7 +103,10 @@ export default {
         {
           time: '18:30 ~ 20:40',
           content: ['동아리 공연 2부'],
-          club: 'LINE UP: 유니콘, 두레박, 춤바람, 한림극회, 어셈블, 힙합PD',
+          subContent: {
+            name: 'LINE UP',
+            list: ['유니콘', '두레박', '춤바람', '한림극회', '어셈블', '힙합PD']
+          },
           space: '한림대 대운동장',
           day: [1]
         },
@@ -97,10 +117,19 @@ export default {
           day: [1]
         },
         {
-          time: '13:00 ~ 17:00 ',
+          time: '13:00 ~ 17:00',
           content: ['축제준비위원회 운영 부스'],
           space: 'CLC희망터',
-          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
+          subContent: {
+            name: 'BOOTH',
+            list: [
+              '한림 공방 - 나만의 Y2K템 만들기',
+              '한림 공방 - 슈링클스 명찰 만들기',
+              '한림시그널 - 매칭 부스',
+              '한림고등학교',
+              '도전 한림 100곡! - 길거리 노래방'
+            ]
+          },
           day: [2]
         },
         {
@@ -128,10 +157,19 @@ export default {
           day: [2]
         },
         {
-          time: '13:00 ~ 17:00 ',
+          time: '13:00 ~ 17:00',
           content: ['축제준비위원회 운영 부스'],
           space: 'CLC희망터',
-          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
+          subContent: {
+            name: 'BOOTH',
+            list: [
+              '한림 공방 - 나만의 Y2K템 만들기',
+              '한림 공방 - 슈링클스 명찰 만들기',
+              '한림시그널 - 매칭 부스',
+              '한림고등학교',
+              '도전 한림 100곡! - 길거리 노래방'
+            ]
+          },
           day: [3]
         },
         {
@@ -181,7 +219,7 @@ export default {
       return result.map((item, index) => ({
         time: item.time,
         content: item.content,
-        club: item.club,
+        subContent: item.subContent,
         day: item.day,
         space: item.space,
         hideLine: index === result.length - 1
@@ -404,23 +442,34 @@ export default {
   font-size: 13pt;
   word-break: break-all;
 }
-.club_lineup{
-  min-height: 36px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  font-weight: 400;
-  font-size: 9pt;
-  word-break: break-all;
-}
+
 .schedule-text {
-  min-height: 36px;
+  min-height: 24px;
   margin-top: 4px;
   margin-bottom: 8px;
   font-weight: 600;
-  font-size: 12pt;
+  font-size: 11pt;
   word-break: break-all;
-  
 }
+
+.schedule-content {
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  background-color: #5c859b1c;
+}
+
+.schedule-content > .title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.schedule-content > ul {
+  margin: 0;
+  line-height: 14pt;
+  padding-left: 24px;
+}
+
 .schedule-space {
   font-size: 10pt;
 
@@ -434,8 +483,8 @@ export default {
 
 @media screen and (max-width: 400px) {
   .background {
-    margin-top: 130px;
-    height: calc(100% - 56px - 230px);
+    margin-top: 150px;
+    height: calc(100% - 56px - 250px);
   }
 
   .button-group {
@@ -464,6 +513,22 @@ export default {
   .schedule-text {
     font-size: 9pt;
   }
+
+  .schedule-content {
+    padding: 8px;
+  }
+
+  .schedule-content > .title {
+    font-size: 9pt;
+  }
+
+  .schedule-content > ul {
+    margin: 0;
+    line-height: 12pt;
+    padding-left: 16px;
+    font-size: 8pt;
+  }
+
   .schedule-space {
     font-size: 8pt;
   }
