@@ -74,7 +74,7 @@
                     v-if="roleList.includes(role)"
                   />
                 </template>
-                <p v-if="role > 0" style="font-size: 11pt">
+                <p v-if="role > 0" style="font-size: 9pt">
                   계정: {{ id }}님 ({{ ['부스운영자', '관리자'][role - 1] }})
                 </p>
               </div>
@@ -454,5 +454,14 @@ nav :hover {
 .slide-leave-to {
   opacity: 0;
   transform: translateX(-25%);
+}
+
+@media screen and (max-width: 400px) {
+  nav > div > * {
+    width: 180px;
+    padding: 10px 0;
+    padding-left: 18px;
+    font-size: 12pt;
+  }
 }
 </style>
