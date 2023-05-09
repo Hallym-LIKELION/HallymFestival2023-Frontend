@@ -7,6 +7,7 @@
       :title="modalData.title"
       :content="modalData.content"
       :date="modalData.date"
+      :dateAlter="modalData.dateAlter"
       :place="modalData.place"
     ></ProgramModal>
 
@@ -66,7 +67,7 @@ export default {
           '중앙동아리분들의 환상적인 공연을 함께하세요!'
         ],
         date: '2023-05-16T16:55:00+20:40',
-        place: '한림대학교 운동장'
+        place: '한림대학교 대운동장'
       },
 
       list: [
@@ -79,7 +80,7 @@ export default {
             '중앙동아리분들의 환상적인 공연을 함께하세요!'
           ],
           date: '2023-05-16T16:55:00+20:40',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
         {
           image: ImagePPung,
@@ -90,7 +91,7 @@ export default {
             '패널들 중 거짓말을 하는 사람은 누구?? 얼른 검거하러 가요!.'
           ],
           date: '2023-05-17T15:30:00+09:00',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
 
         {
@@ -102,7 +103,7 @@ export default {
             '마지막 라운드까지 멍 때림을 유지하는 사람들은 과연 누구?!'
           ],
           date: '2023-05-18T17:00:00+09:00',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
         {
           image: ImageSing,
@@ -113,7 +114,7 @@ export default {
             '가요제 1등은 과연 누구?! 앵콜곡까지 함께하세요!'
           ],
           date: '2023-05-17T18:00:00+09:00',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
         {
           image: ImageDance,
@@ -124,7 +125,7 @@ export default {
             '상위 입상자에게는 다채로운 상품이 제공됩니다!'
           ],
           date: '2023-05-18T19:00:00+09:00',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
         {
           image: ImageMul,
@@ -135,7 +136,7 @@ export default {
             '여러 이벤트들과 함께해서 더욱 재미있는 축제!'
           ],
           date: '2023-05-16T12:00:00+09:00',
-          place: '한림대학교 운동장'
+          place: '한림대학교 대운동장'
         },
         {
           image: ImageMack,
@@ -145,8 +146,8 @@ export default {
             '주점으로 뜨거운 축제의 밤! 맥주마시기 대회에 참가세요!',
             '1~3등에게는 상품까지 준비되어있습니다 !!'
           ],
-          date: '2023-05-16T23:00:00+00:30',
-          place: '한림대학교 운동장'
+          dateAlter: '2023.05.16~18 23:00',
+          place: '사경관 주점길'
         }
       ]
     };

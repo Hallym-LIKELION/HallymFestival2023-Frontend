@@ -14,7 +14,7 @@
 
       <div class="date">
         <div>날짜</div>
-        <p>{{ dateFormat(date) }}</p>
+        <p>{{ date ? dateFormat(date) : dateAlter }}</p>
       </div>
       <div class="place">
         <div>장소</div>
@@ -62,6 +62,10 @@ export default {
       default: ''
     },
     date: {
+      type: String,
+      default: ''
+    },
+    dateAlter: {
       type: String,
       default: ''
     },
