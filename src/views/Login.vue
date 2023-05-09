@@ -6,13 +6,25 @@
     <div class="logo">
       <Image :src="logoImage" class="logo-image"></Image>
     </div>
+    <div class="warning">
+      <p>
+        로그인 기능은 축제 관리자 및 부스 운영진들을 위한 기능입니다. 일반 사용자 여러분들께서는
+        이용하실 수 없습니다.
+      </p>
+    </div>
     <div class="form">
       <form @submit.prevent="fnLogin">
         <div class="input id">
-          <input name="uid" placeholder="아이디" v-model="id" />
+          <input name="uid" placeholder="아이디" v-model="id" maxlength="16" />
         </div>
         <div class="input password">
-          <input name="uid" placeholder="비밀번호" v-model="password" type="password" />
+          <input
+            name="uid"
+            placeholder="비밀번호"
+            v-model="password"
+            type="password"
+            maxlength="32"
+          />
         </div>
         <div class="button">
           <button type="submit" class="w3-button w3-green w3-round">로그인</button>
@@ -45,7 +57,7 @@ export default {
   methods: {
     async fnLogin() {
       if (this.id === '') {
-        alert('지정 아이디를 입력하세요.');
+        alert('아이디를 입력하세요.');
         return;
       }
 
@@ -77,6 +89,8 @@ export default {
 .logo {
   display: flex;
   justify-content: center;
+  margin-top: -96px;
+  margin-bottom: -56px;
 }
 
 :deep(.logo-image) {
@@ -105,6 +119,12 @@ p {
   font-size: 10pt;
   text-align: center;
   padding: 36px 0;
+}
+
+.warning {
+  margin: auto;
+  max-width: 400px;
+  color: white;
 }
 
 .form {
