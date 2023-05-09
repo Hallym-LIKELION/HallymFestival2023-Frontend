@@ -91,6 +91,12 @@ export default {
           day: [1]
         },
         {
+          time: '23:00 ~ 23:30',
+          content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
+          day: [1]
+        },
+        {
           time: '13:00 ~ 17:00 ',
           content: ['축제준비위원회 운영 부스'],
           space: 'CLC희망터',
@@ -113,6 +119,12 @@ export default {
           time: '20:00 ~ ',
           content: ['연예인 공연 2일차'],
           space: '한림대 대운동장',
+          day: [2]
+        },
+        {
+          time: '23:00 ~ 23:30',
+          content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
           day: [2]
         },
         {
@@ -144,6 +156,12 @@ export default {
           time: '20:00 ~ ',
           content: ['연예인 공연 3일차'],
           space: '한림대 대운동장',
+          day: [3]
+        },
+        {
+          time: '23:00 ~ 23:30',
+          content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
           day: [3]
         }
       ],
