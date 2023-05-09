@@ -1,8 +1,11 @@
 <template>
   <div>
     <Carousel :items-to-show="1" :wrapAround="true" v-model="_slide">
-      <Slide v-for="(item, index) in charts" :key="index">
+      <Slide v-if="isAdmin" v-for="(item, index) in charts" :key="index">
         <Chart :options="item"></Chart>
+      </Slide>
+      <Slide v-if="!isAdmin" v-for="(item, index) in image" :key="index">
+        <Image class="image" :src="item" width="500" height="400" spinner-size="300" />
       </Slide>
 
       <template #addons>
@@ -15,6 +18,13 @@
 <script>
 import { Chart } from 'highcharts-vue';
 import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import Image from '../components/Image.vue';
+
+import BoothMap1Image from '@/assets/boothmap/1.png';
+import BoothMap2Image from '@/assets/boothmap/2.png';
+import BoothMap3Image from '@/assets/boothmap/3.png';
+import BoothMap4Image from '@/assets/boothmap/4.png';
+
 import {
   GetBoothListWithComment,
   GetBoothListWithLike,
@@ -99,11 +109,17 @@ export default {
     return {
       _slide: 0,
 
-      charts: []
+      charts: [],
+
+      image: [BoothMap1Image, BoothMap2Image, BoothMap3Image, BoothMap4Image]
     };
   },
 
   props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
     slide: {
       type: Number,
       default: 0
@@ -121,20 +137,25 @@ export default {
   },
 
   async created() {
-    const commentList = (await GetBoothListWithComment()).dtoList;
-    const likeList = (await GetBoothListWithLike()).dtoList;
-    const reportList = (await GetBoothListWithReport()).dtoList;
+    if (this.isAdmin) {
+      const commentList = (await GetBoothListWithComment()).dtoList;
+      const likeList = (await GetBoothListWithLike()).dtoList;
+      const reportList = (await GetBoothListWithReport()).dtoList;
 
-    let data;
+      let data;
 
-    data = commentList.map((item) => [item.booth_title, item.comment_cnt]).slice(0, 5);
-    this.charts.push(CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글', data));
+      data = commentList.map((item) => [item.booth_title, item.comment_cnt]).slice(0, 5);
 
-    data = likeList.map((item) => [item.booth_title, item.like_cnt]).slice(0, 5);
-    this.charts.push(CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요', data));
+      this.charts.push(CreateChart('댓글이 가장 많은 부스 TOP 5', '댓글', data));
 
-    data = reportList.map((item) => [item.booth_title, item.report_cnt]).slice(0, 5);
-    this.charts.push(CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글', data));
+      data = likeList.map((item) => [item.booth_title, item.like_cnt]).slice(0, 5);
+
+      this.charts.push(CreateChart('좋아요가 가장 많은 부스 TOP 5', '좋아요', data));
+
+      data = reportList.map((item) => [item.booth_title, item.report_cnt]).slice(0, 5);
+
+      this.charts.push(CreateChart('신고받은 댓글이 가장 많은 부스 TOP 5', '신고받은 댓글', data));
+    }
   }
 };
 </script>

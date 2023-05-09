@@ -404,7 +404,7 @@ nav :hover {
 
 .router-view {
   max-width: 824px;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 73px);
   box-sizing: border-box;
   margin: auto;
   padding: 0 28px;

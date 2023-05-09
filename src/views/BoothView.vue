@@ -469,7 +469,7 @@ h1 {
 
 .wallpaper {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   width: 824px;
   margin-top: 120px;
   margin-left: -28px;
@@ -522,6 +522,8 @@ h1 {
 .section {
   max-width: 400px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .header {
@@ -625,7 +627,6 @@ h1 {
 .section-text {
   width: 100%;
   min-height: 100px;
-  max-height: 200px;
 
   overflow: hidden;
   font-size: 13pt;
