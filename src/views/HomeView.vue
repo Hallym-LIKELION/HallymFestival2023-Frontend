@@ -19,7 +19,7 @@
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
       <button @click="openBoothRecommendation">부스 유형 추천 테스트하러 가기</button>
-      <button @click="openPopcat">연예인 공개 팝캣 링크 바로가기</button>
+      <button @click="openPopcat" class="popcat">연예인 공개 팝캣 링크 바로가기</button>
     </div>
 
     <div class="sponsor" ref="sponsor">
@@ -199,6 +199,10 @@ export default {
 .menu > button {
   color: white;
   background-color: #ca434cb3;
+}
+
+.menu > button.popcat {
+  background-color: #5c859bb3;
 }
 
 .sponsor {
