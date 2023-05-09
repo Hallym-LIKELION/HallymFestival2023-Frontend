@@ -1,6 +1,10 @@
 <template>
   <main>
-    <Header :image="HeaderImage" text="부스 목록" content="" />
+    <Header
+      :image="HeaderImage"
+      text="부스 목록"
+      content="이번 축제의 다양한 부스들을 둘러보세요!"
+    />
 
     <div class="poster" v-if="admin === 2">
       <BoothCarousel :slide="slide" />

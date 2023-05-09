@@ -10,7 +10,11 @@
       :place="modalData.place"
     ></ProgramModal>
 
-    <Header :image="HeaderImage" text="프로그램" content="" />
+    <Header
+      :image="HeaderImage"
+      text="프로그램"
+      content="이번 축제에서 진행하는 다양한 프로그램입니다!"
+    />
 
     <div class="program-list">
       <template v-for="(item, index) in list" :key="index">
@@ -66,7 +70,7 @@ export default {
       },
 
       list: [
-      {
+        {
           image: ImageDong,
           title: '2023 대동제 동아리 공연',
           description: '한림대 학우들이 주체적으로 꾸민 무대를 다같이 감상해보세요:)',
@@ -88,7 +92,7 @@ export default {
           date: '2023-05-17T16:30:00+09:00',
           place: '한림대학교 운동장'
         },
-        
+
         {
           image: ImageMung,
           title: '멍 때리기 대회, 어멍! ',
@@ -100,7 +104,7 @@ export default {
           date: '2023-05-18T17:00:00+09:00',
           place: '한림대학교 운동장'
         },
-      {
+        {
           image: ImageSing,
           title: 'ㄴr는 ㄱr끔 노㉣łı를 부른⊂ト...',
           description: '자신의 노래를 뽐내고 싶은 한림대 학우분들의 무대를 감상해보세요:)',
@@ -144,8 +148,6 @@ export default {
           date: '2023-05-17T15:00:00+09:00',
           place: '한림대학교 운동장'
         }
-       
-      
       ]
     };
   },

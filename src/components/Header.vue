@@ -66,5 +66,8 @@ export default {
 .title-header-content {
   margin: 28px 0;
   font-size: 11pt;
+  white-space: pre-line;
+  word-break: keep-all;
+  text-align: center;
 }
 </style>
