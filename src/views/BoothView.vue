@@ -643,6 +643,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-break: anywhere;
 }
 
 .menu-group.sold {

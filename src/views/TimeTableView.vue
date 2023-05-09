@@ -95,6 +95,12 @@ export default {
           day: [1]
         },
         {
+          time: '18:00 ~ ',
+          content: ['밤부스(주점) 시작'],
+          space: '사경관 앞 주점 길',
+          day: [1]
+        },
+        {
           time: '18:10 ~ 18:30',
           content: ['선포식'],
           space: '한림대 대운동장',
@@ -113,6 +119,12 @@ export default {
         {
           time: '23:00 ~ 23:30',
           content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
+          day: [1]
+        },
+        {
+          time: '~ 26:00',
+          content: ['밤부스(주점) 마감'],
           space: '사경관 앞 주점 길',
           day: [1]
         },
@@ -139,6 +151,12 @@ export default {
           day: [2]
         },
         {
+          time: '18:00 ~ ',
+          content: ['밤부스(주점) 시작'],
+          space: '사경관 앞 주점 길',
+          day: [2]
+        },
+        {
           time: '18:00 ~ 20:00 ',
           content: ['가요제'],
           space: '한림대 대운동장',
@@ -153,6 +171,12 @@ export default {
         {
           time: '23:00 ~ 23:30',
           content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
+          day: [2]
+        },
+        {
+          time: '~ 26:00',
+          content: ['밤부스(주점) 마감'],
           space: '사경관 앞 주점 길',
           day: [2]
         },
@@ -179,6 +203,12 @@ export default {
           day: [3]
         },
         {
+          time: '18:00 ~ ',
+          content: ['밤부스(주점) 시작'],
+          space: '사경관 앞 주점 길',
+          day: [3]
+        },
+        {
           time: '18:05 ~ 19:25',
           content: ['댄스 경연대회'],
           space: '한림대 대운동장',
@@ -199,6 +229,12 @@ export default {
         {
           time: '23:00 ~ 23:30',
           content: ['맥주 빨리 마시기 대회'],
+          space: '사경관 앞 주점 길',
+          day: [3]
+        },
+        {
+          time: '~ 26:00',
+          content: ['밤부스(주점) 마감'],
           space: '사경관 앞 주점 길',
           day: [3]
         }

@@ -109,10 +109,10 @@ export default {
   computed: {
     icon() {
       const typeObject = {
-        주점: Icon.beer,
-        부스: Icon.gamepad,
         플리마켓: Icon.basket,
-        푸드트럭: Icon.food
+        푸드트럭: Icon.food,
+        주점: Icon.interest,
+        부스: Icon.store
       };
 
       return typeObject[this.type];

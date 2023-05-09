@@ -21,6 +21,8 @@ import space from '../assets/icon/space.svg';
 import findWhite from '../assets/icon/find-white.svg';
 import penGray from '../assets/icon/pen-gray.svg';
 import hamburger from '../assets/icon/hamburger.svg';
+import store from '../assets/icon/store.svg';
+import interest from '../assets/icon/interest.svg';
 // import  from '../assets/icon/.svg';
 
 export const Icon = {
@@ -44,5 +46,7 @@ export const Icon = {
   space,
   findWhite,
   penGray,
-  hamburger
+  hamburger,
+  store,
+  interest
 };
