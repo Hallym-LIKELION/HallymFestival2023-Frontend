@@ -309,7 +309,7 @@ export async function GetBoothMenu(booth_id) {
 export async function CreateBoothMenu(booth_id, name, price) {
   const data = {
     name,
-    price,
+    price
   };
   const res = await axios.post(HOST + '/menu/auth/' + booth_id, data, {
     headers: {
