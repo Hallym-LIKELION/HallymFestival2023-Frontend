@@ -55,11 +55,10 @@ export default {
 </script>
 <style scoped>
 .switch-button {
-  background-color: #24528a;
-  width: 50px;
-  height: 28px;
-  margin: 0 8px;
-  border-radius: 28px;
+  background-color: #1d3552;
+  width: 64px;
+  height: 36px;
+  border-radius: 36px;
   transition: background-color 0.1s;
 }
 
@@ -68,11 +67,11 @@ export default {
 }
 
 .button {
-  width: 24px;
-  height: 24px;
-  margin: 2px;
-  margin-left: 24px;
-  border-radius: 24px;
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+  margin-left: 30px;
+  border-radius: 30px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -81,11 +80,11 @@ export default {
 }
 
 .switch-button.active > .button {
-  margin-left: 2px;
+  margin-left: 3px;
 }
 
 .button > img {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
 }
 </style>
