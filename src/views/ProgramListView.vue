@@ -37,10 +37,10 @@ import Header from '../components/Header.vue';
 import ProgramCard from '../components/ProgramCard.vue';
 import ProgramModal from '../components/ProgramModal.vue';
 
-import ImageDance from '@/assets/programlist/P_dance.png';
+import ImageDance from '@/assets/programlist/P_dance.jpg';
 import ImageMung from '@/assets/programlist/P_mung.jpg';
 import ImagePPung from '@/assets/programlist/P_ppung.jpg';
-import ImageSing from '@/assets/programlist/P_sing.png';
+import ImageSing from '@/assets/programlist/P_sing.jpg';
 import ImageMack from '@/assets/programlist/P_mack.png';
 import ImageMul from '@/assets/programlist/P_mul.png';
 import ImageDong from '@/assets/programlist/P_dong.png';
