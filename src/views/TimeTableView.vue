@@ -29,6 +29,7 @@
           <div class="schedule-time" v-text="item.time"></div>
 
           <div class="schedule-text" v-text="item.content.join('\n')"></div>
+          <div class="club_lineup" v-text="item.club"></div>
 
           <div class="schedule-space">
             <img :src="Icon.space" alt="" />
@@ -58,24 +59,46 @@ export default {
       list: [
         {
           time: '12:00 ~ 12:40 ',
-          content: ['나의 소녀시대 - 물풍선 타임'],
+          content: ['물풍선 "나의 소녀시대"'],
           space: '한림대 대운동장',
           day: [1]
         },
         {
-          time: '16:55 ~ 20:55 ',
-          content: ['동아리 공연'],
+          time: '13:00 ~ 17:00 ',
+          content: ['축제준비위원회 운영 부스'],
+          space: 'CLC희망터',
+          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
+          day: [1]
+        },
+        {
+          time: '16:55 ~ 18:10 ',
+          content: ['동아리 공연 1부'],
+          club: 'LINE UP: CODA, 수레바퀴, 엑스레이',
           space: '한림대 대운동장',
           day: [1]
         },
         {
-          time: '21:00 ~ 21:30',
+          time: '18:10 ~ 18:30',
           content: ['선포식'],
           space: '한림대 대운동장',
           day: [1]
         },
         {
-          time: '16:30 ~ 18:00',
+          time: '18:30 ~ 20:40',
+          content: ['동아리 공연 2부'],
+          club: 'LINE UP: 유니콘, 두레박, 춤바람, 한림극회, 어셈블, 힙합PD',
+          space: '한림대 대운동장',
+          day: [1]
+        },
+        {
+          time: '13:00 ~ 17:00 ',
+          content: ['축제준비위원회 운영 부스'],
+          space: 'CLC희망터',
+          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
+          day: [2]
+        },
+        {
+          time: '15:30 ~ 17:45',
           content: ['천하제일 뻥쟁이 대회'],
           space: '한림대 대운동장',
           day: [2]
@@ -88,43 +111,38 @@ export default {
         },
         {
           time: '20:00 ~ ',
-          content: ['연예인 공연'],
+          content: ['연예인 공연 2일차'],
           space: '한림대 대운동장',
           day: [2]
         },
         {
-          time: '17:00 ~ 19:00',
+          time: '13:00 ~ 17:00 ',
+          content: ['축제준비위원회 운영 부스'],
+          space: 'CLC희망터',
+          club: 'BOOTHS! :*한림 공방-나만의 Y2K템 만들기 *한림 공방-슈링클스 명찰 만들기 *한림시그널-매칭 부스 *한림고등학교 *도전 한림 100곡!-길거리 노래방',
+          day: [3]
+        },
+        {
+          time: '16:00 ~ 18:00',
           content: ['멍때리기 대회'],
           space: '한림대 대운동장',
           day: [3]
         },
         {
-          time: '19:00 ~ 20:50',
+          time: '18:05 ~ 19:25',
           content: ['댄스 경연대회'],
           space: '한림대 대운동장',
           day: [3]
         },
         {
-          time: '21:00 ~ ',
-          content: ['연예인 공연'],
+          time: '19:25 ~ 20:00 ',
+          content: ['폐회식'],
           space: '한림대 대운동장',
           day: [3]
         },
         {
-          time: '21:00 ~ ',
-          content: ['연예인 공연'],
-          space: '한림대 대운동장',
-          day: [3]
-        },
-        {
-          time: '21:00 ~ ',
-          content: ['연예인 공연'],
-          space: '한림대 대운동장',
-          day: [3]
-        },
-        {
-          time: '21:00 ~ ',
-          content: ['연예인 공연'],
+          time: '20:00 ~ ',
+          content: ['연예인 공연 3일차'],
           space: '한림대 대운동장',
           day: [3]
         }
@@ -145,6 +163,7 @@ export default {
       return result.map((item, index) => ({
         time: item.time,
         content: item.content,
+        club: item.club,
         day: item.day,
         space: item.space,
         hideLine: index === result.length - 1
@@ -362,7 +381,14 @@ export default {
   font-size: 13pt;
   word-break: break-all;
 }
-
+.club_lineup{
+  min-height: 36px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 9pt;
+  word-break: break-all;
+}
 .schedule-text {
   min-height: 36px;
   margin-top: 4px;
@@ -370,6 +396,7 @@ export default {
   font-weight: 600;
   font-size: 12pt;
   word-break: break-all;
+  
 }
 .schedule-space {
   font-size: 10pt;
