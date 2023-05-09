@@ -210,7 +210,7 @@ h1 {
 
 .background {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   width: 824px;
   margin-top: 140px;
   margin-left: -28px;
@@ -235,6 +235,8 @@ h1 {
 .content {
   margin: 0 -28px;
   padding: 36px 24px;
+  position: relative;
+  z-index: 3;
   font-family: 'Nanum Gothic', sans-serif;
 }
 
