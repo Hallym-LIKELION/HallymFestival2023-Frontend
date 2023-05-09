@@ -625,7 +625,6 @@ h1 {
 .section-text {
   width: 100%;
   min-height: 100px;
-  max-height: 200px;
 
   overflow: hidden;
   font-size: 13pt;
