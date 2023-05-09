@@ -51,13 +51,13 @@ const router = createRouter({
       component: () => import('../views/AboutUs.vue')
     },
     {
-      path: '/login',
+      path: '/loginPage',
       name: 'login',
       component: () => import('../views/Login.vue'),
       beforeEnter: (to, from, next) => {
         switch (GetAuthority()) {
           case 2:
-            return next({ name: 'admin' });
+            return next({ name: 'adminDashboard' });
           case 1:
             return next({ name: 'home' });
           default:

@@ -20,6 +20,7 @@
     <BoothMenuEditModal
       :visible="editMenuModal"
       :data="editMenuData"
+      :writer="boothData.writer"
       @close="closeEditMenuModal"
       @complete="editMenu"
     />

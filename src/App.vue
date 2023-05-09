@@ -138,7 +138,7 @@ export default {
         { name: '나의 부스', url: '', callback: this.openMyBooth, roleList: [1] },
         { name: '관리자 페이지', url: '/admin', roleList: [2] },
         { name: '로그아웃', url: '', callback: this.logout, roleList: [1, 2] },
-        { name: '로그인', url: '/login', roleList: [0] }
+        { name: '로그인', url: '/loginPage', roleList: [0] }
       ],
       Icon
     };
@@ -147,7 +147,7 @@ export default {
     decoration() {
       return (
         this.$router.currentRoute.value.name !== undefined &&
-        ['/', '/admin', '/login'].includes(this.$router.currentRoute.value.path)
+        ['/', '/admin', '/loginPage'].includes(this.$router.currentRoute.value.path)
       );
     }
   },
