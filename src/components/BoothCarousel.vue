@@ -19,6 +19,12 @@
 import { Chart } from 'highcharts-vue';
 import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import Image from '../components/Image.vue';
+
+import BoothMap1Image from '@/assets/boothmap/1.png';
+import BoothMap2Image from '@/assets/boothmap/2.png';
+import BoothMap3Image from '@/assets/boothmap/3.png';
+import BoothMap4Image from '@/assets/boothmap/4.png';
+
 import {
   GetBoothListWithComment,
   GetBoothListWithLike,
@@ -105,12 +111,7 @@ export default {
 
       charts: [],
 
-      image: [
-        'https://placehold.co/500x400/aa2222/FFFFFF/png?text=Tuesday',
-        'https://placehold.co/500x400/22AA22/FFFFFF/png?text=Wednesday',
-        'https://placehold.co/500x400/3333AA/FFFFFF/png?text=Thursday',
-        'https://placehold.co/500x400/222222/FFFFFF/png?text=Night+time'
-      ]
+      image: [BoothMap1Image, BoothMap2Image, BoothMap3Image, BoothMap4Image]
     };
   },
 

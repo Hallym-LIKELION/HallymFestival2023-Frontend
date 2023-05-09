@@ -111,7 +111,9 @@ export default {
       } else {
         this.selectDay(value);
       }
-      this.slide = value - 1;
+      if (this.dayNight) {
+        this.slide = value - 1;
+      }
     },
     selectDay(day) {
       this.day = day;
