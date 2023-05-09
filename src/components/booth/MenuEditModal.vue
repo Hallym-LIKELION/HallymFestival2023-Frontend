@@ -109,6 +109,10 @@ export default {
       default() {
         return [];
       }
+    },
+    writer: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -203,7 +207,7 @@ export default {
       // 생성할때는 순차적으로 생성하기 (promiseList 사용하면 순서가 꼬임)
       for (const item of createdList) {
         try {
-          await CreateBoothMenu(boothId, item.name, item.price);
+          await CreateBoothMenu(boothId, item.name, item.price, this.writer);
         } catch (e) {
           alert('메뉴를 수정하는데 오류가 발생했습니다.\n' + e);
           return;
@@ -225,7 +229,7 @@ export default {
       });
 
       for (const item of modifiedList) {
-        promiseList.push(ModifyBoothMenu(item.mno, item.name, item.price));
+        promiseList.push(ModifyBoothMenu(item.mno, item.name, item.price, this.writer));
       }
 
       // Modify -- Soldout Operation
@@ -244,14 +248,14 @@ export default {
       });
 
       for (const item of modifiedSoldoutList) {
-        promiseList.push(SoldBoothMenu(item.mno));
+        promiseList.push(SoldBoothMenu(item.mno, this.writer));
       }
 
       // Delete Operation
       const deletedList = this.items.filter((item) => item.mno && item._deleted);
 
       for (const item of deletedList) {
-        promiseList.push(DeleteBoothMenu(item.mno));
+        promiseList.push(DeleteBoothMenu(item.mno, this.writer));
       }
 
       try {

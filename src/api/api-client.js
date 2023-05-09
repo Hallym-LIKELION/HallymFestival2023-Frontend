@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HOST = '/api';
+const HOST = 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
@@ -306,10 +306,11 @@ export async function GetBoothMenu(booth_id) {
   return res.data;
 }
 
-export async function CreateBoothMenu(booth_id, name, price) {
+export async function CreateBoothMenu(booth_id, name, price, writer) {
   const data = {
     name,
-    price
+    price,
+    writer
   };
   const res = await axios.post(HOST + '/menu/auth/' + booth_id, data, {
     headers: {
@@ -319,10 +320,11 @@ export async function CreateBoothMenu(booth_id, name, price) {
   return res.data;
 }
 
-export async function ModifyBoothMenu(menu_id, name, price) {
+export async function ModifyBoothMenu(menu_id, name, price, writer) {
   const data = {
     name,
-    price
+    price,
+    writer
   };
   const res = await axios.put(HOST + '/menu/auth/' + menu_id, data, {
     headers: {
@@ -332,17 +334,26 @@ export async function ModifyBoothMenu(menu_id, name, price) {
   return res.data;
 }
 
-export async function SoldBoothMenu(menu_id) {
-  const res = await axios.put(HOST + '/menu/auth/sell/' + menu_id, null, {
-    headers: {
-      Authorization: `Bearer ${token}`
+export async function SoldBoothMenu(menu_id, writer) {
+  const res = await axios.put(
+    HOST + '/menu/auth/sell/' + menu_id,
+    {
+      writer
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
-  });
+  );
   return res.data;
 }
 
-export async function DeleteBoothMenu(menu_id) {
+export async function DeleteBoothMenu(menu_id, writer) {
   const res = await axios.delete(HOST + '/menu/auth/' + menu_id, {
+    data: {
+      writer
+    },
     headers: {
       Authorization: `Bearer ${token}`
     }
