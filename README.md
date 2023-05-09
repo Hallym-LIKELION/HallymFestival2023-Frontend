@@ -1,12 +1,22 @@
 # HallymFestival2023-Frontend
 
+
+<div align="center">
+    <img alt="image" width="700"  src="https://user-images.githubusercontent.com/35104213/237041734-adaa7693-ee5a-4bf5-9196-8d263d63ae22.png" />
+</div>
+<div align="center">
+    <img alt="image" width="700"   src="https://user-images.githubusercontent.com/35104213/237041744-32f6b02b-c3f9-4759-a2b2-8f340f3ee235.png" />
+</div>
 <div align="center">
     <img width="200" alt="image" src="https://user-images.githubusercontent.com/53892427/227495220-6f11cc27-120c-49d0-b894-b09f62f34bed.png" />
-
-
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVoluntain-SKKU%2FHallymFestival2023-Backend-&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
 </div>
+<div align="center">
+    <img alt="image" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVoluntain-SKKU%2FHallymFestival2023-Backend-&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" />
+</div>
+    
+</div>
+
+## https://www.hallymfestival.com/
 
 ## Front-End Team ✨
 
@@ -14,11 +24,33 @@
 | :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img width="160px" src="https://avatars.githubusercontent.com/u/53892427?v=4" /> | <img width="160px" src="https://avatars.githubusercontent.com/u/35104213?v=4" /> |
 |                  [@osohyun0224](https://github.com/osohyun0224)                  |                   [@PortalCube](https://github.com/PortalCube)                   |
-|                          한림대학교 빅데이터전공 20학번 3학년                         |                          한림대학교 빅데이터전공 20학번 2학년                     |
+|                          한림대학교 빅데이터전공 20학번 3학년                       |                          한림대학교 빅데이터전공 20학번 2학년                      |
 
 ## Description
+2023 한림대학교 비봉축전 웹페이지 프론트엔드입니다! 프레임워크는 Vue.js를 사용하였습니다! 백엔드 코드는 [여기](https://github.com/Hallym-LIKELION/HallymFestival2023-Backend-)에서 확인하실 수 있습니다!
 
-2023 한림대학교 비봉축전 웹어플리케이션입니다.
+## Support Devices
+* Windows: 7 이상
+* OS X: X El Capitan 이상
+* Android: Android 7 이상
+* iOS & iPadOS: 14상이상
+
+### Packages
+ * vue
+ * axios
+ * gsap
+ * dayjs
+ * idb-keyval
+ * js-cookies
+ * highcharts
+ * vue-awesome-paginate
+ * vue-toastification
+ * vue3-carousel
+ * click-outside-vue3
+
+### Dev Packages
+ * vite
+ * prettier
 
 ## Stacks
 
