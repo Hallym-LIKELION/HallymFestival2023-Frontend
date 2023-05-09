@@ -71,13 +71,13 @@
         <input
           ref="upload"
           type="file"
-          accept=".png, .jpg, .jpeg, .gif, .webp, .svg"
+          accept=".png, .jpg, .jpeg, .gif"
           v-show="false"
           @change="uploadImage"
         />
         <button class="image-upload" v-if="admin" @click="showFileSelector">
           <p class="title">이미지 교체하기</p>
-          <p class="subtitle">권장 크기: 400px x 400px / 3MB 이하 / jpg, png, gif</p>
+          <p class="subtitle">권장 크기: 400px x 400px / 5MB 이하 / jpg, png, gif</p>
         </button>
       </div>
     </div>
