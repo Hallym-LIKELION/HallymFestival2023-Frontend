@@ -32,68 +32,77 @@ import {
 } from '../api/api-client';
 
 function CreateChart(title, item, list) {
-  return JSON.parse(
-    JSON.stringify({
-      chart: {
-        type: 'bar',
-        backgroundColor: '#333333',
-        style: { fontFamily: 'NanumGothic, Helvetica, Arial, sans-serif' },
-        spacing: [20, 10, 20, 20]
-      },
+  return {
+    chart: {
+      type: 'bar',
+      backgroundColor: '#333333',
+      style: { fontFamily: 'NanumGothic, Helvetica, Arial, sans-serif' },
+      spacing: [20, 10, 20, 20]
+    },
+    title: {
+      text: title,
+      style: { color: '#ffffff' },
+      align: 'left'
+    },
+    credits: {
+      enabled: false
+    },
+    xAxis: {
+      categories: list.map((item) => item[0]),
+
+      labels: {
+        x: 0,
+        y: -25,
+        align: 'left',
+        formatter: function () {
+          if (this.value.length > 15) {
+            return this.value.slice(0, 15) + '...';
+          } else {
+            return this.value;
+          }
+        },
+        style: { color: '#ffffff' }
+      }
+    },
+    yAxis: {
+      visible: false,
       title: {
-        text: title,
+        text: item,
+        align: 'high'
+      },
+      labels: {
         style: { color: '#ffffff' },
-        align: 'left'
+        overflow: 'justify'
       },
-      credits: {
-        enabled: false
-      },
-      xAxis: {
-        categories: list.map((item) => item[0]),
-        labels: {
-          style: { color: '#ffffff' }
-        }
-      },
-      yAxis: {
-        visible: false,
-        title: {
-          text: item,
-          align: 'high'
-        },
-        labels: {
-          style: { color: '#ffffff' },
-          overflow: 'justify'
-        },
-        gridLineWidth: 0
-      },
-      plotOptions: {
-        bar: {
-          borderColor: 'none',
-          borderRadius: 60,
-          dataLabels: {
-            enabled: true,
-            align: 'right',
-            x: -10,
-            color: '#333333',
-            style: {
-              textOutline: 0
-            }
+      gridLineWidth: 0
+    },
+    plotOptions: {
+      bar: {
+        borderColor: 'none',
+        borderRadius: 60,
+        dataLabels: {
+          enabled: true,
+          align: 'right',
+          x: -10,
+          color: '#333333',
+          style: {
+            textOutline: 0
           }
         }
-      },
-      legend: {
-        enabled: false
-      },
-      tooltip: {
-        enabled: false
-      },
-      series: [
-        {
-          data: list.map((item) => item[1])
-        }
-      ]
-    })
-  );
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    tooltip: {
+      enabled: false
+    },
+    series: [
+      {
+        data: list.map((item) => item[1])
+      }
+    ]
+  };
 }
 
 export default {
