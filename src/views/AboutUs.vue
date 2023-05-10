@@ -88,10 +88,9 @@ export default {
     return {
       HeaderImage,
       phrase: [
-        '2023년도 한림대학교 대동제를 위하여 ',
-        '한림대학교 축제준비위원회가 열정을 쏟아 축제를 준비하고 ',
-        '학우분들의 편의를 위하여 멋쟁이사자처럼 <프로젝트 빌더팀>이',
-        '축제 웹사이트를 개발하였습니다.',
+        '2023년도 한림대학교 대동제를 위하여',
+        '학우분들의 편의를 위하여 한림대학교 멋쟁이사자처럼 Builder Team이',
+        '축제 웹사이트를 개발하였습니다!',
         '이번 2023 한림대학교 대동제가 ',
         '여느때보다 즐겁고 행복한 축제가 되시기를 진심으로 소망합니다.',
         '학우 여러분들의 예쁘고 찬란한 청춘을 응원합니다!'
@@ -364,7 +363,7 @@ export default {
 
 .staff > .title {
   margin-top: 12px;
-  font-size: 16pt;
+  font-size: 12pt;
 }
 
 .staff > .list {
@@ -384,7 +383,7 @@ export default {
 
 .staff-card {
   width: 200px;
-  height: 200px;
+  height: 180px;
   padding: 12px;
   font-size: 10pt;
   box-sizing: border-box;
