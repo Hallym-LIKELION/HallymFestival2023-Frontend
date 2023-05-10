@@ -164,7 +164,7 @@ export default {
         },
         {
           time: '20:00 ~ ',
-          content: ['연예인 공연 2일차'],
+          content: ['연예인 공연 1일차'],
           space: '한림대 대운동장',
           day: [2]
         },
@@ -222,7 +222,7 @@ export default {
         },
         {
           time: '20:00 ~ ',
-          content: ['연예인 공연 3일차'],
+          content: ['연예인 공연 2일차'],
           space: '한림대 대운동장',
           day: [3]
         },
@@ -300,7 +300,10 @@ export default {
               delay: 0.1 + i * 0.6,
               duration: 0.5,
               transform: 'none',
-              opacity: 1
+              opacity: 1,
+              onComplete: function () {
+                gsap.set(this.targets(), { clearProps: 'all' });
+              }
             }
           ),
           gsap.fromTo(
@@ -313,7 +316,10 @@ export default {
               delay: 0.1 + i * 0.6,
               duration: 0.5,
               transform: 'none',
-              opacity: 1
+              opacity: 1,
+              onComplete: function () {
+                gsap.set(this.targets(), { clearProps: 'all' });
+              }
             }
           ),
           gsap.fromTo(
@@ -327,7 +333,10 @@ export default {
               duration: 1,
               maxHeight: 'calc(100% - 36px)',
               transform: 'none',
-              ease: 'Expo.easeOut'
+              ease: 'Expo.easeOut',
+              onComplete: function () {
+                gsap.set(this.targets(), { clearProps: 'all' });
+              }
             }
           )
         );
@@ -350,9 +359,9 @@ export default {
   position: absolute;
   z-index: 0;
   width: 824px;
-  margin-top: 150px;
+  margin-top: 170px;
   margin-left: -28px;
-  height: calc(100% - 56px - 250px);
+  height: calc(100% - 56px - 270px);
   background-color: #fbfbfbe3;
   /* top: 10%; */
 }
@@ -467,6 +476,11 @@ export default {
   color: #333333;
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0px 0px 19px rgba(135, 134, 134, 0.25);
+  transition: transform 0.25s;
+}
+
+.table-col-2:hover {
+  transform: scale(1.05) translateX(3%);
 }
 
 .hidden {

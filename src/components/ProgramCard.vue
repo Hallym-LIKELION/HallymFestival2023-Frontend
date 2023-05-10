@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Image :src="image" class="image" width="300" height="210" spinner-size="200" :alt="title" />
+    <Image :src="image" class="image" width="300" height="300" spinner-size="200" :alt="title" />
     <h4 class="title" v-text="title"></h4>
     <p class="description" v-text="description"></p>
   </div>
@@ -34,8 +34,8 @@ p {
 }
 .wrapper {
   width: 100%;
-  margin-bottom: 12px;
-  padding: 0 8px;
+  margin: 10px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +48,9 @@ p {
 }
 
 :deep(.image) {
+  max-width: 280px;
   width: 100%;
+  margin: auto;
   border-radius: 8px;
   object-fit: contain;
 }
@@ -75,9 +77,9 @@ p {
   color: black;
 
   /* 텍스트 오버플로우를 ... 으로 숨기기 */
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 
 @media screen and (max-width: 400px) {

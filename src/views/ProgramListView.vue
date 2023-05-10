@@ -26,6 +26,7 @@
           :description="item.description"
           @click="openModal(index)"
         />
+        <div class="line"></div>
       </template>
     </div>
   </main>
@@ -38,10 +39,10 @@ import Header from '../components/Header.vue';
 import ProgramCard from '../components/ProgramCard.vue';
 import ProgramModal from '../components/ProgramModal.vue';
 
-import ImageDance from '@/assets/programlist/P_dance.jpg';
-import ImageMung from '@/assets/programlist/P_mung.jpg';
-import ImagePPung from '@/assets/programlist/P_ppung.jpg';
-import ImageSing from '@/assets/programlist/P_sing.jpg';
+import ImageDance from '@/assets/programlist/P_dance.png';
+import ImageMung from '@/assets/programlist/P_mung.png';
+import ImagePPung from '@/assets/programlist/P_ppung.png';
+import ImageSing from '@/assets/programlist/P_sing.png';
 import ImageMack from '@/assets/programlist/P_mack.png';
 import ImageMul from '@/assets/programlist/P_mul.png';
 import ImageDong from '@/assets/programlist/P_dong.png';
@@ -183,17 +184,33 @@ export default {
   background-color: rgb(255, 255, 255, 0.8);
 }
 
-.program-list > * {
+.program-list > div:not(.line) {
   font-family: 'Nanum Gothic', sans-serif;
   max-width: 400px;
-  margin-top: 12px;
-  padding: 12px 0;
-  border-bottom: 2px solid #00000052;
+  margin: 24px 0;
+  padding: 18px 24px;
+  padding-bottom: 0;
+  border-radius: 16px;
+
   cursor: pointer;
   color: #ffffff;
+  /* background-color: #ffffff4f; */
+
+  transition: background-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.program-list > div:not(.line):hover {
+  background-color: #ffffff8f;
+  box-shadow: 0px 0px 8px #00000022;
+  transform: scale(1.05);
 }
 
-.program-list > *:last-child {
+.program-list > .line {
+  border-bottom: 2px solid #00000052;
+  max-width: 400px;
+  width: 100%;
+}
+
+.program-list > div:last-child {
   font-family: 'Nanum Gothic', sans-serif;
   border-bottom: none;
 }

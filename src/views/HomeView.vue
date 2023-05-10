@@ -1,11 +1,15 @@
 <template>
-  <main>
+  <main v-show="show">
+    <div :class="['hint', { hidden: !hint }]" ref="hint">
+      <Image :src="HintImage" class="image" alt="" />
+    </div>
+
     <div class="phrase" ref="introPhrase">
       <p>"과거에서 일어나는 우리의 설레는 이야기 ..."</p>
     </div>
 
     <div class="logo" ref="logo">
-      <Image :src="LogoImage" class="image" alt="" />
+      <Image :src="LogoImage" class="image" alt="" @loaded="loadingComplete" />
     </div>
 
     <div class="title" ref="title">
@@ -30,6 +34,7 @@
 </template>
 
 <script>
+import HintImage from '@/assets/hint.png';
 import LogoImage from '@/assets/로고.png';
 import Image from '../components/Image.vue';
 import { gsap } from 'gsap';
@@ -41,8 +46,27 @@ export default {
   },
   data() {
     return {
-      LogoImage
+      LogoImage,
+      HintImage,
+      show: false
     };
+  },
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    hint: {
+      type: Boolean,
+      default: true
+    }
+  },
+  watch: {
+    loading() {
+      if (this.show) {
+        this.showPage();
+      }
+    }
   },
   methods: {
     openBoothRecommendation() {
@@ -50,96 +74,136 @@ export default {
     },
     openNaverCloud() {
       window.open('https://www.ncloud.com/', '_blank');
-    }
-  },
-  mounted() {
-    // 슬로건 애니메이션
-    gsap.fromTo(
-      this.$refs.introPhrase,
-      {
-        top: '50%',
-        transform: 'translateY(-50%)',
-        opacity: 0
-      },
-      {
-        delay: 0.15,
-        duration: 1,
-        transform: 'none',
-        opacity: 1,
-        ease: 'Expo.easeOut'
+    },
+    loadingComplete() {
+      this.show = true;
+      if (!this.loading) {
+        this.showPage();
       }
-    );
-
-    // 포스터 애니메이션
-    gsap.fromTo(
-      this.$refs.logo,
-      {
-        opacity: 0,
-        transform: 'scale(0.5)'
-      },
-      {
-        delay: 0.75,
-        duration: 1.5,
-        transform: 'none',
-        opacity: 1,
-        ease: 'Expo.easeOut'
-      }
-    );
-
-    // 타이틀 애니메이션
-    gsap.fromTo(
-      this.$refs.title,
-      {
-        opacity: 0,
-        transform: 'translateY(100%)'
-      },
-      {
-        delay: 1.0,
-        duration: 2,
-        transform: 'none',
-        opacity: 1,
-        ease: 'Expo.easeOut'
-      }
-    );
-
-    // 메뉴 애니메이션
-    for (let i = 0; i < 7; i++) {
+    },
+    showPage() {
+      // 슬로건 애니메이션
       gsap.fromTo(
-        this.$refs.menu.childNodes[i],
+        this.$refs.introPhrase,
         {
-          transform: 'translateX(-10%)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          opacity: 0
+        },
+        {
+          delay: 0.2,
+          duration: 1,
+          transform: 'none',
+          opacity: 1,
+          ease: 'Expo.easeOut'
+        }
+      );
+
+      // 포스터 애니메이션
+      gsap.fromTo(
+        this.$refs.logo,
+        {
+          opacity: 0,
+          transform: 'scale(0.5)'
+        },
+        {
+          delay: 0.6,
+          duration: 1.5,
+          transform: 'none',
+          opacity: 1,
+          ease: 'Expo.easeOut'
+        }
+      );
+
+      // 타이틀 애니메이션
+      gsap.fromTo(
+        this.$refs.title,
+        {
+          opacity: 0,
+          transform: 'translateY(100%)'
+        },
+        {
+          delay: 1.25,
+          duration: 2,
+          transform: 'none',
+          opacity: 1,
+          ease: 'Expo.easeOut'
+        }
+      );
+
+      // 메뉴 애니메이션
+      for (let i = 0; i < 6; i++) {
+        gsap.fromTo(
+          this.$refs.menu.childNodes[i],
+          {
+            transform: 'translateX(-7%)',
+            opacity: 0,
+            pointerEvents: 'none'
+          },
+          {
+            delay: 1.75 + i * 0.2,
+            duration: 0.4,
+            transform: 'none',
+            opacity: 1,
+            pointerEvents: 'auto'
+          }
+        );
+      }
+
+      if (this.hint) {
+        // 힌트 애니메이션
+        gsap.fromTo(
+          this.$refs.hint,
+          {
+            opacity: 0,
+            transform: 'translateY(-20%)'
+          },
+          {
+            delay: 3.25,
+            duration: 0.5,
+            transform: 'none',
+            opacity: 1,
+            ease: 'Expo.easeOut',
+            onComplete: function () {
+              gsap.set(this.targets(), { clearProps: 'all' });
+            }
+          }
+        );
+      }
+
+      // 스폰서 애니메이션
+      gsap.fromTo(
+        this.$refs.sponsor,
+        {
           opacity: 0,
           pointerEvents: 'none'
         },
         {
-          delay: 1.5 + i * 0.25,
-          duration: 0.5,
-          transform: 'none',
+          delay: 3.25,
+          duration: 1.5,
           opacity: 1,
-          pointerEvents: 'auto'
+          pointerEvents: 'auto',
+          ease: 'Expo.easeOut'
         }
       );
     }
-
-    // 스폰서 애니메이션
-    gsap.fromTo(
-      this.$refs.sponsor,
-      {
-        opacity: 0,
-        pointerEvents: 'none'
-      },
-      {
-        delay: 3.75,
-        duration: 1.5,
-        opacity: 1,
-        pointerEvents: 'auto',
-        ease: 'Expo.easeOut'
-      }
-    );
-  }
+  },
+  mounted() {}
 };
 </script>
 <style scoped>
+:deep(.hint > img) {
+  width: 240px;
+}
+
+.hint {
+  transition: opacity 0.25s;
+}
+
+.hidden {
+  opacity: 0;
+}
+
 .logo {
   width: 70%;
   max-width: 320px;
@@ -154,7 +218,7 @@ export default {
 }
 
 .phrase {
-  margin-top: 64px;
+  margin-top: 32px;
   font-family: 'Nanum Gothic', sans-serif;
   font-style: normal;
   font-size: 12pt;
@@ -182,7 +246,7 @@ export default {
 
 .menu > * {
   width: 100%;
-  margin: 8px;
+  margin: 4px 8px;
   padding: 10px 0;
   border-radius: 64px;
   font-size: 12pt;

@@ -19,7 +19,7 @@
       <div class="button-group" v-if="role == 2">
         <button @click="clickCreate"><b>글쓰기</b></button>
       </div>
-      <div class="announcement-list">
+      <div class="announcement-list" ref="list">
         <template v-for="item in list" :key="item.nno">
           <FoldingArticle
             :id="item.nno"
@@ -33,7 +33,12 @@
         </template>
       </div>
 
-      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
+      <Pagination
+        @change="changePage"
+        :totalItems="totalItems"
+        :itemsPerPage="itemsPerPage"
+        :scrollToElement="listElement"
+      />
     </div>
   </main>
 </template>
@@ -70,6 +75,8 @@ export default {
       list: [],
       search: '',
       showingContent: null,
+
+      listElement: null,
 
       role: GetAuthority(),
 
@@ -196,6 +203,10 @@ export default {
     this.list = data.dtoList || [];
     this.totalItems = data.total;
     this.itemsPerPage = data.size || 1;
+  },
+
+  mounted() {
+    this.listElement = this.$refs.list;
   }
 };
 </script>

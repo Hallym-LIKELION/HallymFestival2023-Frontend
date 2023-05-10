@@ -141,7 +141,7 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-  padding: 10px;
+  padding: 6px 10px;
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -202,8 +202,9 @@ export default {
 
 .comment {
   width: 100%;
-  height: 60px;
-  margin-top: 6px;
+  font-size: 11pt;
+  height: 48px;
+  margin-top: 8px;
   word-break: break-all;
   overflow: hidden;
 }
@@ -239,17 +240,20 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .wrapper {
+    padding: 4px 8px;
+  }
   .picture {
     width: 24px;
     height: 24px;
   }
 
   .name {
-    font-size: 8pt;
+    font-size: 7pt;
   }
 
   .name > span {
-    font-size: 10pt;
+    font-size: 9pt;
   }
 
   .comment {

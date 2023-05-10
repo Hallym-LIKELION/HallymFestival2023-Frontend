@@ -3,7 +3,7 @@
     <div class="header">
       <div class="content">
         <div class="image-content">
-          <Image class="image" :src="icon" :alt="type" width="60" height="60" />
+          <Image class="image" :src="icon" :alt="type" :width="60" :height="60" />
         </div>
         <div class="text-content">
           <h3 v-text="title" />
@@ -11,15 +11,15 @@
         </div>
       </div>
       <div class="info">
-        <div v-if="isAdmin && mode == 1" class="comment">
+        <div v-if="mode == 4" class="comment">
           <img :src="Icon.comment" />
           <p>{{ numberToString(comment) }}</p>
         </div>
-        <div v-if="isAdmin && mode == 3" class="report">
+        <div v-if="isAdmin && mode == 6" class="report">
           <img :src="Icon.report" />
           <p>{{ numberToString(report) }}</p>
         </div>
-        <div v-if="!isAdmin || mode == 2" class="like">
+        <div v-if="mode == 5" class="like">
           <img :src="Icon.heart" />
           <p>{{ numberToString(like) }}</p>
         </div>
@@ -132,6 +132,11 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: transform 0.25s;
+}
+
+.container:hover {
+  transform: scale(1.07);
 }
 
 .container.large {

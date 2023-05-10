@@ -48,7 +48,10 @@ export async function GetAccessToken(id, password) {
   let res;
 
   try {
-    res = await axios.post('https://www.hallymfestival.com/login', data);
+    res = await axios.post(
+      mode === 'production' ? '/login' : 'https://www.hallymfestival.com/login',
+      data
+    );
   } catch (e) {
     return false;
   }
@@ -82,10 +85,13 @@ export async function GetAccessTokenUser() {
   let res;
 
   try {
-    res = await axios.post('https://www.hallymfestival.com/refreshToken', {
-      accessToken: Cookies.get('access_token', token),
-      refreshToken: Cookies.get('refresh_token')
-    });
+    res = await axios.post(
+      mode === 'production' ? '/refreshToken' : 'https://www.hallymfestival.com/refreshToken',
+      {
+        accessToken: Cookies.get('access_token', token),
+        refreshToken: Cookies.get('refresh_token')
+      }
+    );
   } catch (e) {
     return false;
   }
@@ -482,29 +488,47 @@ export async function GetVisitorCount() {
   return res.data;
 }
 
+// export async function GetBoothListWithLike(page = 0) {
+//   let url = '/like/auth/top-count-list';
+//   if (page !== 0) {
+//     url += '?page=' + page;
+//   }
+//   const res = await axios.get(HOST + url, {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   });
+//   return res.data;
+// }
+
+// export async function GetBoothListWithComment(page = 0) {
+//   let url = '/comment/auth/top-count-list';
+//   if (page !== 0) {
+//     url += '?page=' + page;
+//   }
+//   const res = await axios.get(HOST + url, {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   });
+//   return res.data;
+// }
+
 export async function GetBoothListWithLike(page = 0) {
-  let url = '/like/auth/top-count-list';
+  let url = '/like/top-count-list';
   if (page !== 0) {
     url += '?page=' + page;
   }
-  const res = await axios.get(HOST + url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+  const res = await axios.get(HOST + url);
   return res.data;
 }
 
 export async function GetBoothListWithComment(page = 0) {
-  let url = '/comment/auth/top-count-list';
+  let url = '/comment/top-count-list';
   if (page !== 0) {
     url += '?page=' + page;
   }
-  const res = await axios.get(HOST + url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+  const res = await axios.get(HOST + url);
   return res.data;
 }
 

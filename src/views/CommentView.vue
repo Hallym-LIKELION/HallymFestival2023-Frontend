@@ -31,7 +31,7 @@
       :content="'우측 하단의 버튼을 눌러서\n하고 싶은 말을 자유롭게 남겨주세요!'"
     />
 
-    <div class="comment-list">
+    <div class="comment-list" ref="list">
       <template v-for="item in list" :key="item.vno">
         <Comment
           :id="item.vno"
@@ -43,7 +43,12 @@
           @clickMenu="toggleMenu"
         />
       </template>
-      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
+      <Pagination
+        @change="changePage"
+        :totalItems="totalItems"
+        :itemsPerPage="itemsPerPage"
+        :scrollToElement="listElement"
+      />
     </div>
   </main>
 </template>
@@ -85,6 +90,8 @@ export default {
     return {
       HeaderImage,
       list: [],
+
+      listElement: null,
 
       showContextMenu: false,
       contextMenuTargetID: -1,
@@ -194,10 +201,12 @@ export default {
       } else if (res.result === 'does not exist comment') {
         toast('해당 항목이 더 이상 존재하지 않습니다.');
         return;
+      } else if (res.result === 'duplicate ip') {
+        toast('이미 신고가 완료되었습니다.');
+        return;
       }
 
       toast('신고가 완료되었습니다.');
-
       this.$emit('reload');
     },
 
@@ -217,6 +226,10 @@ export default {
     this.list = data.dtoList;
     this.totalItems = data.total;
     this.itemsPerPage = data.size || 1;
+  },
+
+  mounted() {
+    this.listElement = this.$refs.list;
   }
 };
 </script>

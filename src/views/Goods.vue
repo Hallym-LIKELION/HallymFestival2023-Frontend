@@ -115,7 +115,10 @@ export default {
           delay: 0.5 + i * 0.1,
           duration: 0.5,
           opacity: 1,
-          transform: 'none'
+          transform: 'none',
+          onComplete: function () {
+            gsap.set(this.targets(), { clearProps: 'all' });
+          }
         }
       )
     );
@@ -170,6 +173,11 @@ export default {
   background: #ffffff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.card:hover {
+  box-shadow: 0px 0px 8px #00000022;
+  transform: scale(1.05);
 }
 
 .card > .card-info > .name {

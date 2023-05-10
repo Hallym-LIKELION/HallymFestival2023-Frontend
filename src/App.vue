@@ -1,20 +1,20 @@
 <template>
   <main>
     <div class="container">
-      <div class="background" :style="{ backgroundPositionY: `${10 + 20 * scroll}%` }">
+      <div :class="['background', { hidden: isLoading }]">
         <Transition name="fade">
           <div v-if="decoration">
             <img
               ref="post"
               class="post"
-              src="@/assets/post.png"
+              :src="PostImage"
               alt=""
               :style="{ marginBottom: `calc(${3 * scroll}% - 12px` }"
             />
             <img
               ref="letter"
               class="letter"
-              src="@/assets/letter.png"
+              :src="LetterImage"
               alt=""
               :style="{ marginBottom: `calc(${3 * scroll}% - 24px` }"
             />
@@ -28,11 +28,11 @@
 
       <div class="header">
         <header>
-          <button @click="showMenu = !showMenu">
+          <button @click="toggleMenu">
             <img :src="Icon.hamburger" width="24" />
           </button>
           <RouterLink class="title" to="/" @click="showMenu = false"
-            ><img src="@/assets/logo.png" alt=""
+            ><img :src="LogoImage" alt=""
           /></RouterLink>
         </header>
       </div>
@@ -85,8 +85,14 @@
           </div>
         </Transition>
 
-        <div class="router-view">
-          <RouterView v-slot="{ Component }" @reload="reload" @login="login">
+        <div class="router-view" :style="{ visibility: isLoading ? 'hidden' : 'visible' }">
+          <RouterView
+            v-slot="{ Component }"
+            @reload="reload"
+            @login="login"
+            :loading="isLoading"
+            :hint="hintEnabled"
+          >
             <Transition name="fade" mode="out-in">
               <component :is="Component" :key="update" />
             </Transition>
@@ -101,10 +107,15 @@
 </template>
 
 <script>
+import LogoImage from '@/assets/로고.png';
+import PostImage from '@/assets/post.png';
+import LetterImage from '@/assets/letter.png';
+import BackgroundImage from '@/assets/back.jpg';
 import Cookies from 'js-cookie';
 import { gsap } from 'gsap';
 import { RouterLink, RouterView } from 'vue-router';
 import { Icon } from './library/icon';
+import { get, set } from 'idb-keyval';
 import Footer from './components/Footer.vue';
 
 import * as API from './api/api-client.js';
@@ -119,11 +130,16 @@ export default {
   },
   data() {
     return {
+      LogoImage,
+      PostImage,
+      LetterImage,
       showMenu: false,
       scroll: 0,
       role: API.GetAuthority(),
       id: Cookies.get('id'),
+      hintEnabled: false,
       update: true,
+      isLoading: true,
       scrollTarget: null,
       navList: [
         { name: '공지사항', url: '/announcement' },
@@ -151,18 +167,44 @@ export default {
       );
     }
   },
-  created() {
+  async created() {
     this.$router.beforeEach((to, from, next) => {
       this.footerAnimation();
       next();
     });
 
+    this.hintEnabled = await get('hint');
+
     window.addEventListener('scroll', this.handleScroll);
+    window.clearHint = async () => {
+      await set('hint', true);
+    };
 
     API.GetAPI();
+
+    const list = [LogoImage, PostImage, LetterImage, BackgroundImage];
+
+    const images = list.map((url) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    });
+
+    Promise.all(images).then(() => {
+      this.isLoading = false;
+    });
   },
 
   methods: {
+    async toggleMenu() {
+      this.showMenu = !this.showMenu;
+
+      await set('hint', false);
+      this.hintEnabled = false;
+    },
     async openMyBooth(evt) {
       evt.stopPropagation();
 
@@ -258,11 +300,14 @@ export default {
   overflow: hidden;
 
   z-index: -1;
-  background-image: url('./assets/back.jpg');
+  background-image: url('@/assets/back.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
 
+.hidden {
+  visibility: hidden;
+}
 .background .post {
   position: absolute;
   left: 50%;
