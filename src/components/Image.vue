@@ -49,6 +49,7 @@ export default {
   methods: {
     onImageLoad() {
       this.loaded = true;
+      this.$emit('loaded');
     }
   }
 };

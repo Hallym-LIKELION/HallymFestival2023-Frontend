@@ -46,12 +46,22 @@ export default {
     currentPage: {
       type: Number,
       default: 1
+    },
+    scrollToElement: {
+      type: Object,
+      default: {}
     }
   },
 
   methods: {
     onClickHandler(page) {
-      window.scrollTo(0, 0);
+      if (this.scrollToElement) {
+        setTimeout(() => {
+          const dim = this.scrollToElement.getBoundingClientRect();
+          window.scrollTo({ top: dim.top - 200 + window.scrollY, behavior: 'smooth' });
+        }, 50);
+      }
+
       this.$emit('change', page);
     }
   },

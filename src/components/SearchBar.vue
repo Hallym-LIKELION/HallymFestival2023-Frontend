@@ -23,12 +23,7 @@ export default {
     };
   },
   props: ['modelValue'],
-  emits: ['update:modelValue'],
-  methods: {
-    change(evt) {
-      this.$emit('change', evt);
-    }
-  }
+  emits: ['update:modelValue']
 };
 </script>
 

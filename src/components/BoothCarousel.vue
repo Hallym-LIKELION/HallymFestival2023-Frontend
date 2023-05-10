@@ -5,7 +5,7 @@
         <Chart :options="item"></Chart>
       </Slide>
       <Slide v-if="!isAdmin" v-for="(item, index) in image" :key="index">
-        <Image class="image" :src="item" width="500" height="400" spinner-size="300" />
+        <Image class="image" :src="item" :width="500" :height="400" :spinner-size="300" />
       </Slide>
 
       <template #addons>

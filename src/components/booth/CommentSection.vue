@@ -19,7 +19,7 @@
     <div class="write-container">
       <CommentWrite :id="id" @send="addComment" />
     </div>
-    <div class="comment-container">
+    <div class="comment-container" ref="list">
       <template v-for="item in list" :key="item.cno">
         <Comment
           :id="item.cno"
@@ -30,7 +30,12 @@
           @clickMenu="toggleMenu"
         />
       </template>
-      <Pagination @change="changePage" :totalItems="totalItems" :itemsPerPage="itemsPerPage" />
+      <Pagination
+        @change="changePage"
+        :totalItems="totalItems"
+        :itemsPerPage="itemsPerPage"
+        :scrollToElement="listElement"
+      />
     </div>
   </div>
 </template>
@@ -66,6 +71,8 @@ export default {
       list: [],
 
       myIP: '',
+
+      listElement: null,
 
       admin: GetAuthority(),
 
@@ -177,6 +184,9 @@ export default {
       } else if (res.result === 'does not exist comment') {
         toast('해당 항목이 더 이상 존재하지 않습니다.');
         return;
+      } else if (res.result === 'duplicate ip') {
+        toast('이미 신고가 완료되었습니다.');
+        return;
       }
 
       toast('신고가 완료되었습니다.');
@@ -200,6 +210,9 @@ export default {
     this.totalItems = data.total;
     this.itemsPerPage = data.size || 1;
     this.$emit('update', data.total);
+  },
+  mounted() {
+    this.listElement = this.$refs.list;
   }
 };
 </script>

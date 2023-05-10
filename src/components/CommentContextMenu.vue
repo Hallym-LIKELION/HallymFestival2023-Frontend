@@ -86,4 +86,21 @@ button:hover {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 400px) {
+  div {
+    width: 100px;
+
+    margin-left: -80px;
+    margin-top: 24px;
+  }
+
+  button {
+    height: 28px;
+    margin: 4px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 9pt;
+  }
+}
 </style>

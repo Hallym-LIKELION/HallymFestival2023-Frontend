@@ -23,7 +23,7 @@ export function GetAuthority() {
   // 2: 어드민
 
   if (token) {
-    return role;
+    return 0;
   } else {
     return 0;
   }
@@ -507,6 +507,23 @@ export async function GetBoothListWithComment(page = 0) {
   });
   return res.data;
 }
+// export async function GetBoothListWithLike(page = 0) {
+//   let url = '/like/top-count-list';
+//   if (page !== 0) {
+//     url += '?page=' + page;
+//   }
+//   const res = await axios.get(HOST + url);
+//   return res.data;
+// }
+
+// export async function GetBoothListWithComment(page = 0) {
+//   let url = '/comment/top-count-list';
+//   if (page !== 0) {
+//     url += '?page=' + page;
+//   }
+//   const res = await axios.get(HOST + url);
+//   return res.data;
+// }
 
 export async function GetBoothListWithReport(page = 0) {
   let url = '/comment/auth/report-top-count-list';

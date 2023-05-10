@@ -8,26 +8,52 @@
 
     <div class="poster">
       <BoothCarousel :slide="slide" :isAdmin="admin === 2" />
-      <SwitchButton v-if="admin !== 2" :status="day" @change="switchDayNight" />
+      <SwitchButton v-show="admin !== 2 && day < 4" :status="day" @change="switchDayNight" />
     </div>
 
-    <div class="search-bar" v-if="admin !== 2">
+    <div class="search-bar" v-show="admin !== 2 && day < 4">
       <SearchBar v-model="search" @change="changePage(1)" />
     </div>
 
     <div class="button-group">
-      <button @click="() => selectType(1)" :class="{ selected: day === 1 }">
-        {{ admin === 2 ? '댓글순' : '화요일' }}
-      </button>
-      <button @click="() => selectType(2)" :class="{ selected: day === 2 }">
-        {{ admin === 2 ? '좋아요순' : '수요일' }}
-      </button>
-      <button @click="() => selectType(3)" :class="{ selected: day === 3 }">
-        {{ admin === 2 ? '신고순' : '목요일' }}
-      </button>
+      <Carousel :items-to-show="1" :wrapAround="true" v-model="buttonSlide">
+        <Slide :key="0" v-if="admin !== 2">
+          <div>
+            <button @click="() => selectType(1)" :class="['select', { selected: day === 1 }]">
+              화요일
+            </button>
+            <button @click="() => selectType(2)" :class="['select', { selected: day === 2 }]">
+              수요일
+            </button>
+            <button @click="() => selectType(3)" :class="['select', { selected: day === 3 }]">
+              목요일
+            </button>
+          </div>
+        </Slide>
+        <Slide :key="1">
+          <div>
+            <button @click="() => selectType(4)" :class="['select', { selected: day === 4 }]">
+              댓글순
+            </button>
+            <button @click="() => selectType(5)" :class="['select', { selected: day === 5 }]">
+              좋아요순
+            </button>
+            <button
+              @click="() => selectType(6)"
+              :class="['select', { selected: day === 6 }]"
+              v-if="admin === 2"
+            >
+              신고순
+            </button>
+          </div>
+        </Slide>
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
     </div>
 
-    <div class="booth-list">
+    <div class="booth-list" ref="list">
       <template v-for="item in list" :key="item.bno">
         <ListItem
           @click="() => showBooth(item.bno)"
@@ -48,6 +74,7 @@
         :totalItems="totalItems"
         :itemsPerPage="itemsPerPage"
         :currentPage="currentPage"
+        :scrollToElement="listElement"
       />
     </div>
   </main>
@@ -62,6 +89,7 @@ import BoothCarousel from '../components/BoothCarousel.vue';
 import SwitchButton from '../components/SwitchButton.vue';
 import Image from '../components/Image.vue';
 import Pagination from '../components/Pagination.vue';
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
 import {
   GetAuthority,
   GetBoothList,
@@ -79,46 +107,51 @@ export default {
     SwitchButton,
     BoothCarousel,
     Image,
-    Header
+    Header,
+    Carousel,
+    Slide,
+    Navigation
   },
   data() {
     return {
       HeaderImage,
       list: [],
       search: '',
-      day: 1,
+      day: GetAuthority() === 2 ? 4 : 1,
+
+      listElement: null,
 
       dayNight: true,
 
       admin: GetAuthority(),
 
       slide: 0,
+      buttonSlide: 0,
 
       totalItems: 1,
       itemsPerPage: 1,
       currentPage: 1
     };
   },
-  computed: {},
   methods: {
     showBooth(id) {
       this.$router.push('/booth/' + id);
     },
+
     selectType(value) {
+      this.day = value;
+
+      this.changePage(1);
+
       if (this.admin === 2) {
-        this.day = value;
-        this.changePage(1);
-      } else {
-        this.selectDay(value);
-      }
-      if (this.dayNight) {
+        this.slide = value - 4;
+      } else if (value < 4 && this.dayNight) {
         this.slide = value - 1;
       }
+
+      console.log(value, this.slide);
     },
-    selectDay(day) {
-      this.day = day;
-      this.changePage(1);
-    },
+
     switchDayNight(isDay) {
       this.dayNight = isDay;
       if (isDay) {
@@ -135,16 +168,15 @@ export default {
 
     async changePage(page) {
       this.currentPage = page;
-      if (this.admin === 2) {
-        if (this.day == 2) {
-          this.applyData(await GetBoothListWithLike(page));
-        } else if (this.day == 3) {
-          this.applyData(await GetBoothListWithReport(page));
-        } else {
-          this.applyData(await GetBoothListWithComment(page));
-        }
-      } else {
+
+      if (this.day < 4) {
         this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
+      } else if (this.day === 5) {
+        this.applyData(await GetBoothListWithLike(page));
+      } else if (this.day === 6) {
+        this.applyData(await GetBoothListWithReport(page));
+      } else {
+        this.applyData(await GetBoothListWithComment(page));
       }
     },
 
@@ -157,6 +189,10 @@ export default {
 
   async created() {
     this.changePage(1);
+  },
+
+  mounted() {
+    this.listElement = this.$refs.list;
   }
 };
 </script>
@@ -197,12 +233,17 @@ h1 {
 }
 
 .button-group {
+  max-width: 400px;
+  margin: 0 auto;
   margin-top: 16px;
+}
+
+.button-group div {
   display: flex;
   justify-content: center;
 }
 
-.button-group > button {
+.button-group div > button {
   margin: 8px 10px;
   padding: 6px 16px;
   border: none;
@@ -215,7 +256,7 @@ h1 {
   transition: background-color 0.25s, color 0.25s;
 }
 
-.button-group > button.selected {
+.button-group div > button.selected {
   background-color: #ca434c;
   color: white;
 }
@@ -231,8 +272,22 @@ h1 {
   margin: 10px 0px;
   cursor: pointer;
 }
+
+:deep(.button-group .carousel__prev),
+:deep(.button-group .carousel__next) {
+  color: white;
+}
+
+:deep(.button-group .carousel__prev) {
+  margin-left: -8px;
+}
+
+:deep(.button-group .carousel__next) {
+  margin-right: -8px;
+}
+
 @media screen and (max-width: 400px) {
-  .button-group > button {
+  .button-group div > button {
     margin: 8px;
     padding: 4px 8px;
     font-size: 10pt;
