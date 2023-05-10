@@ -3,10 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 let mode = import.meta.env.MODE;
 
-const HOST =
-  mode === 'production'
-    ? 'https://www.hallymfestival.com/api'
-    : 'https://www.hallymfestival.com/api';
+const HOST = mode === 'production' ? '/api' : 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
@@ -52,9 +49,7 @@ export async function GetAccessToken(id, password) {
 
   try {
     res = await axios.post(
-      mode === 'production'
-        ? 'https://www.hallymfestival.com/login'
-        : 'https://www.hallymfestival.com/login',
+      mode === 'production' ? '/login' : 'https://www.hallymfestival.com/login',
       data
     );
   } catch (e) {
@@ -91,9 +86,7 @@ export async function GetAccessTokenUser() {
 
   try {
     res = await axios.post(
-      mode === 'production'
-        ? 'https://www.hallymfestival.com/refreshToken'
-        : 'https://www.hallymfestival.com/refreshToken',
+      mode === 'production' ? '/refreshToken' : 'https://www.hallymfestival.com/refreshToken',
       {
         accessToken: Cookies.get('access_token', token),
         refreshToken: Cookies.get('refresh_token')
@@ -495,49 +488,49 @@ export async function GetVisitorCount() {
   return res.data;
 }
 
-export async function GetBoothListWithLike(page = 0) {
-  let url = '/like/auth/top-count-list';
-  if (page !== 0) {
-    url += '?page=' + page;
-  }
-  const res = await axios.get(HOST + url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return res.data;
-}
-
-export async function GetBoothListWithComment(page = 0) {
-  let url = '/comment/auth/top-count-list';
-  if (page !== 0) {
-    url += '?page=' + page;
-  }
-  const res = await axios.get(HOST + url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-  return res.data;
-}
-
 // export async function GetBoothListWithLike(page = 0) {
-//   let url = '/like/top-count-list';
+//   let url = '/like/auth/top-count-list';
 //   if (page !== 0) {
 //     url += '?page=' + page;
 //   }
-//   const res = await axios.get(HOST + url);
+//   const res = await axios.get(HOST + url, {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   });
 //   return res.data;
 // }
 
 // export async function GetBoothListWithComment(page = 0) {
-//   let url = '/comment/top-count-list';
+//   let url = '/comment/auth/top-count-list';
 //   if (page !== 0) {
 //     url += '?page=' + page;
 //   }
-//   const res = await axios.get(HOST + url);
+//   const res = await axios.get(HOST + url, {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   });
 //   return res.data;
 // }
+
+export async function GetBoothListWithLike(page = 0) {
+  let url = '/like/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url);
+  return res.data;
+}
+
+export async function GetBoothListWithComment(page = 0) {
+  let url = '/comment/top-count-list';
+  if (page !== 0) {
+    url += '?page=' + page;
+  }
+  const res = await axios.get(HOST + url);
+  return res.data;
+}
 
 export async function GetBoothListWithReport(page = 0) {
   let url = '/comment/auth/report-top-count-list';

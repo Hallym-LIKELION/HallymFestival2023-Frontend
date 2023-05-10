@@ -164,7 +164,7 @@ export default {
         },
         {
           time: '20:00 ~ ',
-          content: ['연예인 공연 2일차'],
+          content: ['연예인 공연 1일차'],
           space: '한림대 대운동장',
           day: [2]
         },
@@ -222,7 +222,7 @@ export default {
         },
         {
           time: '20:00 ~ ',
-          content: ['연예인 공연 3일차'],
+          content: ['연예인 공연 2일차'],
           space: '한림대 대운동장',
           day: [3]
         },

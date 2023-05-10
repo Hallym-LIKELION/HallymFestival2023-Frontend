@@ -151,8 +151,6 @@ export default {
         { name: '만든이들', url: '/aboutus' }
       ],
       navBottomList: [
-        { name: '강제 관리자 ON', url: '', callback: this.adminOn },
-        { name: '강제 관리자 OFF', url: '', callback: this.adminOff },
         { name: '나의 부스', url: '', callback: this.openMyBooth, roleList: [1] },
         { name: '관리자 페이지', url: '/admin', roleList: [2] },
         { name: '로그아웃', url: '', callback: this.logout, roleList: [1, 2] },
@@ -249,14 +247,6 @@ export default {
           transform: 'none'
         }
       );
-    },
-    adminOn() {
-      Cookies.set('role', '2');
-      this.$router.go('/');
-    },
-    adminOff() {
-      Cookies.set('role', '0');
-      this.$router.go('/');
     },
     login(result) {
       this.role = result.role;

@@ -148,8 +148,6 @@ export default {
       } else if (value < 4 && this.dayNight) {
         this.slide = value - 1;
       }
-
-      console.log(value, this.slide);
     },
 
     switchDayNight(isDay) {
