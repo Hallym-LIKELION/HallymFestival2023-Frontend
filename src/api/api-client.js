@@ -17,13 +17,15 @@ let id = Cookies.get('id') || null;
 
 const period = new Date(Date.now() + 10000);
 
+window.cookies = Cookies;
+
 export function GetAuthority() {
   // 0: 권한 없음
   // 1: 일반
   // 2: 어드민
 
   if (token) {
-    return 0;
+    return role;
   } else {
     return 0;
   }
