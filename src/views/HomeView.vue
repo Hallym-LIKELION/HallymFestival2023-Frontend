@@ -14,8 +14,9 @@
       <p>2023.05.16 ~ 05.18</p>
     </div>
     <div class="menu" ref="menu">
-      <RouterLink to="/timetable">타임 테이블</RouterLink>
       <RouterLink to="/boothmap">부스 목록</RouterLink>
+      <RouterLink to="/timetable">타임 테이블</RouterLink>
+      <RouterLink to="/comment">방명록</RouterLink>
       <RouterLink to="/program">프로그램</RouterLink>
       <RouterLink to="/announcement">공지사항</RouterLink>
       <button @click="openBoothRecommendation">부스 유형 추천 테스트 하러가기</button>
@@ -49,7 +50,7 @@ export default {
       window.open('https://hallym-booth.vercel.app/', '_blank');
     },
     openPopcat() {
-      window.open('http://37catch.me/popduck/day1/', '_blank');
+      window.open('http://37catch.me/popduck/open/', '_blank');
     },
     openNaverCloud() {
       window.open('https://www.ncloud.com/', '_blank');
@@ -65,7 +66,7 @@ export default {
         opacity: 0
       },
       {
-        delay: 0.25,
+        delay: 0.15,
         duration: 1,
         transform: 'none',
         opacity: 1,
@@ -97,7 +98,7 @@ export default {
         transform: 'translateY(100%)'
       },
       {
-        delay: 1.25,
+        delay: 1.0,
         duration: 2,
         transform: 'none',
         opacity: 1,
@@ -106,7 +107,7 @@ export default {
     );
 
     // 메뉴 애니메이션
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       gsap.fromTo(
         this.$refs.menu.childNodes[i],
         {
@@ -115,7 +116,7 @@ export default {
           pointerEvents: 'none'
         },
         {
-          delay: 2 + i * 0.25,
+          delay: 1.5 + i * 0.25,
           duration: 0.5,
           transform: 'none',
           opacity: 1,
@@ -132,7 +133,7 @@ export default {
         pointerEvents: 'none'
       },
       {
-        delay: 4.25,
+        delay: 3.75,
         duration: 1.5,
         opacity: 1,
         pointerEvents: 'auto',
