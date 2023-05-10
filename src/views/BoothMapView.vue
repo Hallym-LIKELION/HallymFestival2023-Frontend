@@ -59,7 +59,7 @@
           @click="() => showBooth(item.bno)"
           :title="item.booth_title"
           :content="item.booth_content"
-          :type="admin === 2 ? item.boothType : item.booth_type"
+          :type="day > 3 ? item.boothType : item.booth_type"
           :writer="item.writer"
           :date="item.regDate"
           :like="item.like_cnt"
