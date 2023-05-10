@@ -3,7 +3,10 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 let mode = import.meta.env.MODE;
 
-const HOST = mode === 'production' ? '/api' : 'https://www.hallymfestival.com/api';
+const HOST =
+  mode === 'production'
+    ? 'https://www.hallymfestival.com/api'
+    : 'https://www.hallymfestival.com/api';
 
 // =========================
 // 임시: JWT Login API
