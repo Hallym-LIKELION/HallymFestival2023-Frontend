@@ -7,8 +7,11 @@
       <img src="@/assets/로고.png" alt="" width="400" height="300" />
     </div>
     <div class="totalvisitor">
-      <h3>Today</h3>
-      <h1>{{ today.toLocaleString() }}</h1>
+      <h3>Total</h3>
+      <h1>{{ total.toLocaleString() }}</h1>
+      <h5 class="today">Today</h5>
+      <h2>{{ today.toLocaleString() }}</h2>
+
       <div class="chart">
         <Chart :options="chart"></Chart>
       </div>
@@ -34,6 +37,7 @@ export default {
   data() {
     return {
       today: 0,
+      total: 0,
       chart: {
         chart: {
           backgroundColor: '#333333',
@@ -71,6 +75,7 @@ export default {
   async created() {
     const data = await GetVisitorCount();
 
+    this.total = data.reduce((result, item) => result + item.count, 0);
     this.today = data[0].count;
 
     data.forEach((item) => (item.visitDate = parseInt(item.visitDate.split('-').pop()) + '일'));
@@ -114,6 +119,11 @@ main {
   padding: 36px 0;
   color: #ffffff;
 }
+
+.today {
+  margin-top: 18px;
+}
+
 .totalvisitor {
   text-align: center;
   margin: 0;
