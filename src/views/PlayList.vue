@@ -2,9 +2,11 @@
   <main>
     <Header
       :image="HeaderImage"
-      text="가수분들의 PLAYLIST"
-      content="이번 축제에 한림대에 와주시는 가수분들을 소개합니다!"
+      text="초청 연예인"
+      content="이번 축제에 초청한 가수를 소개합니다!"
     />
+
+    <div class="background"></div>
 
     <div class="content">
       <p>
@@ -13,24 +15,27 @@
         축제 때 와주시는 가수분들의 필청리스트를 복습하면서 공연을 더 즐겨볼까요?
       </p>
 
-    <div class="card-container">
-    <div class="card" v-for="(card, index) in cards" :key="index">
-      <img :src="card.image" alt="" class="card-image">
-      <div class="card-text">
-        <h2>{{ card.title }}</h2>
-        <p>{{ card.description }}</p>
-        <button @click="onClickButton(card.link)">{{ card.buttonText }}</button>
+      <div class="list" v-for="anotherItem in cards">
+        <div class="card" v-for="card in anotherItem" ref="card">
+          <Image :src="card.image" class="card-image"></Image>
+          <div class="card-text">
+            <h2>{{ card.title }}</h2>
+            <p>{{ card.description }}</p>
+          </div>
+          <div class="card-buton">
+            <button @click="openMelon(card.melon)"><img :src="melon" alt="" /></button>
+            <button @click="openYoutube(card.youtube)"><img :src="utube" alt="" /></button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
   </main>
 </template>
 
 <script>
-import Card from "../components/StarCard.vue";
+import Card from '../components/StarCard.vue';
 import { gsap } from 'gsap';
-import HeaderImage from '@/assets/overlay/OGoods.png';
+import HeaderImage from '@/assets/overlay/Oplaylist.png';
 import Header from '../components/Header.vue';
 import Yena from '@/assets/star/ChoiYena.png';
 import HiKey from '@/assets/star/HiKey.png';
@@ -45,71 +50,59 @@ export default {
   data() {
     return {
       HeaderImage,
+      melon,
+      utube,
       cards: [
-        {
-          image: Yena,
-          title: '최예나',
-          description: '대표곡: Smiley😀, SmartPhone📱',
-          buttonText: '플리 바로가기',
-          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507412&ref={W20300}'
-        },
-        {
-          image: HiKey,
-          title: '하이키',
-          description: '대표곡: 건물 사이에 피어난 장미🌹',
-          buttonText:'플리 바로가기',
-          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507378&ref={W20300}'
-        },
-        {
-          image: Loco,
-          title: '로꼬',
-          description: '대표곡: 시간이 들겠지⏳, 니가 모르게😔',
-          buttonText:'플리 바로가기',
-          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507357&ref={W20300}'
-        },
-        {
-          image:  LeeHi,
-          title: '이하이',
-          description: '대표곡: Rose🌹 , 한숨 😮‍💨',
-          buttonText: '플리 바로가기',
-          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507310&ref={W20300}'
-        }
+        [
+          {
+            image: Yena,
+            title: '최예나',
+            description: 'Smiley😀\nSmartPhone📱',
+            buttonText: '플리 바로가기',
+            melon: '524507412',
+            youtube: 'QSrVqCU3Tcs'
+          },
+          {
+            image: HiKey,
+            title: '하이키',
+            description: '건물 사이에 피어난 장미🌹',
+            buttonText: '플리 바로가기',
+            melon: '524507378',
+            youtube: 'utFiypgwHEk'
+          }
+        ],
+        [
+          {
+            image: Loco,
+            title: '로꼬',
+            description: '시간이 들겠지⏳\n니가 모르게😔',
+            buttonText: '플리 바로가기',
+            melon: '524507357',
+            youtube: '_qh6HawM9DU'
+          },
+          {
+            image: LeeHi,
+            title: '이하이',
+            description: 'Rose🌹\n한숨 😮‍💨',
+            buttonText: '플리 바로가기',
+            melon: '524507310',
+            youtube: 'ZbnhW3zFFbw'
+          }
+        ]
       ]
     };
   },
   methods: {
-  onClickButton(link) {
-    window.open(link, '_blank');
-  }
-},
-/*
-  methods: {
-    1. 멜론 플레이리스트 링크
-    openMelon() {
-      window.open('https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq='+ id +'&ref={W20300}', '_blank');
-      //최예나
-      https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507412&ref={W20300}
-       //하이키
-       'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507378&ref={W20300}',
-        //로꼬
-        'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507357&ref={W20300}',
-        //이하이
-        'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507310&ref={W20300}',
-
+    openMelon(id) {
+      window.open(
+        'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=' + id,
         '_blank'
-    2.  유튜브 플레이리스트 링크
-    //최예나
-    https://www.youtube.com/watch?v=QSrVqCU3Tcs
-    //하이키
-    https://www.youtube.com/watch?v=utFiypgwHEk
-    // 로꼬
-    https://www.youtube.com/watch?v=_qh6HawM9DU
-    // 이하이
-    https://www.youtube.com/watch?v=ZbnhW3zFFbw
+      );
     },
-    openMelon() {}
+    openYoutube(id) {
+      window.open('https://www.youtube.com/watch?v=' + id, '_blank');
+    }
   },
-*/
   mounted() {
     const list = this.$refs.card;
 
@@ -136,12 +129,33 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  position: absolute;
+  z-index: 0;
+  width: 824px;
+  margin-top: 10px;
+  margin-left: -28px;
+  height: calc(100% - 56px - 200px);
+  background-color: #fbfbfbe6;
+  /* top: 10%; */
+}
+
+@media screen and (max-width: 824px) {
+  .background {
+    width: 100%;
+  }
+}
+
 .content {
+  position: relative;
+
   margin: 0 -28px;
   padding: 0 12px;
   padding-top: 24px;
-  background-color: #fbfbfbe6;
+  padding-bottom: 72px;
   border-radius: 72px 72px 0 0;
+
+  z-index: 1;
 
   display: flex;
   flex-direction: column;
@@ -159,12 +173,19 @@ export default {
   line-height: 16pt;
 }
 
-.content > .card {
+.content > .list {
   width: 100%;
   margin-top: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.content > .list > .card:nth-child(1) {
+  margin-right: 8px;
+}
+.content > .list > .card:nth-child(2) {
+  margin-left: 8px;
 }
 
 .card-container {
@@ -175,7 +196,7 @@ export default {
 
 .card {
   width: 200px;
-  height: 300px;
+  height: 280px;
   padding: 12px;
   box-sizing: border-box;
   background: #ffffff;
@@ -188,14 +209,14 @@ export default {
   transform: scale(1.05);
 }
 
-.card-image {
+:deep(.card-image) {
   width: 120px;
   height: 120px;
   object-fit: contain;
 }
 
 .card-text {
-  padding: 20px;
+  padding: 4px;
   text-align: center;
 }
 
@@ -207,24 +228,64 @@ export default {
 }
 
 .card-text p {
-  font-size: 11pt;
+  font-size: 9pt;
+  white-space: pre-wrap;
 }
 
-button {
+.card-buton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-buton > button {
+  width: 36px;
+  height: 36px;
   margin-top: 20px;
-  background-color: #ca434c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  box-shadow: 0px 0px 4px #00000066;
+  border-radius: 18px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: box-shadow 0.25s;
 }
 
-button:hover {
-  background-color:#ca434c;
+.card-buton > button:hover {
+  box-shadow: 0px 0px 8px #00000066;
 }
 
+.card-buton > button:nth-child(1) {
+  margin-right: 4px;
+}
+.card-buton > button:nth-child(2) {
+  margin-left: 4px;
+}
+
+.card-buton > button > img {
+  width: 24px;
+}
+
+@media screen and (max-width: 400px) {
+  .content > p {
+    font-size: 11pt;
+  }
+  .content > .list {
+    margin: 0;
+    flex-direction: column;
+  }
+  .card {
+    margin-top: 16px;
+  }
+
+  .content > .list > .card:nth-child(1) {
+    margin-right: 0;
+  }
+  .content > .list > .card:nth-child(2) {
+    margin-left: 0;
+  }
+}
 </style>
-
