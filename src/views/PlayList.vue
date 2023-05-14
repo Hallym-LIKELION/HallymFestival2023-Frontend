@@ -65,7 +65,7 @@ export default {
           {
             image: HiKey,
             title: '하이키',
-            description: '건물 사이에 피어난 장미🌹',
+            description: '건물 사이에 피어난 장미🌹\n\n',
             buttonText: '플리 바로가기',
             melon: '524507378',
             youtube: 'utFiypgwHEk'
@@ -216,7 +216,6 @@ export default {
 }
 
 .card-text {
-  padding: 4px;
   text-align: center;
 }
 
@@ -228,7 +227,7 @@ export default {
 }
 
 .card-text p {
-  font-size: 9pt;
+  font-size: 10pt;
   white-space: pre-wrap;
 }
 
@@ -247,22 +246,18 @@ export default {
   align-items: center;
 
   color: white;
-  box-shadow: 0px 0px 4px #00000066;
   border-radius: 18px;
   font-size: 16px;
   cursor: pointer;
-  transition: box-shadow 0.25s;
-}
-
-.card-buton > button:hover {
-  box-shadow: 0px 0px 8px #00000066;
 }
 
 .card-buton > button:nth-child(1) {
-  margin-right: 4px;
+  margin-right: 6px;
+  background-color: #12d83a;
 }
 .card-buton > button:nth-child(2) {
-  margin-left: 4px;
+  margin-left: 6px;
+  background-color: #ff0000;
 }
 
 .card-buton > button > img {
