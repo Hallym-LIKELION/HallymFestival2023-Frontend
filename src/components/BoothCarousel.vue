@@ -61,7 +61,7 @@ function CreateChart(title, item, list) {
             return this.value;
           }
         },
-        style: { color: '#ffffff' }
+        style: { color: '#ffffff', whiteSpace: 'nowrap' }
       }
     },
     yAxis: {
