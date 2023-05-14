@@ -2,27 +2,28 @@
   <main>
     <Header
       :image="HeaderImage"
-      text="연예인 플리"
+      text="가수분들의 PLAYLIST"
       content="이번 축제에 한림대에 와주시는 가수분들을 소개합니다!"
     />
 
     <div class="content">
       <p>
         이번 축제를 맞이하여 <br />개발팀에서 준비한 연예인 필청리스트!<br />
-        많은 관심 바랍니다! <br />
-        축제 때 와주시는 가수분들의 필청리스트를 복습하면서 공연을 기다리자구요!
+        학생 여러분들의 많은 관심 바랍니다! <br />
+        축제 때 와주시는 가수분들의 필청리스트를 복습하면서 공연을 더 즐겨볼까요?
       </p>
     </div>
 
-  <div>
-    <card
-      image='@/assets/star/ChoiYena.png'
-      name="John Doe"
-      description="This is a card"
-      buttonText="Click Me"
-    />
+    <div class="card-container">
+    <div class="card" v-for="(card, index) in cards" :key="index">
+      <img :src="card.image" alt="" class="card-image">
+      <div class="card-text">
+        <h2>{{ card.title }}</h2>
+        <p>{{ card.description }}</p>
+        <button>{{ card.buttonText }}</button>
+      </div>
+    </div>
   </div>
-  
   </main>
 </template>
 
@@ -44,46 +45,41 @@ export default {
   data() {
     return {
       HeaderImage,
-      list: [
+      cards: [
         {
-          list: [
-            {
-              image: Yena,
-              name: '최예나',
-              content: ['대표곡: Smiley😀, SmartPhone📱'],
-              mplaylist: '524507412'
-            },
-            {
-              image: HiKey,
-              name: '하이키',
-              content: ['대표곡: 건물 사이에 피어난 장미🌹'],
-              mplaylist: '524507378'
-            }
-          ]
+          image: Yena,
+          title: '최예나',
+          description: '대표곡: Smiley😀, SmartPhone📱',
+          buttonText: '플리 바로가기'
         },
         {
-          list: [
-            {
-              image: Loco,
-              name: '로꼬',
-              content: ['대표곡: 시간이 들겠지⏳, 니가 모르게😔'],
-              mplaylist: '524507357'
-            },
-            {
-              image: LeeHi,
-              name: '이하이',
-              content: ['대표곡: Rose🌹 , 한숨 😮‍💨'],
-              mplaylist: '524507310'
-            }
-          ]
+          image: HiKey,
+          title: '하이키',
+          description: '대표곡: 건물 사이에 피어난 장미🌹',
+          buttonText:'플리 바로가기'
+        },
+        {
+          image: Loco,
+          title: '로꼬',
+          description: '대표곡: 시간이 들겠지⏳, 니가 모르게😔',
+          buttonText:'플리 바로가기'
+        },
+        {
+          image:  LeeHi,
+          title: '이하이',
+          description: '대표곡: Rose🌹 , 한숨 😮‍💨',
+          buttonText: '플리 바로가기'
         }
       ]
     };
   },
-
+/*
   methods: {
+    1. 멜론 플레이리스트 링크
     openMelon() {
       window.open('https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq='+ id +'&ref={W20300}', '_blank');
+      //최예나
+      https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507412&ref={W20300}
        //하이키
        'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507378&ref={W20300}',
         //로꼬
@@ -92,11 +88,19 @@ export default {
         'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507310&ref={W20300}',
 
         '_blank'
-    
+    2.  유튜브 플레이리스트 링크
+    //최예나
+    https://www.youtube.com/watch?v=QSrVqCU3Tcs
+    //하이키
+    https://www.youtube.com/watch?v=utFiypgwHEk
+    // 로꼬
+    https://www.youtube.com/watch?v=_qh6HawM9DU
+    // 이하이
+    https://www.youtube.com/watch?v=ZbnhW3zFFbw
     },
     openMelon() {}
   },
-
+*/
   mounted() {
     const list = this.$refs.card;
 
@@ -146,7 +150,7 @@ export default {
   line-height: 16pt;
 }
 
-.content > .list {
+.content > .card {
   width: 100%;
   margin-top: 36px;
   display: flex;
@@ -154,308 +158,57 @@ export default {
   align-items: center;
 }
 
-.content > .list > .card:nth-child(1) {
-  margin-right: 16px;
-}
-.content > .list > .card:nth-child(2) {
-  margin-left: 16px;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
-  width: 200px;
-  height: 240px;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #ffffff;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  transition: box-shadow 0.25s, transform 0.25s;
-}
-.card:hover {
-  box-shadow: 0px 0px 8px #00000022;
-  transform: scale(1.05);
+  width: 300px;
+  margin: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card > .card-info > .name {
-  margin-top: 8px;
-  margin-bottom: 4px;
-  font-weight: 600;
-  font-size: 14pt;
-}
-.card > .card-info > .desc {
-  font-size: 11pt;
-}
-.card > .card-info > .small {
-  margin-top: 8px;
-  font-style: italic;
-  font-size: 8pt;
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0px 0px;
 }
 
-:deep(.card-image) {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-}
-
-.buy {
-  margin: 24px 0;
-  max-width: 400px;
-  padding: 8px 16px;
-  border-radius: 24px;
-  font-size: 14pt;
-  color: white;
-  background-color: #ca434c;
-}
-
-@media screen and (max-width: 400px) {
-  .content > p {
-    font-size: 11pt;
-  }
-  .content > .list {
-    margin: 0;
-    flex-direction: column;
-  }
-  .card {
-    margin-top: 16px;
-  }
-
-  .content > .list > .card:nth-child(1) {
-    margin-right: 0;
-  }
-  .content > .list > .card:nth-child(2) {
-    margin-left: 0;
-  }
-}
-.hidden {
-  visibility: hidden;
-}
-
-.wrapper {
-  margin: 0 -28px;
-  padding: 12px;
-  background-color: #fbfbfbe6;
-  border-radius: 72px 72px 0 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+.card-text {
+  padding: 20px;
   text-align: center;
 }
 
-.wrapper > div {
-  width: 100%;
-  border-top: 3px solid #1d355224;
+.card-text h2 {
+  margin: 0;
+  font-size: 24px;
 }
 
-.wrapper > div:nth-child(1) {
-  border-top: none;
+.card-text p {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-.header {
-  padding: 24px 0;
-}
-
-.header > p {
-  font-size: 12pt;
-  font-weight: 600;
-}
-
-.header > p.collab {
-  margin-top: 16px;
-  margin-bottom: 12px;
-  font-size: 28pt;
-}
-
-.phrase {
-  padding: 5px 0;
-}
-
-.phrase > p {
-  margin: 5px auto;
-  max-width: 540px;
-  word-break: keep-all;
-  line-height: 16pt;
-}
-
-.dev {
-  padding: 24px 0;
-}
-.dev > .title {
-  font-size: 22pt;
-}
-
-.dev > .team {
-  font-weight: bolder;
-  margin-top: 64px;
-  font-size: 17pt;
-  color: #20556c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-:deep(.team-image) {
-  margin-right: 8px;
-}
-
-.dev > .team:nth-of-type(2) {
-  margin-top: 12px;
-}
-.dev > .list {
-  width: 100%;
-  margin-top: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dev > .list > .card:nth-child(1) {
-  margin-right: 16px;
-}
-.dev > .list > .card:nth-child(2) {
-  margin-left: 16px;
-}
-
-.card {
-  width: 200px;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #ffffff;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  transition: box-shadow 0.25s, transform 0.25s;
-}
-
-.card:hover {
-  box-shadow: 0px 0px 8px #00000022;
-  transform: scale(1.1);
-}
-
-.card > .card-info > .name {
-  font-size: 14pt;
-  font-weight: bolder;
-}
-.card > .card-info > .dept {
-  margin-top: 4px;
-  font-size: 10pt;
-}
-
-.card > .card-info > .git-button {
-  margin-top: 16px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  background-color: #5c859b;
+button {
+  margin-top: 20px;
+  background-color: #ca434c;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-:deep(.card-image) {
-  max-width: 120px;
+button:hover {
+  background-color:#ca434c;
 }
 
-.staff {
-  padding: 12px 0;
-}
-
-.staff > .title {
-  margin-top: 12px;
-  font-size: 12pt;
-}
-
-.staff > .list {
-  width: 100%;
-  margin-top: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.staff > .list > .staff-card:nth-child(1) {
-  margin-right: 16px;
-}
-.staff > .list > .staff-card:nth-child(2) {
-  margin-left: 16px;
-}
-
-.staff-card {
-  width: 200px;
-  height: 180px;
-  padding: 12px;
-  font-size: 10pt;
-  box-sizing: border-box;
-  background: #ffffff;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-  transition: box-shadow 0.25s, transform 0.25s;
-}
-
-.staff-card:hover {
-  box-shadow: 0px 0px 8px #00000022;
-  transform: scale(1.1);
-}
-
-.staff-card > p {
-  margin-top: 8px;
-}
-
-.staff-card > p:nth-child(1) {
-  font-weight: 600;
-}
-
-@media screen and (max-width: 400px) {
-  .phrase > p {
-    margin: 5px auto;
-    max-width: 540px;
-    word-break: keep-all;
-    font-size: 10pt;
-    line-height: 12pt;
-  }
-
-  .dev > .title {
-    font-size: 16pt;
-  }
-  .dev > .team {
-    font-size: 12pt;
-  }
-
-  :deep(.team-image) {
-    width: 16px;
-  }
-
-  .dev > .list {
-    margin: 0;
-    flex-direction: column;
-  }
-  .card {
-    margin-top: 16px;
-  }
-
-  .dev > .list > .card:nth-child(1) {
-    margin-right: 0;
-  }
-  .dev > .list > .card:nth-child(2) {
-    margin-left: 0;
-  }
-
-  .staff > .title {
-    font-size: 12pt;
-  }
-  .staff > .list {
-    margin: 0;
-    flex-direction: column;
-  }
-
-  .staff-card {
-    margin-top: 16px;
-  }
-
-  .staff > .list > .staff-card:nth-child(1) {
-    margin-right: 0;
-  }
-  .staff > .list > .staff-card:nth-child(2) {
-    margin-left: 0;
-  }
-}
 </style>
 
