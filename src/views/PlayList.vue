@@ -12,7 +12,6 @@
         학생 여러분들의 많은 관심 바랍니다! <br />
         축제 때 와주시는 가수분들의 필청리스트를 복습하면서 공연을 더 즐겨볼까요?
       </p>
-    </div>
 
     <div class="card-container">
     <div class="card" v-for="(card, index) in cards" :key="index">
@@ -20,10 +19,11 @@
       <div class="card-text">
         <h2>{{ card.title }}</h2>
         <p>{{ card.description }}</p>
-        <button>{{ card.buttonText }}</button>
+        <button @click="onClickButton(card.link)">{{ card.buttonText }}</button>
       </div>
     </div>
   </div>
+</div>
   </main>
 </template>
 
@@ -50,29 +50,38 @@ export default {
           image: Yena,
           title: '최예나',
           description: '대표곡: Smiley😀, SmartPhone📱',
-          buttonText: '플리 바로가기'
+          buttonText: '플리 바로가기',
+          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507412&ref={W20300}'
         },
         {
           image: HiKey,
           title: '하이키',
           description: '대표곡: 건물 사이에 피어난 장미🌹',
-          buttonText:'플리 바로가기'
+          buttonText:'플리 바로가기',
+          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507378&ref={W20300}'
         },
         {
           image: Loco,
           title: '로꼬',
           description: '대표곡: 시간이 들겠지⏳, 니가 모르게😔',
-          buttonText:'플리 바로가기'
+          buttonText:'플리 바로가기',
+          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507357&ref={W20300}'
         },
         {
           image:  LeeHi,
           title: '이하이',
           description: '대표곡: Rose🌹 , 한숨 😮‍💨',
-          buttonText: '플리 바로가기'
+          buttonText: '플리 바로가기',
+          link:'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=524507310&ref={W20300}'
         }
       ]
     };
   },
+  methods: {
+  onClickButton(link) {
+    window.open(link, '_blank');
+  }
+},
 /*
   methods: {
     1. 멜론 플레이리스트 링크
@@ -165,17 +174,24 @@ export default {
 }
 
 .card {
-  width: 300px;
-  margin: 20px;
-  background-color: #f8f8f8;
-  border-radius: 5px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 300px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.card:hover {
+  box-shadow: 0px 0px 8px #00000022;
+  transform: scale(1.05);
 }
 
 .card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 5px 5px 0px 0px;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
 }
 
 .card-text {
@@ -184,14 +200,14 @@ export default {
 }
 
 .card-text h2 {
-  margin: 0;
-  font-size: 24px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 14pt;
 }
 
 .card-text p {
-  margin-top: 10px;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 11pt;
 }
 
 button {
