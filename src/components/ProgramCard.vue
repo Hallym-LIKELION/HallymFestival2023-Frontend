@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Image :src="image" class="image" width="300" height="300" spinner-size="200" :alt="title" />
+    <Image :src="image" class="image" :width="400" :height="400" spinner-size="200" :alt="title" />
     <h4 class="title" v-text="title"></h4>
     <p class="description" v-text="description"></p>
   </div>
