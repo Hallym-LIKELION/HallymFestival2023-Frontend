@@ -148,6 +148,7 @@ export default {
         { name: '프로그램', url: '/program' },
         { name: '굿즈', url: '/goods' },
         { name: '방명록', url: '/comment' },
+        { name: '연예인 공연', url: '/playlist' },
         { name: '만든이들', url: '/aboutus' }
       ],
       navBottomList: [

@@ -63,7 +63,7 @@ export default {
       HeaderImage,
       list: [
         {
-          time: '12:00 ~ 12:40 ',
+          time: '12:00 ~ 12:30 ',
           content: ['물풍선 "나의 소녀시대"'],
           space: '한림대 대운동장',
           day: [1]
@@ -85,7 +85,7 @@ export default {
           day: [1]
         },
         {
-          time: '16:55 ~ 18:10 ',
+          time: '16:00 ~ 18:10 ',
           content: ['동아리 공연 1부'],
           subContent: {
             name: 'LINE UP',
@@ -166,6 +166,13 @@ export default {
           time: '20:00 ~ ',
           content: ['연예인 공연 1일차'],
           space: '한림대 대운동장',
+          subContent: {
+            name: 'LINE UP',
+            list: [
+              '하이키',
+              '최예나'
+            ]
+          },
           day: [2]
         },
         {
@@ -224,6 +231,13 @@ export default {
           time: '20:00 ~ ',
           content: ['연예인 공연 2일차'],
           space: '한림대 대운동장',
+          subContent: {
+            name: 'LINE UP',
+            list: [
+              '이하이',
+              '로꼬'
+            ]
+          },
           day: [3]
         },
         {
