@@ -59,7 +59,7 @@ export default {
             title: '최예나',
             description: 'Smiley😀\nSmartPhone📱',
             buttonText: '플리 바로가기',
-            melon: '524507412',
+            melon: 'EbbCsAjeQU',
             youtube: 'QSrVqCU3Tcs'
           },
           {
@@ -67,7 +67,7 @@ export default {
             title: '하이키',
             description: '건물 사이에 피어난 장미🌹\n\n',
             buttonText: '플리 바로가기',
-            melon: '524507378',
+            melon: '7izOaxgCDy',
             youtube: 'utFiypgwHEk'
           }
         ],
@@ -77,7 +77,7 @@ export default {
             title: '로꼬',
             description: '시간이 들겠지⏳\n니가 모르게😔',
             buttonText: '플리 바로가기',
-            melon: '524507357',
+            melon: 'Qjw9d_IPzw',
             youtube: '_qh6HawM9DU'
           },
           {
@@ -85,7 +85,7 @@ export default {
             title: '이하이',
             description: 'Rose🌹\n한숨 😮‍💨',
             buttonText: '플리 바로가기',
-            melon: '524507310',
+            melon: 'TcGEn-K-52',
             youtube: 'ZbnhW3zFFbw'
           }
         ]
@@ -94,10 +94,7 @@ export default {
   },
   methods: {
     openMelon(id) {
-      window.open(
-        'https://www.melon.com/mymusic/playlist/mymusicplaylistview_inform.htm?plylstSeq=' + id,
-        '_blank'
-      );
+      window.open('http://kko.to/' + id, '_blank');
     },
     openYoutube(id) {
       window.open('https://www.youtube.com/watch?v=' + id, '_blank');
