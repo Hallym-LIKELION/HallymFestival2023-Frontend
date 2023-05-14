@@ -206,8 +206,9 @@ h1 {
 
 .poster {
   max-width: 420px;
+  border-radius: 16px;
   margin: auto;
-  /* overflow: hidden; */
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
