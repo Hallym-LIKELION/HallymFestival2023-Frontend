@@ -70,6 +70,10 @@ export default {
     currentPage(value) {
       this.page = value;
     }
+  },
+
+  mounted() {
+    this.page = this.currentPage;
   }
 };
 </script>

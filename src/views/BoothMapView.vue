@@ -138,6 +138,17 @@ export default {
       this.$router.push('/booth/' + id);
     },
 
+    updateQueryString() {
+      this.$router.push({
+        path: '/boothmap',
+        query: {
+          page: this.currentPage,
+          type: this.day,
+          search: this.search
+        }
+      });
+    },
+
     selectType(value) {
       this.day = value;
 
@@ -152,6 +163,7 @@ export default {
 
     switchDayNight(isDay) {
       this.dayNight = isDay;
+
       if (isDay) {
         this.slide = 0;
       } else {
@@ -166,6 +178,8 @@ export default {
 
     async changePage(page) {
       this.currentPage = page;
+
+      this.updateQueryString();
 
       if (this.day < 4) {
         this.applyData(await SearchBoothList(this.search, this.day, this.dayNight, page));
@@ -186,7 +200,11 @@ export default {
   },
 
   async created() {
-    this.changePage(1);
+    this.currentPage = parseInt(this.$route.query.page ?? this.currentPage);
+    this.day = parseInt(this.$route.query.type ?? this.day);
+    this.search = this.$route.query.search ?? this.search;
+
+    this.changePage(this.currentPage);
   },
 
   mounted() {
