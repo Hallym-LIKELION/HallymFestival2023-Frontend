@@ -88,10 +88,13 @@ export default {
     }
 
     this.chart.xAxis.categories = data
-      .reverse()
       .slice(0, 7)
+      .reverse()
       .map((item) => item.visitDate);
-    this.chart.series[0].data = data.slice(0, 7).map((item) => item.count);
+    this.chart.series[0].data = data
+      .slice(0, 7)
+      .reverse()
+      .map((item) => item.count);
   }
 };
 </script>
