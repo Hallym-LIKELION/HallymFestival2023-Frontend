@@ -128,7 +128,11 @@ const router = createRouter({
   ],
   scrollBehavior(to, from, savedPosition) {
     // 애니메이션 0.25s 기다린 후 스크롤 올리기
+
     return new Promise((resolve, reject) => {
+      if (savedPosition) {
+        to.meta.position = savedPosition;
+      }
       setTimeout(() => {
         resolve({ left: 0, top: 0 });
       }, 250);
