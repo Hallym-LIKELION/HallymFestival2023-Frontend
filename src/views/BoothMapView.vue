@@ -204,7 +204,11 @@ export default {
     this.day = parseInt(this.$route.query.type ?? this.day);
     this.search = this.$route.query.search ?? this.search;
 
-    this.changePage(this.currentPage);
+    await this.changePage(this.currentPage);
+
+    setTimeout(() => {
+      window.scrollTo(this.$route.meta.position);
+    }, 400);
   },
 
   mounted() {
