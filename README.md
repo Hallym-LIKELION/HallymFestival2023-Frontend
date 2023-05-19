@@ -14,7 +14,8 @@
     
 </div>
 
-## https://www.hallymfestival.com/
+## ~~https://www.hallymfestival.com/~~
+주: 축제 웹사이트 서버가 2023년 5월 19일 12:00부로 운영이 종료되어 더 이상 접속할 수 없습니다.
 
 ## Front-End Team ✨
 
@@ -31,7 +32,7 @@
 * Windows: 7 이상
 * OS X: X El Capitan 이상
 * Android: Android 7 이상
-* iOS & iPadOS: 14상이상
+* iOS & iPadOS: 14 이상
 
 ### Packages
  * vue
