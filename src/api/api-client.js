@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 let mode = import.meta.env.MODE;
 
-const HOST = mode === 'production' ? '/api' : 'https://www.hallymfestival.com/api';
+const HOST = '/api';
 
 // =========================
 // 임시: JWT Login API
@@ -48,10 +48,7 @@ export async function GetAccessToken(id, password) {
   let res;
 
   try {
-    res = await axios.post(
-      mode === 'production' ? '/login' : 'https://www.hallymfestival.com/login',
-      data
-    );
+    res = await axios.post('/login', data);
   } catch (e) {
     return false;
   }
@@ -85,8 +82,7 @@ export async function GetAccessTokenUser() {
   let res;
 
   try {
-    res = await axios.post(
-      mode === 'production' ? '/refreshToken' : 'https://www.hallymfestival.com/refreshToken',
+    res = await axios.post('/refreshToken',
       {
         accessToken: Cookies.get('access_token', token),
         refreshToken: Cookies.get('refresh_token')
