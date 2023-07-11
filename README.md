@@ -2,9 +2,7 @@
 
 
 <div align="center">
-<img alt="image" width="250"  src="https://github.com/osohyun0224/HallymFestival2023-Frontend/assets/53892427/f0097766-90c7-4154-b640-814f928dd931"/>
-<img alt="image" width="260"  src="https://osohyun.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc714f722-7378-43e3-a06f-8a4c8dd4b40e%2FUntitled.png?table=block&id=10ee5cb2-de16-434c-a281-9e6b842419f7&spaceId=9dc6b260-b69d-4ebf-847c-a40991873bb2&width=580&userId=&cache=v2"/>
-<img alt="image" width="250"  src="https://github.com/osohyun0224/HallymFestival2023-Frontend/assets/53892427/98c2403f-27c4-4f5f-bb17-e0f98286bef2"/>
+<img alt="image" width="600"  src="https://github.com/osohyun0224/HallymFestival2023-Frontend/assets/53892427/823a3eae-6439-45c3-90f8-53481f380494">
 </div>
     
 
