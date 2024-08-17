@@ -1,9 +1,7 @@
 # HallymFestival2023-Frontend
 
 
-<div align="center">
-<img alt="image" width="600"  src="https://github.com/osohyun0224/HallymFestival2023-Frontend/assets/53892427/823a3eae-6439-45c3-90f8-53481f380494">
-</div>
+![image](https://github.com/user-attachments/assets/8294d757-5b6c-4474-9b5a-4f818da3b362)
     
 
 ## ~~https://www.hallymfestival.com/~~
@@ -18,7 +16,7 @@
 |                          한림대학교 빅데이터전공 20학번 3학년                       |                          한림대학교 빅데이터전공 20학번 2학년                      |
 
 ## Description
-![image](https://github.com/user-attachments/assets/8294d757-5b6c-4474-9b5a-4f818da3b362)
+2023 한림대학교 대동제 웹사이트 프론트엔드 개발 저장소입니다 :)
 
 ## Support Devices
 * Windows: 7 이상
