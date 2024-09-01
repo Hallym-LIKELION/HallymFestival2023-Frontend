@@ -18,6 +18,11 @@
 ## Description
 2023 한림대학교 대동제 웹사이트 프론트엔드 개발 저장소입니다 :)
 
+## Video
+
+[2023 한림대학교 축제 웹사이트 실 배포 진행한 웹사이트 화면 녹화 영상](https://youtu.be/dD3dg6zNe24)
+
+
 ## Support Devices
 * Windows: 7 이상
 * OS X: X El Capitan 이상
